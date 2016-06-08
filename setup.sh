@@ -16,18 +16,18 @@ pip install pyyaml
 pip install configure
 
 # Install known good SQLite
-rm -rf .tmp
-mkdir .tmp
-pushd .tmp
-  git clone https://github.com/rogerbinns/apsw
-  pushd apsw
-    # Fetch the source for SQLite
-    python setup.py fetch --all 
-    # Build the SQLite source with known extensions/parameters
-    python setup.py build --enable-all-extensions
-    # Install the Python module into our virtualenv
-    python setup.py install
-    # We won't always test.
-    # python setup.py test
-  popd
-popd
+# rm -rf .tmp
+# mkdir .tmp
+# pushd .tmp
+#   git clone https://github.com/rogerbinns/apsw
+#   pushd apsw
+#     # Fetch the source for SQLite
+#     python setup.py fetch --all
+#     # Build the SQLite source with known extensions/parameters
+#     python setup.py build --enable-all-extensions
+#     # Install the Python module into our virtualenv
+#     python setup.py install
+#     # We won't always test.
+#     # python setup.py test
+#   popd
+# popd
