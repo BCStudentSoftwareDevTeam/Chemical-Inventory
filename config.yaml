@@ -1,6 +1,3 @@
-matt:
-  greets: "Yo peace."
-  
 database:
   filename: data/mess.sqlite
 

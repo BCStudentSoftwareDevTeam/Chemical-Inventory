@@ -3,4 +3,4 @@ from config import *
 
 @app.route('/')
 def index():
-  return config.matt.greets
+  return "Hello"
