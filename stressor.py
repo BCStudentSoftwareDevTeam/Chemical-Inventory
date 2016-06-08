@@ -12,11 +12,11 @@ def generate (size = 6, chars = string.ascii_uppercase + string.digits):
   return ''.join(random.choice(chars) for _ in range(size))
 
 headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
-numInserts = 100
+numInserts = 1000
 
 for stringSize in [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 4096, 65536]:
   myID = uuid4()
-  s = generate(stringSize)
+  s = "x"
   for i in range (numInserts):
     conn      = HTTPConnection(config.sys.host, config.sys.port)
     # print("String generated: {0}".format(s))
