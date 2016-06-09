@@ -1,0 +1,19 @@
+# Only certain people can be admins in this app
+admin:
+  - %db:admin
+
+students:
+  - @admin
+  - %directory:students
+
+faculty:
+  - @admin
+  - %directory:faculty
+
+valid:
+  - @admin
+  - @students
+  - @faculty
+
+anon:
+  - %any

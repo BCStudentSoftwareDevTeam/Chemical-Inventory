@@ -1,0 +1,12 @@
+admin:
+  scott:
+    handlers:
+      scottAgeHandler:
+        url: "/scott/<int:age>"
+        methods: "POST"
+      scottNameHandler:
+        url: "/scott/<string:name>"
+        methods: "POST, GET"
+user:
+  stressor:
+    url: "/stress"
