@@ -5,7 +5,10 @@
 # sourcing this script. If these variables exist before this
 # script is sourced, then the pre-existing values will be used.
 FLASK_VERSION="${FLASK_VERSION:-0.11.1}"
+WTFORMS_VERSION="${WTFORMS_VERSION:-2.1}"
+FLASK_ADMIN_VERSION="${FLASK_ADMIN_VERSION:-1.4.0}"
 PEEWEE_VERSION="${PEEWEE_VERSION:-2.8.1}"
+WTF_PEEWEE_VERSION="${WTF_PEEWEE_VERSION:-0.2.6}"
 PYYAML_VERSION="${PYYAML_VERSION:-3.11}"
 CONFIGURE_VERSION="${CONFIGURE_VERSION:-0.5}"
 
@@ -33,11 +36,18 @@ pip install --upgrade pip
 
 pip install "flask==$FLASK_VERSION"
 # http://flask.pocoo.org/
-pip install flask-admin
+
+pip install "wtforms==$WTFORMS_VERSION"
+# https://wtforms.readthedocs.io/en/latest/
+
+pip install "flask-admin==$FLASK_ADMIN_VERSION"
+# https://flask-admin.readthedocs.io/en/latest/
 
 pip install "peewee==$PEEWEE_VERSION"
 # http://docs.peewee-orm.com/en/latest/
-pip install wtf-peewee
+
+pip install "wtf-peewee==$WTF_PEEWEE_VERSION"
+# https://github.com/coleifer/wtf-peewee
 
 pip install "configure==$CONFIGURE_VERSION"
 # http://configure.readthedocs.io/en/latest/#
