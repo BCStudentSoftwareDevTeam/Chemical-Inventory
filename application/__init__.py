@@ -1,10 +1,12 @@
 from flask import Flask
 app = Flask(__name__)
 
-import application.view
+# Import all of the views for your application
+
+from application.views import *
 
 # For stress testing
-import application.stress
+#import application.stress
 
 from application.models import theDB
 # This hook ensures that a connection is opened to handle any queries

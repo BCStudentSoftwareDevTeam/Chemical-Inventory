@@ -1,3 +1,10 @@
+# CONFIGURATION
+# Top-level keys are categorical; where possible, introduce
+# new top-level keys to keep constants/ideas separate.
+# Note that we parse this with the configuration library,
+# which has some fancy extensions to allow referencing between
+# different elements in the YAML file.
+# See http://configure.readthedocs.io/en/latest/#
 database:
   filename: data/mess.sqlite
 
@@ -10,10 +17,9 @@ wtf:
   # Enable protection agains *Cross-site Request Forgery (CSRF)*
   csrf_enabled: True
   # Use a secure, unique and absolutely secret key for
-  # signing the data. 
+  # signing the data.
   csrf_session_key: "secret"
 
 flask:
   # Secret key for signing cookies
   secret_key: "secret"
-
