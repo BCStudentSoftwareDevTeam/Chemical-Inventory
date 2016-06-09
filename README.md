@@ -10,12 +10,19 @@ who knows.
 To work on this application, you'll probably want:
 
 * The Flask Documentation
+
   http://flask.pocoo.org/
 
 * The Jinja Documentation
+
   http://jinja.pocoo.org/docs/dev/
 
 * The PeeWee Documentation
+
   http://docs.peewee-orm.com/en/latest/index.html
+
+* The Configure Documentation
+
+  http://configure.readthedocs.io/en/latest/#
 
 That's most of what comes to mind...

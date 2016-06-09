@@ -1,5 +1,5 @@
 from application import app
-from application.models import Mess
+from application.models import *
 from config import *
 
 from flask import request

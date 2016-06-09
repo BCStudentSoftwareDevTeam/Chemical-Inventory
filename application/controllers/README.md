@@ -44,6 +44,6 @@ and uses a standard template to get you started.
 
 For example:
 
-./create-page handleLoginController
+./create-page handleLogin
 
 will create all of the files you need to get working on a new login page.

@@ -4,8 +4,9 @@ if [ "$#" -ne 1 ]; then
   echo
   echo "Include the name of the page you want to create."
   echo "For example:"
-  echo "create-page newController"
+  echo "create-page handleLogin"
   echo
+  echo "The 'controller' and 'template' extensions will be added automatically."
 fi
 
 # FIXME: Strip out the .py if they add it.

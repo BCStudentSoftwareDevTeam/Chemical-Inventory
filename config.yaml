@@ -8,8 +8,11 @@
 application:
   title: "The Template App"
 
-database:
-  filename: data/mess.sqlite
+databases:
+  mess:
+    filename: data/mess.sqlite
+  roles:
+    filename: data/roles.sqlite
 
 sys:
   debug: True
@@ -19,3 +22,5 @@ sys:
 flask:
   # Secret key for signing cookies
   secret_key: "secret"
+
+controllers: !include:controllers.yaml

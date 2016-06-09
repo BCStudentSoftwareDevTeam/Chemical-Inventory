@@ -8,6 +8,10 @@ from configure import Configuration
 # than
 config = Configuration.from_file('config.yaml').configure()
 
+# Load the controllers (if needed)
+#controllers = Configuration.from_file('controllers.yaml').configure()
+#config.controllers = controllers
+
 # This adds the application's base directory to the
 # configuration object, so that the rest of the application
 # can reference it.

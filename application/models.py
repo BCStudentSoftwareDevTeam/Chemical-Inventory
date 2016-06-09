@@ -11,7 +11,7 @@ from config import *
 #
 # threadlocals says that each thread should have its own
 # connection object, as opposed to sharing one object globally.
-theDB = SqliteDatabase ( config.database.filename,
+theDB = SqliteDatabase ( config.databases.mess.filename,
                       pragmas = ( ('busy_timeout', 100),
                                   ('journal_mode', 'WAL')
                                 ),
