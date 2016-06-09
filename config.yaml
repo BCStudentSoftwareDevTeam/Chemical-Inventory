@@ -5,6 +5,9 @@
 # which has some fancy extensions to allow referencing between
 # different elements in the YAML file.
 # See http://configure.readthedocs.io/en/latest/#
+application:
+  title: "The Template App"
+
 database:
   filename: data/mess.sqlite
 
