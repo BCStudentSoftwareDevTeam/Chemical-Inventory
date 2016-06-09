@@ -2,8 +2,8 @@
 from flask import Flask
 app = Flask(__name__)
 
-# Import all of the views for your application
-from application.views import *
+# Import all of the controllers for your application
+from application.controllers import *
 
 # For stress testing
 #import application.stress
