@@ -3,7 +3,6 @@ from flask import Flask
 app = Flask(__name__)
 
 # Import all of the views for your application
-
 from application.views import *
 
 # For stress testing

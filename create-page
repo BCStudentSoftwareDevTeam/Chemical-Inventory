@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+  echo
+  echo "Include the name of the page you want to create."
+  echo "For example:"
+  echo "create-page newView"
+  echo
+fi
+
+newView=${1}.py
+if [ ! -f application/views/${newView} ]; then
+  cp  application/views/defaultView.txt \
+      application/views/${newView}
+else
+  echo "View already exists: ${newView}"
+fi
+
+exit 0
