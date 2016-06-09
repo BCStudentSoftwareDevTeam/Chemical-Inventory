@@ -6,4 +6,4 @@ from flask import \
 
 @app.route('/')
 def index():
-  return render_template("hello.html", config = config)
+  return render_template("views/helloView.html", config = config)
