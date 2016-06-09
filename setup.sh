@@ -13,7 +13,7 @@ CONFIGURE_VERSION="${CONFIGURE_VERSION:-0.5}"
 if [ -d venv ]; then
   echo "Deactivating and removing old virtualenv"
   deactivate 2>&1 /dev/null
-  rm -rf venv 2>&1 /dev/null
+  rm -rf venv
 fi
 
 # Create and activate a clean virtual environment.
