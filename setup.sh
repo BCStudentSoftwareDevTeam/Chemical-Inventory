@@ -33,7 +33,11 @@ pip install --upgrade pip
 
 pip install "flask==$FLASK_VERSION"
 # http://flask.pocoo.org/
+pip install flask-admin
+
 pip install "peewee==$PEEWEE_VERSION"
 # http://docs.peewee-orm.com/en/latest/
+pip install wtf-peewee
+
 pip install "configure==$CONFIGURE_VERSION"
 # http://configure.readthedocs.io/en/latest/#

@@ -1,5 +1,7 @@
 # This must come first in this particular file.
 from flask import Flask
+from flask_admin import Admin
+
 app = Flask(__name__)
 
 # Import all of the controllers for your application
@@ -8,6 +10,14 @@ from config import config
 
 # For stress testing
 #import application.stress
+
+# Set up the administrative interface
+from flask_admin.contrib.peewee import ModelView
+
+admin = Admin(app, name=config.application.title, template_mode='bootstrap3')
+from application.models import classes
+for c in classes:
+  admin.add_view(ModelView(c))
 
 # from application.models import theDB
 
