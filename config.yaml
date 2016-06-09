@@ -16,13 +16,6 @@ sys:
   host: "0.0.0.0"
   port: 5000
 
-wtf:
-  # Enable protection agains *Cross-site Request Forgery (CSRF)*
-  csrf_enabled: True
-  # Use a secure, unique and absolutely secret key for
-  # signing the data.
-  csrf_session_key: "secret"
-
 flask:
   # Secret key for signing cookies
   secret_key: "secret"
