@@ -4,9 +4,13 @@
 from configure import Configuration
 from config import config
 from application.models import getModelFromName
-import re
+import os, re
 
 roleConfig = Configuration.from_file('roles.yaml').configure()
+
+def getUsernameFromEnv():
+  # FIXME: This is wrong.
+  return os.getenv("USER")
 
 def userHasRole (username, role):
   # print "Checking role: {0}".format(role)
