@@ -11,6 +11,18 @@ roleConfig = Configuration.from_file('roles.yaml').configure()
 def getUsernameFromEnv():
   # FIXME: This is wrong.
   return os.getenv("USER")
+  
+def getRoles(username):
+  roles = []
+  for role in roleConfig:
+    if userHasRole (username, role):
+      roles.append(role)
+  return roles
+
+def doesUserHaveRole (role):
+  username = getUsernameFromEnv()
+  roles = getRoles(username)
+  return (role in roles)
 
 def userHasRole (username, role):
   # print "Checking role: {0}".format(role)
@@ -56,9 +68,3 @@ def userHasRole (username, role):
     else:
       return False  
   
-def getRoles(username):
-  roles = []
-  for role in roleConfig:
-    if userHasRole (username, role):
-      roles.append(role)
-  return roles

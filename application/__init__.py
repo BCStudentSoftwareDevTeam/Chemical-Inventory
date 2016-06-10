@@ -23,15 +23,12 @@ sess.init_app(app)
 import flask_admin as admin
 from flask.ext.admin import expose
 from flask_admin.contrib.peewee import ModelView
-from application.logic.validation import getRoles
+from application.logic.validation import doesUserHaveRole
 
 class RoleVerifiedAdminIndexView(admin.AdminIndexView):
     @expose('/')
     def index(self):
-      uname = config.flask.username
-      roles = getRoles(uname)
-      # print "User '{0}' has roles {1}".format(uname, roles)
-      if "admin" in roles:
+      if doesUserHaveRole("admin"):
         # print "Role Verified"
         return super(RoleVerifiedAdminIndexView, self).index()
       else:
