@@ -21,6 +21,8 @@ sys:
 
 flask:
   # Secret key for signing cookies
-  secretKey: "secret"
+  # Only needed for admin module, and we don't seem to rely on
+  # it. Hence, we will randomly generate a key.
+  secretKey: RANDOM
 
 controllers: !include:controllers.yaml

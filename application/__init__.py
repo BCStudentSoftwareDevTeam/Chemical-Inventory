@@ -15,7 +15,13 @@ from config import config
 
 # We need to track session information for using the 
 # admin console. This is not fully understood yet.
-app.secret_key = config.flask.secretKey
+# The admin console does not work without it, though.
+import uuid
+if config.flask.secretKey in ["UUID", "RANDOM"]:
+  app.secret_key = uuid.uuid4()
+else:
+  app.secret_key = "secretsecretsecret"
+
 app.config['SESSION_TYPE'] = 'filesystem'
 sess.init_app(app)
 
