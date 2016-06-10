@@ -1,7 +1,7 @@
 # This must come first in this particular file.
 from flask import Flask
 from flask import session, redirect, url_for
-from flask.ext.session import Session
+from flask_session import Session
 
 app = Flask(__name__)
 sess = Session()
@@ -9,9 +9,6 @@ sess = Session()
 # Import all of the controllers for your application
 from application.controllers import *
 from config import config
-
-# For stress testing
-#import application.stress
 
 # We need to track session information for using the 
 # admin console. This is not fully understood yet.
@@ -27,7 +24,7 @@ sess.init_app(app)
 
 # Set up the administrative interface
 import flask_admin as admin
-from flask.ext.admin import expose
+from flask_admin import expose
 from flask_admin.contrib.peewee import ModelView
 from application.logic.validation import doesUserHaveRole
 

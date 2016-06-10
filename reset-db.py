@@ -1,7 +1,7 @@
 # WARNING
 # This script deletes the database file and configures empty
 # tables for the models defined in the models module.
-from application.models import models, classes
+from application.models import classes
 from config import *
     
 def init_db ():

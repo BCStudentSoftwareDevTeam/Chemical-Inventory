@@ -22,9 +22,11 @@ def checkValidRole (*expected_args):
     return wrapper
   return decorator
 
+def accept_any_role(*args):
+  return checkValidRole(args)
+  
 @app.route("/scott/<int:age>")
-@checkValidUser
-@checkValidRole("student")
+@accept_any_role("programChair", "divisionChair", "admin")
 def scottControllerHandler (age):
   print "Handler Called"
   return str(age)
