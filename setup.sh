@@ -6,6 +6,7 @@
 # script is sourced, then the pre-existing values will be used.
 FLASK_VERSION="${FLASK_VERSION:-0.11.1}"
 WTFORMS_VERSION="${WTFORMS_VERSION:-2.1}"
+FLASK_SESSION_VERSION="${FLASK_SESSION_VERSION:-0.2.3}"
 FLASK_ADMIN_VERSION="${FLASK_ADMIN_VERSION:-1.4.0}"
 PEEWEE_VERSION="${PEEWEE_VERSION:-2.8.1}"
 WTF_PEEWEE_VERSION="${WTF_PEEWEE_VERSION:-0.2.6}"
@@ -39,6 +40,9 @@ pip install "flask==$FLASK_VERSION"
 
 pip install "wtforms==$WTFORMS_VERSION"
 # https://wtforms.readthedocs.io/en/latest/
+
+pip install "flask-session==$FLASK_SESSION_VERSION"
+# http://pythonhosted.org/Flask-Session/
 
 pip install "flask-admin==$FLASK_ADMIN_VERSION"
 # https://flask-admin.readthedocs.io/en/latest/

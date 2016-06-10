@@ -28,4 +28,14 @@ def getModelClasses():
     classes.append(c)
   return classes
 
+def getModelFromName (name):
+  c = None
+  for m in models:  
+    moduleName = "application.models.{0}".format(m) 
+    className  = re.sub("Model", "", m).capitalize()
+    if className == name:
+      c = classFromName(moduleName, className)
+  return c
+    
+
 classes = getModelClasses()

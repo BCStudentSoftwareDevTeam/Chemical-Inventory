@@ -1,19 +1,19 @@
 # Only certain people can be admins in this app
 admin:
-  - %db:admin
+  - database Roles
 
 students:
-  - @admin
-  - %directory:students
+  - group admin
+  - AD students
 
 faculty:
-  - @admin
-  - %directory:faculty
+  - group admin
+  - AD faculty
 
 valid:
-  - @admin
-  - @students
-  - @faculty
+  - group admin
+  - group students
+  - group faculty
 
 anon:
-  - %any
+  - ANY

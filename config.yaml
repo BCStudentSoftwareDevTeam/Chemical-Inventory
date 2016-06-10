@@ -21,6 +21,6 @@ sys:
 
 flask:
   # Secret key for signing cookies
-  secret_key: "secret"
+  secretKey: "secret"
 
 controllers: !include:controllers.yaml
