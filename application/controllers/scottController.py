@@ -1,5 +1,5 @@
 from application import app
-from config import *
+from application.config import *
 from functools import wraps
 from flask import \
     render_template, \

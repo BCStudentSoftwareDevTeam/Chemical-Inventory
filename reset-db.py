@@ -2,7 +2,7 @@
 # This script deletes the database file and configures empty
 # tables for the models defined in the models module.
 from application.models import classes
-from config import *
+from application.configation.config import *
     
 def init_db ():
   # First, we create the databases.

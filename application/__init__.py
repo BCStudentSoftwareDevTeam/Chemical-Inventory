@@ -8,7 +8,7 @@ sess = Session()
 
 # Import all of the controllers for your application
 from application.controllers import *
-from config import config
+from application.config import config
 
 # We need to track session information for using the 
 # admin console. This is not fully understood yet.

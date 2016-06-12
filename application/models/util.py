@@ -1,4 +1,4 @@
-from config import *
+from application.config import *
 from peewee import *
 
 def getDB (dbName):

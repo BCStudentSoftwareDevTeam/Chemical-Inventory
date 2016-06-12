@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from application.models import Mess
-from config import *
+from application.config import *
 from httplib import *
 from urllib import *
 from uuid import *

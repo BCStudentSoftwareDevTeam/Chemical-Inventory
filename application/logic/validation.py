@@ -1,12 +1,12 @@
 # See the configure documentation for more about
 # this library.
 # http://configure.readthedocs.io/en/latest/#
-from application.configure import Configuration
-from config import config
+from configure import Configuration
+from application.config import config
 from application.models import getModelFromName
 import os, re
 
-roleConfig = Configuration.from_file('roles.yaml').configure()
+roleConfig = Configuration.from_file('config/roles.yaml').configure()
 
 def getUsernameFromEnv():
   # FIXME: This is wrong.

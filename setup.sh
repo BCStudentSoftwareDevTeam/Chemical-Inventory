@@ -13,6 +13,19 @@ WTF_PEEWEE_VERSION="${WTF_PEEWEE_VERSION:-0.2.6}"
 PYYAML_VERSION="${PYYAML_VERSION:-3.11}"
 CONFIGURE_VERSION="${CONFIGURE_VERSION:-0.5}"
 
+# Check for virtualenv
+command -v virtualenv >/dev/null 2>&1 || { 
+  echo >&2 "I require 'virtualenv' but it's not installed.  Aborting."; 
+  exit 1;
+ }
+
+ # Check for pip
+command -v pip >/dev/null 2>&1 || { 
+ echo >&2 "I require 'pip' but it's not installed.  Aborting."; 
+ exit 1;
+}
+
+
 # If there is a virtual environment, destroy it.
 if [ -d venv ]; then
   echo "Deactivating and removing old virtualenv"
