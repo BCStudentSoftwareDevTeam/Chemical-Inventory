@@ -1,41 +1,41 @@
-shared:
-  handlers:
-    - purpose: "Show the index page."
-      fun: index
-      url: "/"
-      methods: "GET"
-  
-stu:
-  hello:
-      - purpose: "Collect the user's happiness."
-        role: student
-        fun: happyHappy
-        url: "/happy"
-        methods: "GET"
-        
-  course:
-    handlers:
-      courses:
-        url: "/courses"
-        methods: "GET"
-
-admin:
-  scott:
-    handlers:
-      scottAgeHandler:
-        purpose: "Allow the user to set the age of Scott."
-        url: "/scott/<int:age>"
-        methods: "POST"
-      scottNameHandler:
-        url: "/scott/<string:name>"
-        methods: "POST, GET"
-
-  fixAllTheThings:
-    handlers:
-      fixFirst:
-        url: "/fix"
-        methods: "POST, GET"
-        
-user:
-  stressor:
-    url: "/stress"
+layout:
+  - directory:
+      name: stu
+      controllers:
+        - name: hello
+          handlers:
+          - purpose: "Collect the user's happiness."
+            route: "/stu/happy"
+            methods: 
+              - GET
+            function: happyHappy
+            roles: 
+              - students
+          - purpose: "Find out how sad they are."
+            route: /stu/sad/<int:sadness>"
+            methods:
+              - GET
+              - POST
+            function: sadSad
+            roles: 
+              - students
+  - directory:
+      name: fac
+      controllers:
+        - name: hello
+          handlers:
+          - purpose: "Collect the user's happiness."
+            route: "/fac/happy"
+            methods: 
+              - GET
+            function: happyHappy
+            roles: 
+              - students
+          - purpose: "Find out how sad they are."
+            route: /fac/sad/<int:sadness>"
+            methods:
+              - GET
+              - POST
+            function: sadSad
+            roles: 
+              - students
