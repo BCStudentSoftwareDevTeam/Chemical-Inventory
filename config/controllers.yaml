@@ -12,7 +12,7 @@ layout:
             roles: 
               - students
           - purpose: "Find out how sad they are."
-            route: /stu/sad/<int:sadness>"
+            route: "/stu/sad/<int:sadness>"
             methods:
               - GET
               - POST
@@ -22,7 +22,7 @@ layout:
   - directory:
       name: fac
       controllers:
-        - name: hello
+        - name: something
           handlers:
           - purpose: "Collect the user's happiness."
             route: "/fac/happy"
@@ -32,7 +32,7 @@ layout:
             roles: 
               - students
           - purpose: "Find out how sad they are."
-            route: /fac/sad/<int:sadness>"
+            route: "/fac/sad/<int:sadness>"
             methods:
               - GET
               - POST

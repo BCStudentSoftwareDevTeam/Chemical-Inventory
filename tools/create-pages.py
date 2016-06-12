@@ -1,6 +1,5 @@
 from configure import Configuration
-import argparse
-import os, re
+import argparse, os, re, shutil
 
 parser = argparse.ArgumentParser(description = 'Setup Flask controllers.')
 
@@ -102,7 +101,84 @@ def rolesAreValid (roles):
       exit()
   return result
 
+def getParams(routeString):
+  print "RS: %s" % routeString 
+  matches = re.findall("<.*?:(.*?)>", routeString)
+  if matches:
+    return matches
+  else:
+    return []
+  
+def buildControllers (cc):
+  for d in cc.layout:
+    dir = "application/controllers/{0}".format(d["directory"]["name"])
+    # Create the directory if it doesn't exist
+    if not os.path.exists(dir):
+      os.makedirs(dir)
+    
+    # Also, put an init in there.
+    if not os.path.exists(dir + "/__init__.py"):
+      shutil.copy("application/controllers/__init__.py", dir)
+    
+    controllers = d["directory"]["controllers"]
+    for c in controllers:
+      cfname = dir + "/{0}Controller.py".format(c["name"])
+      cvname = "application/templates/views/{0}View.html".format(c["name"])
+      # Create the file if it doesn't exist
+      if not os.path.exists(cfname):
+        cf = open (cfname, 'a')      
+        # Add the default imports
+        imports = open ("application/controllers/controllerImports.txt")
+        for imp in imports:
+          cf.write(imp)
+        cf.write("\n")
+        cf.close()
+        
+      if not os.path.exists(cvname):
+        open (cvname, 'a').close()
+    
+      # Now, we need to add things to the controllers.
+      # Go through each of the handlers in the controller
+      # to see if the function exists.
+      handlers = c["handlers"]
+      
+      for handler in handlers:
+        found = False
+        # This is tedious/expensive, but I'm not going to do it in
+        # an elegant way right now.
+        cf = open (cfname, 'r')
+        for line in cf:
+          if re.search(handler["route"], line):
+            found = True
+        cf.close()
+        
+        # If we didn't find the handler, lets lay it down.
+        # Do an append at the end of the file.
+        if found == False:
+          cf = open (cfname, 'a')
+          cf.write("\n")
+          
+          cf.write ("# PURPOSE: {0}\n".format(handler["purpose"]))
+          cf.write ("@app.route('{0}', methods = {1})\n"
+            .format (handler["route"], handler["methods"]))
+            
+          for role in handler["roles"]:
+            cf.write("@require_role('{0}')\n".format(role))
+          cf.write ("def {0}({1}):\n"
+            .format(handler["function"], 
+                    ",".join(getParams(handler["route"]))
+                    ))
+          cf.write ("  pass\n")
+          cf.write("\n")
+          cf.close()
+        
+        
+      
+      
+
 if __name__ == "__main__":
   cc = Configuration.from_file('config/controllers.yaml').configure()
   if checkSyntax (cc):
     print "Syntax checks."
+    if args.generate:
+      buildControllers (cc)
