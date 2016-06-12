@@ -1,7 +1,7 @@
 # See the configure documentation for more about
 # this library.
 # http://configure.readthedocs.io/en/latest/#
-from configure import Configuration
+from application.configure import Configuration
 
 # The configure library provides a pretty interface to our
 # configuration data. This module doesn't do anything other
