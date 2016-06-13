@@ -5,12 +5,14 @@ admin:
   - database Roles
 
 students:
-  - group admin
   - AD students
 
 faculty:
   - group admin
   - AD faculty
+
+withsuperpowers:
+  - hunterr
 
 valid:
   - group admin

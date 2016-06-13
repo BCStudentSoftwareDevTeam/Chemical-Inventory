@@ -95,7 +95,7 @@ def require_role (requiredRole):
         return fun(*args, **kwargs)
       else:
         print "User does not have role."
-        return redirect(url_for("index"), code = 302)
+        return redirect(url_for(config.application.default), code = 302)
         # return config.application.noRoleHandler
     return decorated_fun
   return decorator

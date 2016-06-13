@@ -7,10 +7,9 @@
 # See http://configure.readthedocs.io/en/latest/#
 application:
   title: "The Template App"
+  default: showByYear
 
 databases:
-  mess:
-    filename: data/mess.sqlite
   roles:
     filename: data/roles.sqlite
 
