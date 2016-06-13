@@ -118,7 +118,21 @@ def buildControllers (cc):
     
     # Also, put an init in there.
     if not os.path.exists(dir + "/__init__.py"):
-      shutil.copy("application/controllers/__init__.py", dir)
+      shutil.copy("application/controllers/default__init__.py", dir + "/__init.py__")
+    
+    # These directories need to be in the top-level __init__
+    added = False
+    initf = open("application/controllers/__init__.py", 'r')
+    for line in initf:
+      if re.search(d["directory"]["name"], line):
+        added = True
+    initf.close()
+    initf = open("application/controllers/__init__.py", 'a')
+    if not added:
+      initf.write("from application.controllers.{0} import *\n"
+           .format(d["directory"]["name"]))
+    initf.close()
+      
     
     controllers = d["directory"]["controllers"]
     for c in controllers:

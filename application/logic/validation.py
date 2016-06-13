@@ -4,6 +4,7 @@
 from configure import Configuration
 from application.config import config
 from application.models import getModelFromName
+from functools import wraps
 import os, re
 
 roleConfig = Configuration.from_file('config/roles.yaml').configure()
@@ -75,4 +76,27 @@ def userHasRole (username, role):
     if re.match("ANY", ug):
       return True
       
-  
+# https://realpython.com/blog/python/primer-on-python-decorators/
+def checkValidUser (fun):
+  @wraps(fun)
+  def wrapper (*args, **kwargs):
+    print "Is Valid User"
+    return fun(*args, **kwargs)
+  return wrapper
+
+def require_role (*expected_args):
+  def decorator (fun):
+    @wraps(fun)
+    def wrapper (*args, **kwargs):
+      # print "Is Valid Role: %s" % expected_args[0]
+      if userHasRole (getUsernameFromEnv(), expected_args[0]):
+        print "User has role."
+        return fun(*args, **kwargs)
+      else:
+        print "User does not have role."
+        return config.application.noRoleHandler
+    return wrapper
+  return decorator
+
+def accept_any_role(*args):
+  return checkValidRole(args)  

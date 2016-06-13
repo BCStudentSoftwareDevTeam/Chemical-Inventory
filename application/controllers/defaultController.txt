@@ -3,5 +3,5 @@ from application.models import *
 from application.config import *
 from flask import \
     render_template, \
-    response, \
+    request, \
     url_for

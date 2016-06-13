@@ -2,13 +2,13 @@ layout:
   - directory:
       name: stu
       controllers:
-        - name: hello
+        - name: students
           handlers:
           - purpose: "Collect the user's happiness."
             route: "/stu/happy"
             methods: 
               - GET
-            function: happyHappy
+            function: stuHappy
             roles: 
               - students
           - purpose: "Find out how sad they are."
@@ -16,19 +16,19 @@ layout:
             methods:
               - GET
               - POST
-            function: sadSad
+            function: stuSad
             roles: 
               - students
   - directory:
       name: fac
       controllers:
-        - name: something
+        - name: faculty
           handlers:
           - purpose: "Collect the user's happiness."
             route: "/fac/happy"
             methods: 
               - GET
-            function: happyHappy
+            function: facHappy
             roles: 
               - students
           - purpose: "Find out how sad they are."
@@ -36,6 +36,6 @@ layout:
             methods:
               - GET
               - POST
-            function: sadSad
+            function: facSad
             roles: 
               - students
