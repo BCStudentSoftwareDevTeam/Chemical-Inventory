@@ -118,13 +118,13 @@ def buildControllers (cc):
     
     # Also, put an init in there.
     if not os.path.exists(dir + "/__init__.py"):
-      shutil.copy("application/controllers/default__init__.py", dir + "/__init.py__")
+      shutil.copy("application/controllers/default__init__.py", dir + "/__init__.py")
     
     # These directories need to be in the top-level __init__
     added = False
     initf = open("application/controllers/__init__.py", 'r')
     for line in initf:
-      if re.search(d["directory"]["name"], line):
+      if re.search("\." + d["directory"]["name"], line):
         added = True
     initf.close()
     initf = open("application/controllers/__init__.py", 'a')
@@ -148,8 +148,9 @@ def buildControllers (cc):
         cf.write("\n")
         cf.close()
         
+      # Default, empty view.
       if not os.path.exists(cvname):
-        open (cvname, 'a').close()
+        shutil.copy("application/templates/views/defaultView.txt", cvname)
     
       # Now, we need to add things to the controllers.
       # Go through each of the handlers in the controller
@@ -162,7 +163,7 @@ def buildControllers (cc):
         # an elegant way right now.
         cf = open (cfname, 'r')
         for line in cf:
-          if re.search(handler["route"], line):
+          if re.search("'" + handler["route"] + "'", line):
             found = True
         cf.close()
         

@@ -48,23 +48,23 @@ pip install --upgrade pip
 # Install specific versions of libraries to avoid
 # different behaviors of applications over time.
 
-pip install "flask==$FLASK_VERSION"
+pip install -U "flask==$FLASK_VERSION"
 # http://flask.pocoo.org/
 
-pip install "wtforms==$WTFORMS_VERSION"
+pip install -U "wtforms==$WTFORMS_VERSION"
 # https://wtforms.readthedocs.io/en/latest/
 
-pip install "flask-session==$FLASK_SESSION_VERSION"
+pip install -U "flask-session==$FLASK_SESSION_VERSION"
 # http://pythonhosted.org/Flask-Session/
 
-pip install "flask-admin==$FLASK_ADMIN_VERSION"
+pip install -U "flask-admin==$FLASK_ADMIN_VERSION"
 # https://flask-admin.readthedocs.io/en/latest/
 
-pip install "peewee==$PEEWEE_VERSION"
+pip install -U "peewee==$PEEWEE_VERSION"
 # http://docs.peewee-orm.com/en/latest/
 
-pip install "wtf-peewee==$WTF_PEEWEE_VERSION"
+pip install -U "wtf-peewee==$WTF_PEEWEE_VERSION"
 # https://github.com/coleifer/wtf-peewee
 
-pip install "configure==$CONFIGURE_VERSION"
+pip install -U "configure==$CONFIGURE_VERSION"
 # http://configure.readthedocs.io/en/latest/#

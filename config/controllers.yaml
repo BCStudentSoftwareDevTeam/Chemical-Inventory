@@ -1,5 +1,17 @@
 layout:
   - directory:
+      name: a
+      controllers:
+        - name: all
+          handlers:
+            - purpose: "First Page"
+              route: "/"
+              methods:
+                - GET
+              function: index
+              roles:
+                - anon
+  - directory:
       name: stu
       controllers:
         - name: students

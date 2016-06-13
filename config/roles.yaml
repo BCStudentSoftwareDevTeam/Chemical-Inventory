@@ -9,6 +9,7 @@ students:
   - AD students
 
 faculty:
+  - group admin
   - AD faculty
 
 valid:

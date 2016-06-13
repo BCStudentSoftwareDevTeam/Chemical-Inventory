@@ -5,6 +5,7 @@ from configure import Configuration
 from application.config import config
 from application.models import getModelFromName
 from functools import wraps
+from flask import request, redirect, url_for
 import os, re
 
 roleConfig = Configuration.from_file('config/roles.yaml').configure()
@@ -84,19 +85,17 @@ def checkValidUser (fun):
     return fun(*args, **kwargs)
   return wrapper
 
-def require_role (*expected_args):
+def require_role (requiredRole):
   def decorator (fun):
     @wraps(fun)
-    def wrapper (*args, **kwargs):
+    def decorated_fun (*args, **kwargs):
       # print "Is Valid Role: %s" % expected_args[0]
-      if userHasRole (getUsernameFromEnv(), expected_args[0]):
+      if userHasRole (getUsernameFromEnv(), requiredRole):
         print "User has role."
         return fun(*args, **kwargs)
       else:
         print "User does not have role."
-        return config.application.noRoleHandler
-    return wrapper
+        return redirect(url_for("index"), code = 302)
+        # return config.application.noRoleHandler
+    return decorated_fun
   return decorator
-
-def accept_any_role(*args):
-  return checkValidRole(args)  
