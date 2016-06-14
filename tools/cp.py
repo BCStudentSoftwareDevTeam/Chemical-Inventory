@@ -221,17 +221,47 @@ def checkSyntax (cc):
   return True
 
 def createDirectory (dir):
-  print "Creating directory '{0}'".format(dir)
   if not os.path.exists(dir):
+    print "Creating directory '{0}'".format(dir)
     os.makedirs(dir)
 
-def touchFile (dir, c, ext):
-  open(dir["name"] + "/" + c["name"] + ext, 'a').close()
+def touchFile (f):
+  open(f, 'a').close()
 
-def createHandlersInController (d, c, ext, h):
+def copyDefault (src, dest):
+  if not os.path.exists(dest):
+    print "Copying default file:\n\t'{0}'.".format(src)
+    shutil.copy(src, dest)
+  
+
+def touchController(f):
+  copyDefault ("config/defaultController.txt", f)
+
+def touchView (f):
+  copyDefault ("config/defaultView.txt", f)
+
+def handlerExists (f, h):
+  f = open(f, 'r')
+  result = False
+  for line in f:
+    if re.search(h["route"], line): 
+      print "=> Route '{0}' already exists. Skipping.".format(h["route"])
+      result = True
+  return result
+
+def getParams(routeString):
+  # print "RS: %s" % routeString 
+  matches = re.findall("<.*?:(.*?)>", routeString)
+  if matches:
+    return matches
+  else:
+    return []
+  
+def createHandlerInController (controllerFile, c, h):
   # If the handler isn't already there
-  if not handlerExists(d, c, h):
-    f = open(d["name"] + "/" + c["name"] + ext, 'a')
+  if not handlerExists(controllerFile, h):
+    print "Adding route '{0}' to {1}.".format(h["route"], c["name"])
+    cf = open(controllerFile, 'a')
     cf.write("\n")
     
     cf.write ("# PURPOSE: {0}\n".format(h["purpose"]))
@@ -248,22 +278,46 @@ def createHandlersInController (d, c, ext, h):
     cf.write("\n")
     cf.close()
 
+def insertViewName (viewFile, h):
+  out = open(viewFile + ".tmp", 'w')
+  for line in open(viewFile):
+    line = re.sub("VIEWFUNCTION", h["function"], line)
+    line = re.sub("VIEWROUTE", h["route"], line)
+    out.write(line)
+  out.close()
+  shutil.copy(viewFile + ".tmp", viewFile)
+  os.remove(viewFile + ".tmp")
     
 def generateFiles (cc):
   directories = cc["layout"]
   for d in directories:
-    createDirectory("application/controllers/" + d["name"])
-    createDirectory("application/views/" + d["name"])
+    controllerDir = "application/controllers/" + d["name"]
+    viewDir       = "application/views/" + d["name"]
+    createDirectory(controllerDir)
+    createDirectory(viewDir)
     controllers = d["controllers"]
     
     for c in controllers:
-      touchFile (d, c, "Controller.py")
+      controllerFile = controllerDir + "/" + c["name"] + "Controller.py"
+      
+      touchController (controllerFile)
+
+      
       handlers = c["handlers"]
       for h in handlers:
-        createHandlerInController(d, c, "Controller.py", h)
-      exit()
-      createControllerViews(controllers)
-      createControllerImport(controllers)
+        createHandlerInController(controllerFile, c, h)
+        viewFile = viewDir + "/" + h["function"] + "View.html"
+        touchView (viewFile)
+        insertViewName(viewFile, h)
+        
+  # Create the top-level import
+  impPath = "application/controllers/__init__.py"
+  if os.path.exists(impPath):
+    os.remove(impPath)
+  imp = open(impPath, 'w')
+  for d in directories:
+    imp.write("from application.controllers.{0} import *\n".format(d["name"]))
+  imp.close()
     
     
 

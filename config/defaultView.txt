@@ -2,6 +2,12 @@
 
 {% block body %}
 
-Hello.
+<div>
+  <strong>FIXME</strong>: This is the view for the function VIEWFUNCTION.
+</div>
+
+<div>
+  <strong>FIXME</strong>: It serves the route VIEWROUTE.
+</div>
 
 {% endblock %}
