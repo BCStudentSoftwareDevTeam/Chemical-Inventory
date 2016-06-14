@@ -25,8 +25,8 @@ def error (msg):
 def announce (msg):
   print msg
 
-def hasLayout (cc):
-  return ("layout" in cc)
+def hasKey (d, k):
+  return isinstance(d, dict) and (k in d)
 
 # http://stackoverflow.com/questions/1835018/python-check-if-an-object-is-a-list-or-tuple-but-not-string
 def is_sequence(arg):
@@ -48,32 +48,16 @@ def check (d):
   #announce("Layout found.") if args.verbose else False
   True if d["fun"]() else error(d["err"]())
   announce(d["aok"]()) if args.verbose else False
- 
-def directoriesHaveNames (dirs):
-  return all(map(lambda d: "name" in d, dirs))
 
-def nonEmptyControllerList (controllers):
-  return is_sequence(controllers) and \
-    (len(controllers) > 0)
+def isListOfDictsWithKey (dicts, key):
+  return all(map(lambda d: key in d, dicts))
 
-def controllersAreDictionaries (controllers):
-  return all(isinstance(obj, dict) for obj in controllers)
+def isListOfObjOfType (ls, t):
+  return all(map(lambda o: isinstance(o, t), ls))
 
-def controllerHasName (c):
-  return isinstance(c, dict) and ("name" in c)
-
-def hasHandlerKey (c):
-  return "handlers" in c
-  
-def controllerHasListOfHandlers (handlers):
-  return is_sequence(handlers) and \
-    len(handlers) > 0
-
-def checkForRoute (h):
-  return isinstance(h, dict) and ("route" in h)
-
-def checkHandlerHasKey (h, key):
-  return key in h
+def isNonEmptyList (ls):
+  return is_sequence(ls) and \
+    (len(ls) > 0)
 
 def checkValidMethods (h):
   result = True
@@ -92,6 +76,14 @@ def checkValidRoles (h):
       result = False
   return result
 
+def findRepeats (ls):
+  s = set()
+  repeats = set()
+  for obj in ls:
+    if obj in s: 
+      repeats.add(obj)
+    s.add(obj)
+  return repeats
 
 """
     check ({'fun': lambda: ,
@@ -101,18 +93,24 @@ def checkValidRoles (h):
 """
 def checkSyntax (cc):
   
-  check ({'fun': lambda: hasLayout(cc), 
+  check ({'fun': lambda: cc["layout"], 
     'err': lambda: "Top-level should be a 'layout'.",
     'aok': lambda: "Layout found."
   })
 
   directories = cc["layout"]
-  check ({'fun': lambda: isListOfDirectories (directories),
+
+  check ({'fun': lambda: isNonEmptyList (directories),
+    'err': lambda: "Your directories are not a properly formatted list.",
+    'aok': lambda: "Directories are formatted as a list."
+  })
+
+  check ({'fun': lambda: isListOfObjOfType (directories, dict),
     'err': lambda: "The file should begin as a list of 'directory' dictionaries.",
     'aok': lambda: "Layout contains a list of 'directory' dictionaries."
   })
   
-  check ({'fun': lambda: directoriesHaveNames (directories),
+  check ({'fun': lambda: isListOfDictsWithKey (directories, "name"),
     'err': lambda: "Every directory should have a 'name' key.",
     'aok': lambda: "All directories have a name."
   })
@@ -125,45 +123,45 @@ def checkSyntax (cc):
     
     controllers = d["controllers"]
     
-    check ({'fun': lambda: nonEmptyControllerList (controllers),
+    check ({'fun': lambda: isNonEmptyList (controllers),
       'err': lambda: "Directory '{0}' has a non-empty list of controllers.".format(d["name"]),
       'aok': lambda: "Directory '{0}' has a list of controllers.".format(d["name"])
     })
 
-    check ({'fun': lambda: controllersAreDictionaries (controllers),
+    check ({'fun': lambda: isListOfObjOfType (controllers, dict),
       'err': lambda: "Directory '{0}' has a non-dictionaries in its list of controllers.".format(d["name"]),
       'aok': lambda: "Directory '{0}' has a list of controller dicts.".format(d["name"])
     })
     
     # Now, we check every controller
     for c in controllers:
-      check ({'fun': lambda: controllerHasName(c),
+      check ({'fun': lambda: hasKey (c, "name"),
         'err': lambda: "Directory '{0}' has a controller missing a 'name'.".format(d["name"]),
         'aok': lambda: "Controller '{0}' has a name.".format(c["name"])
       })
       
-      check ({'fun': lambda: hasHandlerKey(c),
+      check ({'fun': lambda: hasKey(c, "handlers"),
         'err': lambda: "'{0}' is missing a 'handlers' key.".format(c["name"]),
         'aok': lambda: "'{0}' has a 'handlers' key.".format(c["name"])
       })
       
       # We know we have the key now.
       handlers = c["handlers"]
-      check ({'fun': lambda: controllerHasListOfHandlers(handlers),
+      check ({'fun': lambda: isNonEmptyList (handlers),
         'err': lambda: "Controller '{0}' does not have a list of handlers.".format(c["name"]),
         'aok': lambda: "Controller '{0}' has a list of handlers.".format(c["name"])
       })
       
       # Check each handler
       for h in handlers:
-        check ({'fun': lambda: checkForRoute(h),
+        check ({'fun': lambda: hasKey (h, "route"),
           'err': lambda: "'{0}' has a handler missing a route.".format(c["name"]),
           'aok': lambda: "Route for '{0}' in '{1}' has a route".format(h["route"], c["name"])
         })
 
         # Are they all a complete handler
         for key in ["purpose", "route", "methods", "function", "roles"]:
-          check ({'fun': lambda: checkHandlerHasKey (h, key),
+          check ({'fun': lambda: hasKey (h, key),
             'err': lambda: "Handler for route '{0}' is missing '{1}'.".format(h["route"], key),
             'aok': lambda: "Handler for route '{0} has key '{1}'.".format(h["route"], key)
           })
@@ -179,12 +177,94 @@ def checkSyntax (cc):
           'aok': lambda: "Handler for '{0}' has valid roles.".format(h["route"])
         })
         
-        check ({'fun': lambda: 1,
-          'err': lambda: "",
-          'aok': lambda: ""
-        })
-        
-        
+  # Now, make sure none of the routes in any of the controllers are the same
+  
+  routes = []
+  funs   = []
+
+  print 
+  print "Looking for repeats of routes and function names."
+  print "-------------------------------------------------"
+  for d in directories:
+    print "Directory {0}".format(d["name"])
+    controllers = d["controllers"]
+    for c in controllers:
+      print "=> Controller: {0}".format(c["name"])
+      handlers = c["handlers"]
+      for h in handlers:
+        print "==> Route {0}".format(h["route"])
+        print "==> Func  {0}".format(h["function"])
+        print
+        routes.append(h["route"])
+        funs.append(h["function"])
+  
+  print ""
+  # Now, do a cute set uniqueness check.
+  # http://stackoverflow.com/questions/5278122/checking-if-all-elements-in-a-list-are-unique
+  repeats = findRepeats(routes)
+  if len(repeats) > 0:
+    print "There are repeated routes in your controllers."
+    print routes
+    print repeats
+    for r in repeats:
+      print "route: {0}".format(r)
+    error("Routes cannot repeat.")
+
+  repeats = findRepeats(funs)
+  if len(repeats) > 0:
+    print "There are repeated function names in your controllers."
+    for f in repeats:
+      print "function: {0}".format(f)
+    error ("Function names cannot repeat.")
+  
+  # If we get here, we pass syntax.
+  return True
+
+def createDirectory (dir):
+  print "Creating directory '{0}'".format(dir)
+  if not os.path.exists(dir):
+    os.makedirs(dir)
+
+def touchFile (dir, c, ext):
+  open(dir["name"] + "/" + c["name"] + ext, 'a').close()
+
+def createHandlersInController (d, c, ext, h):
+  # If the handler isn't already there
+  if not handlerExists(d, c, h):
+    f = open(d["name"] + "/" + c["name"] + ext, 'a')
+    cf.write("\n")
+    
+    cf.write ("# PURPOSE: {0}\n".format(h["purpose"]))
+    cf.write ("@app.route('{0}', methods = {1})\n"
+      .format (h["route"], h["methods"]))
+      
+    for role in h["roles"]:
+      cf.write("@require_role('{0}')\n".format(role))
+    cf.write ("def {0}({1}):\n"
+      .format(h["function"], 
+              ",".join(getParams(h["route"]))
+              ))
+    cf.write ("  pass\n")
+    cf.write("\n")
+    cf.close()
+
+    
+def generateFiles (cc):
+  directories = cc["layout"]
+  for d in directories:
+    createDirectory("application/controllers/" + d["name"])
+    createDirectory("application/views/" + d["name"])
+    controllers = d["controllers"]
+    
+    for c in controllers:
+      touchFile (d, c, "Controller.py")
+      handlers = c["handlers"]
+      for h in handlers:
+        createHandlerInController(d, c, "Controller.py", h)
+      exit()
+      createControllerViews(controllers)
+      createControllerImport(controllers)
+    
     
 
 if __name__ == "__main__":
@@ -199,4 +279,8 @@ if __name__ == "__main__":
     print "Syntax checks."
   
   if syntaxOK and args.generate:
+    print
+    print "Generating files."
+    print "-----------------"
     generateFiles (cc)
+    

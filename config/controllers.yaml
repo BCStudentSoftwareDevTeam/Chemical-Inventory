@@ -1,42 +1,42 @@
 layout:
   - directory:
-      name: stu
-      controllers:
-        - name: chooseClasses
-          handlers:
-            # Comments
-            - purpose: "Shows all the courses in a major."
-              route: "/stu/showMajor/<string:maj>"
-              methods:
-                - GET
-              function: showMajor
-              roles:
-                - students
-            # More comments
-            - purpose: "Show by required year."
-              route: "/stu/byYear"
-              methods:
-                - GET
-              function: showByYear
-              roles:
-                - admin
-            # Yet more comments
-            - purpose: "Show by hair color."
-              route: "/stu/byHairColor/<string:color>"
-              defaults: 
-                - "Brown"
-              methods:
-                - GET
-              function: showByHairColor
-              roles:
-                - students
-        - name: makeCookies
-          handlers:
-            # Comments
-            - purpose: "Shows all the courses in a major."
-              route: "/stu/showMajor/<string:maj>"
-              methods:
-                - GET
-              function: showMajor
-              roles:
-                - students
+    name: stu
+    controllers:
+      - name: chooseClasses
+        handlers:
+          # Comments
+          - purpose: "Shows all the courses in a major."
+            route: "/stu/showMajor/<string:maj>"
+            methods:
+              - GET
+            function: showMajor
+            roles:
+              - students
+          # More comments
+          - purpose: "Show by required year."
+            route: "/stu/byYear"
+            methods:
+              - GET
+            function: showByYear
+            roles:
+              - admin
+          # Yet more comments
+          - purpose: "Show by hair color."
+            route: "/stu/byHairColor/<string:color>"
+            defaults: 
+              - "Brown"
+            methods:
+              - GET
+            function: showByHairColor
+            roles:
+              - students
+      - name: makeCookies
+        handlers:
+          # Comments
+          - purpose: "Shows all the courses in a major."
+            route: "/stu/showMajorX/<string:major>"
+            methods:
+              - GET
+            function: showMajorX
+            roles:
+              - students
