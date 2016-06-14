@@ -1,14 +1,21 @@
 layout:
   - directory:
-    name: a
+    name: generic
     controllers:
-      - name: all
+      - name: generic
         handlers:
           - purpose: "First Page"
             route: "/"
             methods:
               - GET
             function: index
+            roles:
+              - anon
+          - purpose: "No Role"
+            route: "/norole"
+            methods:
+              - GET
+            function: noRoleFound
             roles:
               - anon
   - directory:
