@@ -5,6 +5,7 @@ admin:
   - database Roles
 
 students:
+  - group admin
   - AD students
 
 faculty:

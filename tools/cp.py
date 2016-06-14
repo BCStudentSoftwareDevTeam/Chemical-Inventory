@@ -257,7 +257,7 @@ def getParams(routeString):
   else:
     return []
   
-def createHandlerInController (controllerFile, c, h):
+def createHandlerInController (controllerFile, d, c, h):
   # If the handler isn't already there
   if not handlerExists(controllerFile, h):
     print "Adding route '{0}' to {1}.".format(h["route"], c["name"])
@@ -274,7 +274,7 @@ def createHandlerInController (controllerFile, c, h):
       .format(h["function"], 
               ",".join(getParams(h["route"]))
               ))
-    cf.write ("  pass\n")
+    cf.write ('  return render_template("views/{0}/{1}View.html", config = config)\n'.format(d["name"], h["function"]))
     cf.write("\n")
     cf.close()
 
@@ -287,12 +287,15 @@ def insertViewName (viewFile, h):
   out.close()
   shutil.copy(viewFile + ".tmp", viewFile)
   os.remove(viewFile + ".tmp")
-    
+
+def insertDefaultInitFile (dir):
+  shutil.copy("config/default__init__.txt", dir + "/__init__.py")
+  
 def generateFiles (cc):
   directories = cc["layout"]
   for d in directories:
     controllerDir = "application/controllers/" + d["name"]
-    viewDir       = "application/views/" + d["name"]
+    viewDir       = "application/templates/views/" + d["name"]
     createDirectory(controllerDir)
     createDirectory(viewDir)
     controllers = d["controllers"]
@@ -301,11 +304,11 @@ def generateFiles (cc):
       controllerFile = controllerDir + "/" + c["name"] + "Controller.py"
       
       touchController (controllerFile)
-
+      insertDefaultInitFile(controllerDir)
       
       handlers = c["handlers"]
       for h in handlers:
-        createHandlerInController(controllerFile, c, h)
+        createHandlerInController(controllerFile, d, c, h)
         viewFile = viewDir + "/" + h["function"] + "View.html"
         touchView (viewFile)
         insertViewName(viewFile, h)

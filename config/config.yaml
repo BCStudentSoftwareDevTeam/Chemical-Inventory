@@ -7,7 +7,7 @@
 # See http://configure.readthedocs.io/en/latest/#
 application:
   title: "The Template App"
-  default: showByYear
+  default: index
 
 databases:
   roles:
