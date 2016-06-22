@@ -12,11 +12,13 @@ application:
 databases:
   roles:
     filename: data/roles.sqlite
+  inventory:
+    filename: data/inventory.sqlite
 
 sys:
   debug: True
   host: "0.0.0.0"
-  port: 5000
+  port: 8080
 
 flask:
   # Secret key for signing cookies
