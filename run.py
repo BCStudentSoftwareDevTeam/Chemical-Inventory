@@ -4,4 +4,4 @@ from application import app
 from application.config import *
 
 # Run the web application.
-app.run(debug = config.sys.debug)
+app.run(debug = config.sys.debug, host = config.sys.host, port = config.sys.port)
