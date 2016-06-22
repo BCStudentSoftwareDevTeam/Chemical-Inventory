@@ -1,42 +1,183 @@
 layout:
   - directory:
-    name: stu
+    name: a # All
     controllers:
-      - name: chooseClasses
+      - name: ChemTable
         handlers:
-          # Comments
-          - purpose: "Shows all the courses in a major."
-            route: "/stu/showMajor/<string:maj>"
+          # Chemical table controller
+          - purpose: "Shows all Chemicals in Database."
+            route: "/a/ChemTable/"
             methods:
               - GET
-            function: showMajor
+            function: ChemTable
             roles:
-              - students
-          # More comments
-          - purpose: "Show by required year."
-            route: "/stu/byYear"
-            methods:
-              - GET
-            function: showByYear
-            roles:
-              - admin
-          # Yet more comments
-          - purpose: "Show by hair color."
-            route: "/stu/byHairColor/<string:color>"
-            defaults: 
-              - "Brown"
-            methods:
-              - GET
-            function: showByHairColor
-            roles:
-              - students
-      - name: makeCookies
+              - anon
+      - name: ViewChemical
         handlers:
-          # Comments
-          - purpose: "Shows all the courses in a major."
-            route: "/stu/showMajorX/<string:major>"
+        # Chemical page controller
+          - purpose: "Shows specific chemical and all containers of said chemical."
+            route: "/a/ViewChemical/<string:chemical>/"
             methods:
               - GET
-            function: showMajorX
+            function: ViewChemical
             roles:
-              - students
+              - anon
+  - directory:
+    name: fa # faculty
+    controllers:
+      - name: RequestUserAccess
+        handlers:
+          - purpose: "Faculty or Staff requesting for a student to have access to the system."
+            route: "/fa/RequestUserAccess/"
+            methods:
+              - GET
+            function: RequestUserAccess
+            roles:
+              - faculty
+              
+          - name: Home
+        handlers:
+            - purpose: "This is the homepage/dashboard for the professor"
+              route: "/fa/Home/"
+              methods:
+                - GET
+              function: Home
+              roles:
+                - faculty
+              
+  - directory:
+    name: sa #EHS staff
+    controllers:
+      - name: SystemAdminHome
+        handlers:
+          - purpose: "Home page and dash boeard for EHS staff/system admins."
+            route: "/sa/SystemAdminHome/"
+            methods:
+              - GET
+            function: SystemAdminHome
+            roles:
+              - systemAdmin
+      - name: CheckOut
+        handlers:
+          - purpose: "CheckOut a chemical"
+            route: "/sa/CheckOut/"
+            methods:
+              - GET
+              - POST
+            function: CheckOut
+            roles:
+              - systemAdmin
+              - masterAdmin
+      - name: CheckIn
+        handlers:
+          - purpose: "CheckIn a chemical"
+            route: "/sa/CheckIn/"
+            methods:
+              - GET
+              - POST
+            function: CheckIn
+            roles:
+              - systemAdmin
+              - masterAdmin
+      - name: CheckedOut
+        handlers:
+          - purpose: "Display chemicals that are checked out"
+            route: "/sa/CheckedOut/"
+            methods:
+              - GET
+            function: CheckedOut
+            roles:
+              - systemAdmin
+              - masterAdmin
+      - name: AddChemical
+        handlers:
+          - purpose: "Add Chemical to the database"
+            route: "/sa/AddChemical/"
+            methods:
+              - GET
+              - POST
+            function: AddChemical
+            roles:
+              - systemAdmin
+              - masterAdmin
+      - name: AddContainer
+        handlers:
+          - purpose: "Add Container for a certain chemical"
+            route: "/sa/AddContainer/"
+            methods:
+              - GET
+              - POST
+            function: AddContainer
+            roles:
+              - systemAdmin      
+              - masterAdmin
+      - name: CheckHistory
+        handlers:
+          - purpose: "Check history of a specific chemical"
+            route: "sa/CheckHistory/<string:chemical>/"
+            methods:
+              - GET
+            function: CheckHistory
+            roles:
+              - systemAdmin
+              - masterAdmin
+    
+  - directory:
+    name: ma #LeslieKaylor
+    controllers:
+      - name: MasterAdminHome
+        handlers :
+          - purpose: "Dashboard and homepage for the Admin"
+            route: "/ma/MasterAdminHome/"
+            methods:
+               - GET
+            function: MasterAdminHome
+            roles:
+              - masterAdmin
+      
+      - name: UserAccess
+        handlers :
+          - purpose: "Approve and Deny Users"
+            route: "/ma/UserAccess/"
+            methods:
+               - GET
+               - POST
+            function: UserAccess
+            roles:
+              - masterAdmin        
+    
+      - name: ViewUser
+        handlers :
+           - purpose: "View all the user and add new users "
+             route: "/ma/ViewUser/"
+             methods:
+               - GET
+               - POST
+             function: ViewUser
+             roles:
+               - masterAdmin
+               
+      - name: ManageBuildings
+        handlers:
+           - purpose: "Edit, delete, and add buildings"
+             route: "/ma/ManageBuildings/"
+             methods:
+               - GET
+               - POST
+             function: ManageBuildings
+             roles:
+               - masterAdmin
+               
+      - name: ManageFloors
+        handlers:
+           - purpose: "Edit, delete, and add floors and rooms"
+             route: "/ma/ManageFloors/"
+             methods:
+               -  GET
+               -  POST
+             function: ManageFloors
+             roles:
+               - masterAdmin
+        
+              
+              

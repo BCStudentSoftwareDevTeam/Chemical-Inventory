@@ -1,23 +1,20 @@
 # Only certain people can be admins in this app
-admin:
-  - heggens
-  - jadudm
+masterAdmin:
+  - kaylorl
+  - ubuntu #For Testing
   - database Roles
 
-students:
+systemAdmin:
   - group admin
-  - AD students
+  - AD systemAdmin
 
 faculty:
   - group admin
   - AD faculty
 
-withsuperpowers:
-  - hunterr
-
-valid:
-  - group admin
-  - group students
+systemUser:
+  - group masterAdmin
+  - group systemAdmin
   - group faculty
 
 anon:
