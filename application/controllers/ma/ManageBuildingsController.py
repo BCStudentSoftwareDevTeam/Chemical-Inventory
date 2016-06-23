@@ -10,7 +10,7 @@ from flask import \
 
 # PURPOSE: Edit, delete, and add buildings
 @app.route('/ma/ManageBuildings/', methods = ['GET', 'POST'])
-@require_role('masterAdmin')
+@require_role('admin')
 def ManageBuildings():
   return render_template("views/ma/ManageBuildingsView.html", config = config)
 

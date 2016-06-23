@@ -6,7 +6,7 @@
 # different elements in the YAML file.
 # See http://configure.readthedocs.io/en/latest/#
 application:
-  title: "The Template App"
+  title: "Berea Chemical Inventory System"
   default: index
 
 databases:
@@ -20,6 +20,52 @@ sys:
   host: "0.0.0.0"
   port: 8080
 
+hazards:
+    Base: Green   #Does Base need to be in quotes?
+    "Flammable": Red
+    "Flammable Solid": Copper
+    "Health Hazard": Blue
+    Inorganic Acid: Rose  #Does Inorganic Acid need to be in quotes?
+    "Organic Acid": Lavender
+    "Oxidizer": Yellow
+    "Reactive": Orange
+    
+maMenu:
+  - title: "Home"
+    link: "/ma/adminHome/"
+  - title: "View Chemical Table"
+    link: "/a/ChemTable/"
+  - title: "Check In a Container"
+    link: "/sa/CheckIn/"
+  - title: "Add a Chemical"
+    link: "/sa/AddChemical/"
+  - title: "Manage Users"
+    link: "/ma/ViewUser/"
+
+faMenu:
+  - title: "Home"
+    link: "/fa/Home/"
+  - title: "View Chemical Table"
+    link: "/a/ChemTable"
+  - title: "Request Access For a Student"
+    link: "/fa/RequestUserAccess/"
+    
+aMenu:
+  - title: "Home"
+    link: "a/ChemTable"
+
+saMenu:
+  - title: "System Admin Home"
+    link: "/sa/SystemAdminHome/"
+  - title: "View Chemical Table"
+    link: "/a/ChemTable/"
+  - title: "Check In"
+    link: "/sa/CheckIn/"
+  - title: "Add Chemical"
+    link: "/sa/AddChemical/"
+  
+  
+  
 flask:
   # Secret key for signing cookies
   # Only needed for admin module, and we don't seem to rely on

@@ -1,8 +1,7 @@
 # Only certain people can be admins in this app
-masterAdmin:
-  - kaylorl
+admin:
   - ubuntu #For Testing
-  - database Roles
+#  - database Roles
 
 systemAdmin:
   - group admin
@@ -13,7 +12,7 @@ faculty:
   - AD faculty
 
 systemUser:
-  - group masterAdmin
+  - group admin
   - group systemAdmin
   - group faculty
 

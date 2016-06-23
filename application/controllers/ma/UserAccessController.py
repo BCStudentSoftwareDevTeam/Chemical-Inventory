@@ -10,7 +10,7 @@ from flask import \
 
 # PURPOSE: Approve and Deny Users
 @app.route('/ma/UserAccess/', methods = ['GET', 'POST'])
-@require_role('masterAdmin')
+@require_role('admin')
 def UserAccess():
   return render_template("views/ma/UserAccessView.html", config = config)
 

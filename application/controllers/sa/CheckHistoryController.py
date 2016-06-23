@@ -9,9 +9,10 @@ from flask import \
     url_for
 
 # PURPOSE: Check history of a specific chemical
-@app.route('sa/CheckHistory/<string:chemical>/', methods = ['GET'])
+@app.route('/sa/CheckHistory/<string:chemical>/', methods = ['GET'])
 @require_role('systemAdmin')
-@require_role('masterAdmin')
+@require_role('admin')
 def CheckHistory(chemical):
-  return render_template("views/sa/CheckHistoryView.html", config = config)
+  return render_template("/views/sa/CheckHistoryView.html", config = config)
+
 

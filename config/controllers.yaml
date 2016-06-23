@@ -59,7 +59,7 @@ layout:
               - systemAdmin
       - name: CheckOut
         handlers:
-          - purpose: "CheckOut a chemical"
+          - purpose: "CheckOut a container"
             route: "/sa/CheckOut/"
             methods:
               - GET
@@ -67,10 +67,10 @@ layout:
             function: CheckOut
             roles:
               - systemAdmin
-              - masterAdmin
+              - admin
       - name: CheckIn
         handlers:
-          - purpose: "CheckIn a chemical"
+          - purpose: "CheckIn a container"
             route: "/sa/CheckIn/"
             methods:
               - GET
@@ -78,17 +78,17 @@ layout:
             function: CheckIn
             roles:
               - systemAdmin
-              - masterAdmin
+              - admin
       - name: CheckedOut
         handlers:
-          - purpose: "Display chemicals that are checked out"
+          - purpose: "Display containers that are checked out"
             route: "/sa/CheckedOut/"
             methods:
               - GET
             function: CheckedOut
             roles:
               - systemAdmin
-              - masterAdmin
+              - admin
       - name: AddChemical
         handlers:
           - purpose: "Add Chemical to the database"
@@ -99,7 +99,7 @@ layout:
             function: AddChemical
             roles:
               - systemAdmin
-              - masterAdmin
+              - admin
       - name: AddContainer
         handlers:
           - purpose: "Add Container for a certain chemical"
@@ -110,30 +110,30 @@ layout:
             function: AddContainer
             roles:
               - systemAdmin      
-              - masterAdmin
+              - admin
       - name: CheckHistory
         handlers:
           - purpose: "Check history of a specific chemical"
-            route: "sa/CheckHistory/<string:chemical>/"
+            route: "/sa/CheckHistory/<string:chemical>/"
             methods:
               - GET
             function: CheckHistory
             roles:
               - systemAdmin
-              - masterAdmin
+              - admin
     
   - directory:
     name: ma #LeslieKaylor
     controllers:
-      - name: MasterAdminHome
+      - name: adminHome
         handlers :
           - purpose: "Dashboard and homepage for the Admin"
-            route: "/ma/MasterAdminHome/"
+            route: "/ma/adminHome/"
             methods:
                - GET
-            function: MasterAdminHome
+            function: adminHome
             roles:
-              - masterAdmin
+              - admin
       
       - name: UserAccess
         handlers :
@@ -144,7 +144,7 @@ layout:
                - POST
             function: UserAccess
             roles:
-              - masterAdmin        
+              - admin        
     
       - name: ViewUser
         handlers :
@@ -155,7 +155,7 @@ layout:
                - POST
              function: ViewUser
              roles:
-               - masterAdmin
+               - admin
                
       - name: ManageBuildings
         handlers:
@@ -166,7 +166,7 @@ layout:
                - POST
              function: ManageBuildings
              roles:
-               - masterAdmin
+               - admin
                
       - name: ManageFloors
         handlers:
@@ -177,7 +177,4 @@ layout:
                -  POST
              function: ManageFloors
              roles:
-               - masterAdmin
-        
-              
-              
+               - admin

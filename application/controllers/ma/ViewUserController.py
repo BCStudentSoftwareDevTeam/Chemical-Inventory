@@ -10,7 +10,7 @@ from flask import \
 
 # PURPOSE: View all the user and add new users 
 @app.route('/ma/ViewUser/', methods = ['GET', 'POST'])
-@require_role('masterAdmin')
+@require_role('admin')
 def ViewUser():
   return render_template("views/ma/ViewUserView.html", config = config)
 

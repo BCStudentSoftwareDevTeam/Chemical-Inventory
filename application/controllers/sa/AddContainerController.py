@@ -11,7 +11,7 @@ from flask import \
 # PURPOSE: Add Container for a certain chemical
 @app.route('/sa/AddContainer/', methods = ['GET', 'POST'])
 @require_role('systemAdmin')
-@require_role('masterAdmin')
+@require_role('admin')
 def AddContainer():
   return render_template("views/sa/AddContainerView.html", config = config)
 

@@ -11,7 +11,7 @@ from flask import \
 # PURPOSE: Add Chemical to the database
 @app.route('/sa/AddChemical/', methods = ['GET', 'POST'])
 @require_role('systemAdmin')
-@require_role('masterAdmin')
+@require_role('admin')
 def AddChemical():
   return render_template("views/sa/AddChemicalView.html", config = config)
 

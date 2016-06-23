@@ -11,7 +11,7 @@ from flask import \
 # PURPOSE: CheckIn a chemical
 @app.route('/sa/CheckIn/', methods = ['GET', 'POST'])
 @require_role('systemAdmin')
-@require_role('masterAdmin')
+@require_role('admin')
 def CheckIn():
   return render_template("views/sa/CheckInView.html", config = config)
 

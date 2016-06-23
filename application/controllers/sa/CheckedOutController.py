@@ -11,7 +11,7 @@ from flask import \
 # PURPOSE: Display chemicals that are checked out
 @app.route('/sa/CheckedOut/', methods = ['GET'])
 @require_role('systemAdmin')
-@require_role('masterAdmin')
+@require_role('admin')
 def CheckedOut():
   return render_template("views/sa/CheckedOutView.html", config = config)
 
