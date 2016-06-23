@@ -2,26 +2,30 @@ layout:
   - directory:
     name: a # All
     controllers:
-      - name: ChemTable
+      - name: aChemTable
         handlers:
           # Chemical table controller
           - purpose: "Shows all Chemicals in Database."
             route: "/a/ChemTable/"
             methods:
               - GET
-            function: ChemTable
+            function: aChemTable
             roles:
-              - anon
-      - name: ViewChemical
+              - systemUser
+              
+      - name: aViewChemical
         handlers:
         # Chemical page controller
           - purpose: "Shows specific chemical and all containers of said chemical."
             route: "/a/ViewChemical/<string:chemical>/"
             methods:
               - GET
-            function: ViewChemical
+            function: aViewChemical
             roles:
-              - anon
+              - systemUser
+              
+################################################################################
+
   - directory:
     name: fa # faculty
     controllers:
@@ -35,7 +39,29 @@ layout:
             roles:
               - faculty
               
-          - name: Home
+      - name: faChemTable
+        handlers:
+          # Chemical table controller
+          - purpose: "Shows all Chemicals in Database."
+            route: "/fa/ChemTable/"
+            methods:
+              - GET
+            function: faChemTable
+            roles:
+              - faculty
+              
+      - name: faViewChemical
+        handlers:
+        # Chemical page controller
+          - purpose: "Shows specific chemical and all containers of said chemical."
+            route: "/fa/ViewChemical/<string:chemical>/"
+            methods:
+              - GET
+            function: faViewChemical
+            roles:
+              - faculty
+              
+      - name: Home
         handlers:
             - purpose: "This is the homepage/dashboard for the professor"
               route: "/fa/Home/"
@@ -44,6 +70,8 @@ layout:
               function: Home
               roles:
                 - faculty
+                
+################################################################################
               
   - directory:
     name: sa #EHS staff
@@ -57,70 +85,94 @@ layout:
             function: SystemAdminHome
             roles:
               - systemAdmin
-      - name: CheckOut
+              
+      - name: saChemTable
+        handlers:
+          # Chemical table controller
+          - purpose: "Shows all Chemicals in Database."
+            route: "/sa/ChemTable/"
+            methods:
+              - GET
+            function: saChemTable
+            roles:
+              - systemAdmin
+              
+      - name: saViewChemical
+        handlers:
+        # Chemical page controller
+          - purpose: "Shows specific chemical and all containers of said chemical."
+            route: "/sa/ViewChemical/<string:chemical>/"
+            methods:
+              - GET
+            function: saViewChemical
+            roles:
+              - systemAdmin
+              
+      - name: saCheckOut
         handlers:
           - purpose: "CheckOut a container"
             route: "/sa/CheckOut/"
             methods:
               - GET
               - POST
-            function: CheckOut
+            function: saCheckOut
             roles:
               - systemAdmin
-              - admin
-      - name: CheckIn
+              
+      - name: saCheckIn
         handlers:
           - purpose: "CheckIn a container"
             route: "/sa/CheckIn/"
             methods:
               - GET
               - POST
-            function: CheckIn
+            function: saCheckIn
             roles:
               - systemAdmin
-              - admin
-      - name: CheckedOut
+              
+      - name: saCheckedOut
         handlers:
           - purpose: "Display containers that are checked out"
             route: "/sa/CheckedOut/"
             methods:
               - GET
-            function: CheckedOut
+            function: saCheckedOut
             roles:
               - systemAdmin
-              - admin
-      - name: AddChemical
+              
+      - name: saAddChemical
         handlers:
           - purpose: "Add Chemical to the database"
             route: "/sa/AddChemical/"
             methods:
               - GET
               - POST
-            function: AddChemical
+            function: saAddChemical
             roles:
               - systemAdmin
-              - admin
-      - name: AddContainer
+              
+      - name: saAddContainer
         handlers:
           - purpose: "Add Container for a certain chemical"
             route: "/sa/AddContainer/"
             methods:
               - GET
               - POST
-            function: AddContainer
+            function: saAddContainer
             roles:
-              - systemAdmin      
-              - admin
-      - name: CheckHistory
+              - systemAdmin
+              
+      - name: saCheckHistory
         handlers:
           - purpose: "Check history of a specific chemical"
             route: "/sa/CheckHistory/<string:chemical>/"
             methods:
               - GET
-            function: CheckHistory
+            function: saCheckHistory
             roles:
               - systemAdmin
-              - admin
+              
+################################################################################
     
   - directory:
     name: ma #LeslieKaylor
@@ -178,3 +230,89 @@ layout:
              function: ManageFloors
              roles:
                - admin
+               
+      - name: maChemTable
+        handlers:
+          # Chemical table controller
+          - purpose: "Shows all Chemicals in Database."
+            route: "/ma/ChemTable/"
+            methods:
+              - GET
+            function: maChemTable
+            roles:
+              - admin
+              
+      - name: maViewChemical
+        handlers:
+        # Chemical page controller
+          - purpose: "Shows specific chemical and all containers of said chemical."
+            route: "/ma/ViewChemical/<string:chemical>/"
+            methods:
+              - GET
+            function: maViewChemical
+            roles:
+              - admin
+              
+      - name: maCheckOut
+        handlers:
+          - purpose: "CheckOut a container"
+            route: "/ma/CheckOut/"
+            methods:
+              - GET
+              - POST
+            function: maCheckOut
+            roles:
+              - admin
+              
+      - name: maCheckIn
+        handlers:
+          - purpose: "CheckIn a container"
+            route: "/ma/CheckIn/"
+            methods:
+              - GET
+              - POST
+            function: maCheckIn
+            roles:
+              - admin
+              
+      - name: maCheckedOut
+        handlers:
+          - purpose: "Display containers that are checked out"
+            route: "/ma/CheckedOut/"
+            methods:
+              - GET
+            function: maCheckedOut
+            roles:
+              - admin
+              
+      - name: maAddChemical
+        handlers:
+          - purpose: "Add Chemical to the database"
+            route: "/ma/AddChemical/"
+            methods:
+              - GET
+              - POST
+            function: maAddChemical
+            roles:
+              - admin
+              
+      - name: maAddContainer
+        handlers:
+          - purpose: "Add Container for a certain chemical"
+            route: "/ma/AddContainer/"
+            methods:
+              - GET
+              - POST
+            function: maAddContainer
+            roles:
+              - admin
+              
+      - name: maCheckHistory
+        handlers:
+          - purpose: "Check history of a specific chemical"
+            route: "/ma/CheckHistory/<string:chemical>/"
+            methods:
+              - GET
+            function: maCheckHistory
+            roles:
+              - admin
