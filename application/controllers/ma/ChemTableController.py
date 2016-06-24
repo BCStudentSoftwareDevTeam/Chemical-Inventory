@@ -9,8 +9,8 @@ from flask import \
     url_for
 
 # PURPOSE: Shows all Chemicals in Database.
-@app.route('/fa/ChemTable/', methods = ['GET'])
-@require_role('faculty')
-def faChemTable():
-  return render_template("views/fa/faChemTableView.html", config = config)
+@app.route('/ma/ChemTable/', methods = ['GET'])
+@require_role('admin')
+def maChemTable():
+  return render_template("views/ma/ChemTableView.html", config = config)
 

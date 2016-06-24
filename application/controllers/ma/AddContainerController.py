@@ -8,9 +8,9 @@ from flask import \
     request, \
     url_for
 
-# PURPOSE: Dashboard and homepage for the Admin
-@app.route('/ma/adminHome/', methods = ['GET'])
+# PURPOSE: Add Container for a certain chemical
+@app.route('/ma/AddContainer/', methods = ['GET', 'POST'])
 @require_role('admin')
-def adminHome():
-  return render_template("views/ma/adminHomeView.html", config = config)
+def maAddContainer():
+  return render_template("views/ma/AddContainerView.html", config = config)
 

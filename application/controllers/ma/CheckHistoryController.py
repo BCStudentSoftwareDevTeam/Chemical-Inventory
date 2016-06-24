@@ -8,9 +8,9 @@ from flask import \
     request, \
     url_for
 
-# PURPOSE: CheckIn a container
-@app.route('/ma/CheckIn/', methods = ['GET', 'POST'])
+# PURPOSE: Check history of a specific chemical
+@app.route('/ma/CheckHistory/<string:chemical>/', methods = ['GET'])
 @require_role('admin')
-def maCheckIn():
-  return render_template("views/ma/maCheckInView.html", config = config)
+def maCheckHistory(chemical):
+  return render_template("views/ma/CheckHistoryView.html", config = config)
 

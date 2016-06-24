@@ -8,9 +8,9 @@ from flask import \
     request, \
     url_for
 
-# PURPOSE: CheckOut a container
-@app.route('/ma/CheckOut/', methods = ['GET', 'POST'])
+# PURPOSE: Display containers that are checked out
+@app.route('/ma/CheckedOut/', methods = ['GET'])
 @require_role('admin')
-def maCheckOut():
-  return render_template("views/ma/maCheckOutView.html", config = config)
+def maCheckedOut():
+  return render_template("views/ma/CheckedOutView.html", config = config)
 

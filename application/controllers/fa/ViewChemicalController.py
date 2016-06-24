@@ -9,8 +9,8 @@ from flask import \
     url_for
 
 # PURPOSE: Shows specific chemical and all containers of said chemical.
-@app.route('/sa/ViewChemical/<string:chemical>/', methods = ['GET'])
-@require_role('systemAdmin')
-def saViewChemical(chemical):
-  return render_template("views/sa/saViewChemicalView.html", config = config)
+@app.route('/fa/ViewChemical/<string:chemical>/', methods = ['GET'])
+@require_role('faculty')
+def faViewChemical(chemical):
+  return render_template("views/fa/ViewChemicalView.html", config = config)
 

@@ -8,9 +8,9 @@ from flask import \
     request, \
     url_for
 
-# PURPOSE: Shows all Chemicals in Database.
-@app.route('/a/ChemTable/', methods = ['GET'])
-@require_role('systemUser')
-def aChemTable():
-  return render_template("views/a/aChemTableView.html", config = config)
+# PURPOSE: Dashboard and homepage for the Admin
+@app.route('/ma/Home/', methods = ['GET'])
+@require_role('admin')
+def adminHome():
+  return render_template("views/ma/HomeView.html", config = config)
 
