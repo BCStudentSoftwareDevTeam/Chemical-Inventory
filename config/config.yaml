@@ -46,13 +46,13 @@ faMenu:
   - title: "Home"
     link: "/fa/Home/"
   - title: "View Chemical Table"
-    link: "/fa/ChemTable"
+    link: "/fa/ChemTable/"
   - title: "Request Access For a Student"
     link: "/fa/RequestUserAccess/"
     
 aMenu:
   - title: "Home"
-    link: "a/ChemTable"
+    link: "/a/ChemTable/"
 
 saMenu:
   - title: "System Admin Home"

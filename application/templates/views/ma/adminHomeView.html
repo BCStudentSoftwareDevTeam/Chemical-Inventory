@@ -4,12 +4,14 @@
 
 {%  include "Navigation/maMenu.html"  %}
 
-<div>
-  <strong>FIXME</strong>: This is the view for the function <strong style="color: red;">adminHome</strong>.
-</div>
-
-<div>
-  <strong>FIXME</strong>: It serves the route <strong style="color: red;">/ma/adminHome/</strong>.
-</div>
+<div class="container-fluid">
+  <table class="table table-hover" style="cursor: pointer;">
+    <tr onclick="window.location.href = '{{url_for('maChemTable')}}';"><td>View Chemical Table</td></tr>
+    <tr onclick="window.location.href = '{{url_for('maCheckIn')}}';"><td>Check in Container(s)</td></tr>
+    <tr onclick="window.location.href = '{{url_for('maCheckedOut')}}';"><td>View Checked Out Containers</td></tr>
+    <tr onclick="window.location.href = '{{url_for('UserAccess')}}';"><td>User Access Requests</td>
+    <tr onclick="window.location.href = '{{url_for('ViewUser')}}';"><td>View all Users</td></tr>
+    <tr onclick="window.location.href = '{{url_for('ManageBuildings')}}';"><td>Edit Buildings</td></tr>
+  </table>
 
 {% endblock %}
