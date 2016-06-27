@@ -15,20 +15,23 @@ class Chemicals (Model):
   storageTemp     = FloatField(null = True)
   sdsLink         = CharField(null = True)
   description     = CharField(default = "")
-  ## Hazards
-  healthHazard    = CharField(null = False)       # Bool?
-  flammable       = CharField(null = False)       # Bool?
-  reactive        = CharField(null = False)       # Bool?
-  other           = CharField(null = False)
-  # Do we want to automatically decide which pictograms will show up? Or ask the user which pictograms a chemical should have?
-  waterReactive   = BooleanField(default = False) # Water Reactive Pictogram
-  hhPict          = BooleanField(default = False) # Health Hazard Pictogram # Couldn't we just check if the healthHazard field has been marked as True?
+  ## NFPA "Fire Diamond"
+  healthHazard    = CharField(null = False) # 0-4
+  flammable       = CharField(null = False) # 0-4
+  reactive        = CharField(null = False) # 0-4
+  other           = CharField(null = False) # Ask Leslie if they use any non-standard symbols
+  ## NFPA "Fire Diamond" DATABASE DOES NOT SUPPORT THESE YET!
+  #simpleAsphyxiant= BooleanField(default = False) # Simple Asphyxiant
+  #oxidizer        = BooleanField(default = False) # Oxidizer
+  waterReactive   = BooleanField(default = False) # Water Reactive
+  # Ask the user which pictograms a chemical should have
+  hhPict          = BooleanField(default = False) # Health Hazard Pictogram
   flamePict       = BooleanField(default = False) # Flammmable Pictogram
-  emPict          = BooleanField(default = False) # Explanation Mark
-  gcPict          = BooleanField(default = False) # Gas Cylinder
-  corrosivePict   = BooleanField(default = False) # Corrosive
-  expPict         = BooleanField(default = False) # Explosive
-  oxidizerPict    = BooleanField(default = False)
+  emPict          = BooleanField(default = False) # Exclamation Mark Pictogram
+  gcPict          = BooleanField(default = False) # Gas Cylinder Pictogram
+  corrosivePict   = BooleanField(default = False) # Corrosive Pictogram
+  expPict         = BooleanField(default = False) # Explosive Pictogram
+  oxidizerPict    = BooleanField(default = False) # Oxidizer Pictogram
   oxidizerClass   = CharField(default = '4')      # Only if it is an oxidizer
   envPict         = BooleanField(default = False) # Environmental Hazard
   toxicPict       = BooleanField(default = False) # Acute Toxicity

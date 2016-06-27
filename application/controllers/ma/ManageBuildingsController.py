@@ -12,5 +12,6 @@ from flask import \
 @app.route('/ma/ManageBuildings/', methods = ['GET', 'POST'])
 @require_role('admin')
 def ManageBuildings():
-  return render_template("views/ma/ManageBuildingsView.html", config = config)
+    buildings = buildingsModel.Buildings.select()
+    return render_template("views/ma/ManageBuildingsView.html", config = config, buildings = buildings)
 

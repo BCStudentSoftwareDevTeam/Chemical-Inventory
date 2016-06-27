@@ -20,6 +20,9 @@ class Containers (Model):
   capacityUnit       = CharField(default = "") # units container is initially measured in
   capacity           = FloatField(null = False)# amount of units that the container can hold
   checkedOut         = BooleanField(default = False)
+  forClass           = CharField(null = True)
+  forProf            = CharField(null = True)
+  checkedOutBy       = CharField(null = True)
 
   class Meta:
     database = getDB("inventory")

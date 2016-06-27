@@ -20,19 +20,54 @@ sys:
   host: "0.0.0.0"
   port: 8080
 
+pictograms:
+  # Pictograms found @ https://www.osha.gov/dsg/hazcom/pictograms/
+    - title: "corrosive"
+      pict: "/static/pictograms/corrosivePict.jpg"
+      alt: "Corrosion"
+    - title: "environmental"
+      pict: "/static/pictograms/environmentalPict.jpg"
+      alt: "Environmental"
+    - title: "exclamation"
+      pict: "/static/pictograms/exclamationPict.jpg"
+      alt: "Exclamation Mark"
+    - title: "flammable"
+      pict: "/static/pictograms/flammablePict.jpg"
+      alt: "Flame"
+    - title: "gasCylinder"
+      pict: "/static/pictograms/gasCylinderPict.jpg"
+      alt: "Gas Cylinder"
+    - title: "health"
+      pict: "/static/pictograms/healthPict.jpg"
+      alt: "Health Hazard"
+    - title: "oxidizer"
+      pict: "/static/pictograms/oxidizerPict.jpg"
+      alt: "Flame Over Circle"
+    - title: "toxic"
+      pict: "/static/pictograms/toxicPict.jpg"
+      alt: "Skull and Crossbones"
+
 hazards:
-    Base: Green   #Does Base need to be in quotes?
-    "Flammable": Red
-    "Flammable Solid": Copper
-    "Health Hazard": Blue
-    Inorganic Acid: Rose  #Does Inorganic Acid need to be in quotes?
-    "Organic Acid": Lavender
-    "Oxidizer": Yellow
-    "Reactive": Orange
+    - hazard: "Base"
+      color: "Green"   
+    - hazard: "Flammable"
+      color: "Red"
+    - hazard: "Flammable Solid"
+      color: "Copper"
+    - hazard: "Health"
+      color: "Blue"
+    - hazard: "Inorganic Acid"
+      color: "Rose"
+    - hazard: "Organic Acid"
+      color: "Lavender"
+    - hazard: "Oxidizer"
+      color: "Yellow"
+    - hazard: "Reactive"
+      color: "Orange"
     
 maMenu:
   - title: "Home"
-    link: "/ma/adminHome/"
+    link: "/ma/Home/"
   - title: "View Chemical Table"
     link: "/ma/ChemTable/"
   - title: "Check In a Container"
@@ -55,8 +90,8 @@ aMenu:
     link: "/a/ChemTable/"
 
 saMenu:
-  - title: "System Admin Home"
-    link: "/sa/SystemAdminHome/"
+  - title: "Home"
+    link: "/sa/Home/"
   - title: "View Chemical Table"
     link: "/sa/ChemTable/"
   - title: "Check In"

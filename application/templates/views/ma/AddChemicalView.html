@@ -4,12 +4,158 @@
 
 {%  include "Navigation/maMenu.html"  %}
 
-<div>
-  <strong>FIXME</strong>: This is the view for the function <strong style="color: red;">maAddChemical</strong>.
-</div>
-
-<div>
-  <strong>FIXME</strong>: It serves the route <strong style="color: red;">/ma/AddChemical/</strong>.
+<div class="container">
+  <form>
+    <div class="form-group row">
+      <label for="name" class="col-sm-2">Name:</label>
+      <div class="col-sm-10">
+        <input id="name" type="text" placeholder="Chemical Name" required="true">
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <label for="casNum" class="col-sm-2">Cas Number:</label>
+      <div class="col-sm-10">
+        <input id="casNum" type="text" placeholder="Cas Number" required="true"> <!--Change this later to validate correct formatting SEE:https://www.cas.org/content/chemical-substances/checkdig-->
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <label for="primaryHazard" class="col-sm-2">Primary Hazard:</label>
+      <div class="col-sm-10">
+        <select id="primaryHazard">
+          <option selected disabled>Select One</option>
+          <option value="Flammable">Flammable</option>
+          <option value="Flammable Solid">Flammable Solid</option>
+          <option value="Organic Health Hazard">Organic Health Hazard</option>
+          <option value="Inorganic Health Hazard">Inorganic Health Hazard</option>
+          <option value="Organic Acid">Organic Acid</option>
+          <option value="Inorganic Acid">Inorganic Acid</option>
+          <option value="Oxidizer">Oxidizer</option>
+          <option value="Reactive">Reactive</option>
+          <option value="Pressure Forming">Pressure Forming</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <label for="structure" class="col-sm-2">Structure</label>
+      <div class="col-sm-10">
+        <select id="structure">
+          <option value="Organic">Organic</option>
+          <option value="Inorganic">Inorganic</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <label for="state" class="col-sm-2">State:</label>
+      <div class="col-sm-10">
+        <select id="state">
+          <option selected disabled>Select One</option>
+          <option value="Solid">Solid</option>
+          <option value="Liquid">Liquid</option>
+          <option value="Gas">Gas</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <label for="formula" class="col-sm-2">Formula:</label>
+      <div class="col-sm-10">
+        <input type="text" id="formula" placeholder="Chemical Formula">
+      </div>
+    </div>   
+    
+    <div class="form-group row">
+      <label for="flashPoint" class="col-sm-2">Flash Point</label>
+      <div class="col-sm-10">
+        <input id="flashPoint" type="number" placeholder="Degrees Fahrenheit">
+        <small class="text-muted">In Fahrenheit</small>
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <label for="boilPoint" class="col-sm-2">Boiling Point</label>
+      <div class="col-sm-10">
+        <input id="boilPoint" type="number" placeholder="Degrees Fahrenheit">
+        <small class="text-muted">In Fahrenheit</small>
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <label for="storageTemp" class="col-sm-2">Storage Temp:</label>
+      <div class="col-sm-10">
+        <input id="storageTemp" type="number" placeholder="Degrees Fahrenheit">
+        <small class="text-muted">In Fahrenheit</small>
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <label for="sdsLink" class="col-sm-2">Safety Data Sheet Link:</label>
+      <div class="col-sm-10">
+        <input id="sdsLink" type="text" placeholder="SDS link">
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <label for="description" class="col-sm-2">Description:</label>
+      <div class="col-sm-10">
+        <input id="description" type="text" placeholder="Chemical Description">
+      </div>
+    </div>
+    <!--This will change to look a little nicer later.-->
+    <div class="form-group row">
+      <label for="nfpaDiamond" class="col-sm-2">NFPA 704:</label>
+      <div class="col-sm-10">
+        <label for="health">Health</label>
+        <select id="health">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <label for="flammability">Flammablility</label>
+        <select id="flammability">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <label for="instability">Instability/Reactivity</label>
+        <select id="instability">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <label for="special">Special Notice</label>
+        <select id="special">
+          <option value="oxidizer">OX (Oxidizer)</option> <!--DATABASE DOES NOT SUPPORT THESE YET-->
+          <option value="waterReactive">₩ (Water Reactive)</option>
+          <option value="simpleAsphyxiant">SA (Simple Asphyxiant Gas)</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <label for="pictograms" class="row">Please select the appropriate hazard pictogram.</label>
+      <div class="radio">
+        {%for hazardPict in config['pictograms']%}
+          <input type="radio" name="hazardPict" id="{{hazardPict['title']}}" value="{{hazardPict['title']}}">
+          <label for="{{hazardPict['title']}}">
+          <img src="{{hazardPict['pict']}}" alt="{{hazardPict['alt']}}"><br>
+          {{hazardPict['title']}}
+          </label> 
+        {%endfor%}
+      </div>
+    </div>
+    
+  <button type="submit">Submit</button>
+  </form>
 </div>
 
 {% endblock %}

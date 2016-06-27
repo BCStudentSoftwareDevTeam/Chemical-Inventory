@@ -4,12 +4,20 @@
 
 {%  include "Navigation/maMenu.html"  %}
 
-<div>
-  <strong>FIXME</strong>: This is the view for the function <strong style="color: red;">ManageFloors</strong>.
-</div>
-
-<div>
-  <strong>FIXME</strong>: It serves the route <strong style="color: red;">/ma/ManageFloors/</strong>.
+<div class="container-fluid">
+  <table class="table table-hover">
+    <thead>
+      <th>Building Name</th>
+      <th>Floor Number</th>
+    </thead>
+    {%  for floor in floors  %}
+      <tr>
+        <td>{{floor.buildid.name}}</td>
+        <td>{{floor.floornum}}</td>
+      </tr>
+    {%  endfor  %}
+  </table>
+  
 </div>
 
 {% endblock %}

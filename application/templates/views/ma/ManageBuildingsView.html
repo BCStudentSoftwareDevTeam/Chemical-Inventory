@@ -4,12 +4,29 @@
 
 {%  include "Navigation/maMenu.html"  %}
 
-<div>
-  <strong>FIXME</strong>: This is the view for the function <strong style="color: red;">ManageBuildings</strong>.
+<div class="container-fluid">
+  <table class="table table-hover">
+    <thead>
+      <th>Building Name</th>
+      <th>Number of Floors</th>
+      <th>Address</th>
+    </thead>
+    {%  for building in buildings  %}
+      <tr>
+        <td>{{building.name}}</td>
+        <td>{{building.numfloors}}</td>
+        <td>{{building.address}}</td>
+      </tr>
+    {%  endfor  %}
+  </table>
 </div>
 
-<div>
-  <strong>FIXME</strong>: It serves the route <strong style="color: red;">/ma/ManageBuildings/</strong>.
-</div>
+<!--<div class="container-fluid">-->
+<!--  <form>-->
+<!--    <fieldset class="form-group">-->
+<!--      <label for=""></label>-->
+<!--    </fieldset>-->
+<!--  </form>-->
+<!--</div>-->
 
 {% endblock %}
