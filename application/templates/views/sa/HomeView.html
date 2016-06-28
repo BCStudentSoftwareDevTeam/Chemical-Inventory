@@ -4,12 +4,14 @@
 
 {%  include "Navigation/saMenu.html"  %}
 
-<div>
-  <strong>FIXME</strong>: This is the view for the function <strong style="color: red;">SystemAdminHome</strong>.
-</div>
-
-<div>
-  <strong>FIXME</strong>: It serves the route <strong style="color: red;">/sa/SystemAdminHome/</strong>.
+<div class= "contianer-fluid">
+  <table class="table table-hover" style="cursor: pointer;">
+    <tr onclick="window.location.href = '{{url_for('saChemTable')}}';"><td>View Chemical Table</td></tr>
+    <tr onclick="window.location.href = '{{url_for('saCheckIn')}}';"><td>Check in Container(s)</td></tr>
+    <tr onclick="window.location.href = '{{url_for('CheckedOut')}}';"><td>View Checked Out Containers</td></tr>
+    <tr onclick="window.location.href = '{{url_for('AddChemical')}}';"><td>Add Chemical</td></tr>
+  </table>
+  
 </div>
 
 {% endblock %}
