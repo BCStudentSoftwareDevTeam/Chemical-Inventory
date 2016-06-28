@@ -19,7 +19,8 @@ sys:
   debug: True
   host: "0.0.0.0"
   port: 8080
-
+  
+# Add Chemical form
 pictograms:
   # Pictograms found @ https://www.osha.gov/dsg/hazcom/pictograms/
     - title: "corrosive"
@@ -48,6 +49,7 @@ pictograms:
       alt: "Skull and Crossbones"
 
 NFPAdiamond:
+  # Used to build the selection form for the NFPA "Fire Diamond"
     - section: "Health"
       selections: 
        - "0"
@@ -74,7 +76,68 @@ NFPAdiamond:
        - "OX (Oxidizer)"
        - "₩ (Water Reactive)"
        - "SA (Simple Asphyxiant Gas)"
+       
+addChemInputs:
+    - name: "Name"
+      id: "name"
+      type: "text"
+      placeholder: "Chemical Name"
+    - name: "Cas Number"
+      id: "casNum"
+      type: "text"
+      placeholder: "Cas Number"
+    - name: "Formula"
+      id: "formula"
+      type: "text"
+      placeholder: "Chemical Formula"
+    - name: "Flash Point"
+      id: "flashPoint"
+      type: "number"
+      placeholder: "Degrees Fahrenheit"
+      small: "In Fahrenheit"
+    - name: "Boiling Point"
+      type: "number"
+      placeholder: "Degrees Fahrenheit"
+      small: "In Fahrenheit"
+    - name: "Storage Temp"
+      type: "number"
+      placeholder: "Degrees Fahrenheit"
+      small: "In Fahrenheit"
+    - name: "Safety Data Sheet Link"
+      type: "text"
+       
+addChemDropdowns:
+    - name: "primaryHazard"
+      selections:
+        - "Flammable"
+          # color: "Red"
+        - "Flammable Solid"
+          # color: "Copper"
+        - "Organic Health Hazard"
+          # color: "Blue"
+        - "Inorganic Health Hazard"
+          # color: "Blue"
+        - "Organic Acid"
+          # color: "Lavender"
+        - "Inorganic Acid"
+          # color: "Rose"
+        - "Base"
+          # color: "Green"
+        - "Oxidizer"
+          # color: "Yellow"
+        - "Reactive"
+          # color: "Orange"
+    - name: "structure"
+      selections:
+        - "Organic"
+        - "Inorganic"
+    - name: "state"
+      selections:
+        - "Solid"
+        - "Liquid"
+        - "Gas"
 
+# Color Codes
 hazards:
     - hazard: "Base"
       color: "Green"   
@@ -92,7 +155,8 @@ hazards:
       color: "Yellow"
     - hazard: "Reactive"
       color: "Orange"
-    
+ 
+# Navigation bars   
 maMenu:
   - title: "Home"
     link: "/ma/Home/"
