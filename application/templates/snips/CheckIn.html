@@ -1,40 +1,40 @@
 <div class="container">
-  <form>
+  <form name="checkIn">
     <div class="form-group row">
       <label for="name" class="col-sm-2">Name:</label>
       <div class="col-sm-10">
-        <input id="name" required="true" type="text" placeholder="Chemical Name">
+        <input id="name" required="true" type="text" placeholder="Chemical Name" name="name">
       </div>
     </div>
     <div class="form-group row">
       <label for="barcode" class="col-sm-2">Barcode:</label>
       <div class="col-sm-10">
-        <input id="barcode" required="true" type="number" placeholder="Chemical Barcode"> <!--Needs to auto populate the barcode-->
+        <input id="barcode" name="barcode" required="true" type="number" placeholder="Chemical Barcode"> <!--Needs to auto populate the barcode-->
       </div>
     </div>
     <div class="form-group row">
       <label for="lastroom" class="col-sm-2">Last Room:</label>
       <div class="col-sm-10">
-        <input id="barcode" required="true" type="text" placeholder="Chemical's last Room">
+        <input id="lastRoom" name="lastRoom" required="true" type="text" placeholder="Chemical's last Room">
       </div>
     </div>
     <div class="form-group row">
-      <label for="new quantity" class="col-sm-2">New Quantity:</label>
+      <label for="newQuantity" class="col-sm-2">New Quantity:</label>
       <div class="col-sm-10">
-        <input id="new quantity" required="true" type="text" placeholder="Chemical's new Quanity">
+        <input id="newQuantity" name="newQuantity"  required="true" type="text" placeholder="Chemical's new Quanity">
       </div>
     </div>
     <div class="form-group row">
       <label for="newroom" class="col-sm-2">New Room:</label>
       <div class="col-sm-10">
-        <input id="newroom" required="true" type="text" placeholder="Chemical's new Room">
+        <input id="newroom" name="newroom" required="true" type="text" placeholder="Chemical's new Room">
       </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Submit</button>
+    <button class="btn btn-primary btn-lg" id="submitForm" type="button" onclick="CheckInModal('name','barcode','lastRoom','newQuantity','newroom')">Submit</button>
     <head>
 
     <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" >
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -53,3 +53,4 @@
 </div>
   </form>        
 </div>
+<script src="/static/js/local/Checkin.js"></script>
