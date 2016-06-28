@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+{%  include "Navigation/maMenu.html"  %}
+
+<div class="container-fluid">
+  <table class="table table-hover" style="cursor: pointer;">
+    <tr onclick="window.location.href = '{{url_for('maChemTable')}}';"><td>View Chemical Table</td></tr>
+    <tr onclick="window.location.href = '{{url_for('maCheckIn')}}';"><td>Check in Container(s)</td></tr>
+    <tr onclick="window.location.href = '{{url_for('maCheckedOut')}}';"><td>View Checked Out Containers</td></tr>
+    <tr onclick="window.location.href = '{{url_for('UserAccess')}}';"><td>User Access Requests</td>
+    <tr onclick="window.location.href = '{{url_for('ViewUser')}}';"><td>View all Users</td></tr>
+    <tr onclick="window.location.href = '{{url_for('ManageBuildings')}}';"><td>Edit Buildings</td></tr>
+  </table>
+
+{% endblock %}

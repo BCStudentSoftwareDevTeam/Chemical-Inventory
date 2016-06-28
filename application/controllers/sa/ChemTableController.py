@@ -12,5 +12,6 @@ from flask import \
 @app.route('/sa/ChemTable/', methods = ['GET'])
 @require_role('systemAdmin')
 def saChemTable():
-  return render_template("views/sa/ChemTableView.html", config = config)
+    chemicals = chemicalsModel.Chemicals.select()
+    return render_template("views/sa/ChemTableView.html", config = config, chemicals= chemicals)
 

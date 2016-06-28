@@ -12,5 +12,6 @@ from flask import \
 @app.route('/sa/CheckIn/', methods = ['GET', 'POST'])
 @require_role('systemAdmin')
 def saCheckIn():
-  return render_template("views/sa/CheckInView.html", config = config)
+  inputNames = ['name','barcode','lastroom','newQuantity','newroom']
+  return render_template("views/sa/CheckInView.html", config = config,inputNames = inputNames)
 
