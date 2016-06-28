@@ -123,6 +123,12 @@ addChemInputs:
       id: "description"
       type: "textarea"
       placeholder: "Description of Chemical"
+
+addChemChecks:
+    - name: "Pressure Former"
+      id: "pressureFormer"
+    - name: "Peroxide Former"
+      id: "peroxideFormer"
        
 addChemDropdowns:
     - name: "Primary Hazard"
