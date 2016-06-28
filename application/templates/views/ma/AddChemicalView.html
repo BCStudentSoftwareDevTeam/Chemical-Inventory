@@ -104,40 +104,18 @@
         <input id="description" type="text" placeholder="Chemical Description">
       </div>
     </div>
-    <!--This will change to look a little nicer later.-->
+    
     <div class="form-group row">
       <label for="nfpaDiamond" class="col-sm-2">NFPA 704:</label>
       <div class="col-sm-10">
-        <label for="health">Health</label>
-        <select id="health">
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select>
-        <label for="flammability">Flammablility</label>
-        <select id="flammability">
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select>
-        <label for="instability">Instability/Reactivity</label>
-        <select id="instability">
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select>
-        <label for="special">Special Notice</label>
-        <select id="special">
-          <option value="oxidizer">OX (Oxidizer)</option> <!--DATABASE DOES NOT SUPPORT THESE YET-->
-          <option value="waterReactive">₩ (Water Reactive)</option>
-          <option value="simpleAsphyxiant">SA (Simple Asphyxiant Gas)</option>
-        </select>
+        {%for division in config['NFPAdiamond']%}
+          <label for="{{division['section']}}">{{division['section']}}</label>
+          <select id="{{division['section']}}">
+          {%for selection in division['selections']%}
+            <option value="{{selection}}">{{selection}}</option>
+          {%endfor%}
+          </select>
+        {%endfor%}
       </div>
     </div>
     

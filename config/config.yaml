@@ -47,6 +47,34 @@ pictograms:
       pict: "/static/pictograms/toxicPict.jpg"
       alt: "Skull and Crossbones"
 
+NFPAdiamond:
+    - section: "Health"
+      selections: 
+       - "0"
+       - "1"
+       - "2"
+       - "3"
+       - "4"
+    - section: "Flammability"
+      selections: 
+       - "0"
+       - "1"
+       - "2"
+       - "3"
+       - "4"
+    - section: "Instability"
+      selections: 
+       - "0"
+       - "1"
+       - "2"
+       - "3"
+       - "4"
+    - section: "Special"
+      selections: 
+       - "OX (Oxidizer)"
+       - "₩ (Water Reactive)"
+       - "SA (Simple Asphyxiant Gas)"
+
 hazards:
     - hazard: "Base"
       color: "Green"   
