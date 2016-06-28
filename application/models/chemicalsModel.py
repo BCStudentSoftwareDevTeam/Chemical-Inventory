@@ -10,9 +10,9 @@ class Chemicals (Model):
   concentration   = CharField(null = True)                   #This field can be left empty
   state           = CharField(null = False)
   structure       = CharField(null = False)       # Organic or Inorganic
-  flashPoint      = FloatField(null = True)
-  boilPoint       = FloatField(null = True)
-  storageTemp     = FloatField(null = True)
+  flashPoint      = DecimalField(null = True)
+  boilPoint       = DecimalField(null = True)
+  storageTemp     = DecimalField(null = True)
   sdsLink         = CharField(null = True)
   description     = CharField(default = "")
   ## NFPA "Fire Diamond"
