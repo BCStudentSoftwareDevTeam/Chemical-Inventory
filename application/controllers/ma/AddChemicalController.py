@@ -15,8 +15,9 @@ from flask import \
 @require_role('admin')
 def maAddChemical():
   if request.method == "GET":
-      return render_template("views/ma/AddChemicalView.html", config = config)
+      return render_template("views/ma/AddChemicalView.html", config = config, formConfig = formConfig)
   data = request.form
+  
   modelData, extraData = sortPost(data, chemicalsModel.Chemicals)
   chemicalsModel.Chemicals.create(**modelData)
-  return render_template("views/ma/AddChemicalView.html", config = config)
+  return render_template("views/ma/AddChemicalView.html", config = config, formConfig = formConfig)

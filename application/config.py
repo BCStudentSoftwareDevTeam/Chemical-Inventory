@@ -12,6 +12,9 @@ config = Configuration.from_file('config/config.yaml').configure()
 # controllers = Configuration.from_file('controllers.yaml').configure()
 # config.controllers = controllers
 
+# Added for splitting up add chemical form config from config
+formConfig = Configuration.from_file('config/addChemicalConfig.yaml').configure()
+
 # This adds the application's base directory to the
 # configuration object, so that the rest of the application
 # can reference it.
