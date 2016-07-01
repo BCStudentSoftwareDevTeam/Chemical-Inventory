@@ -23,13 +23,6 @@ def maChemTable():
                                 (Containers.disposalDate == None) &
                                 (Containers.chemId == chemical.chemId)))
                               .count())
-  # containers = Containers.select().where(Containers.disposalDate == None)
-  # contDict = {}
-  # for container in containers:
-  #   for chemical in chemicals:
-  #     contDict[chemical.name] = 0
-  #     if container.chemId == chemical:
-  #         contDict[chemical.name] += 1
   return render_template("views/ma/ChemTableView.html",
                           config = config, 
                           chemicals = chemicals, 

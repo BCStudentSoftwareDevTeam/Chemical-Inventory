@@ -19,7 +19,7 @@
               </tr>
         </thead>
         {% for chemical in chemicals %}
-            <tr>
+            <tr onclick="window.location.href = '../ViewChemical/{{chemical.name}}/';">
                 <td>{{chemical.name}}</td>
                 <td>{{chemical.casNum}}</td>
                 <td>{{config['hazards'][chemical.primaryHazard]}}</td>
