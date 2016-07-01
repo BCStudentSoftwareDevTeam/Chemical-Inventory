@@ -13,7 +13,10 @@ config = Configuration.from_file('config/config.yaml').configure()
 # config.controllers = controllers
 
 # Added for splitting up add chemical form config from config
-formConfig = Configuration.from_file('config/addChemicalConfig.yaml').configure()
+chemConfig = Configuration.from_file('config/chemicalConfig.yaml').configure()
+
+# Added for add container page
+contConfig = Configuration.from_file('config/containerConfig.yaml').configure()
 
 # This adds the application's base directory to the
 # configuration object, so that the rest of the application

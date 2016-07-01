@@ -11,7 +11,7 @@ class Containers (Model):
   ##
   barcodeId          = CharField(null = False)
   #res_u_name         = ForeignKeyField(User, related_name = 'responsible')
-  currentUnit        = TextField() # units of chemical
+  currentQuantityUnit= TextField() # units of chemical
   currentQuantity    = FloatField()# amount of chemical currently in container?
   receiveDate        = DateTimeField(default = datetime.datetime.now)
   disposalDate       = DateTimeField(null = True) # needed when container is empty??? To avoid deleting anything?

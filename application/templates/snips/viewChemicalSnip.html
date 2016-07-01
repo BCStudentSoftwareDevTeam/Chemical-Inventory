@@ -1,0 +1,56 @@
+<h1>{{chemInfo.name}} Information</h1>
+
+<div class="col-md-8 col-md-offset-2">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#containers">Containers</a></li>
+        <li><a data-toggle="tab" href="#info">Information</a></li>
+        <li><a data-toggle="tab" href="#hazards">Hazards</a></li>
+    </ul>
+    
+    <div class="tab-content">
+        <div id="containers" class="tab-pane fade in active">
+          <h3>Containers</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                {%  for field in contConfig['containerInformation']  %}
+                  {%  if "Unit" not in field.name  %}
+                    <td>{{field.name}}</td>
+                  {%  endif  %}
+                {%  endfor  %}
+              </tr>
+            </thead>
+            {%  for container in containers  %}
+              <tr>
+                {%  for field in contConfig['containerInformation']  %}
+                  {%  set attribute = field.id  %}
+                    {%  if attribute != "capacityUnit" and attribute != "currentQuantityUnit" %}
+                      {%  if attribute == "capacity" or attribute == "currentQuantity" %}
+                        <td>{{container[attribute]}} {{container[attribute + "Unit"]}}</td>
+                      {% elif attribute == "storageId"  %}
+                        <td>{{container[attribute].roomId.floorid.buildid.name}} {{container[attribute].roomId.name}}</td>
+                      {%  else  %}
+                        <td>{{container[attribute]}}</td>
+                      {%  endif  %}
+                    {%  endif  %}
+                {%  endfor  %}
+              </tr>
+            {%  endfor  %}
+          </table>
+        </div>
+        
+        <div id="info" class="tab-pane fade">
+          <h3>Information</h3>
+          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+        
+        <div id="hazards" class="tab-pane fade">
+          <h3>Hazards</h3>
+          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <a href="../../AddContainer/{{chemInfo.name}}/{{chemInfo.chemId}}/" class="button">Create a new Container</a>
+</div>
