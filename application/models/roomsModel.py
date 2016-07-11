@@ -3,7 +3,7 @@ from application.models.floorsModel import Floors
 
 class Rooms (Model):
   rId        = PrimaryKeyField()
-  floorid    = ForeignKeyField(Floors)
+  floorId    = ForeignKeyField(Floors, related_name = "floor")
   name       = TextField()
 
   class Meta:

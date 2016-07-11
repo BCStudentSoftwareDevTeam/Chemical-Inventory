@@ -3,7 +3,7 @@ from application.models.util import *
 class Buildings (Model):
   bId        = PrimaryKeyField()
   name       = TextField()
-  numfloors  = FloatField()
+  numFloors  = FloatField()
   address    = TextField()
 
   class Meta:

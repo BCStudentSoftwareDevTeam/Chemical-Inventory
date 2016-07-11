@@ -19,7 +19,7 @@ class Chemicals (Model):
   healthHazard    = CharField(null = False) # 0-4
   flammable       = CharField(null = False) # 0-4
   reactive        = CharField(null = False) # 0-4
-  other           = CharField(null = False) # Ask Leslie if they use any non-standard symbols
+  other           = CharField(null = True) # Ask Leslie if they use any non-standard symbols
   ## NFPA "Fire Diamond" DATABASE DOES NOT SUPPORT THESE YET!
   #simpleAsphyxiant= BooleanField(default = False) # Simple Asphyxiant
   #oxidizer        = BooleanField(default = False) # Oxidizer

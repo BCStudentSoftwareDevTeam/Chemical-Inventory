@@ -1,28 +1,29 @@
 from application.models.util import *
 from application.models.chemicalsModel import Chemicals
 from application.models.storagesModel import Storages
+from application.models.roomsModel import *
 import datetime
 
 class Containers (Model):
   conId          = PrimaryKeyField()
-   ##Foreign Keys
+  ##Foreign Keys
   chemId             = ForeignKeyField(Chemicals, related_name = 'chemical')
-  storageId          = ForeignKeyField(Storages, related_name = 'storage')
+  storageId          = ForeignKeyField(Storages, related_name = 'storage', null = True)
+  roomId             = ForeignKeyField(Rooms, related_name = "room") # When creating container, select room first, then populate a list of all storages with that roomId.
   ##
   barcodeId          = CharField(null = False)
-  #res_u_name         = ForeignKeyField(User, related_name = 'responsible')
   currentQuantityUnit= TextField() # units of chemical
   currentQuantity    = FloatField()# amount of chemical currently in container?
   receiveDate        = DateTimeField(default = datetime.datetime.now)
   disposalDate       = DateTimeField(null = True) # needed when container is empty??? To avoid deleting anything?
   conType            = CharField(default = "")
-  manufacturer       = CharField(null = True)
+  manufacturer       = CharField(null = True) # Why is manufacturer allowed to be null?
   capacityUnit       = CharField(default = "") # units container is initially measured in
   capacity           = FloatField(null = False)# amount of units that the container can hold
-  checkedOut         = BooleanField(default = False)
-  forClass           = CharField(null = True)
-  forProf            = CharField(null = True)
-  checkedOutBy       = CharField(null = True)
+  checkedOut         = BooleanField(default = False) # set to True upon checkout
+  forClass           = CharField(null = True) # Required field on checkout page
+  forProf            = CharField(null = True) # Required field on checkout page
+  checkedOutBy       = CharField(null = True) # Required field on checkout page
 
   class Meta:
     database = getDB("inventory")
