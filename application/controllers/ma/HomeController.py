@@ -14,3 +14,4 @@ from flask import \
 def adminHome():
   return render_template("views/ma/HomeView.html", config = config)
 
+## TeSt

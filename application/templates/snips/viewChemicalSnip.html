@@ -21,14 +21,22 @@
               </tr>
             </thead>
             {%  for container in containers  %}
-              <tr>
+              {% if container.checkedOut != True %}
+                <tr style="cursor: pointer;">
+              {% else %}
+                <tr class="danger">
+              {% endif %}
                 {%  for field in contConfig['containerInformation']  %}
                   {%  set attribute = field.id  %}
                     {%  if attribute != "capacityUnit" and attribute != "currentQuantityUnit" %}
                       {%  if attribute == "capacity" or attribute == "currentQuantity" %}
                         <td>{{container[attribute]}} {{container[attribute + "Unit"]}}</td>
                       {% elif attribute == "storageId"  %}
-                        <td>{{container[attribute].roomId.floorid.buildid.name}} {{container[attribute].roomId.name}}</td>
+                        {% if container[attribute].roomId is defined %}
+                          <td>{{container[attribute].roomId.floorId.buildId.name}} {{container[attribute].roomId.name}}</td>
+                        {% else %}
+                          <td>{{container.roomId.floorId.buildId.name}} {{container.roomId.name}}</td>
+                        {% endif %}
                       {%  else  %}
                         <td>{{container[attribute]}}</td>
                       {%  endif  %}
