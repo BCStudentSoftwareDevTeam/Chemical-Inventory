@@ -14,16 +14,16 @@
               <tr>
                 <th>Name</th>
                 <th>CAS Number</th>
-                <th>Colour Code</th>
+                <th>Color Code</th>
                 <th>In Stock</th>
               </tr>
         </thead>
         {% for chemical in chemicals %}
-            <tr>
+            <tr onclick="window.location.href = '../ViewChemical/{{chemical.name}}/{{chemical.chemId}}/';">
                 <td>{{chemical.name}}</td>
                 <td>{{chemical.casNum}}</td>
-                
-
+                <td>{{config['hazards'][chemical.primaryHazard]}}</td>
+                <td>{{contDict[chemical.name]}}</td>
             </tr>
         {%endfor%}
         

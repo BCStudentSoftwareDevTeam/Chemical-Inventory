@@ -2,3 +2,10 @@ body {
     margin-bottom: 200px;
 }
 
+.hiddenRadio {
+    visibility:hidden;
+}
+
+.selectedPict {
+    background: #B0E0E6;
+}

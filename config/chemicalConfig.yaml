@@ -10,7 +10,7 @@ pictograms:
     - title: "exclamation"
       pict: "/static/pictograms/exclamationPict.png"
       alt: "Exclamation Mark"
-    - title: "flammable"
+    - title: "flame"
       pict: "/static/pictograms/flamePict.png"
       alt: "Flame"
     - title: "gasCylinder"

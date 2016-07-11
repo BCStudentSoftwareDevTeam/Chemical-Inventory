@@ -1,5 +1,6 @@
 from application import app
-from application.models import *
+from application.models.chemicalsModel import *
+from application.models.containersModel import *
 from application.config import *
 from application.logic.validation import require_role
 
@@ -12,6 +13,18 @@ from flask import \
 @app.route('/ma/ChemTable/', methods = ['GET'])
 @require_role('admin')
 def maChemTable():
-  chemicals = chemicalsModel.Chemicals.select()
-  return render_template("views/ma/ChemTableView.html", config = config, chemicals = chemicals)
+  chemicals = Chemicals.select()
+  contDict = {}
+  for chemical in chemicals:
+    contDict[chemical.name] = ((((Chemicals
+                              .select())
+                              .join(Containers))
+                              .where(
+                                (Containers.disposalDate == None) &
+                                (Containers.chemId == chemical.chemId)))
+                              .count())
+  return render_template("views/ma/ChemTableView.html",
+                          config = config, 
+                          chemicals = chemicals, 
+                          contDict = contDict)
 
