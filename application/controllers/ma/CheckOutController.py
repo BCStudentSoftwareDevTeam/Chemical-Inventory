@@ -9,8 +9,10 @@ from flask import \
     url_for
 
 # PURPOSE: CheckOut a container
-@app.route('/ma/CheckOut/', methods = ['GET', 'POST'])
+@app.route('/ma/CheckOut/<conId>/', methods = ['GET', 'POST'])
 @require_role('admin')
-def maCheckOut():
-  return render_template("views/ma/CheckOutView.html", config = config)
+def maCheckOut(conId):
+  container = containersModel.Containers.get(conId = conId)
+  print container
+  return render_template("views/ma/CheckOutView.html", config = config, container = container)
 

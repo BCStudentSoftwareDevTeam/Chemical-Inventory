@@ -22,7 +22,7 @@
             </thead>
             {%  for container in containers  %}
               {% if container.checkedOut != True %}
-                <tr style="cursor: pointer;">
+                <tr style="cursor: pointer;" onclick="window.location.href = '../../../CheckOut/{{container.conId}}/'";>
               {% else %}
                 <tr class="danger">
               {% endif %}
