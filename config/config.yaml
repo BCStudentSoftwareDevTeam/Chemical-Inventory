@@ -35,7 +35,7 @@ hazards:
 # Navigation bars   
 maMenu:
   - title: "Home"
-    link: "/ma/Home/"
+    link: " /ma/Home/"
   - title: "View Chemical Table"
     link: "/ma/ChemTable/"
   - title: "Check In a Container"
