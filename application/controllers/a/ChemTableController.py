@@ -23,7 +23,7 @@ def aChemTable():
                                 (Containers.disposalDate == None) &
                                 (Containers.chemId == chemical.chemId)))
                               .count())
-  return render_template("views/ma/ChemTableView.html",
+  return render_template("views/a/ChemTableView.html",
                           config = config, 
                           chemicals = chemicals, 
                           contDict = contDict)
