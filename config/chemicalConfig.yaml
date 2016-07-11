@@ -99,7 +99,7 @@ addChemInputs:
       placeholder: "SDS Link"
     - name: "Description"
       id: "description"
-      type: "textarea"
+      type: "text"
       placeholder: "Description of Chemical"
 
 addChemChecks:
