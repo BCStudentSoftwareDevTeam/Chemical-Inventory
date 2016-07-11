@@ -1,5 +1,5 @@
 from application import app
-from application.models import *
+from application.models.containersModel import *
 from application.config import *
 from application.logic.validation import require_role
 
@@ -13,5 +13,10 @@ from flask import \
 @require_role('systemAdmin')
 @require_role('admin')
 def AddContainer():
-  return render_template("views/sa/AddContainerView.html", config = config)
+  if request.method == "GET":
+      return render_template("views/sa/AddContainerView.html", config = config, contConfig = contConfig)
+  data = request.form
+  modelData, extraData = sortPost(data, Containers)
+  Containers.create(**modelData)
+  return render_template("views/ma/AddContainerView.html", config = config, contConfig = contConfig)
 

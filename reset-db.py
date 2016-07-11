@@ -126,6 +126,7 @@ def init_db ():
     roomId = 2,
     name = "Health Hazard Shelf",
     healthHazard = True).save()
+    
   print "Storages Saved"
   
   chemicalsModel.Chemicals(

@@ -13,5 +13,11 @@ from flask import \
 @require_role('systemAdmin')
 @require_role('admin')
 def AddChemical():
-  return render_template("views/sa/AddChemicalView.html", config = config)
+  if request.method == "GET":
+      return render_template("views/sa/AddChemicalView.html", config = config, chemConfig = chemConfig)
+  data = request.form
+  
+  modelData, extraData = sortPost(data, chemicalsModel.Chemicals)
+  chemicalsModel.Chemicals.create(**modelData)
+  return render_template("views/sa/AddChemicalView.html", config = config, chemConfig = chemConfig)
 
