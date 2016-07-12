@@ -12,6 +12,7 @@ faculty:
   - AD faculty
 
 systemUser:
+#   - ubuntu
   - group admin
   - group systemAdmin
   - group faculty

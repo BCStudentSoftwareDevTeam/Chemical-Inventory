@@ -10,15 +10,15 @@ from flask import \
     url_for
 
 # PURPOSE: Shows specific chemical and all containers of said chemical.
-@app.route('/ma/ViewChemical/<chemical>/<chemId>/', methods = ['GET'])
-@require_role('admin')
-def maViewChemical(chemical, chemId):
+@app.route('/a/ViewChemical/<chemical>/<chemId>/', methods = ['GET'])
+@require_role('systemUser')
+def aViewChemical(chemical, chemId):
   chemInfo = Chemicals.get(Chemicals.name == chemical)
   containers = (((Containers
                 .select())
                 .join(Chemicals))
                 .where(Containers.chemId == chemId))
-  return render_template("views/ma/ViewChemicalView.html",
+  return render_template("views/a/ViewChemicalView.html",
                          config = config,
                          chemInfo = chemInfo,
                          containers = containers,
