@@ -1,12 +1,34 @@
 <div class="col-sm-3"></div>
-<div class="form col-sm-4">
-  <form name="addCont" method="post">
+<div class="form col-sm-6">
+  <form name="addCont" method="post" action="../../../AddContainer/{{chemInfo.name}}/{{chemInfo.chemId}}/">
+    <input type="hidden" id="chemId" name="chemId" value="{{chemInfo.chemId}}"/>
       {%  for group in contConfig['containerInformation']  %}
+        {%  if group.type != 'select'  %}
           <div class="form-group row">
-              {%  if group.type != 'select'  %}
-                  not select
-              {%  else  %}
-                  select
-              {%  endif  %}
+            <label for="{{group.id}}" class="col-sm-6">{{group.name}}</label>
+            <div class="col-sm-6">
+            <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" placeholder="{{group.placeholder}}" min='0' max='1000' required="true"/>
+            </div>
           </div>
+        {%  else  %}
+          {% if group.id != 'storageId' %}
+            <div class="form-group row">
+              <label for="{{  group['name'] }}" class="col-sm-6">{{  group['name']  }}:</label>
+              <div class="col-sm-6">
+                <select id="{{group['id']}}" name="{{group.id}}" class="form-control" required>
+                  <option selected disabled value="">Select One</option>
+                  {%  for unit in group['options']  %}
+                  <option value="{{  unit  }}">{{  unit  }}</option>
+                  {%  endfor  %}
+                </select> 
+              </div>
+            </div>
+            {% else %}
+              {# Fill this in with selections populated by roomsList #}
+          {% endif %}
+        {%  endif  %}
       {%  endfor  %}
+  <button type="submit" class="btn btn-primary" id="submitCont">Submit</button>
+  </form>
+</div>
+<script src="/static/js/local/validateForm.js"></script>

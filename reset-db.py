@@ -118,6 +118,18 @@ def init_db ():
     healthHazard = True).save()
     
   storagesModel.Storages(
+    roomId = 3,
+    name = "233",
+    flammable = True,
+    healthHazard = True,
+    oxidizer = True,
+    orgAcid = True,
+    inorgAcid = True,
+    base = True,
+    peroxide = True,
+    pressure = True).save()
+  
+  storagesModel.Storages(
     roomId = 2,
     name = "Flammable Cabinet",
     flammable = True).save()
@@ -159,7 +171,7 @@ def init_db ():
     
   containersModel.Containers(
     chemId = 1,
-    roomId = 4,
+    storageId = 2,
     barcodeId = "16070000",
     currentQuantityUnit = "ounce (oz)",
     currentQuantity = 20,
@@ -171,7 +183,6 @@ def init_db ():
   
   containersModel.Containers(
     chemId = 2,
-    roomId = 9,
     storageId = 1,
     barcodeId = "16070000",
     currentQuantityUnit = "ounce (oz)",

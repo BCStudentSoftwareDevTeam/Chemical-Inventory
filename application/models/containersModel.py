@@ -8,8 +8,7 @@ class Containers (Model):
   conId          = PrimaryKeyField()
   ##Foreign Keys
   chemId             = ForeignKeyField(Chemicals, related_name = 'chemical')
-  storageId          = ForeignKeyField(Storages, related_name = 'storage', null = True)
-  roomId             = ForeignKeyField(Rooms, related_name = "room") # When creating container, select room first, then populate a list of all storages with that roomId.
+  storageId          = ForeignKeyField(Storages, related_name = 'storage')
   ##
   barcodeId          = CharField(null = False)
   currentQuantityUnit= TextField() # units of chemical

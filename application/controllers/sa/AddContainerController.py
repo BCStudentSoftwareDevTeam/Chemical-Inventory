@@ -14,9 +14,12 @@ from flask import \
 @require_role('admin')
 def AddContainer():
   if request.method == "GET":
-      return render_template("views/sa/AddContainerView.html", config = config, contConfig = contConfig)
+      return render_template("views/sa/AddContainerView.html",
+                             config = config,
+                             contConfig = contConfig)
   data = request.form
   modelData, extraData = sortPost(data, Containers)
   Containers.create(**modelData)
-  return render_template("views/ma/AddContainerView.html", config = config, contConfig = contConfig)
-
+  return render_template("views/sa/AddContainerView.html",
+                         config = config,
+                         contConfig = contConfig)
