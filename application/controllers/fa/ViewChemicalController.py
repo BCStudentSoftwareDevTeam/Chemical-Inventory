@@ -1,5 +1,6 @@
 from application import app
-from application.models import *
+from application.models.chemicalsModel import *
+from application.models.containersModel import *
 from application.config import *
 from application.logic.validation import require_role
 
@@ -9,8 +10,17 @@ from flask import \
     url_for
 
 # PURPOSE: Shows specific chemical and all containers of said chemical.
-@app.route('/fa/ViewChemical/<string:chemical>/', methods = ['GET'])
+@app.route('/fa/ViewChemical/<chemical>/<chemId>/', methods = ['GET'])
 @require_role('faculty')
-def faViewChemical(chemical):
-  return render_template("views/fa/ViewChemicalView.html", config = config)
-
+def faViewChemical(chemical, chemId):
+  chemInfo = Chemicals.get(Chemicals.name == chemical)
+  containers = (((Containers
+                .select())
+                .join(Chemicals))
+                .where(Containers.chemId == chemId))
+  return render_template("views/fa/ViewChemicalView.html",
+                         config = config,
+                         chemInfo = chemInfo,
+                         containers = containers,
+                         contConfig = contConfig,
+                         chemConfig = chemConfig)

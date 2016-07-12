@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <ul class="nav navbar-nav"> 
     {% for menuItem in config['saMenu'] %}
-      {% if menuItem['link'] == url_for(request.endpoint) %}
+      {% if menuItem['link'] == request.path %}
         <li class="active">
           <a href="{{menuItem['link']}}">{{menuItem['title']}}</a>
         </li>
