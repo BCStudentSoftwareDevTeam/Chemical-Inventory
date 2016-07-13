@@ -12,6 +12,7 @@ from flask import \
 @app.route('/ma/CheckOut/<conId>/', methods = ['GET', 'POST'])
 @require_role('admin')
 def maCheckOut(conId):
+  
   container = containersModel.Containers.get(conId = conId)
   print container
   return render_template("views/ma/CheckOutView.html", config = config, container = container)
