@@ -1,7 +1,10 @@
 from application import app
 from application.models.containersModel import *
+from application.models.roomsModel import *
+from application.models.storagesModel import *
 from application.config import *
 from application.logic.validation import require_role
+from application.logic.sortPost import *
 
 from flask import \
     render_template, \
@@ -9,17 +12,20 @@ from flask import \
     url_for
 
 # PURPOSE: Add Container for a certain chemical
-@app.route('/sa/AddContainer/', methods = ['GET', 'POST'])
+@app.route('/sa/AddContainer/<chemName>/<chemId>/', methods = ['GET', 'POST'])
 @require_role('systemAdmin')
-@require_role('admin')
-def AddContainer():
+def AddContainer(chemName, chemId):
+  chemInfo = Chemicals.get(Chemicals.chemId == chemId)
   if request.method == "GET":
       return render_template("views/sa/AddContainerView.html",
                              config = config,
-                             contConfig = contConfig)
+                             contConfig = contConfig,
+                             chemInfo = chemInfo)
   data = request.form
   modelData, extraData = sortPost(data, Containers)
+  print modelData
   Containers.create(**modelData)
   return render_template("views/sa/AddContainerView.html",
                          config = config,
-                         contConfig = contConfig)
+                         contConfig = contConfig,
+                         chemInfo = chemInfo)

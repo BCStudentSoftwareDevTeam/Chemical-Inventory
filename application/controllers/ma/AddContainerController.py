@@ -2,6 +2,7 @@ from application import app
 from application.models.containersModel import *
 from application.models.roomsModel import *
 from application.models.storagesModel import *
+from application.models.buildingsModel import *
 from application.config import *
 from application.logic.validation import require_role
 from application.logic.sortPost import *
@@ -16,11 +17,15 @@ from flask import \
 @require_role('admin')
 def maAddContainer(chemName, chemId):
   chemInfo = Chemicals.get(Chemicals.chemId == chemId)
+  storageList = Storages.select()
+  buildingList = Buildings.select()
   if request.method == "GET":
       return render_template("views/ma/AddContainerView.html",
                              config = config,
                              contConfig = contConfig,
-                             chemInfo = chemInfo)
+                             chemInfo = chemInfo,
+                             storageList = storageList,
+                             buildingList = buildingList)
   data = request.form
   modelData, extraData = sortPost(data, Containers)
   print modelData
@@ -28,4 +33,6 @@ def maAddContainer(chemName, chemId):
   return render_template("views/ma/AddContainerView.html",
                          config = config,
                          contConfig = contConfig,
-                         chemInfo = chemInfo)
+                         chemInfo = chemInfo,
+                         storageList = storageList,
+                         buildingList = buildingList)
