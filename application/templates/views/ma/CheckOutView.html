@@ -1,14 +1,9 @@
 {% extends "base.html" %}
 
 {% block body %}
-<h1>Check Out</h1>
+
 {%  include "Navigation/maMenu.html"  %}
-
-{{container.barcodeId}}
-
-<h1>Check Out</h1>
-
-
-{{chemName}}
+{% include "snips/CheckOut.html" %}
+ 
 
 {% endblock %}
