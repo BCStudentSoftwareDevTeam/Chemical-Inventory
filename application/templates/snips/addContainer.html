@@ -1,21 +1,47 @@
-<div class="col-sm-3"></div>
-<div class="form col-sm-6">
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success col-md-4 col-md-offset-4" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Success!</strong> {{message}}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<div class="clearfix"></div>
+<script src="/static/js/local/createBarcode.js"></script>
+<div class="col-sm-offset-3">
+  <h3>Add a new Container of {{chemInfo.name}}</h3>
+</div>
+<div class="form col-sm-6 col-sm-offset-3">
   <form name="addCont" method="post" action="../../../AddContainer/{{chemInfo.name}}/{{chemInfo.chemId}}/">
     <input type="hidden" id="chemId" name="chemId" value="{{chemInfo.chemId}}"/>
       {%  for group in contConfig['containerInformation']  %}
         {%  if group.type != 'select'  %}
-          <div class="form-group row">
-            <label for="{{group.id}}" class="col-sm-6">{{group.name}}</label>
-            <div class="col-sm-6">
-            <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" placeholder="{{group.placeholder}}" min='0' max='1000' required="true"/>
+          {% if group.special == 'readonly' %}
+            <div class="form-group row">
+              <label for="{{group.id}}" class="col-sm-6">{{group.name}}</label>
+              <div class="col-sm-6">
+                <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" value="" min='0' max='1000' {{group.special}}/>
+                <script type="text/javascript">
+                  createBarcode('{{group.id}}', '{{lastCont.barcodeId}}');
+                </script>
+              </div>
             </div>
-          </div>
+          {% else %}
+            <div class="form-group row">
+              <label for="{{group.id}}" class="col-sm-6">{{group.name}}</label>
+              <div class="col-sm-6">
+              <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" placeholder="{{group.placeholder}}" min='0' max='1000' {{group.special}}/>
+              </div>
+            </div>
+          {% endif %}
         {%  else  %}
           {% if group.id != 'storageId' %}
             <div class="form-group row">
               <label for="{{  group['name'] }}" class="col-sm-6">{{  group['name']  }}:</label>
               <div class="col-sm-6">
-                <select id="{{group['id']}}" name="{{group.id}}" class="form-control" required>
+                <select id="{{group['id']}}" name="{{group.id}}" class="form-control" {{group.special}}>
                   <option selected disabled value="">Select One</option>
                   {%  for unit in group['options']  %}
                   <option value="{{  unit  }}">{{  unit  }}</option>
@@ -24,11 +50,29 @@
               </div>
             </div>
             {% else %}
-              {# Fill this in with selections populated by roomsList #}
+              <div class="form-group row">
+                <label for="{{group.name}}" class="col-sm-6">{{group.name}}:</label>
+                <div class="col-sm-6">
+                  <select id="{{group.id}}" name="{{group.id}}" class="form-control" {{group.special}}>
+                    <option selected disabled value="">Select One</option>
+                    {% for building in buildingList %}
+                      <optgroup label="{{building.name}} Building"></optgroup>
+                      {% for storage in storageList %}
+                        {% if storage.roomId.floorId.buildId.bId == building.bId %}
+                          {% if storage.roomId.name == storage.name %}
+                            <option value="{{storage.sId}}">Room {{storage.roomId.name}}</option>
+                          {% else %}
+                            <option value="{{storage.sId}}">Room {{storage.roomId.name}} ({{storage.name}})</option>
+                          {% endif %}
+                        {% endif %}
+                      {% endfor %}
+                    {%endfor%}
+                  </select>
+                </div>
+              </div>
           {% endif %}
         {%  endif  %}
       {%  endfor  %}
   <button type="submit" class="btn btn-primary" id="submitCont">Submit</button>
   </form>
 </div>
-<script src="/static/js/local/validateForm.js"></script>

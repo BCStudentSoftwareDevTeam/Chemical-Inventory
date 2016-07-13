@@ -11,9 +11,8 @@ from flask import \
 # PURPOSE: CheckOut a container
 @app.route('/ma/CheckOut/<chemId>/<conId>/', methods = ['GET', 'POST'])
 @require_role('admin')
-def maCheckOut(chemId, conId):
-  chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
-  container = containersModel.Containers.get(containersModel.Containers.conId == conId)
-  
-  return render_template("views/ma/CheckOutView.html", config = config, container = container, chemical = chemical)
+def maCheckOut(chemName, conId):
 
+  container = containersModel.Containers.get(conId = conId)
+  print container
+  return render_template("views/ma/CheckOutView.html", config = config, container = container, chemName = chemName)

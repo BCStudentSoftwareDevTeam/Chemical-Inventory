@@ -9,7 +9,7 @@ from flask import \
     url_for
 
 # PURPOSE: Check history of a specific chemical
-@app.route('/sa/CheckHistory/<string:chemical>/', methods = ['GET'])
+@app.route('/sa/CheckHistory/<chemical>/', methods = ['GET'])
 @require_role('systemAdmin')
 @require_role('admin')
 def CheckHistory(chemical):
