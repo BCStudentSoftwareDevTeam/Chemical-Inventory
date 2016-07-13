@@ -10,6 +10,7 @@ from application.logic.sortPost import *
 from flask import \
     render_template, \
     request, \
+    flash, \
     url_for
 
 # PURPOSE: Add Container for a certain chemical
@@ -26,10 +27,14 @@ def maAddContainer(chemName, chemId):
                              chemInfo = chemInfo,
                              storageList = storageList,
                              buildingList = buildingList)
-  data = request.form
-  modelData, extraData = sortPost(data, Containers)
-  print modelData
-  Containers.create(**modelData)
+  try:
+    data = request.form
+    modelData, extraData = sortPost(data, Containers)
+    print modelData
+    Containers.create(**modelData)
+    flash("Container added successfully")
+  except:
+    flash("Container could not be added")
   return render_template("views/ma/AddContainerView.html",
                          config = config,
                          contConfig = contConfig,
