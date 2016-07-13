@@ -20,13 +20,15 @@ def maAddContainer(chemName, chemId):
   chemInfo = Chemicals.get(Chemicals.chemId == chemId)
   storageList = Storages.select()
   buildingList = Buildings.select()
+  lastCont = Containers.select().order_by(Containers.conId.desc()).get()
   if request.method == "GET":
       return render_template("views/ma/AddContainerView.html",
                              config = config,
                              contConfig = contConfig,
                              chemInfo = chemInfo,
                              storageList = storageList,
-                             buildingList = buildingList)
+                             buildingList = buildingList,
+                             lastCont = lastCont)
   try:
     data = request.form
     modelData, extraData = sortPost(data, Containers)
@@ -40,4 +42,5 @@ def maAddContainer(chemName, chemId):
                          contConfig = contConfig,
                          chemInfo = chemInfo,
                          storageList = storageList,
-                         buildingList = buildingList)
+                         buildingList = buildingList,
+                         lastCont = lastCont)

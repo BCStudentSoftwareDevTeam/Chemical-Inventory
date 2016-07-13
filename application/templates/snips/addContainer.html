@@ -22,9 +22,9 @@
             <div class="form-group row">
               <label for="{{group.id}}" class="col-sm-6">{{group.name}}</label>
               <div class="col-sm-6">
-                <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" placeholder="" min='0' max='1000' {{group.special}}/>
+                <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" value="" min='0' max='1000' {{group.special}}/>
                 <script type="text/javascript">
-                  createBarcode('{{group.id}}');
+                  createBarcode('{{group.id}}', '{{lastCont.barcodeId}}');
                 </script>
               </div>
             </div>
@@ -60,9 +60,9 @@
                       {% for storage in storageList %}
                         {% if storage.roomId.floorId.buildId.bId == building.bId %}
                           {% if storage.roomId.name == storage.name %}
-                            <option value="{{storage.sId}}">{{storage.roomId.name}}</option>
+                            <option value="{{storage.sId}}">Room {{storage.roomId.name}}</option>
                           {% else %}
-                            <option value="{{storage.sId}}">{{storage.roomId.name}} ({{storage.name}})</option>
+                            <option value="{{storage.sId}}">Room {{storage.roomId.name}} ({{storage.name}})</option>
                           {% endif %}
                         {% endif %}
                       {% endfor %}
