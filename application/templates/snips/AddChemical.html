@@ -1,11 +1,15 @@
-<div class="col-sm-3"></div>
-<div class="form col-sm-4">
+<div class="col-sm-offset-3"><h3>Add a new Chemical</h3></div>
+<div class="form col-sm-offset-3 col-sm-4">
   <form name="addChem" method="post">
     {%  for group in chemConfig['addChemInputs']  %}
       <div class="form-group row">
         <label for="{{group['id']}}" class="col-sm-4">{{group['name']}}</label>
         <div class="col-sm-8">
-          <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" required="true" class="form-control">
+          {% if group['special'] == "required" %}
+            <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
+          {% else %}
+            <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
+          {% endif %}
           {#{%  if group['addon'] is defined  %}
           <span class="input-group-addon">{{group['addon']}}</span>
           {%  endif  %}
@@ -21,8 +25,8 @@
     <div class="form-group row">
       <label for="{{  group['name'] }}" class="col-sm-4">{{  group['name']  }}:</label>
       <div class="col-sm-8">
-        <select id="{{  group['id']  }}" name="{{  group['id']  }}" class="form-control" required="true">
-          <option selected disabled>Select One</option>
+        <select id="{{  group['id']  }}" name="{{  group['id']  }}" class="form-control" required>
+          <option selected disabled value="">Select One</option>
           {%  for selection in group['selections']  %}
           <option value="{{  selection  }}">{{  selection  }}</option>
           {%  endfor  %}
@@ -37,6 +41,7 @@
         {%for division in chemConfig['NFPAdiamond']%}
           <label for="{{division['section']}}">{{division['section']}}</label>
           <select id="{{division['id']}}" name="{{  division['id']  }}" class="form-control" required="true">
+            <option value="" selected disabled>Select One</option>
           {%for selection in division['selections']%}
             <option value="{{selection}}">{{selection}}</option>
           {%endfor%}
@@ -59,7 +64,7 @@
     
     <div class="form-group row">
       <label for="pictograms" class="row">Please select the appropriate hazard pictogram.</label>
-      <div class="radio col-sm-11" required>
+      <div class="radio col-sm-11">
         {%for hazardPict in chemConfig['pictograms']%}
           <label for="{{hazardPict['title']}}"></label>
           <input type="radio" name="hazardPict" id="{{hazardPict['title']}}" value="{{hazardPict['title']}}" class="hiddenRadio">
@@ -69,8 +74,7 @@
       </div>
     </div>
     
-  <button type="submit">Submit</button>
+  <input class="btn btn-default btn" id="addChemSubmit" type="submit" value="Submit" disabled="true">
   </form>
 </div>
-
 <script src="/static/js/local/pictSelect.js"></script>
