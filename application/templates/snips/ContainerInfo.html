@@ -2,8 +2,11 @@
 
 <div class="col-md-8 col-md-offset-2">
     <ul class="nav nav-tabs">
-         <li class="active"><a data-toggle="tab" href="#checkout">CheckOut {{chemical.name}}</a></li>
-        <li><a data-toggle="tab" href="#history">History of {{chemical.name}}</a></li>
+        <li class="active"><a data-toggle="tab" href="#checkout">CheckOut this Container</a></li>
+        <li><a data-toggle="tab" href="#history">History of Container</a></li>
+        {% if container.currentQuantity == 0 %}
+          <li><a data-toggle="tab" href="#dispose">Dispose of Container</a></li>
+        {% endif %}
         {# example code for tabs found here: http://jsfiddle.net/xfw8t/12/ #}
     </ul>
      <div class="tab-content">
@@ -34,6 +37,14 @@
         
         <div id="history" class="tab-pane fade">
           <h3>History</h3>
+        </div>
+        
+        <div id="dispose" class="tab-pane fade">
+          <h3>Dispose of Container</h3>
+          <form method="POST">
+            <input class="btn btn-primary" type="submit" name="dispose" value="Dispose of this Container">
+          </form>
+          {# disposalDate #}
         </div>
     </div>
       

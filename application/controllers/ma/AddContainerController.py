@@ -20,7 +20,7 @@ def maAddContainer(chemName, chemId):
   chemInfo = Chemicals.get(Chemicals.chemId == chemId)
   storageList = Storages.select()
   buildingList = Buildings.select()
-  lastCont = Containers.select().order_by(Containers.conId.desc()).get()
+  lastCont = Containers.select().order_by(-Containers.conId).get()
   
   if request.method == "GET":
       return render_template("views/ma/AddContainerView.html",

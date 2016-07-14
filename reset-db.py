@@ -189,6 +189,18 @@ def init_db ():
     manufacturer = "Sigma Aldrich",
     capacityUnit = "ounce (oz)",
     capacity = 20).save()
+    
+  containersModel.Containers(
+    chemId = 1,
+    storageId = 2,
+    barcodeId = "16070000",
+    currentQuantityUnit = "ounce (oz)",
+    currentQuantity = 0,
+    recieveDate = date.today(),
+    conType = "bottle",
+    manufacturer = "Sigma Aldrich",
+    capacityUnit = "ounce (oz)",
+    capacity = 20).save()
   
   containersModel.Containers(
     chemId = 2,
