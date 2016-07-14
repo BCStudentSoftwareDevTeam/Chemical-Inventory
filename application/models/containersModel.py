@@ -12,9 +12,9 @@ class Containers (Model):
   ##
   barcodeId          = CharField(null = False)
   currentQuantityUnit= TextField() # units of chemical
-  currentQuantity    = FloatField()# amount of chemical currently in container?
+  currentQuantity    = FloatField()# amount of chemical currently in container
   receiveDate        = DateTimeField(default = datetime.datetime.now)
-  disposalDate       = DateTimeField(null = True) # needed when container is empty??? To avoid deleting anything?
+  disposalDate       = DateTimeField(null = True)
   conType            = CharField(default = "")
   manufacturer       = CharField(null = True) # Why is manufacturer allowed to be null?
   capacityUnit       = CharField(default = "") # units container is initially measured in

@@ -22,7 +22,7 @@
             <div class="form-group row">
               <label for="{{group.id}}" class="col-sm-6">{{group.name}}</label>
               <div class="col-sm-6">
-                <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" value="" min='0' max='1000' {{group.special}}/>
+                <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" value="" {{group.special}}/>
                 <script type="text/javascript">
                   createBarcode('{{group.id}}', '{{lastCont.barcodeId}}');
                 </script>

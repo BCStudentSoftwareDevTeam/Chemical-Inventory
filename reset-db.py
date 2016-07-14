@@ -34,9 +34,9 @@ def init_db ():
   print "Building 1 saved"
 
   building2 = buildingsModel.Buildings(
-    name = "Danforth Industrial Arts",
+    name = "The House",
     numFloors = "2.0",
-    address = "Right next to the big hole in the ground").save()
+    address = "Townsville USA").save()
   print "Building 2 saved"
   
   floorsModel.Floors(
@@ -61,12 +61,12 @@ def init_db ():
 
   floorsModel.Floors(
     buildId = 2,
-    floorNum = '1',
+    floorNum = '2',
     storageLimits = "None").save()
 
   floorsModel.Floors(
     buildId = 2,
-    floorNum = '2',
+    floorNum = '1',
     storageLimits = "None").save()
     
   print "All Floors Saved."
@@ -109,13 +109,20 @@ def init_db ():
 
   roomsModel.Rooms(
     floorId = 6,
-    name = "111").save()
+    name = "Professor Utonium's Lab").save()
   print "All Rooms saved"
   
   storagesModel.Storages(
     roomId = 10,
-    name = "Top left desk drawer",
-    healthHazard = True).save()
+    name = "Professor Utonium's Lab",
+    flammable = True,
+    healthHazard = True,
+    oxidizer = True,
+    orgAcid = True,
+    inorgAcid = True,
+    base = True,
+    peroxide = True,
+    pressure = True).save()
     
   storagesModel.Storages(
     roomId = 3,
@@ -157,13 +164,13 @@ def init_db ():
     reactive = "2").save()
     
   chemicalsModel.Chemicals(
-    name = "Chloroform",
+    name = "Chemical X",
     casNum = "59-874-9721",
     primaryHazard = "Organic Health Hazard",
-    formula = "ZzzZZzZZ",
+    formula = "ChEmIcaLX",
     state = "Liquid",
     structure = "Organic",
-    sdsLink = "https://www.link.com/Chloroform",
+    sdsLink = "https://www.link.com/ChemicalX",
     flashPoint = 999,
     boilPoint = 888,
     storageTemp = 69,
@@ -195,9 +202,9 @@ def init_db ():
     capacityUnit = "ounce (oz)",
     capacity = 20,
     checkedOut = True,
-    forClass = "Cody",
-    forProf = "Scott Hegen",
-    checkedOutBy = "Heggens").save()
+    forClass = "I think you get the reference",
+    forProf = "Professor Utonium",
+    checkedOutBy = "UtoniumP").save()
   
 if __name__ == "__main__":
   init_db()

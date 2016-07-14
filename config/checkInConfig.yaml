@@ -1,0 +1,32 @@
+inputs:
+  - title: "Chemical Name"
+    id: "chemName" # This may need to change
+    type: "text"
+    special: "autoPop"
+  - title: "Previous Location"
+    id: "locationId" #This should change to whatever will get the full location information
+    type: "text"
+    special: "autoPop"
+  - title: "Previous Quantity"
+    id: "currentQuantity" # This should change to whatever will get the full location info
+    type: "text"
+    speical: "autoPop"
+  - title: "Current Location" #This may be unclear... maybe 'New Location'
+    id: "locationId" # This may need to change
+    type: "text"
+    special: "required"
+  - title: "Current Quantity"
+    id: "currentQuantity" # This may also need to change
+    type: "number"
+    special: "required"
+  - title: "Current Unit"
+    id: "currentQuantityUnit"
+    type: "select"
+    options:
+      - "gram (g)"
+      - "ounce (oz)"
+      - "pound (lb)"
+      - "liter (L)"
+      - "milliliter (mL)"
+      - "gallon (gal)"
+    special: "required"

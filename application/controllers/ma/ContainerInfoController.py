@@ -9,10 +9,10 @@ from flask import \
     url_for
 
 # PURPOSE: CheckOut a container
-@app.route('/ma/CheckOut/<chemId>/<conId>/', methods = ['GET', 'POST'])
+@app.route('/ma/ContainerInfo/<chemId>/<conId>/', methods = ['GET', 'POST'])
 @require_role('admin')
-def maCheckOut(chemId, conId):
+def maContainerInfo(chemId, conId):
   chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
   container = containersModel.Containers.get(containersModel.Containers.conId == conId)
-  
-  return render_template("views/ma/CheckOutView.html", config = config, container = container, chemical = chemical)
+  if request.method =="GET":
+    return render_template("views/ma/ContainerInfoView.html", config = config, container = container, chemical = chemical)

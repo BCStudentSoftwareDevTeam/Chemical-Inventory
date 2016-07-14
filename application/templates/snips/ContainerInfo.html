@@ -9,24 +9,29 @@
      <div class="tab-content">
         <div id="checkout" class="tab-pane fade in active">
           <h3>Check Out</h3>
-              <label for="name" class="col-sm-2">Name:</label>
-              <input type = "text" name ="chemname" value = "{{chemical.name}}" readonly><br>
-              <label for ="barcode" class="col-sm-2">Barcode:</label>
-              <input type = "number" name ="barcode" value = "{{container.barcodeId}}" readonly><br>
-              <label for = "quantity" class = "col-sm-2"> Quantity:</label>
-              <input type= "varchar" name ="quantity" value = "{{container.currentQuantity}} {{container.currentQuantityUnit}} " readonly><br>
-              <label for = "location" class = "col-sm-2"> Location:</label>
-              <input type = "varchar" name = "location" value = "{{container.storageId.roomId.floorId.buildId.name}} {{container.storageId.roomId.name}}  {{container.storageId.name}}" readonly><br>
-              <label for = "Class Name" class = "col-sm-2"> Class:</label>
-              <input id="class" required="true" type="text" placeholder="Class Name" name="class"><br>
-              <label for = "Building" class = "col-sm-2"> Building:</label>
-              <input id="building" required="true" type="text" placeholder="Class Building" name="building"><br>
-              <label for = "Room" class = "col-sm-2"> Room:</label>
-              <input type ="number" id="room" required="true" type="text" placeholder="Room Number" name="room"><br>
-              <label for = "Professor" class = "col-sm-2"> Professor's Name:</label>
-              <input  id = "profname" required="true" type="text" placeholder="Professors Name" name="profname"><br>
-              <button type="submit" class="btn btn-primary">CheckOut Chemical</button>
+            <div class="form">
+              <form name="checkOutForm">
+                <label for="name" class="col-sm-2">Name:</label>
+                  <input type = "text" name ="chemname" value = "{{chemical.name}}" readonly><br>
+                <label for ="barcode" class="col-sm-2">Barcode:</label>
+                  <input type = "number" name ="barcode" value = "{{container.barcodeId}}" readonly><br>
+                <label for = "quantity" class = "col-sm-2"> Quantity:</label>
+                  <input type= "varchar" name ="quantity" value = "{{container.currentQuantity}} {{container.currentQuantityUnit}} " readonly><br>
+                <label for = "location" class = "col-sm-2"> Location:</label>
+                  <input type = "varchar" name = "location" value = "{{container.storageId.roomId.floorId.buildId.name}} {{container.storageId.roomId.name}}  {{container.storageId.name}}" readonly><br>
+                <label for = "Class Name" class = "col-sm-2"> Class:</label>
+                  <input id="class" required="true" type="text" placeholder="Class Name" name="class"><br>
+                <label for = "Building" class = "col-sm-2"> Building:</label>
+                  <input id="building" required="true" type="text" placeholder="Class Building" name="building"><br>
+                <label for = "Room" class = "col-sm-2"> Room:</label>
+                  <input type ="number" id="room" required="true" type="text" placeholder="Room Number" name="room"><br>
+                <label for = "Professor" class = "col-sm-2"> Professor's Name:</label>
+                  <input  id = "profname" required="true" type="text" placeholder="Professors Name" name="profname"><br>
+                <button type="submit" class="btn btn-primary">CheckOut Chemical</button>
+              </form>
+            </div>
         </div>
+        
         <div id="history" class="tab-pane fade">
           <h3>History</h3>
         </div>

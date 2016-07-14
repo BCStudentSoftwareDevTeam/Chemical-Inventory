@@ -12,5 +12,7 @@ from flask import \
 @app.route('/ma/CheckIn/', methods = ['GET', 'POST'])
 @require_role('admin')
 def maCheckIn():
-  return render_template("views/ma/CheckInView.html", config = config)
+  return render_template("views/ma/CheckInView.html",
+                         config = config,
+                         checkInConfig = checkInConfig)
 
