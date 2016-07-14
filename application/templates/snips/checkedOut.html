@@ -1,0 +1,41 @@
+<div class = "container-fluid">
+  <table class= "table table-hover" style="cursor: pointer;">
+    <thead>
+      <tr>
+        <td>Chemical</td>
+        {%  for field in contConfig['containerInformation']  %}
+          {%  if "Unit" not in field.name  %}
+            <td>{{field.name}}</td>
+          {%  endif  %}
+        {%  endfor  %}
+        <td>Checked Out To</td>
+        <td>Checked Out By</td>
+        <td>Reason</td>
+      </tr>
+    </thead>
+      {% for container in containers %}
+      <tr>
+          <td>{{container.chemId.name}}</td>
+            {%  for field in contConfig['containerInformation']  %}
+              {%  set attribute = field.id  %}
+                {%  if attribute != "capacityUnit" and attribute != "currentQuantityUnit" %}
+                  {%  if attribute == "capacity" or attribute == "currentQuantity" %}
+                    <td>{{container[attribute]}} {{container[attribute + "Unit"]}}</td>
+                  {% elif attribute == "storageId"  %}
+                    {% if container[attribute].roomId is defined %}
+                      <td>{{container[attribute].roomId.floorId.buildId.name}} {{container[attribute].roomId.name}}</td>
+                    {% else %}
+                      <td>{{container.roomId.floorId.buildId.name}} {{container.roomId.name}}</td>
+                    {% endif %}
+                  {%  else  %}
+                    <td>{{container[attribute]}}</td>
+                  {%  endif  %}
+                {%  endif  %}
+              {%  endfor  %}
+              <td>{{container.forProf}}</td>
+              <td>{{container.checkedOutBy}}</td>
+              <td>{{container.forClass}}</td>
+      </tr>
+      {% endfor %}
+  </table>
+ </div>

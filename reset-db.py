@@ -148,6 +148,7 @@ def init_db ():
     formula = "AcEtoNE",
     state = "Liquid",
     structure = "Inorganic",
+    sdsLink = "https://www.link.com/Acetone",
     flashPoint = 999,
     boilPoint = 888,
     storageTemp = 69,
@@ -162,6 +163,7 @@ def init_db ():
     formula = "ZzzZZzZZ",
     state = "Liquid",
     structure = "Organic",
+    sdsLink = "https://www.link.com/Chloroform",
     flashPoint = 999,
     boilPoint = 888,
     storageTemp = 69,
@@ -193,7 +195,7 @@ def init_db ():
     capacityUnit = "ounce (oz)",
     capacity = 20,
     checkedOut = True,
-    forClass = "Whichever one Cody is in.",
+    forClass = "Cody",
     forProf = "Scott Hegen",
     checkedOutBy = "Heggens").save()
   

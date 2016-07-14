@@ -1,5 +1,5 @@
 from application import app
-from application.models import *
+from application.models.containersModel import *
 from application.config import *
 from application.logic.validation import require_role
 
@@ -8,10 +8,13 @@ from flask import \
     request, \
     url_for
 
-# PURPOSE: Display chemicals that are checked out
+# PURPOSE: Display containers that are checked out
 @app.route('/sa/CheckedOut/', methods = ['GET'])
 @require_role('systemAdmin')
-@require_role('admin')
 def CheckedOut():
-  return render_template("views/sa/CheckedOutView.html", config = config)
+  containers = Containers.select().where(Containers.checkedOut == True)
+  return render_template("views/sa/CheckedOutView.html", 
+                         config = config,
+                         contConfig = contConfig,
+                         containers = containers)
 

@@ -21,8 +21,9 @@ def maChemTable():
                               .join(Containers))
                               .where(
                                 (Containers.disposalDate == None) &
-                                (Containers.chemId == chemical.chemId)))
-                              .count())
+                                (Containers.chemId == chemical.chemId) &
+                                (Containers.checkedOut == False))
+                              .count()))
   return render_template("views/ma/ChemTableView.html",
                           config = config, 
                           chemicals = chemicals, 

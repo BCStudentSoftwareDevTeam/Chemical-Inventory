@@ -1,5 +1,5 @@
 from application import app
-from application.models import *
+from application.models.containersModel import *
 from application.config import *
 from application.logic.validation import require_role
 
@@ -12,5 +12,9 @@ from flask import \
 @app.route('/ma/CheckedOut/', methods = ['GET'])
 @require_role('admin')
 def maCheckedOut():
-  return render_template("views/ma/CheckedOutView.html", config = config)
+  containers = Containers.select().where(Containers.checkedOut == True)
+  return render_template("views/ma/CheckedOutView.html",
+                         config = config,
+                         contConfig = contConfig,
+                         containers = containers)
 
