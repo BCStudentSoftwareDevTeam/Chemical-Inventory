@@ -9,7 +9,6 @@ for file in glob.glob(directoryOfThisFile + "/*Model.py"):
     models.append(os.path.splitext(os.path.basename(file))[0])
 
 # print "Found models: {0}".format(models)
-__all__ = models
 
 def classFromName(moduleName, className):
     # load the module, will raise ImportError if module cannot be loaded
@@ -28,6 +27,9 @@ def getModelClasses():
     classes.append(c)
   return classes
 
+def getNameFromModelFile (mfile):
+  return re.sub("Model", "", mfile).capitalize()
+
 def getModelFromName (name):
   c = None
   for m in models:  
@@ -39,3 +41,32 @@ def getModelFromName (name):
     
 
 classes = getModelClasses()
+
+
+# METAPROGRAMMING
+# This bit of code below is a bit convoluted, and honestly, I wish it was better.
+# This creates a dummy Obj, and then attaches attributes to it.
+# Those are the models. 
+# Developers, in their controllers, should:
+#
+# from application.models import models
+#
+# Then, in their code:
+# 
+# f = models.Foo()
+# 
+# which assumes that in the file fooModel, there is a class called "Foo" that 
+# instantiates a PeeWee model.
+# 
+# Again, there must be a better way, but this is reasonably straight-forward/consistent.
+__all__ = models
+
+class Obj:
+  pass
+o = Obj()
+
+for modelFileName, classObj in zip (models, classes):
+  modelName = getNameFromModelFile (modelFileName)
+  setattr(o, modelName, classObj)
+models = o
+
