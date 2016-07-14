@@ -22,7 +22,7 @@
             <div class="form-group row">
               <label for="{{group.id}}" class="col-sm-6">{{group.name}}</label>
               <div class="col-sm-6">
-                <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" value="" min='0' max='1000' {{group.special}}/>
+                <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" value="" {{group.special}}/>
                 <script type="text/javascript">
                   createBarcode('{{group.id}}', '{{lastCont.barcodeId}}');
                 </script>
@@ -32,7 +32,7 @@
             <div class="form-group row">
               <label for="{{group.id}}" class="col-sm-6">{{group.name}}</label>
               <div class="col-sm-6">
-              <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" placeholder="{{group.placeholder}}" min='0' max='1000' {{group.special}}/>
+              <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" placeholder="{{group.placeholder}}" min='0' max='10000' {{group.special}}/>
               </div>
             </div>
           {% endif %}
@@ -41,7 +41,7 @@
             <div class="form-group row">
               <label for="{{  group['name'] }}" class="col-sm-6">{{  group['name']  }}:</label>
               <div class="col-sm-6">
-                <select id="{{group['id']}}" name="{{group.id}}" class="form-control" {{group.special}}>
+                <select id="{{group['id']}}" name="{{group['id']}}" class="form-control" {{group.special}}>
                   <option selected disabled value="">Select One</option>
                   {%  for unit in group['options']  %}
                   <option value="{{  unit  }}">{{  unit  }}</option>

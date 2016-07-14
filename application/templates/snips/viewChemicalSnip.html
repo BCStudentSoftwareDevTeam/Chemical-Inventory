@@ -1,4 +1,7 @@
-<h1>{{chemInfo.name}} Information</h1>
+<div class="col-sm-6 col-sm-offset-2">
+  <h1>{{chemInfo.name}} Information</h1>
+  <h3>Color Code: {{config.hazards[chemInfo.primaryHazard]}}</h3>
+</div>
 
 <div class="col-md-8 col-md-offset-2">
     <ul class="nav nav-tabs">
@@ -23,7 +26,7 @@
             </thead>
             {%  for container in containers  %}
               {% if container.checkedOut != True %}
-                <tr>
+                <tr style="cursor: pointer;" onclick="window.location.href = '../../../ContainerInfo/{{chemInfo.chemId}}/{{container.conId}}/'";>
               {% else %}
                 <tr class="danger">
               {% endif %}
@@ -33,10 +36,10 @@
                       {%  if attribute == "capacity" or attribute == "currentQuantity" %}
                         <td>{{container[attribute]}} {{container[attribute + "Unit"]}}</td>
                       {% elif attribute == "storageId"  %}
-                        {% if container[attribute].roomId is defined %}
+                        {% if container[attribute.name] == container[attribute].roomId.name %}
                           <td>{{container[attribute].roomId.floorId.buildId.name}} {{container[attribute].roomId.name}}</td>
                         {% else %}
-                          <td>{{container.roomId.floorId.buildId.name}} {{container.roomId.name}}</td>
+                          <td>{{container[attribute].roomId.floorId.buildId.name}} Building, Room {{container[attribute].roomId.name}}, {{container[attribute].name}}</td>
                         {% endif %}
                       {%  else  %}
                         <td>{{container[attribute]}}</td>
@@ -50,19 +53,33 @@
         
         <div id="info" class="tab-pane fade">
           <h3>Information</h3>
+          <table class="table table-striped">
           {% for field in chemConfig['addChemInputs'] %}
             {% set attribute = field.name %}
               {% if attribute == "Safety Data Sheet Link" %}
+                <tr>
+                  <td>{{attribute}}</td>
+                  <td><a href="{{chemInfo[field.id]}}" target="blank">{{chemInfo[field.id]}}</a></td>
+                </tr>
+              {% elif field.small is defined %}
+                <tr>
+                  <td>{{attribute}}</td>
+                  <td>{{chemInfo[field.id]}} &#176F</td>
+                </tr>
+              {% else %}
+              <tr>
+                <td>{{attribute}}</td>
+                <td>{{chemInfo[field.id]}}</td>
+              </tr>
               {% endif %}
-              {# if attribute is a temperature field #}
-                {# Show "degrees Fahrenheit" #}
-            {{attribute}}: {{chemInfo[field.id]}}</br>
           {% endfor %}
+          </table>
         </div>
         
         <div id="hazards" class="tab-pane fade">
           <h3>Hazards</h3>
-          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+          Primary Hazard: {{chemInfo.primaryHazard}}
         </div>
+
     </div>
 </div>

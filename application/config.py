@@ -18,6 +18,9 @@ chemConfig = Configuration.from_file('config/chemicalConfig.yaml').configure()
 # Added for add container page
 contConfig = Configuration.from_file('config/containerConfig.yaml').configure()
 
+# Added for check in page
+checkInConfig = Configuration.from_file('config/checkInConfig.yaml').configure()
+
 # This adds the application's base directory to the
 # configuration object, so that the rest of the application
 # can reference it.
