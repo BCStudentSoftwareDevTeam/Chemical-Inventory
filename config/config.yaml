@@ -12,8 +12,6 @@ application:
 databases:
   roles:
     filename: data/roles.sqlite
-  foo:
-    filename: data/foo.sqlite
 
 sys:
   debug: True
