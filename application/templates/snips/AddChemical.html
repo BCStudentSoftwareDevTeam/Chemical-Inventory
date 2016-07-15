@@ -64,11 +64,11 @@
     
     <div class="form-group row">
       <label for="pictograms" class="row">Please select the appropriate hazard pictogram.</label>
-      <div class="radio col-sm-11">
+      <div class="checkbox col-sm-11">
         {%for hazardPict in chemConfig['pictograms']%}
           <label for="{{hazardPict['title']}}"></label>
-          <input type="radio" name="hazardPict" id="{{hazardPict['title']}}" value="{{hazardPict['title']}}" class="hiddenRadio">
-            <img src="{{hazardPict['pict']}}" id="{{hazardPict['title']}}" alt="{{hazardPict['alt']}}" class="hazardRadio"  onclick="pictSelect(this)"></img>
+          <input type="checkbox" name="hazardPict" id="{{hazardPict['title']}}" value="{{hazardPict['title']}}" class="hiddenRadio">
+            <img src="{{hazardPict['pict']}}" id="{{hazardPict['title']}}" alt="{{hazardPict['alt']}}" class="hazardRadio"  onclick="pictSelect({{hazardPict['title']}})"></img>
           </input>
         {%endfor%}
       </div>
