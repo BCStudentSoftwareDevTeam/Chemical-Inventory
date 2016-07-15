@@ -1,12 +1,11 @@
-function CheckInModal(name,barcode,lastroom,newQuanity,newroom){
-   var list = [name,barcode,lastroom,newQuanity,newroom];
+function CheckInModal(name,barcode,lastroom,newQuantity,newroom){
+   var list = [name,barcode,lastroom,newQuantity,newroom];
    var check = checkValues(list);
    if (check == true) {
-     $("#myModal").modal();
-     
+     printdata(name,barcode,lastroom,newQuantity,newroom);
      
    }
-   showModal()
+  
 }
 
 function checkValues(list){
@@ -19,16 +18,20 @@ function checkValues(list){
   }
   return true;
 }
- function print(name,barcode,lastroom,newQuanity,newroom){
-     var Name = document.getElementById(name).textContent;
-     var Barcode = document.getElementById(barcode).textContent;
-     var Lastroom = document.getElementById(lastroom).textContent;
-     var Quanity = document.getElementById(newQuanity).textContent;
-      $('.share_list_popup ul').append(Name);
-      $('.share_list_popup ul').append(Barcode);
 
-  function showModal($) {
-      $('#myModal').modal('show');
-      //still need to fix this I have no idea how to print this on the modal
-  }
- }
+function printdata(name,barcode,lastroom,newQuantity,newroom){
+     var Name = $("#" + name).val();
+     var Barcode =$("#" + barcode).val();
+     var Lastroom = $("#" + lastroom).val();
+     var Quantity = $("#" + newQuantity).val();
+     var newroomy = $("#" + newroom).val();
+      $('.chemdata').append("<li>Name: "+ Name +"</li>");
+      $('.chemdata').append("<li>Barcode: " + Barcode + "</li>");
+      $('.chemdata').append("<li>Lastroom: " + Lastroom + "</li>");
+      $('.chemdata').append("<li>NewQuantity: " +Quantity+ "</li>")
+      $('.chemdata').append("<li>NewRoom:" +newroomy+"</li>")
+      $("#myModal").modal('show');
+}
+
+
+ 
