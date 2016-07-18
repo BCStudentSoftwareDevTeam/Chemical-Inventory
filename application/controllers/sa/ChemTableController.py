@@ -3,6 +3,7 @@ from application.models.chemicalsModel import *
 from application.models.containersModel import *
 from application.config import *
 from application.logic.validation import require_role
+from urllib import *
 
 from flask import \
     render_template, \
@@ -27,5 +28,6 @@ def saChemTable():
   return render_template("views/sa/ChemTableView.html",
                           config = config, 
                           chemicals = chemicals, 
-                          contDict = contDict)
+                          contDict = contDict,
+                          quote = quote)
 
