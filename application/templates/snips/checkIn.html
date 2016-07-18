@@ -1,0 +1,25 @@
+<div class="col-sm-offset-3"><h3>Check In</h3></div>
+    <div class="container-fluid" style="float:left">
+        <form name="checkIn" class="form-inline">
+            <div class="form-group">
+                <label class="label-control" for="barcodeId">Barcode: </label>
+                    <input class="form-control" type="text" id="barcodeId" name="barcodeId" required oninput="checkBar()" autofocus>
+            </div>
+            {% for group in checkInConfig['inputs'] %}
+                {% if group.autoPop == "true" %}
+                    <div class="form-group">
+                        <label class="label-control" for="{{group.id}}">{{group.title}}</label>
+                            <input class="form-control d autoPop" type="{{group.type}}" id="{{group.id}}" name="{{group.id}}" readonly>
+                    </div>
+                {% else %}
+                    <div class="form-group">
+                        <label class="label-control" for="{{group.id}}">{{group.title}}</label>
+                            <input class="form-control d" type="{{group.type}}" id="{{group.id}}" name="{{group.id}}" {{group.special}} disabled>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </form>
+    </div>
+</div>
+
+<script src="/static/js/local/changeForm.js"></script>

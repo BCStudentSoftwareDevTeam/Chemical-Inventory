@@ -2,15 +2,15 @@ inputs:
   - title: "Chemical Name"
     id: "chemName" # This may need to change
     type: "text"
-    special: "autoPop"
+    autoPop: "true"
   - title: "Previous Location"
     id: "locationId" #This should change to whatever will get the full location information
     type: "text"
-    special: "autoPop"
+    autoPop: "true"
   - title: "Previous Quantity"
     id: "currentQuantity" # This should change to whatever will get the full location info
     type: "text"
-    speical: "autoPop"
+    autoPop: "true"
   - title: "Current Location" #This may be unclear... maybe 'New Location'
     id: "locationId" # This may need to change
     type: "text"

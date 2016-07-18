@@ -16,7 +16,8 @@ from flask import \
 def maContainerInfo(chemId, conId):
   chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
   container = containersModel.Containers.get(containersModel.Containers.conId == conId)
-
+  storageList = storagesModel.Storages.select()
+  buildingList = buildingsModel.Buildings.select()
   if request.method =="POST":
     try:
       if request.form['dispose'] == "Dispose of this Container":
@@ -25,13 +26,16 @@ def maContainerInfo(chemId, conId):
         return redirect(url_for("maChemTable"))
     except:
       # add form data to container as checked out
-      return redirect(url_for("maChemTable"))
-  
-    # cont.storageId.roomId.save()
-    # cont.storageId.roomId.floorId.buildId.save()
-  else:     # No data from the form (GET request)
-
+      return render_template("views/ma/ContainerInfoView.html",
+                             config = config,
+                             container = container,
+                             chemical = chemical,
+                             storageList = storageList,
+                             buildingList = buildingList)
+  else:
     return render_template("views/ma/ContainerInfoView.html",
                        config = config,
                        container = container,
-                       chemical = chemical)
+                       chemical = chemical,
+                       storageList = storageList,
+                       buildingList = buildingList)

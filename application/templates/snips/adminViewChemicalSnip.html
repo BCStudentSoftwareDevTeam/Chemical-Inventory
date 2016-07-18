@@ -28,7 +28,7 @@
             </thead>
             {%  for container in containers  %}
               {% if container.checkedOut != True %}
-                
+
                 <tr style="cursor: pointer;" onclick="window.location.href = '../../../ContainerInfo/{{chemInfo.chemId}}/{{container.conId}}/'";>
               {% else %}
                 <tr class="danger">

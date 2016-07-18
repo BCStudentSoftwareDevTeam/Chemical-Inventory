@@ -27,10 +27,22 @@
                   <input class="form-control" type = "varchar" name = "location" value = "{{container.storageId.roomId.floorId.buildId.name}} {{container.storageId.roomId.name}}  {{container.storageId.name}}" readonly>
                 <label for = "Class Name" class = "col-sm-2"> Class:</label>
                   <input class="form-control" id="class" required="true" type="text" placeholder="Class Name" name="class">
-                <label for = "Building" class = "col-sm-2"> Building:</label>
-                  <input class="form-control" id="building" required="true" type="text" placeholder="Class Building" name="building">
-                <label for = "Room" class = "col-sm-2"> Room:</label>
-                  <input class="form-control" type ="number" id="room" required="true" type="text" placeholder="Room Number" name="room">
+                <label for = "storage" class = "col-sm-2"> Storage Location:</label>
+                  <select id="storage" name="storageId" class="form-control" required>
+                    <option selected disabled value="">Select One</option>
+                    {% for building in buildingList %}
+                      <optgroup label="{{building.name}} Building"></optgroup>
+                      {% for storage in storageList %}
+                        {% if storage.roomId.floorId.buildId.bId == building.bId %}
+                          {% if storage.roomId.name == storage.name %}
+                            <option value="{{storage.sId}}">Room {{storage.roomId.name}}</option>
+                          {% else %}
+                            <option value="{{storage.sId}}">Room {{storage.roomId.name}} ({{storage.name}})</option>
+                          {% endif %}
+                        {% endif %}
+                      {% endfor %}
+                    {%endfor%}
+                  </select>
                 <label for = "Professor" class = "col-sm-2"> Professor's Name:</label>
                   <input class="form-control" id = "profname" required="true" type="text" placeholder="Professors Name" name="profname">
                 <button type="submit" class="btn btn-primary">CheckOut Chemical</button>

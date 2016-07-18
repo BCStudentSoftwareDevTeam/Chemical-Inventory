@@ -14,7 +14,8 @@ from flask import \
 def maCheckIn():
 
   if request.method == "GET":
-    return render_template("views/ma/CheckInView.html", config = config, contConfig = contConfig)
-  data = request.form
-  print data 
+    return render_template("views/ma/CheckInView.html",
+                           config = config,
+                           contConfig = contConfig,
+                           checkInConfig = checkInConfig)
   
