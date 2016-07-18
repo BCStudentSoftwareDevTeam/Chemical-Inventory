@@ -6,6 +6,9 @@
         <label for="{{group['id']}}" class="col-sm-4">{{group['name']}}</label>
         <div class="col-sm-8">
           {% if group['special'] == "required" %}
+            {% if group['id'] == "sdsLink" %}
+            <div class="input-group-addon">https://</div>
+            {% endif %}
             <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
           {% else %}
             <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">

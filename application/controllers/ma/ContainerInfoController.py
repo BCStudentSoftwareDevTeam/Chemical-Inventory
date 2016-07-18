@@ -17,11 +17,17 @@ def maContainerInfo(chemId, conId):
   chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
   container = containersModel.Containers.get(containersModel.Containers.conId == conId)
   if request.method =="POST":
-    if request.form['dispose'] == "Dispose of this Container":
-      container.disposalDate = datetime.now()
-      container.save()
-      return redirect(url_for("maChemTable"))
-
+    try:
+      if request.form['dispose'] == "Dispose of this Container":
+        container.disposalDate = datetime.now()
+        container.save()
+        return redirect(url_for("maChemTable"))
+    except:
+      # add form data to container as checked out
+      return render_template("views/ma/ContainerInfoView.html",
+                             config = config,
+                             container = container,
+                             chemical = chemical)
   else:
     return render_template("views/ma/ContainerInfoView.html",
                        config = config,
