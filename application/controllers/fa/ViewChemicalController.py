@@ -3,6 +3,7 @@ from application.models.chemicalsModel import *
 from application.models.containersModel import *
 from application.config import *
 from application.logic.validation import require_role
+from urllib import *
 
 from flask import \
     render_template, \
@@ -23,4 +24,5 @@ def faViewChemical(chemical, chemId):
                          chemInfo = chemInfo,
                          containers = containers,
                          contConfig = contConfig,
-                         chemConfig = chemConfig)
+                         chemConfig = chemConfig,
+                         quote = quote)
