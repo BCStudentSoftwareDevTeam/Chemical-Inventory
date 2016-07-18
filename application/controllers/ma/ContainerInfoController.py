@@ -16,13 +16,21 @@ from flask import \
 def maContainerInfo(chemId, conId):
   chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
   container = containersModel.Containers.get(containersModel.Containers.conId == conId)
-  if request.method =="POST":
-    if request.form['dispose'] == "Dispose of this Container":
-      container.disposalDate = datetime.now()
-      container.save()
-      return redirect(url_for("maChemTable"))
 
-  else:
+  if request.method =="POST":
+    try:
+      if request.form['dispose'] == "Dispose of this Container":
+        container.disposalDate = datetime.now()
+        container.save()
+        return redirect(url_for("maChemTable"))
+    except:
+      # add form data to container as checked out
+      return redirect(url_for("maChemTable"))
+  
+    # cont.storageId.roomId.save()
+    # cont.storageId.roomId.floorId.buildId.save()
+  else:     # No data from the form (GET request)
+
     return render_template("views/ma/ContainerInfoView.html",
                        config = config,
                        container = container,

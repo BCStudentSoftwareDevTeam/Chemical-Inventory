@@ -49,9 +49,9 @@
                 </select> 
               </div>
             </div>
-            {% else %}
-              <div class="form-group row">
-                <label for="{{group.name}}" class="col-sm-6">{{group.name}}:</label>
+          {% else %}
+            <div class="form-group row">
+              <label for="{{group.name}}" class="col-sm-6">{{group.name}}:</label>
                 <div class="col-sm-6">
                   <select id="{{group.id}}" name="{{group.id}}" class="form-control" {{group.special}}>
                     <option selected disabled value="">Select One</option>

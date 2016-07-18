@@ -12,7 +12,9 @@ from flask import \
 @app.route('/ma/CheckIn/', methods = ['GET', 'POST'])
 @require_role('admin')
 def maCheckIn():
-  return render_template("views/ma/CheckInView.html",
-                         config = config,
-                         checkInConfig = checkInConfig)
 
+  if request.method == "GET":
+    return render_template("views/ma/CheckInView.html", config = config, contConfig = contConfig)
+  data = request.form
+  print data 
+  

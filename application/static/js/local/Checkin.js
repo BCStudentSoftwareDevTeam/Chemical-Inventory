@@ -1,10 +1,11 @@
-function CheckInModal(name,barcode,lastroom,newQuanity,newroom){
-   var list = [name,barcode,lastroom,newQuanity,newroom];
+function CheckInModal(name,barcode,lastroom,newQuantity,newroom){
+   var list = [name,barcode,lastroom,newQuantity,newroom];
    var check = checkValues(list);
    if (check == true) {
-     $("#myModal").modal();
-     //console.log("opened modal");
+     printdata(name,barcode,lastroom,newQuantity,newroom);
+     
    }
+  
 }
 
 function checkValues(list){
@@ -17,3 +18,20 @@ function checkValues(list){
   }
   return true;
 }
+
+function printdata(name,barcode,lastroom,newQuantity,newroom){
+     var Name = $("#" + name).val();
+     var Barcode =$("#" + barcode).val();
+     var Lastroom = $("#" + lastroom).val();
+     var Quantity = $("#" + newQuantity).val();
+     var newroomy = $("#" + newroom).val();
+      $('.chemdata').append("<li>Name: "+ Name +"</li>");
+      $('.chemdata').append("<li>Barcode: " + Barcode + "</li>");
+      $('.chemdata').append("<li>Lastroom: " + Lastroom + "</li>");
+      $('.chemdata').append("<li>NewQuantity: " +Quantity+ "</li>")
+      $('.chemdata').append("<li>NewRoom:" +newroomy+"</li>")
+      $("#myModal").modal('show');
+}
+
+
+ 

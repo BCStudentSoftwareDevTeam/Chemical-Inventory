@@ -8,7 +8,8 @@
         <li class="active"><a data-toggle="tab" href="#containers">Containers</a></li>
         <li><a data-toggle="tab" href="#info">Information</a></li>
         <li><a data-toggle="tab" href="#hazards">Hazards</a></li>
-        <li><a data="tab" href="../../../AddContainer/{{chemInfo.name}}/{{chemInfo.chemId}}/">Add a new Container</a></li>
+        {% set chemName = quote(chemInfo.name) %}
+        <li><a data="tab" href="../../../AddContainer/{{chemName}}/{{chemInfo.chemId}}/">Add a new Container</a></li>
         {# example code for tabs found here: http://jsfiddle.net/xfw8t/12/ #}
     </ul>
     
@@ -27,6 +28,7 @@
             </thead>
             {%  for container in containers  %}
               {% if container.checkedOut != True %}
+                
                 <tr style="cursor: pointer;" onclick="window.location.href = '../../../ContainerInfo/{{chemInfo.chemId}}/{{container.conId}}/'";>
               {% else %}
                 <tr class="danger">
