@@ -1,3 +1,4 @@
+
 <h1 align = "center"> {{chemical.name}}</h1>
 
 <div class="col-md-8 col-md-offset-2">
@@ -13,7 +14,9 @@
         <div id="checkout" class="tab-pane fade in active">
           <h3>Check Out</h3>
             <div class="form">
-              <form name="checkOutForm" method="post">
+
+              <form name="checkOutForm" method = "POST" action = "/ma/ContainerInfo/{{chemical.chemId}}/{{container.conId}}/">
+
                 <label for="name" class="col-sm-2">Name:</label>
                   <input class="form-control" type = "text" name ="chemname" value = "{{chemical.name}}" readonly>
                 <label for ="barcode" class="col-sm-2">Barcode:</label>
