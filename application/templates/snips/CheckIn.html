@@ -1,5 +1,5 @@
 <div class="container">
-  <form name="checkIn">
+  <form name="checkIn" method = "post" action = "/ma/CheckIn/">
     <div class="form-group row">
       <label for="name" class="col-sm-2">Name:</label>
       <div class="col-sm-10">
@@ -46,8 +46,8 @@
       </div>
       <div class="modal-body">
       <h5> Review Chemical Information</h5>
-       <div class="share_list_popup">
-         <ul></ul>
+       <div>
+         <ul class="chemdata"></ul>
        </div>
       </div>
       <div class="modal-footer">
@@ -59,4 +59,3 @@
 </div>
   </form>        
 </div>
-<script src="/static/js/local/Checkin.js"></script>

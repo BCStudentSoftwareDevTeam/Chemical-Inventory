@@ -67,18 +67,13 @@
     
     <div class="form-group row">
       <label for="pictograms" class="row">Please select the appropriate hazard pictogram.</label>
-      <div class="checkbox">
-        <ul>
-          {%for hazardPict in chemConfig['pictograms']%}
-            <li>
-              <input type="checkbox" name="hazardPict" id="{{hazardPict['title']}}" value="{{hazardPict['title']}}" hidden>
-                <label for="{{hazardPict['title']}}">
-                  <img src="{{hazardPict['pict']}}" id="{{hazardPict['title']}}" alt="{{hazardPict['alt']}}" class="hazardRadio"></img>
-                </label>
-              </input>
-            </li>
-          {%endfor%}
-        </ul>
+      <div class="checkbox col-sm-11">
+        {%for hazardPict in chemConfig['pictograms']%}
+          <label for="{{hazardPict['title']}}"></label>
+          <input type="checkbox" name="hazardPict" id="{{hazardPict['title']}}" value="{{hazardPict['title']}}" class="hiddenRadio">
+            <img src="{{hazardPict['pict']}}" id="{{hazardPict['title']}}" alt="{{hazardPict['alt']}}" class="hazardRadio"  onclick="pictSelect({{hazardPict['title']}})"></img>
+          </input>
+        {%endfor%}
       </div>
     </div>
     
