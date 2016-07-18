@@ -29,9 +29,9 @@
             {%  for container in containers  %}
               {% if container.checkedOut != True %}
 
-                <tr style="cursor: pointer;" onclick="window.location.href = '../../../ContainerInfo/{{chemInfo.chemId}}/{{container.conId}}/'";>
+                <tr class="success" style="cursor: pointer;" onclick="window.location.href = '../../../ContainerInfo/{{chemInfo.chemId}}/{{container.conId}}/'";>
               {% else %}
-                <tr class="danger">
+                <tr class="danger" style="cursor: pointer;" onclick="window.location.href = '../../../ContainerInfo/{{chemInfo.chemId}}/{{container.conId}}/'";>
               {% endif %}
                 {%  for field in contConfig['containerInformation']  %}
                   {%  set attribute = field.id  %}

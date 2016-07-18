@@ -25,20 +25,15 @@ def maContainerInfo(chemId, conId):
         container.save()
         return redirect(url_for("maChemTable"))
     except:
-      data= request.form
+      data = request.form
       cont = containersModel.Containers.get(conId = conId)
-      cont.forClass  = data['profname']
+      cont.forClass  = data['class']
       cont.checkedOut = True
-      cont.forClass = data ['class']
-      cont.storageId.roomId.floorId.buildId = data['building']
+      cont.forProf = data ['forProf']
+      cont.storageId.roomId.floorId.buildId = data['storageId']
       cont.save()
       # add form data to container as checked out
-      return render_template("views/ma/ContainerInfoView.html",
-                             config = config,
-                             container = container,
-                             chemical = chemical,
-                             storageList = storageList,
-                             buildingList = buildingList)
+      return redirect('/ma/ViewChemical/' + chemical.name + '/' + chemId + '/')
   else:
     return render_template("views/ma/ContainerInfoView.html",
                        config = config,

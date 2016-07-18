@@ -3,14 +3,19 @@
 
 <div class="col-md-8 col-md-offset-2">
     <ul class="nav nav-tabs">
+        {% if container.checkedOut == False %}
         <li class="active"><a data-toggle="tab" href="#checkout">CheckOut this Container</a></li>
         <li><a data-toggle="tab" href="#history">History of Container</a></li>
+        {% else %}
+        <li class="active"><a data-toggle="tab" href="#history">History of Container</a></li>
+        {% endif %}
         {% if container.currentQuantity == 0 %}
           <li><a data-toggle="tab" href="#dispose">Dispose of Container</a></li>
         {% endif %}
         {# example code for tabs found here: http://jsfiddle.net/xfw8t/12/ #}
     </ul>
      <div class="tab-content">
+       {% if container.checkedOut == False %} {# Only render if container is not checked out. Will not show up in page source #}
         <div id="checkout" class="tab-pane fade in active">
           <h3>Check Out</h3>
             <div class="form">
@@ -44,23 +49,28 @@
                     {%endfor%}
                   </select>
                 <label for = "Professor" class = "col-sm-2"> Professor's Name:</label>
-                  <input class="form-control" id = "profname" required="true" type="text" placeholder="Professors Name" name="profname">
+                  <input class="form-control" id = "profname" required="true" type="text" placeholder="Professors Name" name="forProf">
                 <button type="submit" class="btn btn-primary">CheckOut Chemical</button>
               </form>
             </div>
         </div>
-        
+        {% endif %}
+        {% if container.checkedOut == False %} {# If container is checked out, then only show the history tab #}
         <div id="history" class="tab-pane fade">
+        {% else %}
+        <div id="history" class="tab-pane fade in active">
+        {% endif %}
           <h3>History</h3>
         </div>
         
+        {% if container.currentQuantity == 0 %} {# To prevent this part from showing in page source when the container is not able to be disposed of yet. #}
         <div id="dispose" class="tab-pane fade">
           <h3>Dispose of Container</h3>
           <form method="POST">
             <input class="btn btn-primary" type="submit" name="dispose" value="Dispose of this Container">
           </form>
-          {# disposalDate #}
         </div>
+        {% endif %}
     </div>
       
       
