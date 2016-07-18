@@ -19,7 +19,8 @@
               </tr>
         </thead>
         {% for chemical in chemicals %}
-            <tr onclick="window.location.href = '../ViewChemical/{{chemical.name}}/{{chemical.chemId}}/';">
+            {% set chemName = quote(chemical.name) %}
+            <tr onclick="window.location.href = '../ViewChemical/{{chemName}}/{{chemical.chemId}}/';">
                 <td>{{chemical.name}}</td>
                 <td>{{chemical.casNum}}</td>
                 <td>{{config['hazards'][chemical.primaryHazard]}}</td>

@@ -6,6 +6,9 @@
         <label for="{{group['id']}}" class="col-sm-4">{{group['name']}}</label>
         <div class="col-sm-8">
           {% if group['special'] == "required" %}
+            {% if group['id'] == "sdsLink" %}
+            <div class="input-group-addon">https://</div>
+            {% endif %}
             <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
           {% else %}
             <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
@@ -64,17 +67,22 @@
     
     <div class="form-group row">
       <label for="pictograms" class="row">Please select the appropriate hazard pictogram.</label>
-      <div class="radio col-sm-11">
-        {%for hazardPict in chemConfig['pictograms']%}
-          <label for="{{hazardPict['title']}}"></label>
-          <input type="radio" name="hazardPict" id="{{hazardPict['title']}}" value="{{hazardPict['title']}}" class="hiddenRadio">
-            <img src="{{hazardPict['pict']}}" id="{{hazardPict['title']}}" alt="{{hazardPict['alt']}}" class="hazardRadio"  onclick="pictSelect(this)"></img>
-          </input>
-        {%endfor%}
+      <div class="checkbox">
+        <ul>
+          {%for hazardPict in chemConfig['pictograms']%}
+            <li>
+              <input type="checkbox" name="hazardPict" id="{{hazardPict['title']}}" value="{{hazardPict['title']}}" hidden>
+                <label for="{{hazardPict['title']}}">
+                  <img src="{{hazardPict['pict']}}" id="{{hazardPict['title']}}" alt="{{hazardPict['alt']}}" class="hazardRadio"></img>
+                </label>
+              </input>
+            </li>
+          {%endfor%}
+        </ul>
       </div>
     </div>
     
-  <input class="btn btn-default btn" id="addChemSubmit" type="submit" value="Submit" disabled="true">
+  <input class="btn btn-default btn" id="addChemSubmit" type="submit" value="Submit">
   </form>
 </div>
 <script src="/static/js/local/pictSelect.js"></script>
