@@ -25,6 +25,13 @@ def maContainerInfo(chemId, conId):
         container.save()
         return redirect(url_for("maChemTable"))
     except:
+      data= request.form
+      cont = containersModel.Containers.get(conId = conId)
+      cont.forClass  = data['profname']
+      cont.checkedOut = True
+      cont.forClass = data ['class']
+      cont.storageId.roomId.floorId.buildId = data['building']
+      cont.save()
       # add form data to container as checked out
       return render_template("views/ma/ContainerInfoView.html",
                              config = config,
