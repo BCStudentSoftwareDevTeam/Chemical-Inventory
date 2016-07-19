@@ -25,12 +25,21 @@ def maContainerInfo(chemId, conId):
         container.save()
         return redirect(url_for("maChemTable"))
     except:
+<<<<<<< HEAD
+      data= request.form
+      cont = containersModel.Containers.get(conId = conId)
+      cont.forClass  = data['profname']
+      cont.checkedOut = True
+      cont.forClass = data ['class']
+      cont.storageId.roomId.floorId.buildId = data['building']
+=======
       data = request.form
       cont = containersModel.Containers.get(conId = conId)
       cont.forClass  = data['class']
       cont.checkedOut = True
       cont.forProf = data ['forProf']
       cont.storageId.roomId.floorId.buildId = data['storageId']
+>>>>>>> 7be976213e25dd4f09b191b71320f4ad4b19bede
       cont.save()
       # add form data to container as checked out
       return redirect('/ma/ViewChemical/' + chemical.name + '/' + chemId + '/')
