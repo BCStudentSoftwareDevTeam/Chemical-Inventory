@@ -7,7 +7,7 @@ class Histories (Model):
   hId          = PrimaryKeyField()
   ##Foreign Keys
   storageid     = ForeignKeyField(Storages)
-  containerid   = ForeignKeyField(Containers)
+  containerid   = ForeignKeyField(Containers, related_name = "containers")
   ##
   pastUnit      = TextField() # Container.currentUnit unit last entered.
   pastQuantity  = FloatField()# Container.currentQuantity amount of chemical last in the container
