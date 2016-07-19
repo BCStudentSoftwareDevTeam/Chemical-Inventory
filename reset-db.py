@@ -34,9 +34,9 @@ def init_db ():
   print "Building 1 saved"
 
   building2 = buildingsModel.Buildings(
-    name = "The House",
+    name = "Danforth Industrial Arts",
     numFloors = "2.0",
-    address = "Townsville USA").save()
+    address = "By the big hole in the ground").save()
   print "Building 2 saved"
   
   floorsModel.Floors(
@@ -109,12 +109,87 @@ def init_db ():
 
   roomsModel.Rooms(
     floorId = 6,
-    name = "Professor Utonium's Lab").save()
+    name = "111").save()
   print "All Rooms saved"
   
   storagesModel.Storages(
+    roomId = 1,
+    name = "Health Hazard Shelf",
+    healthHazard = True).save()
+  
+  storagesModel.Storages(
+    roomId = 4,
+    name = "200",
+    flammable = True,
+    healthHazard = True,
+    oxidizer = True,
+    orgAcid = True,
+    inorgAcid = True,
+    base = True,
+    peroxide = True,
+    pressure = True).save()
+    
+  storagesModel.Storages(
+    roomId = 5,
+    name = "404",
+    flammable = True,
+    healthHazard = True,
+    oxidizer = True,
+    orgAcid = True,
+    inorgAcid = True,
+    base = True,
+    peroxide = True,
+    pressure = True).save()
+    
+  storagesModel.Storages(
+    roomId = 6,
+    name = "420",
+    flammable = True,
+    healthHazard = True,
+    oxidizer = True,
+    orgAcid = True,
+    inorgAcid = True,
+    base = True,
+    peroxide = True,
+    pressure = True).save()
+
+  storagesModel.Storages(
+    roomId = 7,
+    name = "B07",
+    flammable = True,
+    healthHazard = True,
+    oxidizer = True,
+    orgAcid = True,
+    inorgAcid = True,
+    base = True,
+    peroxide = True,
+    pressure = True).save()
+    
+  storagesModel.Storages(
+    roomId = 8,
+    name = "B11",
+    flammable = True,
+    healthHazard = True,
+    oxidizer = True,
+    orgAcid = True,
+    inorgAcid = True,
+    base = True,
+    peroxide = True,
+    pressure = True).save()
+    
+  storagesModel.Storages(
+    roomId = 9,
+    name = "Organic Acid Shelf",
+    orgAcid = True).save()
+    
+  storagesModel.Storages(
+    roomId = 9,
+    name = "Inorganic Acid Shelf",
+    inorgAcid = True).save()
+  
+  storagesModel.Storages(
     roomId = 10,
-    name = "Professor Utonium's Lab",
+    name = "111",
     flammable = True,
     healthHazard = True,
     oxidizer = True,
@@ -210,6 +285,22 @@ def init_db ():
     conType = "bottle",
     manufacturer = "Sigma Aldrich",
     capacityUnit = "ounce (oz)",
+    capacity = 20).save()
+    
+  containersModel.Containers(
+    chemId = 1,
+    storageId = 9,
+    barcodeId = "16070003",
+    currentQuantityUnit = "ounce (oz)",
+    currentQuantity = 18.4,
+    recieveDate = date.today(),
+    conType = "bottle",
+    manufacturer = "Sigma Aldrich",
+    capacityUnit = "ounce (oz)",
+    checkedOut = True,
+    checkedOutBy = "Nick DeTore",
+    forProf = "Scott Heggen",
+    forClass = "Ummmmm... I don't know.",
     capacity = 20).save()
   
   containersModel.Containers(

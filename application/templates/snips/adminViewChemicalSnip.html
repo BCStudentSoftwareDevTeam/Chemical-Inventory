@@ -38,8 +38,8 @@
                       {%  if attribute == "capacity" or attribute == "currentQuantity" %}
                         <td>{{container[attribute]}} {{container[attribute + "Unit"]}}</td>
                       {% elif attribute == "storageId"  %}
-                        {% if container[attribute.name] == container[attribute].roomId.name %}
-                          <td>{{container[attribute].roomId.floorId.buildId.name}} {{container[attribute].roomId.name}}</td>
+                        {% if container[attribute].name == container[attribute].roomId.name %}
+                          <td>{{container[attribute].roomId.floorId.buildId.name}} Building, Room {{container[attribute].roomId.name}}</td>
                         {% else %}
                           <td>{{container[attribute].roomId.floorId.buildId.name}} Building, Room {{container[attribute].roomId.name}}, {{container[attribute].name}}</td>
                         {% endif %}
