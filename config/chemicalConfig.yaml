@@ -26,32 +26,54 @@ pictograms:
       pict: "/static/pictograms/toxicPict.png"
       alt: "Skull and Crossbones"
 
+HMIS:
+   - name: "Health"
+     id: "hmisHealth"
+     color: "blue"
+     text: "#FFF"
+     selections: &zeroThruFour
+       - "0"
+       - "1"
+       - "2"
+       - "3"
+       - "4"
+   - name: "Flammability"
+     id: "hmisFlammable"
+     color: "red"
+     text: "#FFF"
+     selections: *zeroThruFour
+   - name: "Reactivity"
+     id: "hmisReactive"
+     color: "orange"
+     text: "#FFF"
+     selections: *zeroThruFour
+   - name: "Personal Protection"
+     id: "hmisPPE"
+     color: "white"
+     selections:
+       - "A"
+       - "B"
+       - "C"
+       - "D"
+       - "E"
+       - "F"
+       - "G"
+       - "H"
+       - "I"
+       - "J"
+       - "K"
+
 NFPAdiamond:
   # Used to build the selection form for the NFPA "Fire Diamond"
     - section: "Health"
       id: "healthHazard"
-      selections: 
-       - "0"
-       - "1"
-       - "2"
-       - "3"
-       - "4"
+      selections: *zeroThruFour
     - section: "Flammability"
       id: "flammable"
-      selections: 
-       - "0"
-       - "1"
-       - "2"
-       - "3"
-       - "4"
+      selections: *zeroThruFour
     - section: "Instability/Reactivity"
       id: "reactive"
-      selections: 
-       - "0"
-       - "1"
-       - "2"
-       - "3"
-       - "4"
+      selections: *zeroThruFour
     - section: "Special"
       id: "other"
       selections: 

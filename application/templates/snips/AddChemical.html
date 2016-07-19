@@ -1,6 +1,6 @@
 <div class="col-sm-offset-3"><h3>Add a new Chemical</h3></div>
 <div class="form col-sm-offset-3 col-sm-4">
-  <form name="addChem" method="post">
+  <form name="addChem" method="post" class="form-group">
     {%  for group in chemConfig['addChemInputs']  %}
       <div class="form-group row">
         <label for="{{group['id']}}" class="col-sm-4">{{group['name']}}</label>
@@ -67,16 +67,47 @@
     
     <div class="form-group row">
       <label for="pictograms" class="row">Please select the appropriate hazard pictogram.</label>
-      <div class="checkbox col-sm-11">
-        {%for hazardPict in chemConfig['pictograms']%}
-          <label for="{{hazardPict['title']}}"></label>
-          <input type="checkbox" name="hazardPict" id="{{hazardPict['title']}}" value="{{hazardPict['title']}}" class="hiddenRadio">
-            <img src="{{hazardPict['pict']}}" id="{{hazardPict['title']}}" alt="{{hazardPict['alt']}}" class="hazardRadio"  onclick="pictSelect({{hazardPict['title']}})"></img>
-          </input>
-        {%endfor%}
+      <div class="checkbox">
+        <ul>
+          {%for hazardPict in chemConfig['pictograms']%}
+            <li>
+              <input type="checkbox" name="hazardPict" id="{{hazardPict['title']}}" value="{{hazardPict['title']}}" hidden required>
+                <label for="{{hazardPict['title']}}">
+                  <img src="{{hazardPict['pict']}}" id="{{hazardPict['title']}}" alt="{{hazardPict['alt']}}" class="hazardRadio"></img>
+                </label>
+              </input>
+            </li>
+          {%endfor%}
+        </ul>
       </div>
     </div>
     
+    <div class="col-sm-7">
+      <div class="panel panel-default text-center">
+        <div class="panel-heading">
+          <h3 class="panel-title">Hazardous Materials Identification System (HMIS)</h3>
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <tbody>
+              {% for row in chemConfig['HMIS'] %}
+                <tr BGCOLOR="{{row.color}}">
+                  <td><font color="{{row.text}}">{{row.name}}</font></td>
+                  <td class="col-md-6">
+                    <select id="{{row.id}}" name="{{row.id}}" required class="form-control">
+                      <option value="" disabled selected>Select One</option>
+                      {% for option in row.selections %}
+                      <option value="{{option}}">{{option}}</option>
+                      {% endfor %}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  <div class="clearfix"></div>  
   <input class="btn btn-default btn" id="addChemSubmit" type="submit" value="Submit">
   </form>
 </div>

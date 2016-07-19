@@ -26,12 +26,7 @@ def saContainerInfo(chemId, conId):
         return redirect(url_for("saChemTable"))
     except:
       # add form data to container as checked out
-      return render_template("views/sa/ContainerInfoView.html",
-                             config = config,
-                             container = container,
-                             chemical = chemical,
-                             storageList = storageList,
-                             buildingList = buildingList)
+      return redirect('/sa/ViewChemical/' + chemical.name + '/' + chemId + '/')
   else:
     return render_template("views/sa/ContainerInfoView.html",
                        config = config,

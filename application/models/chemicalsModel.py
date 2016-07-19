@@ -19,11 +19,16 @@ class Chemicals (Model):
   healthHazard    = CharField(null = False) # 0-4
   flammable       = CharField(null = False) # 0-4
   reactive        = CharField(null = False) # 0-4
-  other           = CharField(null = True) # Ask Leslie if they use any non-standard symbols
+  other           = CharField(null = True) 
   ## NFPA "Fire Diamond" DATABASE DOES NOT SUPPORT THESE YET!
   #simpleAsphyxiant= BooleanField(default = False) # Simple Asphyxiant
   #oxidizer        = BooleanField(default = False) # Oxidizer
   waterReactive   = BooleanField(default = False) # Water Reactive
+  ## HMIS Color Bar
+  hmisHealth      = CharField(null = False) # 0-4
+  hmisFlammable   = CharField(null = False) # 0-4
+  hmisReactive    = CharField(null = False) # 0-4
+  hmisPPE         = CharField(default = "A") # "A, B, C, D, E, H"
   # Ask the user which pictograms a chemical should have
   hhPict          = BooleanField(default = False) # Health Hazard Pictogram
   flamePict       = BooleanField(default = False) # Flammmable Pictogram
