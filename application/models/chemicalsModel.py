@@ -27,7 +27,7 @@ class Chemicals (Model):
   ## HMIS Color Bar
   hmisHealth      = CharField(null = False) # 0-4
   hmisFlammable   = CharField(null = False) # 0-4
-  hmisReactive    = CharField(null = False) # 0-4
+  hmisPhysical    = CharField(null = False) # 0-4
   hmisPPE         = CharField(default = "A") # "A, B, C, D, E, H"
   # Ask the user which pictograms a chemical should have
   hhPict          = BooleanField(default = False) # Health Hazard Pictogram

@@ -42,8 +42,8 @@ HMIS:
      color: "red"
      text: "#FFF"
      selections: *zeroThruFour
-   - name: "Reactivity"
-     id: "hmisReactive"
+   - name: "Physical Hazard"
+     id: "hmisPhysical"
      color: "orange"
      text: "#FFF"
      selections: *zeroThruFour
