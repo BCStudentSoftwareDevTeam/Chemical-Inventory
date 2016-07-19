@@ -11,7 +11,7 @@
 <div class="clearfix"></div>
 <script src="/static/js/local/createBarcode.js"></script>
 <div class="col-sm-offset-3">
-  <h3>Add a new Container of {{chemInfo.name}}</h3>
+  <h3>Add a new Container of <a href="../../../ViewChemical/{{chemInfo.name}}/{{chemInfo.chemId}}/" >{{chemInfo.name}}</a></h3>
 </div>
 <div class="form col-sm-6 col-sm-offset-3">
   <form name="addCont" method="post" action="../../../AddContainer/{{chemInfo.name}}/{{chemInfo.chemId}}/">
@@ -32,7 +32,7 @@
             <div class="form-group row">
               <label for="{{group.id}}" class="col-sm-6">{{group.name}}</label>
               <div class="col-sm-6">
-              <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" placeholder="{{group.placeholder}}" min='0' max='10000' {{group.special}}/>
+              <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" placeholder="{{group.placeholder}}" min='0' max='10000' step="any" {{group.special}}/>
               </div>
             </div>
           {% endif %}

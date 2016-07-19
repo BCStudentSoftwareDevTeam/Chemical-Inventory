@@ -4,7 +4,7 @@
 <div class="col-md-8 col-md-offset-2">
     <ul class="nav nav-tabs">
         {% if container.checkedOut == False %}
-        <li class="active"><a data-toggle="tab" href="#checkout">CheckOut this Container</a></li>
+        <li class="active"><a data-toggle="tab" href="#checkout">Check Out this Container</a></li>
         <li><a data-toggle="tab" href="#history">History of Container</a></li>
         {% else %}
         <li class="active"><a data-toggle="tab" href="#history">History of Container</a></li>
@@ -29,7 +29,11 @@
                 <label for = "quantity" class = "col-sm-2"> Quantity:</label>
                   <input class="form-control" type= "varchar" name ="quantity" value = "{{container.currentQuantity}} {{container.currentQuantityUnit}} " readonly>
                 <label for = "location" class = "col-sm-2"> Location:</label>
+                {% if container.storageId.roomId.name != container.storageId.name %}
                   <input class="form-control" type = "varchar" name = "location" value = "{{container.storageId.roomId.floorId.buildId.name}} {{container.storageId.roomId.name}}  {{container.storageId.name}}" readonly>
+                {% else %}
+                  <input class="form-control" type = "varchar" name = "location" value = "{{container.storageId.roomId.floorId.buildId.name}} {{container.storageId.roomId.name}}" readonly>
+                {% endif %}  
                 <label for = "Class Name" class = "col-sm-2"> Class:</label>
                   <input class="form-control" id="class" required="true" type="text" placeholder="Class Name" name="class">
                 <label for = "storage" class = "col-sm-2"> Storage Location:</label>
