@@ -18,7 +18,10 @@ def aViewChemical(chemical, chemId):
   containers = (((Containers
                 .select())
                 .join(Chemicals))
-                .where(Containers.chemId == chemId))
+                .where(
+                  (Containers.chemId == chemId) &
+                  (Containers.disposalDate == None)
+                ))
   return render_template("views/a/ViewChemicalView.html",
                          config = config,
                          chemInfo = chemInfo,
