@@ -12,5 +12,5 @@ from flask import \
 @app.route('/fa/RequestUserAccess/', methods = ['GET'])
 @require_role('faculty')
 def RequestUserAccess():
-  return render_template("views/fa/RequestUserAccessView.html", config = config)
+  return render_template("views/fa/RequestUserAccessView.html", config = config, userConfig = userConfig)
 

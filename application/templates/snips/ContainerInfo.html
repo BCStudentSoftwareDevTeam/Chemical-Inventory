@@ -65,6 +65,26 @@
         <div id="history" class="tab-pane fade in active">
         {% endif %}
           <h3>History</h3>
+          <div class = "container-fluid">
+            <table class = "table" id = "chemhistory" style = "cursor: pointer;">
+              <thead>
+                <tr>
+                  <th>Name:</th>
+                  <th>Barcode:</th>
+                  <th>Current Location:</th>
+                  <th>Last Location:</th>
+                  <th>Current Amount :</th>
+                  <th>Last Amount:</th>
+                </tr>
+              </thead>
+              <td>{{chemical.name}}</td>
+              <td>{{container.barcodeId}}</td>
+              <td>{{container.storageId.roomId.floorId.buildId.name}} {{container.storageId.roomId.name}}  {{container.storageId.name}}</td>
+              <td> dummy</td>
+              <td>{{container.currentQuantity}} {{container.currentQuantityUnit}}</td>
+              {#<td>{{history.pastQuantity}} {{history.pastUnit}}</td>#}
+            </table>
+          </div>
         </div>
         
         {% if container.currentQuantity == 0 %} {# To prevent this part from showing in page source when the container is not able to be disposed of yet. #}

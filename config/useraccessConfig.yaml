@@ -1,0 +1,13 @@
+useraccess:
+    - name: "Name"
+      id: "username"
+      type: "text"
+      placeholder: "User's Name"
+      special: "required"
+      
+    - name: "Report To"
+      id: "report"
+      type: "text"
+      placeholder: "Supervisor's Name"
+      special: "required"
+      

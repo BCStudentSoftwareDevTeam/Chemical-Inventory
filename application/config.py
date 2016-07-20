@@ -21,6 +21,10 @@ contConfig = Configuration.from_file('config/containerConfig.yaml').configure()
 # Added for check in page
 checkInConfig = Configuration.from_file('config/checkInConfig.yaml').configure()
 
+#Added for UserAcess page
+userConfig = Configuration.from_file('config/useraccessConfig.yaml').configure()
+
+
 # This adds the application's base directory to the
 # configuration object, so that the rest of the application
 # can reference it.
