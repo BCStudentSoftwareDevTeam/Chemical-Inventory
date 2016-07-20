@@ -15,13 +15,12 @@
         {# example code for tabs found here: http://jsfiddle.net/xfw8t/12/ #}
     </ul>
      <div class="tab-content">
-       {% if container.checkedOut == False %} {# Only render if container is not checked out. Will not show up in page source #}
+       {% if container.checkedOut == False %} {# Only render if container is not checked out. Will not show up in page source if container has been checked out #}
         <div id="checkout" class="tab-pane fade in active">
           <h3>Check Out</h3>
             <div class="form">
 
               <form name="checkOutForm" method = "POST" action = "/ma/ContainerInfo/{{chemical.chemId}}/{{container.conId}}/">
-
                 <label for="name" class="col-sm-2">Name:</label>
                   <input class="form-control" type = "text" name ="chemname" value = "{{chemical.name}}" readonly>
                 <label for ="barcode" class="col-sm-2">Barcode:</label>
@@ -52,9 +51,10 @@
                       {% endfor %}
                     {%endfor%}
                   </select>
-                <label for = "Professor" class = "col-sm-2"> Professor's Name:</label>
-                  <input class="form-control" id = "profname" required="true" type="text" placeholder="Professors Name" name="forProf">
-                <button type="submit" class="btn btn-primary">CheckOut Chemical</button>
+                <label for = "Professor" class = "col-sm-2"> Person Responsible:</label>
+                  <input class="form-control" id = "profname" required="true" type="text" placeholder="Name of person responsible" name="forProf">
+                <label for="checkout"></label>
+                <button id="checkout" type="submit" class="btn btn-primary">Check Out Chemical</button>
               </form>
             </div>
         </div>
