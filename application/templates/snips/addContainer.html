@@ -17,6 +17,7 @@
   <form name="addCont" method="post" action="../../../AddContainer/{{chemInfo.name}}/{{chemInfo.chemId}}/">
     <input type="hidden" id="chemId" name="chemId" value="{{chemInfo.chemId}}"/>
       {%  for group in contConfig['containerInformation']  %}
+      {# {% if group.id == capacityUnit onselect = "PickUnit()" %} #}
         {%  if group.type != 'select'  %}
           {% if group.special == 'readonly' %}
             <div class="form-group row">
