@@ -6,7 +6,8 @@ import datetime
 class Histories (Model):
   hId          = PrimaryKeyField()
   ##Foreign Keys
-  storageId     = ForeignKeyField(Storages)
+  movedFrom     = ForeignKeyField(Storages, related_name="movedFrom")
+  movedTo       = ForeignKeyField(Storages, related_name="movedTo")
   containerId   = ForeignKeyField(Containers, related_name = "containers")
   ##
   pastUnit      = TextField() # Container.currentUnit unit last entered.

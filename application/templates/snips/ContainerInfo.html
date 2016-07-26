@@ -21,18 +21,22 @@
             <div class="form">
 
               <form name="checkOutForm" method = "POST" action = "/ma/ContainerInfo/{{chemical.chemId}}/{{container.conId}}/">
+                <input type="hidden" name="containerId" value="{{container.conId}}">
                 <label for="name" class="col-sm-2">Name:</label>
                   <input class="form-control" type = "text" name ="chemname" value = "{{chemical.name}}" readonly>
                 <label for ="barcode" class="col-sm-2">Barcode:</label>
                   <input class="form-control" type = "number" name ="barcode" value = "{{container.barcodeId}}" readonly>
                 <label for = "quantity" class = "col-sm-2"> Quantity:</label>
-                  <input class="form-control" type= "varchar" name ="quantity" value = "{{container.currentQuantity}} {{container.currentQuantityUnit}} " readonly>
-                <label for = "location" class = "col-sm-2"> Location:</label>
+                  <input class="form-control" value = "{{container.currentQuantity}} {{container.currentQuantityUnit}} " disabled>
+                  <input type="hidden" name="quantity" value="{{container.currentQuantity}}"/>
+                  <input type="hidden" name="unit" value = "{{container.currentQuantityUnit}}"/>
+                <label for = "location" class = "col-sm-2"> Current Location:</label>
                 {% if container.storageId.roomId.name != container.storageId.name %}
-                  <input class="form-control" type = "varchar" name = "location" value = "{{container.storageId.roomId.floorId.buildId.name}} {{container.storageId.roomId.name}}  {{container.storageId.name}}" readonly>
+                  <input class="form-control" value = "{{container.storageId.roomId.floorId.buildId.name}} Building, Room: {{container.storageId.roomId.name}}  {{container.storageId.name}}" disabled>
                 {% else %}
-                  <input class="form-control" type = "varchar" name = "location" value = "{{container.storageId.roomId.floorId.buildId.name}} {{container.storageId.roomId.name}}" readonly>
+                  <input class="form-control" value = "{{container.storageId.roomId.floorId.buildId.name}} Building, Room: {{container.storageId.roomId.name}}" disabled>
                 {% endif %}  
+                <input type="hidden" name="location" value="{{container.storageId.sId}}">
                 <label for = "Class Name" class = "col-sm-2"> Class:</label>
                   <input class="form-control" id="class" type="text" placeholder="Class Name" name="class">
                 <label for = "storage" class = "col-sm-2"> Storage Location:</label>
@@ -64,26 +68,22 @@
         {% else %}
         <div id="history" class="tab-pane fade in active">
         {% endif %}
-          <h3>History</h3>
+          <h3>History of Container # {{container.barcodeId}}</h3>
           <div class = "container-fluid">
             <table class = "table" id = "chemhistory" style = "cursor: pointer;">
               <thead>
                 <tr>
-                  <th>Name:</th>
-                  <th>Barcode:</th>
-                  <th>Current Location:</th>
-                  <th>Last Location:</th>
-                  <th>Current Amount :</th>
-                  <th>Last Amount:</th>
+                  <th>Date Modified:</th>
+                  <th>Moved From:</th>
+                  <th>Moved To:</th>
+                  <th>Amount Reported:</th>
                 </tr>
               </thead>
               {% for history in histories %}
               <tr>
-                <td>{{chemical.name}}</td>
-                <td>{{container.barcodeId}}</td>
-                <td>{{container.storageId.roomId.floorId.buildId.name}} {{container.storageId.roomId.name}}  {{container.storageId.name}}</td>
-                <td>{{history.storageId.roomId.floorId.buildId.name}} {{history.storageId.roomId.name}} {{history.storageId.name}}</td>
-                <td>{{container.currentQuantity}} {{container.currentQuantityUnit}}</td>
+                <td>{{history.modDate}}</td>
+                <td>{{history.movedFrom.roomId.floorId.buildId.name}} {{history.movedFrom.roomId.name}} {{history.movedFrom.name}}</td>
+                <td>{{history.movedTo.roomId.floorId.buildId.name}} {{history.movedTo.roomId.name}} {{history.movedTo.name}}</td>
                 <td>{{history.pastQuantity}} {{history.pastUnit}}</td>
               </tr>
               {% endfor %}

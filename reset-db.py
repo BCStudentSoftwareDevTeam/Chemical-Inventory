@@ -308,7 +308,7 @@ def init_db ():
     storageId = 1,
     barcodeId = "16070002",
     currentQuantityUnit = "ounce (oz)",
-    currentQuantity = 2,
+    currentQuantity = 17,
     recieveDate = date.today(),
     conType = "bottle",
     manufacturer = "Sigma Aldrich",
@@ -320,14 +320,16 @@ def init_db ():
     checkedOutBy = "UtoniumP").save()
     
   historiesModel.Histories(
-    storageId = 4,
+    movedFrom = 8,
+    movedTo = 1,
     containerId = 4,
     pastUnit = "ounce (oz)",
     pastQuantity = 17,
     modDate = "01/22/2012").save()
     
   historiesModel.Histories(
-    storageId = 5,
+    movedFrom = 5,
+    movedTo = 8,
     containerId = 4,
     pastUnit = "ounce (oz)",
     pastQuantity = 20,
