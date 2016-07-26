@@ -1,3 +1,4 @@
+{% include "snips/setVars.html" %}
 <div class="col-sm-offset-3"><h3>Check In</h3></div>
     <div class="container-fluid" style="float:left">
         <form name="checkIn" class="form-inline">
@@ -9,7 +10,7 @@
                 {% if group.autoPop == "true" %}
                     <div class="form-group">
                         <label class="label-control" for="{{group.id}}">{{group.title}}</label>
-                            <input class="form-control d autoPop" type="{{group.type}}" id="{{group.id}}" name="{{group.id}}" readonly>
+                            <input class="form-control d" type="{{group.type}}" id="{{group.id}}" name="{{group.id}}" value="{{setChem}}" readonly>
                     </div>
                 {% else %}
                     <div class="form-group">
