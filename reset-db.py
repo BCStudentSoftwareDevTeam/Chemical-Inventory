@@ -4,7 +4,7 @@
 from application.models import classes
 from application.models import *
 from application.config import *
-from datetime import date
+import datetime
 
 def init_db ():
   # First, we create the databases.
@@ -269,7 +269,7 @@ def init_db ():
     barcodeId = "16070000",
     currentQuantityUnit = "ounce (oz)",
     currentQuantity = 20,
-    recieveDate = date.today(),
+    recieveDate = datetime.date.today(),
     conType = "bottle",
     manufacturer = "Sigma Aldrich",
     capacityUnit = "ounce (oz)",
@@ -281,7 +281,7 @@ def init_db ():
     barcodeId = "16070001",
     currentQuantityUnit = "ounce (oz)",
     currentQuantity = 0,
-    recieveDate = date.today(),
+    recieveDate = datetime.date.today(),
     conType = "bottle",
     manufacturer = "Sigma Aldrich",
     capacityUnit = "ounce (oz)",
@@ -293,7 +293,7 @@ def init_db ():
     barcodeId = "16070003",
     currentQuantityUnit = "ounce (oz)",
     currentQuantity = 18.4,
-    recieveDate = date.today(),
+    recieveDate = datetime.date.today(),
     conType = "bottle",
     manufacturer = "Sigma Aldrich",
     capacityUnit = "ounce (oz)",
@@ -309,7 +309,7 @@ def init_db ():
     barcodeId = "16070002",
     currentQuantityUnit = "ounce (oz)",
     currentQuantity = 17,
-    recieveDate = date.today(),
+    recieveDate = datetime.date.today(),
     conType = "bottle",
     manufacturer = "Sigma Aldrich",
     capacityUnit = "ounce (oz)",
@@ -322,6 +322,7 @@ def init_db ():
   historiesModel.Histories(
     movedFrom = 8,
     movedTo = 1,
+    modUser = "Jesson Soto",
     containerId = 4,
     pastUnit = "ounce (oz)",
     pastQuantity = 17,
@@ -330,6 +331,7 @@ def init_db ():
   historiesModel.Histories(
     movedFrom = 5,
     movedTo = 8,
+    modUser = "Nick DeTore",
     containerId = 4,
     pastUnit = "ounce (oz)",
     pastQuantity = 20,
