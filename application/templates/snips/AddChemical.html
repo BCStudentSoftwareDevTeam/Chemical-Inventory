@@ -5,21 +5,14 @@
       <div class="form-group row">
         <label for="{{group['id']}}" class="col-sm-4">{{group['name']}}</label>
         <div class="col-sm-8">
-          {% if group['special'] == "required" %}
-            {% if group['id'] == "sdsLink" %}
+          {% if group['id'] == "sdsLink" %}
             <div class="input-group-addon">https://</div>
+            <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
+            <div class="input-group-addon"><a target="blank" href="https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?nas=True">Find SDS Here</a></div>
+            {% else %}
+            <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
             {% endif %}
-            <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
-          {% else %}
-            <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
-          {% endif %}
-          {#{%  if group['addon'] is defined  %}
           <span class="form-group-addon">{{group['addon']}}</span>
-          {%  endif  %}
-          Need to get this working...#}
-          {%  if group['small'] is defined  %}
-          <small class="text-muted">{{group['small']}}</small>
-          {%  endif  %}
         </div>
       </div>
     {%endfor%}
@@ -71,7 +64,7 @@
         <ul>
           {%for hazardPict in chemConfig['pictograms']%}
             <li>
-              <input type="checkbox" name="hazardPict" id="{{hazardPict['title']}}" value="{{hazardPict['title']}}" hidden required>
+              <input type="checkbox" name="hazardPict" id="{{hazardPict['title']}}" value="{{hazardPict['title']}}" hidden>
                 <label for="{{hazardPict['title']}}">
                   <img src="{{hazardPict['pict']}}" id="{{hazardPict['title']}}" alt="{{hazardPict['alt']}}" class="hazardRadio"></img>
                 </label>
@@ -94,7 +87,7 @@
                 <tr BGCOLOR="{{row.color}}">
                   <td><font color="{{row.text}}">{{row.name}}</font></td>
                   <td class="col-md-6">
-                    <select id="{{row.id}}" name="{{row.id}}" required class="form-control">
+                    <select id="{{row.id}}" name="{{row.id}}" class="form-control">
                       <option value="" disabled selected>Select One</option>
                       {% for option in row.selections %}
                       <option value="{{option}}">{{option}}</option>
