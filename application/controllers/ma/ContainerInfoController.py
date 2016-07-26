@@ -18,7 +18,7 @@ def maContainerInfo(chemId, conId):
   container = containersModel.Containers.get(containersModel.Containers.conId == conId)
   storageList = storagesModel.Storages.select()
   buildingList = buildingsModel.Buildings.select()
-  history = historiesModel.Histories.select().where(historiesModel.Histories.containerid == conId)
+  histories = historiesModel.Histories.select().where(historiesModel.Histories.containerId == conId)
   if request.method =="POST":
     try:
       if request.form['dispose'] == "Dispose of this Container":
@@ -42,4 +42,4 @@ def maContainerInfo(chemId, conId):
                        chemical = chemical,
                        storageList = storageList,
                        buildingList = buildingList,
-                       history = history)
+                       histories = histories)

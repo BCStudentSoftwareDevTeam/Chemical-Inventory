@@ -34,7 +34,7 @@
                   <input class="form-control" type = "varchar" name = "location" value = "{{container.storageId.roomId.floorId.buildId.name}} {{container.storageId.roomId.name}}" readonly>
                 {% endif %}  
                 <label for = "Class Name" class = "col-sm-2"> Class:</label>
-                  <input class="form-control" id="class" required="true" type="text" placeholder="Class Name" name="class">
+                  <input class="form-control" id="class" type="text" placeholder="Class Name" name="class">
                 <label for = "storage" class = "col-sm-2"> Storage Location:</label>
                   <select id="storage" name="storageId" class="form-control" required>
                     <option selected disabled value="">Select One</option>
@@ -52,7 +52,7 @@
                     {%endfor%}
                   </select>
                 <label for = "Professor" class = "col-sm-2"> Person Responsible:</label>
-                  <input class="form-control" id = "profname" required="true" type="text" placeholder="Name of person responsible" name="forProf">
+                  <input class="form-control" id = "profname" type="text" placeholder="Name of person responsible" name="forProf">
                 <label for="checkout"></label>
                 <button id="checkout" type="submit" class="btn btn-primary">Check Out Chemical</button>
               </form>
@@ -77,12 +77,16 @@
                   <th>Last Amount:</th>
                 </tr>
               </thead>
-              <td>{{chemical.name}}</td>
-              <td>{{container.barcodeId}}</td>
-              <td>{{container.storageId.roomId.floorId.buildId.name}} {{container.storageId.roomId.name}}  {{container.storageId.name}}</td>
-              <td> dummy</td>
-              <td>{{container.currentQuantity}} {{container.currentQuantityUnit}}</td>
-              {#<td>{{history.pastQuantity}} {{history.pastUnit}}</td>#}
+              {% for history in histories %}
+              <tr>
+                <td>{{chemical.name}}</td>
+                <td>{{container.barcodeId}}</td>
+                <td>{{container.storageId.roomId.floorId.buildId.name}} {{container.storageId.roomId.name}}  {{container.storageId.name}}</td>
+                <td>{{history.storageId.roomId.floorId.buildId.name}} {{history.storageId.roomId.name}} {{history.storageId.name}}</td>
+                <td>{{container.currentQuantity}} {{container.currentQuantityUnit}}</td>
+                <td>{{history.pastQuantity}} {{history.pastUnit}}</td>
+              </tr>
+              {% endfor %}
             </table>
           </div>
         </div>

@@ -308,7 +308,7 @@ def init_db ():
     storageId = 1,
     barcodeId = "16070002",
     currentQuantityUnit = "ounce (oz)",
-    currentQuantity = 20,
+    currentQuantity = 2,
     recieveDate = date.today(),
     conType = "bottle",
     manufacturer = "Sigma Aldrich",
@@ -318,6 +318,20 @@ def init_db ():
     forClass = "I think you get the reference",
     forProf = "Professor Utonium",
     checkedOutBy = "UtoniumP").save()
+    
+  historiesModel.Histories(
+    storageId = 4,
+    containerId = 4,
+    pastUnit = "ounce (oz)",
+    pastQuantity = 17,
+    modDate = "01/22/2012").save()
+    
+  historiesModel.Histories(
+    storageId = 5,
+    containerId = 4,
+    pastUnit = "ounce (oz)",
+    pastQuantity = 20,
+    modDate = "01/20/2012").save()
   
 if __name__ == "__main__":
   init_db()
