@@ -20,7 +20,7 @@ class Containers (Model):
   capacityUnit       = CharField(default = "") # units container is initially measured in
   capacity           = FloatField(null = False)# amount of units that the container can hold
   checkedOut         = BooleanField(default = False) # set to True upon checkout
-  forClass           = CharField(null = True) # Required field on checkout page
+  checkOutReason           = CharField(null = True) # Required field on checkout page
   forProf            = CharField(null = True) # Required field on checkout page
   checkedOutBy       = CharField(null = True) # Required field on checkout page
 

@@ -300,7 +300,7 @@ def init_db ():
     checkedOut = True,
     checkedOutBy = "Nick DeTore",
     forProf = "Scott Heggen",
-    forClass = "Ummmmm... I don't know.",
+    checkOutReason = "Ummmmm... I don't know.",
     capacity = 20).save()
   
   containersModel.Containers(
@@ -315,7 +315,7 @@ def init_db ():
     capacityUnit = "ounce (oz)",
     capacity = 20,
     checkedOut = True,
-    forClass = "I think you get the reference",
+    checkOutReason = "I think you get the reference",
     forProf = "Professor Utonium",
     checkedOutBy = "UtoniumP").save()
     

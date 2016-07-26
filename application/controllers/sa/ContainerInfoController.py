@@ -3,7 +3,7 @@ from application.models import *
 from application.config import *
 from application.logic.validation import require_role
 from application.logic.sortPost import *
-from datetime import *
+import datetime
 
 from flask import \
     render_template, \
@@ -35,13 +35,13 @@ def saContainerInfo(chemId, conId):
                                pastQuantity = data['quantity'],
                                modDate = datetime.now()).save()
       cont = containersModel.Containers.get(conId = conId)
-      cont.forClass  = data['class']
+      cont.checkOutReason  = data['class']
       cont.checkedOut = True
       cont.forProf = data ['forProf']
       cont.storageId = data['storageId']
       cont.save()
       # add form data to container as checked out
-      return redirect('/sa/ViewChemical/' + chemical.name + '/' + chemId + '/')
+      return redirect('/sa/ViewChemical/%s/%s/' %(chemical.name, chemId))
   else:
     return render_template("views/sa/ContainerInfoView.html",
                        config = config,
@@ -50,3 +50,11 @@ def saContainerInfo(chemId, conId):
                        storageList = storageList,
                        buildingList = buildingList,
                        histories = histories)
+                       
+@app.route('/sa/ContainerInfo/<chemId>/<conId>/dispose/', methods = ['GET', 'POST'])
+def saContainerDispose(chemId, conId):
+  chem = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
+  container = containersModel.Containers.get(containersModel.Containers.conId == conId)
+  container.disposalDate = datetime.date.today()
+  container.save()
+  return redirect('/sa/ViewChemical/%s/%s/' %(chem.name, chem.chemId))

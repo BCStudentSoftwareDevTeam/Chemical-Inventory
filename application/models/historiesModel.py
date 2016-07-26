@@ -10,7 +10,7 @@ class Histories (Model):
   movedTo       = ForeignKeyField(Storages, related_name="movedTo")
   containerId   = ForeignKeyField(Containers, related_name = "containers")
   ##
-  modUser       = TextField() # This should probably eventually be a foreign key to the users table.
+  modUser       = TextField(null = True) # This should probably eventually be a foreign key to the users table.
   ##
   pastUnit      = TextField() # Container.currentUnit unit last entered.
   pastQuantity  = FloatField()# Container.currentQuantity amount of chemical last in the container

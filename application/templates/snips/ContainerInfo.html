@@ -9,9 +9,7 @@
         {% else %}
         <li class="active"><a data-toggle="tab" href="#history">History of Container</a></li>
         {% endif %}
-        {% if container.currentQuantity == 0 %}
-          <li><a data-toggle="tab" href="#dispose">Dispose of Container</a></li>
-        {% endif %}
+        <li><a data-toggle="tab" href="#dispose">Dispose of Container</a></li>
         {# example code for tabs found here: http://jsfiddle.net/xfw8t/12/ #}
     </ul>
      <div class="tab-content">
@@ -107,14 +105,12 @@
           </div>
         </div>
         
-        {% if container.currentQuantity == 0 %} {# To prevent this part from showing in page source when the container is not able to be disposed of yet. #}
         <div id="dispose" class="tab-pane fade">
           <h3>Dispose of Container</h3>
           <form method="POST">
-            <input class="btn btn-primary" type="submit" name="dispose" value="Dispose of this Container">
+            <a class="btn btn-primary" href="dispose/">Dispose of container</a> {# This could look a lot better, and maybe function better #}
           </form>
         </div>
-        {% endif %}
     </div>
       
       
