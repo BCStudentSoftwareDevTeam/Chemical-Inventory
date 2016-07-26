@@ -4,12 +4,13 @@
 
 {% include "Navigation/faMenu.html" %}
 
-<div>
-  <strong>FIXME</strong>: This is the view for the function <strong style="color: red;">Home</strong>.
-</div>
-
-<div>
-  <strong>FIXME</strong>: It serves the route <strong style="color: red;">/fa/Home/</strong>.
+<div class = "container-fluid">
+     <table class="table table-hover" style="cursor: pointer;">
+    <tr onclick="window.location.href = '{{url_for('faChemTable')}}';"><td>View Chemical Table</td></tr>
+    <tr onclick="window.location.href = '{{url_for('RequestUserAccess')}}';"><td>Request User Access</td></tr>
+   
+  </table>
+  
 </div>
 
 {% endblock %}
