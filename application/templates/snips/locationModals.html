@@ -1,0 +1,41 @@
+{####### Remove Building Modal #######}
+<div class="modal fade" id="removeBuilding{{building.bId}}" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-labeledby="removeBuildLabel">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="removeBuildLabel">Delete {{building.name}} Building</h4>
+            </div>
+            <div class="modal-body text-center">
+                This will delete the builing from the system. Are you sure you want to remove it?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+                <a class="btn btn-danger" href="#">Yes</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{####### Edit Building Modal #######}
+<div class="modal fade" id="editBuilding{{building.bId}}" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-labeledby="editBuildingLabel">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="editBuildingLabel">Edit {{building.name}} Building</h4>
+            </div>
+            <div class="modal-body text-center">
+                This will be a form for editing!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                <a class="btn btn-danger" href="#">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>

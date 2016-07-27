@@ -2,24 +2,25 @@
     <div class="panel-group" id="buildingAccordion" role="tablist" aria-multiselectable="true">
         <div class="panel panel-default">
             {% for building in buildings %}
+            {% include "snips/locationModals.html" %}
             <div class="panel-heading" role="tab">
                 <h4 class="panel-title">
                     <a role="button" data-toggle="collapse" data-parent="#buildingAccordion" href="#{{building.bId}}" aria-expanded="true" aria-controls="{{building.bId}}">
                         {{building.name}}
                     </a>
-                    <button type="button" class="btn btn-xs btn-danger">
+                    <a class="glyphLink" data-toggle="modal" data-target="#removeBuilding{{building.bId}}" aria-hidden="true">
                         <span class="glyphicon glyphicon-trash"></span>
-                    </button>
-                    <button type="button" class="btn btn-xs">
+                    </a>
+                    <a class="glyphLink" data-toggle="modal" data-target="#editBuilding{{building.bId}}" aria-hidden="true">
                         <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
+                    </a>
                 </h4>
             </div>
             <div id="{{building.bId}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{building.bId}}">
                 <div class="panel-body">
-                    <button type="button" class="btn btn-primary">
+                    <button title="Add a floor to the {{building.name}} Building" type="button" class="btn btn-success btn-xs addLink">
                         <span class="glyphicon glyphicon-plus"></span>
-                        Add a floor to the {{building.name}} Building
+                        Add Floor
                     </button>
                     {# First Nested Accordion Begins (Floors) #}
                     <div class="panel-group" id="floorAccordion{{building.bId}}" role="tablist" aria-multiselectable="true">
@@ -31,19 +32,19 @@
                                             <a role="button" data-toggle="collapse" data-parent="#floorAccordion{{building.bId}}" href="#{{floor.floorNum}}{{floor.fId}}" aria-expanded="true" aria-controls="{{floor.floorNum}}{{floor.fId}}">
                                                 Floor: {{floor.floorNum}}
                                             </a>
-                                            <button type="button" class="btn btn-xs btn-danger">
+                                            <a class="glyphLink" data-toggle="modal" data-target="#removeFloor{{floor.fId}}">
                                                 <span class="glyphicon glyphicon-trash"></span>
-                                            </button>
-                                            <button type="button" class="btn btn-xs">
+                                            </a>
+                                            <a class="glyphLink" data-toggle="modal" data-target="#editFloor{{floor.fId}}">
                                                 <span class="glyphicon glyphicon-pencil"></span>
-                                            </button>
+                                            </a>
                                         </h4>
                                     </div>
                                     <div id="{{floor.floorNum}}{{floor.fId}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{floor.floorNum}}{{floor.fId}}">
                                         <div class="panel-body">
-                                            <button type="button" class="btn btn-primary">
+                                            <button title="Add a Room to floor: {{floor.floorNum}}" type="button" class="btn btn-success btn-xs addLink">
                                                 <span class="glyphicon glyphicon-plus"></span>
-                                                Add a Room to floor: {{floor.floorNum}}
+                                                Add Room
                                             </button>
                                             {# Second Nested Accordion Begins (Rooms) #}
                                             <div class="panel-group" id="roomAccordian{{floor.fId}}" role="tablist" aria-mulitselectable="true">
@@ -55,19 +56,19 @@
                                                                     <a role="button" data-toggle="collapse" data-parent="#roomAccordian{{floor.fId}}" href="#{{room.name}}{{room.rId}}" aria-expanded="true" aria-controls="{{room.name}}{{room.rId}}">
                                                                         Room: {{room.name}}
                                                                     </a> 
-                                                                    <button type="button" class="btn btn-xs btn-danger">
+                                                                    <a class="glyphLink" data-toggle="modal" data-target="#removeRoom{{room.rId}}">
                                                                         <span class="glyphicon glyphicon-trash"></span>
-                                                                    </button>
-                                                                    <button type="button" class="btn btn-xs">
+                                                                    </a>
+                                                                    <a class="glyphLink" data-toggle="modal" data-target="editRoom{{room.rId}}">
                                                                         <span class="glyphicon glyphicon-pencil"></span>
-                                                                    </button>
+                                                                    </a>
                                                                 </h4>
                                                             </div>
                                                             <div id="{{room.name}}{{room.rId}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{room.name}}{{room.rId}}">
                                                                 <div class="panel-body">
-                                                                    <button type="button" class="btn btn-primary">
-                                                                        <span class="glyphicon glyphicon-plus"></span>
-                                                                        Add a Storage Location to room {{room.name}}
+                                                                    <button type="button" class="btn btn-success btn-xs addLink">
+                                                                        <span title="Add a storage location to room {{room.name}}" class="glyphicon glyphicon-plus"></span>
+                                                                        Add Storage Location
                                                                     </button>
                                                                     {# Third Nested Accordian Begins (Storages) #}
                                                                     <div class="panel-group" id="storageAccordian{{room.rId}}" role="tablist" aria-multiselectable="true">
@@ -78,12 +79,12 @@
                                                                                         <h4 class="panel-title">
                                                                                             {{storage.name}}
                                                                                         </h4>
-                                                                                        <button type="button" class="btn btn-xs btn-danger">
+                                                                                        <a title="Remove Storage Location" class="glyphLink" data-toggle="modal" data-target="removeStorage{{storage.sId}}">
                                                                                             <span class="glyphicon glyphicon-trash"></span>
-                                                                                        </button>
-                                                                                        <button type="button" class="btn btn-xs">
+                                                                                        </a>
+                                                                                        <a title="Edit Storage Location" class="glyphLink" data-toggle="modal" data-target="editStorage{{storage.sId}}">
                                                                                             <span class="glyphicon glyphicon-pencil"></span>
-                                                                                        </button>
+                                                                                        </a>
                                                                                     </div>
                                                                                 {% endif %}
                                                                             {% endfor %}

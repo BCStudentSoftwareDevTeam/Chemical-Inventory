@@ -63,3 +63,14 @@ label img {
   box-shadow: 0 0 5px #333;
   z-index: -1;
 }
+
+.glyphLink {
+  padding: 10px;
+  cursor: pointer;
+  text-decoration: none !important;
+  color: #3F333F;
+}
+
+.addLink {
+  margin: 10px;
+}
