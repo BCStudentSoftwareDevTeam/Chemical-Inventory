@@ -4,29 +4,6 @@
 
 {%  include "Navigation/maMenu.html"  %}
 
-<div class="container-fluid">
-  <table class="table table-hover">
-    <thead>
-      <th>Building Name</th>
-      <th>Number of Floors</th>
-      <th>Address</th>
-    </thead>
-    {%  for building in buildings  %}
-      <tr>
-        <td>{{building.name}}</td>
-        <td>{{building.numfloors}}</td>
-        <td>{{building.address}}</td>
-      </tr>
-    {%  endfor  %}
-  </table>
-</div>
-
-<!--<div class="container-fluid">-->
-<!--  <form>-->
-<!--    <fieldset class="form-group">-->
-<!--      <label for=""></label>-->
-<!--    </fieldset>-->
-<!--  </form>-->
-<!--</div>-->
+{% include "snips/manageBuildings.html" %}
 
 {% endblock %}
