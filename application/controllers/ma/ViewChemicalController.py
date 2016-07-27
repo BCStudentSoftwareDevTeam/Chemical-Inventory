@@ -8,6 +8,7 @@ from urllib import *
 from flask import \
     render_template, \
     request, \
+    redirect, \
     url_for
 
 # PURPOSE: Shows specific chemical and all containers of said chemical.
@@ -29,4 +30,12 @@ def maViewChemical(chemical, chemId):
                          contConfig = contConfig,
                          chemConfig = chemConfig,
                          quote = quote)
-
+                         
+                         
+@app.route('/ma/ViewChemical/<chemical>/<chemId>/delete/', methods = ['GET','POST'])
+def maDeleteChemical(chemical, chemId):
+  chem = Chemicals.get(Chemicals.chemId == chemId)
+  chem.deleteDate = datetime.date.today()
+  chem.remove = True
+  chem.save()
+  return redirect('/ma/ChemTable')

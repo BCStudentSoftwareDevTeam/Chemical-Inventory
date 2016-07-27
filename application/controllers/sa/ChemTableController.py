@@ -17,14 +17,18 @@ def saChemTable():
   chemicals = Chemicals.select()
   contDict = {}
   for chemical in chemicals:
-    contDict[chemical.name] = ((((Chemicals
-                              .select())
+    print "Here"
+    contDict[chemical.name] = (((Chemicals
+                              .select()
                               .join(Containers))
                               .where(
                                 (Containers.disposalDate == None) &
                                 (Containers.chemId == chemical.chemId) &
-                                (Containers.checkedOut == False))
+                                (Containers.checkedOut == False)&
+                                (Chemicals.remove == False))
                               .count()))
+                              
+  
   return render_template("views/sa/ChemTableView.html",
                           config = config, 
                           chemicals = chemicals, 
