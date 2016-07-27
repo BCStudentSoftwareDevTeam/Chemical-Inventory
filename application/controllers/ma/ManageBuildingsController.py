@@ -13,5 +13,13 @@ from flask import \
 @require_role('admin')
 def ManageBuildings():
     buildings = buildingsModel.Buildings.select()
-    return render_template("views/ma/ManageBuildingsView.html", config = config, buildings = buildings)
+    floors = floorsModel.Floors.select()
+    rooms = roomsModel.Rooms.select().order_by(+roomsModel.Rooms.name)
+    storages = storagesModel.Storages.select()
+    return render_template("views/ma/ManageBuildingsView.html",
+                           config = config,
+                           buildings = buildings,
+                           floors = floors,
+                           rooms = rooms,
+                           storages = storages)
 

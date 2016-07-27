@@ -41,7 +41,7 @@ def init_db ():
   
   floorsModel.Floors(
     buildId = 1,
-    floorNum = '1',
+    floorNum = 'Basement',
     storageLimits = "None").save()
   
   floorsModel.Floors(
@@ -61,12 +61,12 @@ def init_db ():
 
   floorsModel.Floors(
     buildId = 2,
-    floorNum = '2',
+    floorNum = '1',
     storageLimits = "None").save()
 
   floorsModel.Floors(
     buildId = 2,
-    floorNum = '1',
+    floorNum = '2',
     storageLimits = "None").save()
     
   print "All Floors Saved."
@@ -86,6 +86,10 @@ def init_db ():
   roomsModel.Rooms(
     floorId = 2,
     name = "200").save()
+    
+  roomsModel.Rooms(
+    floorId = 3,
+    name= "330").save()
 
   roomsModel.Rooms(
     floorId = 4,
@@ -96,19 +100,19 @@ def init_db ():
     name = "420").save()
 
   roomsModel.Rooms(
-    floorId = 5,
+    floorId = 6,
     name = "B07").save()
 
   roomsModel.Rooms(
-    floorId = 5,
+    floorId = 6,
     name = "B11").save()
 
   roomsModel.Rooms(
-    floorId = 6,
+    floorId = 5,
     name = "110").save()
 
   roomsModel.Rooms(
-    floorId = 6,
+    floorId = 5,
     name = "111").save()
   print "All Rooms saved"
   
@@ -289,7 +293,7 @@ def init_db ():
     
   containersModel.Containers(
     chemId = 1,
-    storageId = 9,
+    storageId = 8,
     barcodeId = "16070003",
     currentQuantityUnit = "ounce (oz)",
     currentQuantity = 18.4,

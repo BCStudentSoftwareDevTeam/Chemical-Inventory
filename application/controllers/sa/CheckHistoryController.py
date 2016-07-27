@@ -11,7 +11,6 @@ from flask import \
 # PURPOSE: Check history of a specific chemical
 @app.route('/sa/CheckHistory/<chemical>/', methods = ['GET'])
 @require_role('systemAdmin')
-@require_role('admin')
 def CheckHistory(chemical):
   return render_template("/views/sa/CheckHistoryView.html", config = config)
 
