@@ -14,7 +14,7 @@
               </tr>
         </thead>
         {% for chemical in chemicals %}
-
+            {% if chemical.remove == False %}
             {% set chemName = quote(chemical.name) %}
             <tr onclick="window.location.href = '../ViewChemical/{{chemName}}/{{chemical.chemId}}/';">
                 <td>{{chemical.name}}</td>
@@ -23,9 +23,10 @@
                 <td>{{contDict[chemical.name]}}</td>
 
             </tr>
+            {%endif%}
         {%endfor%}
       
-        <script src="/static/js/local/search.js"></script> 
+        <!--<script src="/static/js/local/search.js"></script> -->
         
         <script>
             $(document).ready(function(){

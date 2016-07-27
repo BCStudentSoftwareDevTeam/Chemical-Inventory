@@ -15,6 +15,8 @@ class Chemicals (Model):
   storageTemp     = DecimalField(null = True)
   sdsLink         = CharField(null = True)
   description     = CharField(default = "")
+  remove          = BooleanField(default = False)
+  deleteDate      = DateTimeField(null = True)
   ## NFPA "Fire Diamond"
   healthHazard    = CharField(null = True) # 0-4
   flammable       = CharField(null = True) # 0-4
