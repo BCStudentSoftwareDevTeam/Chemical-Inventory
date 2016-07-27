@@ -9,7 +9,7 @@
                 <h4 class="modal-title" id="remove{{location}}{{attribute}}Label">Delete {{location}}: {{name}}</h4>
             </div>
             <div class="modal-body text-center">
-                This will delete the builing from the system. Are you sure you want to remove it?
+                {{ locationConfig[location]['delete']['message'] }}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
@@ -30,7 +30,16 @@
                 <h4 class="modal-title" id="edit{{location}}{{attribute}}Label">Edit {{location}}: {{name}}</h4>
             </div>
             <div class="modal-body text-center">
-                This will be a form for editing!
+                <form class="form" name="edit{{location}}{{attribute}}" method="post" action="#">
+                    {% for group in locationConfig[location]['edit'] %}
+                        {% if group.type != "radio" %}
+                            <label class="col-sm-4 col-form-label" for="{{group.id}}">{{group.name}}</label>
+                            <input id="{{group.id}}" class="form-control" name="{{group.id}}" type="{{group.type}}">
+                        {% else %}
+                            NO
+                        {% endif %}
+                    {% endfor %}
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>

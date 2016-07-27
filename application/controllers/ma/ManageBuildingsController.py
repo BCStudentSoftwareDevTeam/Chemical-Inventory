@@ -18,6 +18,7 @@ def ManageBuildings():
     storages = storagesModel.Storages.select()
     return render_template("views/ma/ManageBuildingsView.html",
                            config = config,
+                           locationConfig = locationConfig,
                            buildings = buildings,
                            floors = floors,
                            rooms = rooms,
