@@ -2,16 +2,19 @@
     <div class="panel-group" id="buildingAccordion" role="tablist" aria-multiselectable="true">
         <div class="panel panel-default">
             {% for building in buildings %}
+            {% set location = "Building" %}
+            {% set attribute = building.bId %}
+            {% set name = building.name %}
             {% include "snips/locationModals.html" %}
             <div class="panel-heading" role="tab">
                 <h4 class="panel-title">
                     <a role="button" data-toggle="collapse" data-parent="#buildingAccordion" href="#{{building.bId}}" aria-expanded="true" aria-controls="{{building.bId}}">
                         {{building.name}}
                     </a>
-                    <a class="glyphLink" data-toggle="modal" data-target="#removeBuilding{{building.bId}}" aria-hidden="true">
+                    <a class="glyphLink" data-toggle="modal" data-target="#remove{{location}}{{building.bId}}" aria-hidden="true">
                         <span class="glyphicon glyphicon-trash"></span>
                     </a>
-                    <a class="glyphLink" data-toggle="modal" data-target="#editBuilding{{building.bId}}" aria-hidden="true">
+                    <a class="glyphLink" data-toggle="modal" data-target="#edit{{location}}{{building.bId}}" aria-hidden="true">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </a>
                 </h4>
@@ -27,15 +30,19 @@
                         <div class="panel panel-default">
                             {% for floor in floors %}
                                 {% if floor.buildId.bId == building.bId %}
+                                {% set location = "Floor" %}
+                                {% set attribute = floor.fId %}
+                                {% set name = floor.floorNum %}
+                                {% include "snips/locationModals.html" %}
                                     <div class="panel-heading" role="tab">
                                         <h4 class="panel-title">
                                             <a role="button" data-toggle="collapse" data-parent="#floorAccordion{{building.bId}}" href="#{{floor.floorNum}}{{floor.fId}}" aria-expanded="true" aria-controls="{{floor.floorNum}}{{floor.fId}}">
                                                 Floor: {{floor.floorNum}}
                                             </a>
-                                            <a class="glyphLink" data-toggle="modal" data-target="#removeFloor{{floor.fId}}">
+                                            <a class="glyphLink" data-toggle="modal" data-target="#remove{{location}}{{floor.fId}}">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </a>
-                                            <a class="glyphLink" data-toggle="modal" data-target="#editFloor{{floor.fId}}">
+                                            <a class="glyphLink" data-toggle="modal" data-target="#edit{{location}}{{floor.fId}}">
                                                 <span class="glyphicon glyphicon-pencil"></span>
                                             </a>
                                         </h4>
@@ -50,16 +57,20 @@
                                             <div class="panel-group" id="roomAccordian{{floor.fId}}" role="tablist" aria-mulitselectable="true">
                                                 <div class="panel panel-default">
                                                     {% for room in rooms %}
-                                                        {% if room.floorId.fId == floor.fId %}
+                                                        {% if room.floorId.fId == floor.fId %}                                                        
+                                                        {% set location = "Room" %}
+                                                        {% set attribute = room.rId %}
+                                                        {% set name = room.name %}
+                                                        {% include "snips/locationModals.html"%}
                                                             <div class="panel-heading" role="tab">
                                                                 <h4 class="panel-title">
                                                                     <a role="button" data-toggle="collapse" data-parent="#roomAccordian{{floor.fId}}" href="#{{room.name}}{{room.rId}}" aria-expanded="true" aria-controls="{{room.name}}{{room.rId}}">
                                                                         Room: {{room.name}}
                                                                     </a> 
-                                                                    <a class="glyphLink" data-toggle="modal" data-target="#removeRoom{{room.rId}}">
+                                                                    <a class="glyphLink" data-toggle="modal" data-target="#remove{{location}}{{room.rId}}">
                                                                         <span class="glyphicon glyphicon-trash"></span>
                                                                     </a>
-                                                                    <a class="glyphLink" data-toggle="modal" data-target="editRoom{{room.rId}}">
+                                                                    <a class="glyphLink" data-toggle="modal" data-target="#edit{{location}}{{room.rId}}">
                                                                         <span class="glyphicon glyphicon-pencil"></span>
                                                                     </a>
                                                                 </h4>
@@ -75,14 +86,18 @@
                                                                         <div class="panel panel-default">
                                                                             {% for storage in storages %}
                                                                                 {% if storage.roomId.rId == room.rId %}
+                                                                                {% set location = "Storage" %}
+                                                                                {% set name = storage.name %}
+                                                                                {% set attribute = storage.sId %}
+                                                                                {% include "snips/locationModals.html" %}
                                                                                     <div class="panel-heading" role="tab">
                                                                                         <h4 class="panel-title">
                                                                                             {{storage.name}}
                                                                                         </h4>
-                                                                                        <a title="Remove Storage Location" class="glyphLink" data-toggle="modal" data-target="removeStorage{{storage.sId}}">
+                                                                                        <a title="Remove Storage Location" class="glyphLink" data-toggle="modal" data-target="#remove{{location}}{{storage.sId}}">
                                                                                             <span class="glyphicon glyphicon-trash"></span>
                                                                                         </a>
-                                                                                        <a title="Edit Storage Location" class="glyphLink" data-toggle="modal" data-target="editStorage{{storage.sId}}">
+                                                                                        <a title="Edit Storage Location" class="glyphLink" data-toggle="modal" data-target="#edit{{location}}{{storage.sId}}">
                                                                                             <span class="glyphicon glyphicon-pencil"></span>
                                                                                         </a>
                                                                                     </div>
