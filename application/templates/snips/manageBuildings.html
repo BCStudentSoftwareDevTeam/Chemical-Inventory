@@ -4,7 +4,7 @@
             {% for building in buildings %}
             {% set location = "Building" %}
             {% set attribute = building.bId %}
-            {% set name = building.name %}
+            {% set item = building %}
             {% include "snips/locationModals.html" %}
             <div class="panel-heading" role="tab">
                 <h4 class="panel-title">
@@ -32,12 +32,12 @@
                                 {% if floor.buildId.bId == building.bId %}
                                 {% set location = "Floor" %}
                                 {% set attribute = floor.fId %}
-                                {% set name = floor.floorNum %}
+                                {% set item = floor %}
                                 {% include "snips/locationModals.html" %}
                                     <div class="panel-heading" role="tab">
                                         <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse" data-parent="#floorAccordion{{building.bId}}" href="#{{floor.floorNum}}{{floor.fId}}" aria-expanded="true" aria-controls="{{floor.floorNum}}{{floor.fId}}">
-                                                Floor: {{floor.floorNum}}
+                                            <a role="button" data-toggle="collapse" data-parent="#floorAccordion{{building.bId}}" href="#{{floor.name}}{{floor.fId}}" aria-expanded="true" aria-controls="{{floor.name}}{{floor.fId}}">
+                                                Floor: {{floor.name}}
                                             </a>
                                             <a class="glyphLink" data-toggle="modal" data-target="#remove{{location}}{{floor.fId}}">
                                                 <span class="glyphicon glyphicon-trash"></span>
@@ -47,9 +47,9 @@
                                             </a>
                                         </h4>
                                     </div>
-                                    <div id="{{floor.floorNum}}{{floor.fId}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{floor.floorNum}}{{floor.fId}}">
+                                    <div id="{{floor.name}}{{floor.fId}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{floor.name}}{{floor.fId}}">
                                         <div class="panel-body">
-                                            <button title="Add a Room to floor: {{floor.floorNum}}" type="button" class="btn btn-success btn-xs addLink">
+                                            <button title="Add a Room to floor: {{floor.name}}" type="button" class="btn btn-success btn-xs addLink">
                                                 <span class="glyphicon glyphicon-plus"></span>
                                                 Add Room
                                             </button>
@@ -58,9 +58,9 @@
                                                 <div class="panel panel-default">
                                                     {% for room in rooms %}
                                                         {% if room.floorId.fId == floor.fId %}                                                        
-                                                        {% set location = "Room" %}
+                                                        {% set location = 'Room' %}
                                                         {% set attribute = room.rId %}
-                                                        {% set name = room.name %}
+                                                        {% set item = room %}
                                                         {% include "snips/locationModals.html"%}
                                                             <div class="panel-heading" role="tab">
                                                                 <h4 class="panel-title">
@@ -87,7 +87,7 @@
                                                                             {% for storage in storages %}
                                                                                 {% if storage.roomId.rId == room.rId %}
                                                                                 {% set location = "Storage" %}
-                                                                                {% set name = storage.name %}
+                                                                                {% set item = storage %}
                                                                                 {% set attribute = storage.sId %}
                                                                                 {% include "snips/locationModals.html" %}
                                                                                     <div class="panel-heading" role="tab">

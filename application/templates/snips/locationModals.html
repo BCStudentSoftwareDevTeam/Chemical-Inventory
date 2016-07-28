@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-labeledby="remove{{location}}{{attribute}}Label">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="remove{{location}}{{attribute}}Label">Delete {{location}}: {{name}}</h4>
+                <h4 class="modal-title" id="remove{{location}}{{attribute}}Label">Delete {{location}}: {{item.name}}</h4>
             </div>
             <div class="modal-body text-center">
                 {{ locationConfig[location]['delete']['message'] }}
@@ -27,14 +27,14 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-labeledby="edit{{location}}{{attribute}}Label">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="edit{{location}}{{attribute}}Label">Edit {{location}}: {{name}}</h4>
+                <h4 class="modal-title" id="edit{{location}}{{attribute}}Label">Edit {{location}}: {{item.name}}</h4>
             </div>
             <div class="modal-body text-center">
                 <form class="form" name="edit{{location}}{{attribute}}" method="post" action="#">
                     {% for group in locationConfig[location]['edit'] %}
                         {% if group.type != "radio" %}
                             <label class="col-sm-4 col-form-label" for="{{group.id}}">{{group.name}}</label>
-                            <input id="{{group.id}}" class="form-control" name="{{group.id}}" type="{{group.type}}">
+                            <input id="{{group.id}}" class="form-control" name="{{group.id}}" type="{{group.type}}" value="{{item[group.id]}}">
                         {% else %}
                             NO
                         {% endif %}

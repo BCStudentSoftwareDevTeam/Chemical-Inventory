@@ -41,32 +41,32 @@ def init_db ():
   
   floorsModel.Floors(
     buildId = 1,
-    floorNum = 'Basement',
+    name = 'Basement',
     storageLimits = "None").save()
   
   floorsModel.Floors(
     buildId = 1,
-    floorNum = '2',
+    name = '2',
     storageLimits = "None").save()
     
   floorsModel.Floors(
     buildId = 1,
-    floorNum = '3',
+    name = '3',
     storageLimits = "None").save()
   
   floorsModel.Floors(
     buildId = 1,
-    floorNum = '4',
+    name = '4',
     storageLimits = "None").save()  
 
   floorsModel.Floors(
     buildId = 2,
-    floorNum = '1',
+    name = '1',
     storageLimits = "None").save()
 
   floorsModel.Floors(
     buildId = 2,
-    floorNum = '2',
+    name = '2',
     storageLimits = "None").save()
     
   print "All Floors Saved."

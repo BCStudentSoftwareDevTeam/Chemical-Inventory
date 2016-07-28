@@ -14,7 +14,7 @@ Building:
 Floor:
     edit:
       - name: "Floor Number"
-        id: "floorNum"
+        id: "name"
         type: "text"
       - name: "Storage Limits"
         id: "storageLimits"
