@@ -31,6 +31,8 @@
             </div>
             <div class="modal-body text-center">
                 <form class="form" name="edit{{location}}{{attribute}}" method="post" action="#">
+                    <input type="hidden" name="location" value="{{location}}">
+                    <input type="hidden" name="id" value="{{attribute}}">
                     {% for group in locationConfig[location]['edit'] %}
                         {% if group.type != "radio" %}
                             <label class="col-sm-4 col-form-label" for="{{group.id}}">{{group.name}}</label>

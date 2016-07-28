@@ -38,12 +38,6 @@ maMenu:
     link: " /ma/Home/"
   - title: "View Chemical Table"
     link: "/ma/ChemTable/"
-  - title: "Check In a Container"
-    link: "/ma/CheckIn/"
-  - title: "Add a Chemical"
-    link: "/ma/AddChemical/"
-  - title: "Manage Users"
-    link: "/ma/ViewUser/"
 
 faMenu:
   - title: "Home"
@@ -62,10 +56,7 @@ saMenu:
     link: "/sa/Home/"
   - title: "View Chemical Table"
     link: "/sa/ChemTable/"
-  - title: "Check In"
-    link: "/sa/CheckIn/"
-  - title: "Add Chemical"
-    link: "/sa/AddChemical/"
+
   
   
   
