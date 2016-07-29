@@ -7,6 +7,7 @@ from urllib import *
 
 from flask import \
     render_template, \
+    redirect, \
     request, \
     url_for
 
@@ -15,6 +16,8 @@ from flask import \
 @require_role('faculty')
 def faViewChemical(chemical, chemId):
   chemInfo = Chemicals.get(Chemicals.name == chemical)
+  if chemInfo.remove == True:
+    return redirect('fa/ChemTable')
   containers = (((Containers
                 .select())
                 .join(Chemicals))

@@ -16,7 +16,11 @@ from flask import \
 @require_role('admin')
 def maContainerInfo(chemId, barcodeId):
   chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
+  if chemical.remove == True:
+    return redirect('ma/ChemTable')
   container = containersModel.Containers.get(containersModel.Containers.barcodeId == barcodeId)
+  if container.disposalDate is not None:
+    return redirect('ma/ChemTable')
   storageList = storagesModel.Storages.select()
   buildingList = buildingsModel.Buildings.select()
   histories = historiesModel.Histories.select().where(historiesModel.Histories.containerId == barcodeId)

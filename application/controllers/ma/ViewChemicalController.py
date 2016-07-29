@@ -16,6 +16,8 @@ from flask import \
 @require_role('admin')
 def maViewChemical(chemical, chemId):
   chemInfo = Chemicals.get(Chemicals.name == chemical)
+  if chemInfo.remove == True:
+      return redirect('ma/ChemTable')
   containers = (((Containers
                 .select())
                 .join(Chemicals))

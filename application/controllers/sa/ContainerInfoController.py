@@ -16,32 +16,30 @@ from flask import \
 @require_role('admin')
 def saContainerInfo(chemId, barcodeId):
   chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
+  if chemical.remove == True:
+    return redirect('sa/ChemTable')
   container = containersModel.Containers.get(containersModel.Containers.barcodeId == barcodeId)
+  if container.disposalDate is not None:
+    return redirect('sa/ChemTable')
   storageList = storagesModel.Storages.select()
   buildingList = buildingsModel.Buildings.select()
   histories = historiesModel.Histories.select().where(historiesModel.Histories.containerId == barcodeId)
   if request.method =="POST":
-    try:
-      if request.form['dispose'] == "Dispose of this Container":
-        container.disposalDate = datetime.now()
-        container.save()
-        return redirect(url_for("saChemTable"))
-    except:
-      data = request.form
-      historiesModel.Histories(containerId = data['containerId'],
-                               movedFrom = data['location'],
-                               movedTo = data['storageId'],
-                               pastUnit = data['unit'],
-                               pastQuantity = data['quantity'],
-                               modDate = datetime.now()).save()
-      cont = containersModel.Containers.get(barcodeId = barcodeId)
-      cont.checkOutReason  = data['class']
-      cont.checkedOut = True
-      cont.forProf = data ['forProf']
-      cont.storageId = data['storageId']
-      cont.save()
-      # add form data to container as checked out
-      return redirect('/sa/ViewChemical/%s/%s/' %(chemical.name, chemId))
+    data = request.form
+    historiesModel.Histories(containerId = data['containerId'],
+                             movedFrom = data['location'],
+                             movedTo = data['storageId'],
+                             pastUnit = data['unit'],
+                             pastQuantity = data['quantity'],
+                             modDate = datetime.now()).save()
+    cont = containersModel.Containers.get(barcodeId = barcodeId)
+    cont.checkOutReason  = data['class']
+    cont.checkedOut = True
+    cont.forProf = data ['forProf']
+    cont.storageId = data['storageId']
+    cont.save()
+    # add form data to container as checked out
+    return redirect('/sa/ViewChemical/%s/%s/' %(chemical.name, chemId))
   else:
     return render_template("views/sa/ContainerInfoView.html",
                        config = config,
