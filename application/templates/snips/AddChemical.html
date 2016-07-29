@@ -65,7 +65,7 @@
           {%for hazardPict in chemConfig['pictograms']%}
             <li>
               <input type="checkbox" name="hazardPict" id="{{hazardPict['title']}}" value="{{hazardPict['title']}}" hidden>
-                <label for="{{hazardPict['title']}}">
+                <label for="{{hazardPict['title']}}" class="hazardLabel">
                   <img src="{{hazardPict['pict']}}" id="{{hazardPict['title']}}" alt="{{hazardPict['alt']}}" class="hazardRadio"></img>
                 </label>
               </input>
