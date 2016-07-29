@@ -23,8 +23,10 @@ def maChemTable():
                               .where(
                                 (Containers.disposalDate == None) &
                                 (Containers.chemId == chemical.chemId) &
-                                (Containers.checkedOut == False))
+                                (Containers.checkedOut == False)&
+                                (Chemicals.remove == False))
                               .count()))
+                              
   return render_template("views/ma/ChemTableView.html",
                           config = config, 
                           chemicals = chemicals, 

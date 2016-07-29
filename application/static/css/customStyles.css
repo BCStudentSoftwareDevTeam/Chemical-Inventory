@@ -74,3 +74,13 @@ label img {
 .addLink {
   margin: 10px;
 }
+
+.panel-open {
+  background-color: #696969 !important;
+  color: #fff !important;
+}
+
+.panel-closed {
+  background-color: #f5f5f5 !important;
+  color: #333333 !important;
+}

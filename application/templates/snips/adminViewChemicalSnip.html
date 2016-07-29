@@ -1,5 +1,6 @@
 <div class="col-sm-6 col-sm-offset-2">
   <h1>{{chemInfo.name}} Information</h1>
+  {% if containers | length == 0 %}
   <div class="pull-right">
     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete {{chemInfo.name}} </button> 
   </div>
@@ -25,6 +26,7 @@
           </div>
   
   {#Modal Ends #}
+  {% endif %}
   <h3>Color Code: {{config.hazards[chemInfo.primaryHazard]}}</h3>
 </div>
 
@@ -53,9 +55,9 @@
             </thead>
             {%  for container in containers  %}
               {% if container.checkedOut != True %}
-                <tr class="success" style="cursor: pointer;" onclick="window.location.href = '../../../ContainerInfo/{{chemInfo.chemId}}/{{container.conId}}/'";>
+                <tr class="success" style="cursor: pointer;" onclick="window.location.href = '../../../ContainerInfo/{{chemInfo.chemId}}/{{container.barcodeId}}/'";>
               {% else %}
-                <tr class="danger" style="cursor: pointer;" onclick="window.location.href = '../../../ContainerInfo/{{chemInfo.chemId}}/{{container.conId}}/'";>
+                <tr class="danger" style="cursor: pointer;" onclick="window.location.href = '../../../ContainerInfo/{{chemInfo.chemId}}/{{container.barcodeId}}/'";>
               {% endif %}
                 {%  for field in contConfig['containerInformation']  %}
                   {%  set attribute = field.id  %}

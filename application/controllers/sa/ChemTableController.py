@@ -17,7 +17,6 @@ def saChemTable():
   chemicals = Chemicals.select()
   contDict = {}
   for chemical in chemicals:
-    print "Here"
     contDict[chemical.name] = (((Chemicals
                               .select()
                               .join(Containers))
@@ -28,7 +27,6 @@ def saChemTable():
                                 (Chemicals.remove == False))
                               .count()))
                               
-  
   return render_template("views/sa/ChemTableView.html",
                           config = config, 
                           chemicals = chemicals, 

@@ -294,7 +294,7 @@ def init_db ():
   containersModel.Containers(
     chemId = 1,
     storageId = 8,
-    barcodeId = "16070003",
+    barcodeId = "16060003",
     currentQuantityUnit = "ounce (oz)",
     currentQuantity = 18.4,
     recieveDate = datetime.date.today(),

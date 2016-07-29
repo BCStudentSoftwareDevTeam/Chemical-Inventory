@@ -12,14 +12,14 @@ from flask import \
     url_for
 
 # PURPOSE: CheckOut a container
-@app.route('/sa/ContainerInfo/<chemId>/<conId>/', methods = ['GET', 'POST'])
+@app.route('/sa/ContainerInfo/<chemId>/<barcodeId>/', methods = ['GET', 'POST'])
 @require_role('admin')
-def saContainerInfo(chemId, conId):
+def saContainerInfo(chemId, barcodeId):
   chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
-  container = containersModel.Containers.get(containersModel.Containers.conId == conId)
+  container = containersModel.Containers.get(containersModel.Containers.barcodeId == barcodeId)
   storageList = storagesModel.Storages.select()
   buildingList = buildingsModel.Buildings.select()
-  histories = historiesModel.Histories.select().where(historiesModel.Histories.containerId == conId)
+  histories = historiesModel.Histories.select().where(historiesModel.Histories.containerId == barcodeId)
   if request.method =="POST":
     try:
       if request.form['dispose'] == "Dispose of this Container":
@@ -34,7 +34,7 @@ def saContainerInfo(chemId, conId):
                                pastUnit = data['unit'],
                                pastQuantity = data['quantity'],
                                modDate = datetime.now()).save()
-      cont = containersModel.Containers.get(conId = conId)
+      cont = containersModel.Containers.get(barcodeId = barcodeId)
       cont.checkOutReason  = data['class']
       cont.checkedOut = True
       cont.forProf = data ['forProf']
@@ -51,10 +51,10 @@ def saContainerInfo(chemId, conId):
                        buildingList = buildingList,
                        histories = histories)
                        
-@app.route('/sa/ContainerInfo/<chemId>/<conId>/dispose/', methods = ['GET', 'POST'])
-def saContainerDispose(chemId, conId):
+@app.route('/sa/ContainerInfo/<chemId>/<barcodeId>/dispose/', methods = ['GET', 'POST'])
+def saContainerDispose(chemId, barcodeId):
   chem = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
-  container = containersModel.Containers.get(containersModel.Containers.conId == conId)
+  container = containersModel.Containers.get(containersModel.Containers.barcodeId == barcodeId)
   container.disposalDate = datetime.date.today()
   container.save()
   return redirect('/sa/ViewChemical/%s/%s/' %(chem.name, chem.chemId))
