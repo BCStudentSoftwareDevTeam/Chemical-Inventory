@@ -11,6 +11,9 @@ from flask import \
     request, \
     url_for
 
+####################################################
+@app.route("/") # TAKE THIS OUT! JUST FOR TESTING ##
+####################################################
 # PURPOSE: Edit, delete, and add buildings
 @app.route('/ma/Home/', methods = ['GET', 'POST'])
 @require_role('admin')

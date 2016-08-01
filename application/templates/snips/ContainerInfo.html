@@ -27,15 +27,15 @@
                   <input class="form-control" type = "number" name ="barcode" value = "{{container.barcodeId}}" readonly>
                 <label for = "quantity" class = "col-sm-2"> Quantity:</label>
                   <input class="form-control" type= "varchar" name ="quantity" value = "{{container.currentQuantity}} {{container.currentQuantityUnit}} " readonly>
-                <label for = "location" class = "col-sm-2"> Location:</label>
+                <label for = "location" class = "col-sm-2"> Current Location:</label>
                 {% if container.storageId.roomId.name != container.storageId.name %}
                   <input class="form-control" type = "varchar" name = "location" value = "{{container.storageId.roomId.floorId.buildId.name}} {{container.storageId.roomId.name}}  {{container.storageId.name}}" readonly>
                 {% else %}
                   <input class="form-control" type = "varchar" name = "location" value = "{{container.storageId.roomId.floorId.buildId.name}} {{container.storageId.roomId.name}}" readonly>
                 {% endif %}  
-                <label for = "Class Name" class = "col-sm-2"> Class:</label>
-                  <input class="form-control" id="class" type="text" placeholder="Class Name" name="class">
-                <label for = "storage" class = "col-sm-2"> Storage Location:</label>
+                <label for = "Class Name" class = "col-sm-2"> Reason for Checkout:</label>
+                  <input class="form-control" id="class" type="text" placeholder="Reason" name="class">
+                <label for = "storage" class = "col-sm-2"> New Location:</label>
                   <select id="storage" name="storageId" class="form-control" required>
                     <option selected disabled value="">Select One</option>
                     {% for building in buildingList %}

@@ -7,7 +7,7 @@
         {% include "snips/locationModals.html" %}
         <div class="panel-heading panel-change panel-closed" id="{{location}}{{attribute}}Tab" role="tab">
             <h4 class="panel-title">
-                <a role="button" data-toggle="collapse" onclick="highlightTab('{{location}}{{attribute}}Tab', '{{building.bId}}')" data-parent="#buildingAccordion" href="#{{building.bId}}" aria-expanded="true" aria-controls="{{building.bId}}">
+                <a role="button" data-toggle="collapse" onclick="highlightTab('{{location}}{{attribute}}Tab')" data-parent="#buildingAccordion" href="#{{building.bId}}" aria-expanded="true" aria-controls="{{building.bId}}">
                     {{building.name}}
                 </a>
                 <a class="glyphLink" data-toggle="modal" data-target="#remove{{location}}{{building.bId}}" aria-hidden="true">
@@ -31,7 +31,7 @@
                             {% include "snips/locationModals.html" %}
                                 <div class="panel-heading panel-change panel-closed" id="{{location}}{{attribute}}Tab" role="tab">
                                     <h4 class="panel-title">
-                                        <a role="button" data-toggle="collapse" onclick="highlightTab('{{location}}{{attribute}}Tab', '{{floor.name}}{{floor.fId}}')" data-parent="#floorAccordion{{building.bId}}" href="#{{floor.name}}{{floor.fId}}" aria-expanded="true" aria-controls="{{floor.name}}{{floor.fId}}">
+                                        <a role="button" data-toggle="collapse" onclick="highlightTab('{{location}}{{attribute}}Tab')" data-parent="#floorAccordion{{building.bId}}" href="#{{floor.name}}{{floor.fId}}" aria-expanded="true" aria-controls="{{floor.name}}{{floor.fId}}">
                                             Floor: {{floor.name}}
                                         </a>
                                         <a class="glyphLink" data-toggle="modal" data-target="#remove{{location}}{{floor.fId}}">
@@ -55,7 +55,7 @@
                                                     {% include "snips/locationModals.html"%}
                                                         <div class="panel-heading panel-change panel-closed" id="{{location}}{{attribute}}Tab" role="tab">
                                                             <h4 class="panel-title">
-                                                                <a role="button" data-toggle="collapse" onclick="highlightTab('{{location}}{{attribute}}Tab', '{{room.name}}{{room.rId}}')" data-parent="#roomAccordian{{floor.fId}}" href="#{{room.name}}{{room.rId}}" aria-expanded="true" aria-controls="{{room.name}}{{room.rId}}">
+                                                                <a role="button" data-toggle="collapse" onclick="highlightTab('{{location}}{{attribute}}Tab')" data-parent="#roomAccordian{{floor.fId}}" href="#{{room.name}}{{room.rId}}" aria-expanded="true" aria-controls="{{room.name}}{{room.rId}}">
                                                                     Room: {{room.name}}
                                                                 </a> 
                                                                 <a class="glyphLink" data-toggle="modal" data-target="#remove{{location}}{{room.rId}}">

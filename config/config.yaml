@@ -36,13 +36,13 @@ hazards:
 maMenu:
   - title: "Home"
     link: " /ma/Home/"
-  - title: "View Chemical Table"
+  - title: "View All Chemicals"
     link: "/ma/ChemTable/"
 
 faMenu:
   - title: "Home"
     link: "/fa/Home/"
-  - title: "View Chemical Table"
+  - title: "View All Chemicals"
     link: "/fa/ChemTable/"
   - title: "Request Access For a Student"
     link: "/fa/RequestUserAccess/"
@@ -54,7 +54,7 @@ aMenu:
 saMenu:
   - title: "Home"
     link: "/sa/Home/"
-  - title: "View Chemical Table"
+  - title: "View All Chemicals"
     link: "/sa/ChemTable/"
 
   
