@@ -19,7 +19,7 @@
             <tr onclick="window.location.href = '../ViewChemical/{{chemName}}/{{chemical.chemId}}/';">
                 <td>{{chemical.name}}</td>
                 <td>{{chemical.casNum}}</td>
-                <td>{{config['hazards'][chemical.primaryHazard]}}</td>
+                <td>{{config['hazards'][chemical.primaryHazard]}} ({{chemical.primaryHazard}})</td>
                 <td>{{contDict[chemical.name]}}</td>
 
             </tr>

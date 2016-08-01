@@ -4,6 +4,116 @@
 
 {%  include "Navigation/saMenu.html"  %}
 
-{%  include "snips/adminViewChemicalSnip.html"  %}
+<div class="col-sm-6 col-sm-offset-2">
+  <h1>{{chemInfo.name}} Information</h1>
+  <h3>Color Code: {{config.hazards[chemInfo.primaryHazard]}}</h3>
+</div>
+
+<div class="col-md-8 col-md-offset-2">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#containers">Containers</a></li>
+        <li><a data-toggle="tab" href="#info">Information</a></li>
+        <li><a data-toggle="tab" href="#hazards">Hazards</a></li>
+        {% set chemName = quote(chemInfo.name) %}
+        <li><a data="tab" href="../../../AddContainer/{{chemName}}/{{chemInfo.chemId}}/">Add a new Container</a></li>
+        {# example code for tabs found here: http://jsfiddle.net/xfw8t/12/ #}
+    </ul>
+    
+    <div class="tab-content">
+        <div id="containers" class="tab-pane fade in active">
+          <h3>Containers</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                {%  for field in contConfig['containerInformation']  %}
+                  {%  if "Unit" not in field.name  %}
+                    <td>{{field.name}}</td>
+                  {%  endif  %}
+                {%  endfor  %}
+              </tr>
+            </thead>
+            {%  for container in containers  %}
+              {% if container.checkedOut != True %}
+                <tr class="success" style="cursor: pointer;" onclick="window.location.href = '../../../ContainerInfo/{{chemInfo.chemId}}/{{container.conId}}/'";>
+              {% else %}
+                <tr class="danger" style="cursor: pointer;" onclick="window.location.href = '../../../ContainerInfo/{{chemInfo.chemId}}/{{container.conId}}/'";>
+              {% endif %}
+                {%  for field in contConfig['containerInformation']  %}
+                  {%  set attribute = field.id  %}
+                    {%  if attribute != "capacityUnit" and attribute != "currentQuantityUnit" %}
+                      {%  if attribute == "capacity" or attribute == "currentQuantity" %}
+                        <td>{{container[attribute]}} {{container[attribute + "Unit"]}}</td>
+                      {% elif attribute == "storageId"  %}
+                        {% if container[attribute].name == container[attribute].roomId.name %}
+                          <td>{{container[attribute].roomId.floorId.buildId.name}} Building, Room {{container[attribute].roomId.name}}</td>
+                        {% else %}
+                          <td>{{container[attribute].roomId.floorId.buildId.name}} Building, Room {{container[attribute].roomId.name}}, {{container[attribute].name}}</td>
+                        {% endif %}
+                      {%  else  %}
+                        <td>{{container[attribute]}}</td>
+                      {%  endif  %}
+                    {%  endif  %}
+                {%  endfor  %}
+              </tr>
+            {%  endfor  %}
+          </table>
+        </div>
+        
+        <div id="info" class="tab-pane fade">
+          <h3>Information</h3>
+          <table class="table table-striped">
+          {% for field in chemConfig['addChemInputs'] %}
+            {% set attribute = field.name %}
+              {% if attribute == "Safety Data Sheet Link" %}
+                <tr>
+                  <td>{{attribute}}</td>
+                  <td><a href="{{chemInfo[field.id]}}" target="blank">{{chemInfo[field.id]}}</a></td>
+                </tr>
+              {% elif field.small is defined %}
+                <tr>
+                  <td>{{attribute}}</td>
+                  <td>{{chemInfo[field.id]}} &#176F</td>
+                </tr>
+              {% else %}
+              <tr>
+                <td>{{attribute}}</td>
+                <td>{{chemInfo[field.id]}}</td>
+              </tr>
+              {% endif %}
+          {% endfor %}
+          </table>
+        </div>
+        
+        <div id="hazards" class="tab-pane fade">
+          <h3>Hazards</h3>
+          Primary Hazard: {{chemInfo.primaryHazard}}
+          <div class="col-sm-7">
+            <div class="panel panel-default text-center">
+              <div class="panel-heading">
+                <h3 class="panel-title">Hazardous Materials Identification System (HMIS)</h3>
+              </div>
+              <div class="panel-body">
+                <table class="table">
+                  <tbody>
+                    {% for row in chemConfig['HMIS'] %}
+                      <tr BGCOLOR="{{row.color}}">
+                        <td><font color="{{row.text}}">{{row.name}}</font></td>
+                        <td class="col-md-6">
+                          <font color="{{row.text}}">
+                            {{chemInfo[row.id]}}
+                          </font>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+</div>
+
 
 {% endblock %}
