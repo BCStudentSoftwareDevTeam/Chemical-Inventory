@@ -1,3 +1,4 @@
+<script src="/static/js/local/fillEditForm.js"></script>
 <div class="col-sm-6 col-sm-offset-2">
   <h1>{{chemInfo.name}} Information</h1>
   {% if containers | length == 0 %}
@@ -130,12 +131,15 @@
             </div>
           </div>
         </div>
-        
+       
         <div id="edit" class="tab-pane fade">
           <div class="text-center">
             <h2>Edit</h2>
           </div>
           {% include "snips/AddChemical.html" %}
+          <script>
+            fillEditForm('{{chemInfo.chemId}}', "{{chemConfig | safe}}");
+          </script>
         </div>
 
     </div>
