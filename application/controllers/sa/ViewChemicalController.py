@@ -14,8 +14,10 @@ from flask import \
 # PURPOSE: Shows specific chemical and all containers of said chemical.
 @app.route('/sa/ViewChemical/<string:chemical>/<string:chemId>/', methods = ['GET'])
 @require_role('systemAdmin')
+
 def saViewChemical(chemical, chemId):
   chemInfo = Chemicals.get(Chemicals.name == chemical)
+  
   if chemInfo.remove == True:
     return redirect('sa/ChemTable')
   containers = (((Containers
