@@ -71,47 +71,47 @@ def init_db ():
     
   print "All Floors Saved."
   
-  roomsModel.Rooms(
+  roomsModel.Rooms( #1
     floorId = 1,
     name = "13b").save()
 
-  roomsModel.Rooms(
+  roomsModel.Rooms( #2
     floorId = 1,
     name = "13c").save()
     
-  roomsModel.Rooms(
+  roomsModel.Rooms( #3
     floorId = 2,
     name = "233").save()
     
-  roomsModel.Rooms(
+  roomsModel.Rooms( #4
     floorId = 2,
     name = "200").save()
     
-  roomsModel.Rooms(
+  roomsModel.Rooms( #5
     floorId = 3,
     name= "330").save()
 
-  roomsModel.Rooms(
+  roomsModel.Rooms( #6
     floorId = 4,
     name = "404").save()
 
-  roomsModel.Rooms(
+  roomsModel.Rooms( #7
     floorId = 4,
     name = "420").save()
 
-  roomsModel.Rooms(
+  roomsModel.Rooms( #8
     floorId = 6,
     name = "B07").save()
 
-  roomsModel.Rooms(
+  roomsModel.Rooms( #9
     floorId = 6,
     name = "B11").save()
 
-  roomsModel.Rooms(
+  roomsModel.Rooms( #10
     floorId = 5,
     name = "110").save()
 
-  roomsModel.Rooms(
+  roomsModel.Rooms( #11
     floorId = 5,
     name = "111").save()
   print "All Rooms saved"
@@ -119,7 +119,29 @@ def init_db ():
   storagesModel.Storages(
     roomId = 1,
     name = "Health Hazard Shelf",
+    healthHazard = True).save()  
+    
+  storagesModel.Storages(
+    roomId = 2,
+    name = "Flammable Cabinet",
+    flammable = True).save()
+    
+  storagesModel.Storages(
+    roomId = 2,
+    name = "Health Hazard Shelf",
     healthHazard = True).save()
+        
+  storagesModel.Storages(
+    roomId = 3,
+    name = "233",
+    flammable = True,
+    healthHazard = True,
+    oxidizer = True,
+    orgAcid = True,
+    inorgAcid = True,
+    base = True,
+    peroxide = True,
+    pressure = True).save()
   
   storagesModel.Storages(
     roomId = 4,
@@ -135,7 +157,7 @@ def init_db ():
     
   storagesModel.Storages(
     roomId = 5,
-    name = "404",
+    name = "330",
     flammable = True,
     healthHazard = True,
     oxidizer = True,
@@ -147,7 +169,7 @@ def init_db ():
     
   storagesModel.Storages(
     roomId = 6,
-    name = "420",
+    name = "404",
     flammable = True,
     healthHazard = True,
     oxidizer = True,
@@ -159,7 +181,7 @@ def init_db ():
 
   storagesModel.Storages(
     roomId = 7,
-    name = "B07",
+    name = "420",
     flammable = True,
     healthHazard = True,
     oxidizer = True,
@@ -171,7 +193,7 @@ def init_db ():
     
   storagesModel.Storages(
     roomId = 8,
-    name = "B11",
+    name = "B07",
     flammable = True,
     healthHazard = True,
     oxidizer = True,
@@ -193,6 +215,18 @@ def init_db ():
   
   storagesModel.Storages(
     roomId = 10,
+    name = "110",
+    flammable = True,
+    healthHazard = True,
+    oxidizer = True,
+    orgAcid = True,
+    inorgAcid = True,
+    base = True,
+    peroxide = True,
+    pressure = True).save()
+    
+  storagesModel.Storages(
+    roomId = 11,
     name = "111",
     flammable = True,
     healthHazard = True,
@@ -202,28 +236,6 @@ def init_db ():
     base = True,
     peroxide = True,
     pressure = True).save()
-    
-  storagesModel.Storages(
-    roomId = 3,
-    name = "233",
-    flammable = True,
-    healthHazard = True,
-    oxidizer = True,
-    orgAcid = True,
-    inorgAcid = True,
-    base = True,
-    peroxide = True,
-    pressure = True).save()
-  
-  storagesModel.Storages(
-    roomId = 2,
-    name = "Flammable Cabinet",
-    flammable = True).save()
-    
-  storagesModel.Storages(
-    roomId = 2,
-    name = "Health Hazard Shelf",
-    healthHazard = True).save()
     
   print "Storages Saved"
   

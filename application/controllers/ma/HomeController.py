@@ -8,20 +8,29 @@ from application.logic.validation import require_role
 
 from flask import \
     render_template, \
+    redirect, \
     request, \
     url_for
 
 ####################################################
 @app.route("/") # TAKE THIS OUT! JUST FOR TESTING ##
+def homeRedr():
+    return redirect('/ma/Home/')
 ####################################################
 # PURPOSE: Edit, delete, and add buildings
 @app.route('/ma/Home/', methods = ['GET', 'POST'])
 @require_role('admin')
 def adminHome():
     buildings = Buildings.select()
-    floors = Floors.select()
-    rooms = Rooms.select().order_by(+Rooms.name)
-    storages = Storages.select()
+    floors = {}
+    rooms = {}
+    storages = {}
+    for building in buildings:
+        floors[building.bId] = Floors.select().where(Floors.buildId == building.bId)
+        for floor in floors[building.bId]:
+            rooms[floor.fId] = Rooms.select().where(Rooms.floorId == floor.fId).order_by(+Rooms.name)
+            for room in rooms[floor.fId]:
+                storages[room.rId] = Storages.select().where(Storages.roomId == room.rId)
     if request.method == "GET":
         return render_template("views/ma/HomeView.html",
                                config = config,

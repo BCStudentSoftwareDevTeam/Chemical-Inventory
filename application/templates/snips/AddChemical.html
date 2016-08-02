@@ -5,7 +5,9 @@
       <div class="form-group row">
         <label for="{{group['id']}}" class="col-sm-4">{{group['name']}}</label>
         <div class="col-sm-8">
-          {% if group['id'] == "sdsLink" %}
+          {% if group['id'] == 'name' %}
+            <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" oninput="checkName()" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
+          {% elif group['id'] == "sdsLink" %}
             <div class="input-group-addon">https://</div>
             <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
             <div class="input-group-addon"><a target="blank" href="https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?nas=True">Find SDS Here</a></div>
@@ -105,3 +107,4 @@
   </form>
 </div>
 <script src="/static/js/local/pictSelect.js"></script>
+<script src="/static/js/local/checkName.js"></script>
