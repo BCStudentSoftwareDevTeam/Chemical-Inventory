@@ -4,7 +4,7 @@
 
 {%  include "Navigation/saMenu.html"  %}
 
-<<<<<<< HEAD
+
 <script src="/static/js/local/fillEditForm.js"></script>
 <div class="col-sm-6 col-sm-offset-2">
   <h1>{{chemInfo.name}} Information</h1>
@@ -60,6 +60,7 @@
               </tr>
             {%  endfor  %}
           </table>
+          <a data="tab" href="../../../AddContainer/{{chemName}}/{{chemInfo.chemId}}/"><span class="glyphicon glyphicon-plus"></span>Add a new Container of {{chemInfo.name}} </a>
         </div>
         
         <div id="info" class="tab-pane fade">
@@ -126,8 +127,5 @@
     </div>
 </div>
 
-=======
-{% include "snips/adminViewChemicalSnip.html" %}
->>>>>>> 43d6263f2e02fa8f26535c4ec97bd18c186e8d1a
 
 {% endblock %}
