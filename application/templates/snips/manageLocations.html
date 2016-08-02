@@ -23,8 +23,7 @@
                 {# First Nested Accordion Begins (Floors) #}
                 <div class="panel-group" id="floorAccordion{{building.bId}}" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
-                        {% for floor in floors %}
-                            {% if floor.buildId.bId == building.bId %}
+                        {% for floor in floors[building.bId] %}
                             {% set location = "Floor" %}
                             {% set attribute = floor.fId %}
                             {% set item = floor %}
@@ -47,8 +46,7 @@
                                         {# Second Nested Accordion Begins (Rooms) #}
                                         <div class="panel-group" id="roomAccordian{{floor.fId}}" role="tablist" aria-mulitselectable="true">
                                             <div class="panel panel-default">
-                                                {% for room in rooms %}
-                                                    {% if room.floorId.fId == floor.fId %}                                                        
+                                                {% for room in rooms[floor.fId] %}                                                      
                                                     {% set location = 'Room' %}
                                                     {% set attribute = room.rId %}
                                                     {% set item = room %}
@@ -71,8 +69,7 @@
                                                                 {# Third Nested Accordian Begins (Storages) #}
                                                                 <div class="panel-group" id="storageAccordian{{room.rId}}" role="tablist" aria-multiselectable="true">
                                                                     <div class="panel panel-default">
-                                                                        {% for storage in storages %}
-                                                                            {% if storage.roomId.rId == room.rId %}
+                                                                        {% for storage in storages[room.rId] %}
                                                                             {% set location = "Storage" %}
                                                                             {% set item = storage %}
                                                                             {% set attribute = storage.sId %}
@@ -88,7 +85,6 @@
                                                                                         </a>
                                                                                     </h4>
                                                                                 </div>
-                                                                            {% endif %}
                                                                         {% endfor %}
                                                                     </div>
                                                                 </div>
@@ -99,7 +95,6 @@
                                                                 </button>
                                                             </div>
                                                         </div>
-                                                    {% endif %}
                                                 {% endfor %}
                                             </div>
                                         </div>
@@ -110,7 +105,6 @@
                                         </button>
                                     </div>
                                 </div>
-                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>

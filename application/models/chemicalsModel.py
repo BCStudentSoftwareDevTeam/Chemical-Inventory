@@ -3,7 +3,7 @@ from application.models.util import *
 class Chemicals (Model):
   chemId          = PrimaryKeyField()
   ## General Information
-  name            = CharField(unique = True)
+  name            = CharField(null = False)
   casNum          = CharField(null = True)
   primaryHazard   = CharField(null = True)
   formula         = CharField(null = True)

@@ -19,16 +19,17 @@ function checkBar(){
 }
 
 function getData(barcodeId){
-    $.getJSON("/checkInData/", {
-        barId: $('input[name="barcodeId"]').val()
-    },
-        function(data) {
-            console.log(data);
-            for (var contKey in data){
-                var cont = data[contKey];
-                window.chemId = "{{ group.id['" + cont.chemId + "']|safe }}";
-                window.storageId = "{{ group.id['" + cont.storageId + "'] | safe }}";
-                window.currentQuantity = cont.currentQuantity + " " + cont.currentQuantityUnit;
-            }
-        });
-}
+    $.ajax({
+        url: "/checkInData/",
+        data: {barId : barcodeId.value},
+        type: "GET",
+        success: function(data) {
+            document.getElementById("chemId").value = data['chemName'];
+            document.getElementById('prevStorageId').value = data['storage'];
+            document.getElementById('prevQuantity').value = data['quantity'] + " " + data['unit'];
+        },
+        error: function() {
+            console.log("Error: There are no containers with that barcode in the system.")
+        }
+    });
+    }

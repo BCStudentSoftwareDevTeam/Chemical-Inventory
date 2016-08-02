@@ -1,13 +1,14 @@
 from application import app
 from application.models.chemicalsModel import *
 from application.models.containersModel import *
+from application.models.storagesModel import *
 from application.config import *
 from application.logic.validation import require_role
 
 from flask import \
     render_template, \
     request, \
-    json as simplejson, \
+    jsonify, \
     url_for
 
 # PURPOSE: CheckIn a container
@@ -26,7 +27,10 @@ def maCheckIn():
 def checkInData():
     barId = request.args.get('barId')
     container = Containers.select().where(Containers.barcodeId == barId).dicts().get()
-    # chemical = Chemicals.select().join(Containers).where(Containers.barcodeId == barId).dicts().get()
-    return render_template("snips/setVars.html",
-                           avatar_url = process_data(data),
-                           container = container)
+    chemical = Chemicals.get(Chemicals.chemId == container['chemId']).name
+    storage = Storages.get(Storages.sId == container['storageId'])
+    if storage.name != storage.roomId.name:
+        location = storage.roomId.floorId.buildId.name + " Building, Room: " + storage.roomId.name + " (" + storage.name + ")"
+    else:
+        location = storage.roomId.floorId.buildId.name + " Building, Room: " + storage.name
+    return jsonify({'status':'OK', 'chemName' : chemical, 'storage' : location, 'quantity' : container['currentQuantity'], 'unit' : container['currentQuantityUnit']})
