@@ -16,9 +16,15 @@ from flask import \
 @require_role('admin')
 def saHome():
     buildings = Buildings.select()
-    floors = Floors.select()
-    rooms = Rooms.select().order_by(+Rooms.name)
-    storages = Storages.select()
+    floors = {}
+    rooms = {}
+    storages = {}
+    for building in buildings:
+        floors[building.bId] = Floors.select().where(Floors.buildId == building.bId)
+        for floor in floors[building.bId]:
+            rooms[floor.fId] = Rooms.select().where(Rooms.floorId == floor.fId).order_by(+Rooms.name)
+            for room in rooms[floor.fId]:
+                storages[room.rId] = Storages.select().where(Storages.roomId == room.rId)
     if request.method == "GET":
         return render_template("views/sa/HomeView.html",
                                config = config,
