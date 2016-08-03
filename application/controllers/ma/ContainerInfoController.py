@@ -49,7 +49,8 @@ def maContainerInfo(chemId, barcodeId):
                        buildingList = buildingList,
                        histories = histories)
                        
-@app.route('/ma/ContainerInfo/<chemId>/<barcodeId>/dispose/', methods = ['GET', 'POST'])
+                       
+@app.route('/sa/ContainerInfo/<chemId>/<barcodeId>/dispose/', methods = ['GET', 'POST'])
 def maContainerDispose(chemId, barcodeId):
   chem = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
   container = containersModel.Containers.get(containersModel.Containers.barcodeId == barcodeId)

@@ -255,6 +255,8 @@ def init_db ():
     flashPoint = 999,
     boilPoint = 888,
     storageTemp = 69,
+    flamePict = True,
+    peroxideFormer = True,
     healthHazard = "1",
     flammable = "4",
     reactive = "2").save()

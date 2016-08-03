@@ -8,6 +8,7 @@ from urllib import *
 from flask import \
     render_template, \
     request, \
+    jsonify, \
     url_for
 
 # PURPOSE: Shows all Chemicals in Database.
@@ -31,3 +32,4 @@ def aChemTable():
                           chemicals = chemicals, 
                           contDict = contDict,
                           quote = quote)
+                        

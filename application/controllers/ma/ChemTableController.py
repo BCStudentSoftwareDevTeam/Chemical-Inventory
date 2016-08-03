@@ -8,6 +8,7 @@ from urllib import *
 from flask import \
     render_template, \
     request, \
+    jsonify, \
     url_for
 
 # PURPOSE: Shows all Chemicals in Database.
@@ -33,3 +34,10 @@ def maChemTable():
                           contDict = contDict,
                           quote = quote)
 
+@app.route("/getEditData/", methods = ['GET'])
+def getEditData():
+    chemId = request.args.get('chemId')
+    chemical = Chemicals.select().where(Chemicals.chemId ==  chemId).dicts().get() # Gets the database entry as a dictionary. This is needed to pass it as a JSON object
+    for key in chemical:
+      chemical[key] = str(chemical[key])
+    return jsonify(chemical)

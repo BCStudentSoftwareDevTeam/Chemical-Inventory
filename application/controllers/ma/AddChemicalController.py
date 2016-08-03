@@ -26,14 +26,14 @@ def maAddChemical():
                          config = config,
                          chemConfig = chemConfig)
                          
-@app.route('/checkName/', methods=['GET'])
-def checkName(name):
-  chemName = request.args.get('chemName')
-  try:
-    chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.name == chemName)
-    return render_template('snips/AddChemical.html',
-                           avatar_url = process_data(data),
-                           config = config,
-                           chemConfig = chemConfig)
-  except:
-    pass
+# @app.route('/checkName/', methods=['GET'])
+# def checkName(name):
+#   chemName = request.args.get('chemName')
+#   try:
+#     chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.name == chemName)
+#     return render_template('snips/AddChemical.html',
+#                           avatar_url = process_data(data),
+#                           config = config,
+#                           chemConfig = chemConfig)
+#   except:
+#     pass
