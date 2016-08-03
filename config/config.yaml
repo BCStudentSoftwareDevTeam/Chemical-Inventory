@@ -40,8 +40,6 @@ maMenu:
     link: "/ma/ChemTable/"
 
 faMenu:
-  - title: "Home"
-    link: "/fa/Home/"
   - title: "View All Chemicals"
     link: "/fa/ChemTable/"
   - title: "Request Access For a Student"

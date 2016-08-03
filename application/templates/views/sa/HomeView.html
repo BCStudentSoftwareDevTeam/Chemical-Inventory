@@ -7,28 +7,32 @@
 <div class= "contianer-fluid">
   <div class="col-md-8 col-md-offset-2">
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#inventory">Chemical Inventory Management</a></li>
-        <li><a data-toggle="tab" href="#buildings">Location Management</a></li>
-        {# example code for tabs found here: http://jsfiddle.net/xfw8t/12/ #}
+      <li class="active"><a data-toggle="tab" href="#inventory">Chemical Inventory Management</a></li>
+      <li><a data-toggle="tab" href="#buildings">Location Management</a></li>
+      {# example code for tabs found here: http://jsfiddle.net/xfw8t/12/ #}
     </ul>
     
     <div class = "tab-content">
+      
       <div id = "inventory" class = "tab-pane fade in active">
+        {# Tab that contains all inventory management pages #}
         <h3>Chemical Inventory Management</h3>
         <table class="table table-hover" style="cursor: pointer;">
-           <tr onclick="window.location.href = '{{url_for('saChemTable')}}';"><td>View All Chemicals</td></tr>
-           <tr onclick="window.location.href = '{{url_for('saCheckIn')}}';"><td>Check in Container(s)</td></tr>
-           <tr onclick = "window.location.href = '{{url_for('AddChemical')}}';"><td>Add Chemical</td></tr>
+          <tr onclick="window.location.href = '{{url_for('saChemTable')}}';"><td>View All Chemicals</td></tr>
+          <tr onclick="window.location.href = '{{url_for('saCheckIn')}}';"><td>Check in Container(s)</td></tr>
+          <tr onclick = "window.location.href = '{{url_for('AddChemical')}}';"><td>Add Chemical</td></tr>
           <tr onclick="window.location.href = '{{url_for('CheckedOut')}}';"><td>View Checked Out Containers</td></tr>
         </table>
-       </div>
+      </div>
     
  
       <div id = "buildings" class = "tab-pane fade">
+        {# Tab that contains the manageLocations snip #}
          {% include "snips/manageLocations.html" %}
       </div>
       
     </div>
+    
   </div>
 </div>
 {% endblock %}

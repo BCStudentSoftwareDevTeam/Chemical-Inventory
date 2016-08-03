@@ -1,8 +1,5 @@
 <div class="container">
     <h1>View All Chemicals</h1>
-    <div class="col-md-4 col-md-offset-4" id = "chemical"> <!-- Centered Search bar using offset rows -->
-       
-    </div>
     <div class = "container-fluid">
         <table class= "table" id = "chemtable" style="cursor: pointer;">
             <thead>
@@ -15,18 +12,15 @@
             </thead>
             {% for chemical in chemicals %}
                 {% if chemical.remove == False %}
-                {% set chemName = quote(chemical.name) %}
-                <tr onclick="window.location.href = '../ViewChemical/{{chemName}}/{{chemical.chemId}}/';">
-                    <td>{{chemical.name}}</td>
-                    <td>{{chemical.casNum}}</td>
-                    <td>{{config['hazards'][chemical.primaryHazard]}}</td>
-                    <td>{{contDict[chemical.name]}}</td>
-    
-                </tr>
+                    {% set chemName = quote(chemical.name) %}
+                    <tr onclick="window.location.href = '../ViewChemical/{{chemName}}/{{chemical.chemId}}/';"> {# The whole row is a link to the correct chemical page #}
+                        <td>{{chemical.name}}</td>
+                        <td>{{chemical.casNum}}</td>
+                        <td>{{config['hazards'][chemical.primaryHazard]}}</td>
+                        <td>{{contDict[chemical.name]}}</td>
+                    </tr>
                 {%endif%}
             {%endfor%}
-          
-            <!--<script src="/static/js/local/search.js"></script> -->
             
             <script>
                 $(document).ready(function(){
