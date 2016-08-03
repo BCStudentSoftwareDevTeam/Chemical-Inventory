@@ -15,8 +15,8 @@ from flask import \
 @app.route('/fa/ViewChemical/<chemical>/<chemId>/', methods = ['GET'])
 @require_role('faculty')
 def faViewChemical(chemical, chemId):
-  chemInfo = Chemicals.get(Chemicals.name == chemical)
-  if chemInfo.remove == True:
+  chemInfo = Chemicals.get(Chemicals.chemId == chemId) #Get chemical by correct chemId
+  if chemInfo.remove == True: #If the chemical attribute, 'remove', was set to True, go back to the chemical table.
     return redirect('fa/ChemTable')
   containers = (((Containers
                 .select())
@@ -25,6 +25,7 @@ def faViewChemical(chemical, chemId):
                   (Containers.chemId == chemId) &
                   (Containers.disposalDate == None)
                 ))
+  #(Above) Get all containers of this chemical that haven't been disposed of
   return render_template("views/fa/ViewChemicalView.html",
                          config = config,
                          chemInfo = chemInfo,

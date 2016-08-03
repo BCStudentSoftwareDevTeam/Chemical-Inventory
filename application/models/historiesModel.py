@@ -12,8 +12,7 @@ class Histories (Model):
   ##
   modUser       = TextField(null = True) # This should probably eventually be a foreign key to the users table.
   ##
-  pastUnit      = TextField() # Container.currentUnit unit last entered.
-  pastQuantity  = FloatField()# Container.currentQuantity amount of chemical last in the container
+  pastQuantity  = CharField()# Container.currentQuantity amount of chemical last in the container
   modDate       = DateTimeField(default = datetime.datetime.now)
 
   class Meta:

@@ -342,8 +342,7 @@ def init_db ():
     movedTo = 1,
     modUser = "Jesson Soto",
     containerId = 4,
-    pastUnit = "ounce (oz)",
-    pastQuantity = 17,
+    pastQuantity = "17 ounce (oz)",
     modDate = "01/22/2012").save()
     
   historiesModel.Histories(
@@ -351,8 +350,7 @@ def init_db ():
     movedTo = 8,
     modUser = "Nick DeTore",
     containerId = 4,
-    pastUnit = "ounce (oz)",
-    pastQuantity = 20,
+    pastQuantity = "20 ounce (oz)",
     modDate = "01/20/2012").save()
   
 if __name__ == "__main__":

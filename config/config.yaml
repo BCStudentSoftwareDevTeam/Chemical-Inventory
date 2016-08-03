@@ -22,15 +22,15 @@ sys:
 
 # Color Codes
 hazards:
-  "Base": "Green"
-  "Flammable": "Red"
-  "Flammable Solid": "Copper"
-  "Organic Health Hazard": "Blue"
-  "Inorganic Health Hazard": "Blue"
-  "Inorganic Acid": "Rose"
-  "Organic Acid": "Lavender"
-  "Oxidizer": "Yellow"
-  "Reactive": "Orange"
+  "Base": "Green (Base)"
+  "Flammable": "Red (Flammable)"
+  "Flammable Solid": "Copper (Flammable Solid)"
+  "Organic Health Hazard": "Blue (Health Hazard)"
+  "Inorganic Health Hazard": "Blue (Health Hazard)"
+  "Inorganic Acid": "Rose (Inorganic Acid)"
+  "Organic Acid": "Lavender (Organic Acid)"
+  "Oxidizer": "Yellow (Oxidizer)"
+  "Reactive": "Orange (Reactive)"
  
 # Navigation bars   
 maMenu:

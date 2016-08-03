@@ -30,13 +30,13 @@ def maAddContainer(chemName, chemId):
                              storageList = storageList,
                              buildingList = buildingList,
                              lastCont = lastCont)
-  try:
+  try: #If a form was posted, try to create a new container with info from form
     data = request.form
     modelData, extraData = sortPost(data, Containers)
     Containers.create(**modelData)
-    flash("Container added successfully")
+    flash("Container added successfully") #Flash a success message
   except:
-    flash("Container could not be added")
+    flash("Container could not be added") #If there was an error, flash an error message
   return render_template("views/ma/AddContainerView.html",
                          config = config,
                          contConfig = contConfig,
