@@ -5,6 +5,7 @@ class Storages (Model):
   sId           = PrimaryKeyField()
   roomId        = ForeignKeyField(Rooms) # When creating a container, select room first, then populate dropdown with all storages with matching roomId.
   name          = TextField() # Name of the specific storage unit ex: "Flammable Cabinet"
+  # Booleans of true are what the storage is allowed to hold
   flammable     = BooleanField(default = False)
   healthHazard  = BooleanField(default = False)
   oxidizer      = BooleanField(default = False)

@@ -7,9 +7,9 @@ class Chemicals (Model):
   casNum          = CharField(null = True)
   primaryHazard   = CharField(null = True)
   formula         = CharField(null = True)
-  concentration   = CharField(null = True)                   #This field can be left empty
+  concentration   = CharField(null = True) #This field can be left empty
   state           = CharField(null = True)
-  structure       = CharField(null = True)       # Organic or Inorganic
+  structure       = CharField(null = True) # Organic or Inorganic
   flashPoint      = DecimalField(null = True)
   boilPoint       = DecimalField(null = True)
   storageTemp     = DecimalField(null = True)
