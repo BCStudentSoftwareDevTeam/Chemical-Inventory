@@ -15,7 +15,7 @@ from flask import \
 @app.route('/ma/ContainerInfo/<chemId>/<barcodeId>/', methods = ['GET', 'POST'])
 @require_role('admin')
 def maContainerInfo(chemId, barcodeId):
-  chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.barcodeId == barcodeId)
+  chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
   if chemical.remove == True:
     return redirect('ma/ChemTable')
   container = containersModel.Containers.get(containersModel.Containers.barcodeId == barcodeId)
@@ -49,7 +49,7 @@ def maContainerInfo(chemId, barcodeId):
                        histories = histories)
                        
                        
-@app.route('/sa/ContainerInfo/<chemId>/<barcodeId>/dispose/', methods = ['GET', 'POST'])
+@app.route('/ma/ContainerInfo/<chemId>/<barcodeId>/dispose/', methods = ['GET', 'POST'])
 def maContainerDispose(chemId, barcodeId):
   chem = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
   container = containersModel.Containers.get(containersModel.Containers.barcodeId == barcodeId)

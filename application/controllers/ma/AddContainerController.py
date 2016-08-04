@@ -19,9 +19,9 @@ from flask import \
 def maAddContainer(chemName, chemId):
   chemInfo = Chemicals.get(Chemicals.chemId == chemId)
   storageList = Storages.select().order_by(Storages.roomId)
+  lastCont = Containers.select().order_by(-Containers.barcodeId).get().barcodeId # Gets the last entered container. Used for creating the next barcode
+  #First creation of lastCont is needed when the page is called with method of GET
   buildingList = Buildings.select()
-  lastCont = Containers.select().order_by(-Containers.barcodeId).get() # Gets the last entered container. Used for creating the next barcode
-  
   if request.method == "GET":
       return render_template("views/ma/AddContainerView.html",
                              config = config,
@@ -34,6 +34,8 @@ def maAddContainer(chemName, chemId):
     data = request.form
     modelData, extraData = sortPost(data, Containers)
     Containers.create(**modelData)
+    lastCont = Containers.select().order_by(-Containers.barcodeId).get().barcodeId # Gets the last entered container. Used for creating the next barcode
+    #Need to reset lastCont because the last created barcode has been updated
     flash("Container added successfully") #Flash a success message
   except:
     flash("Container could not be added") #If there was an error, flash an error message

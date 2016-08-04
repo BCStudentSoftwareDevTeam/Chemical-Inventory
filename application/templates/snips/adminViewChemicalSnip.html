@@ -40,7 +40,7 @@
         <li><a data-toggle="tab" href="#hazards">Hazards</a></li>
         <li><a data-toggle="tab" href="#edit">Edit Chemical</a></li>
         {% set chemName = (chemInfo.name) %}
-        <li><a data="tab" href="../../../AddContainer/{{chemName}}/{{chemInfo.chemId}}/">Add a new Container</a></li>
+        <li><a data="tab" href="../../AddContainer/{{chemName}}/{{chemInfo.chemId}}/">Add a new Container</a></li>
         {# example code for tabs found here: http://jsfiddle.net/xfw8t/12/ #}
     </ul>
     
@@ -59,9 +59,9 @@
             </thead>
             {%  for container in containers  %}
               {% if container.checkedOut != True %}
-                <tr class="success" style="cursor: pointer;" onclick="window.location.href = '../../../ContainerInfo/{{chemInfo.chemId}}/{{container.barcodeId}}/'";>
+                <tr class="success" style="cursor: pointer;" onclick="window.location.href = '../../ContainerInfo/{{chemInfo.chemId}}/{{container.barcodeId}}/'";>
               {% else %}
-                <tr class="danger" style="cursor: pointer;" onclick="window.location.href = '../../../ContainerInfo/{{chemInfo.chemId}}/{{container.barcodeId}}/'";>
+                <tr class="danger" style="cursor: pointer;" onclick="window.location.href = '../../ContainerInfo/{{chemInfo.chemId}}/{{container.barcodeId}}/'";>
               {% endif %}
                 {%  for field in contConfig['containerInformation']  %}
                   {%  set attribute = field.id  %}
@@ -83,7 +83,7 @@
             {%  endfor  %}
           </table>
           {# TODO: Change type of link #}
-          <a data="tab" href="../../../AddContainer/{{chemName}}/{{chemInfo.chemId}}/"><span class="glyphicon glyphicon-plus"></span>Add a new Container of {{chemInfo.name}} </a>
+          <a data="tab" href="../../AddContainer/{{chemName}}/{{chemInfo.chemId}}/"><span class="glyphicon glyphicon-plus"></span>Add a new Container of {{chemInfo.name}} </a>
         </div>
         
         <div id="info" class="tab-pane fade">
