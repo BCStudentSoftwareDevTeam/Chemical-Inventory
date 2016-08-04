@@ -14,9 +14,9 @@ from flask import \
 @app.route('/sa/ChemTable/', methods = ['GET'])
 @require_role('systemAdmin')
 def saChemTable():
-  chemicals = Chemicals.select()
-  contDict = {}
-  for chemical in chemicals:
+  chemicals = Chemicals.select() #Get all chemicals from the database
+  contDict = {} #Set up a dictionary for all containers
+  for chemical in chemicals: #For each chemical
     contDict[chemical.name] = (((Chemicals
                               .select()
                               .join(Containers))
@@ -26,6 +26,7 @@ def saChemTable():
                                 (Containers.checkedOut == False)&
                                 (Chemicals.remove == False))
                               .count()))
+  #(Above) Set value for the chemicals name to a count of how many containers of this chemical that are not checked out, and have not been disposed of
                               
   return render_template("views/sa/ChemTableView.html",
                           config = config, 

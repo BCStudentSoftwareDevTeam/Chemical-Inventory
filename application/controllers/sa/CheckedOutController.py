@@ -12,7 +12,7 @@ from flask import \
 @app.route('/sa/CheckedOut/', methods = ['GET'])
 @require_role('systemAdmin')
 def CheckedOut():
-  containers = Containers.select().where(Containers.checkedOut == True)
+  containers = Containers.select().where(Containers.checkedOut == True) #Get a list of all containers that are set to checked out
   return render_template("views/sa/CheckedOutView.html", 
                          config = config,
                          contConfig = contConfig,

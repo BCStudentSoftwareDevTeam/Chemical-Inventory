@@ -2,12 +2,8 @@
 
 {% block body %}
 
+{% include "Navigation/saMenu.html" %}
 
-{%  include "Navigation/saMenu.html"  %}
-<h1>Check In Chemical</h1>
-<div>
-  {% include "snips/CheckIn.html"%}
-</div>
-
+{% include "snips/CheckIn.html" %}
 
 {% endblock %}

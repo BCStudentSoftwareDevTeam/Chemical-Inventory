@@ -26,12 +26,11 @@ def maContainerInfo(chemId, barcodeId):
   histories = historiesModel.Histories.select().where(historiesModel.Histories.containerId == barcodeId)
   if request.method =="POST":
     data = request.form
-    historiesModel.Histories(containerId = data['containerId'],
-                             movedFrom = data['location'],
-                             movedTo = data['storageId'],
-                             pastUnit = data['unit'],
-                             pastQuantity = data['quantity'],
-                             modDate = datetime.now()).save()
+    historiesModel.Histories(containerId = data['barcode'],
+                            movedFrom = data['location'],
+                            movedTo = data['storageId'],
+                            pastQuantity = data['quantity'],
+                            modDate = datetime.date.today()).save()
     cont = containersModel.Containers.get(barcodeId = barcodeId)
     cont.checkOutReason  = data['class']
     cont.checkedOut = True
@@ -49,7 +48,8 @@ def maContainerInfo(chemId, barcodeId):
                        buildingList = buildingList,
                        histories = histories)
                        
-@app.route('/ma/ContainerInfo/<chemId>/<barcodeId>/dispose/', methods = ['GET', 'POST'])
+                       
+@app.route('/sa/ContainerInfo/<chemId>/<barcodeId>/dispose/', methods = ['GET', 'POST'])
 def maContainerDispose(chemId, barcodeId):
   chem = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
   container = containersModel.Containers.get(containersModel.Containers.barcodeId == barcodeId)

@@ -33,10 +33,10 @@ def saHome():
                                floors = floors,
                                rooms = rooms,
                                storages = storages)
-    data = request.form
-    if data['location'] == "Building":
-        building = Buildings.get(Buildings.bId == data['id'])
-        building.name = data['name']
+    data = request.form #If a form is posted to the page
+    if data['location'] == "Building": #If the form is editing a building
+        building = Buildings.get(Buildings.bId == data['id']) #Get building to be edited
+        building.name = data['name'] #Change all information to what was in the form
         building.numFloors = data['numFloors']
         building.address = data['address']
         building.save()
@@ -47,8 +47,8 @@ def saHome():
                                floors = floors,
                                rooms = rooms,
                                storages = storages)
-    elif data['location'] == "Floor":
-        floor = Floors.get(Floors.fId == data['id'])
+    elif data['location'] == "Floor": #If the form is editing a floor
+        floor = Floors.get(Floors.fId == data['id']) #Get floor to be edited and change all information to what was in form
         floor.name = data['name']
         floor.storageLimits = data['storageLimits']
         floor.save()
@@ -59,19 +59,19 @@ def saHome():
                                floors = floors,
                                rooms = rooms,
                                storages = storages)
-    elif data['location'] == "Room":
-        room = Rooms.get(Rooms.rId == data['id'])
+    elif data['location'] == "Room": #If the form is editing a room
+        room = Rooms.get(Rooms.rId == data['id']) #Get room to be edited and change all information to what was in form
         room.name = data['name']
         room.save()
-        return render_template("views/ma/HomeView.html",
+        return render_template("views/sa/HomeView.html",
                                config = config,
                                locationConfig = locationConfig,
                                buildings = buildings,
                                floors = floors,
                                rooms = rooms,
                                storages = storages)
-    elif data['location'] == "Storage":
-        storage = Storages.get(Storages.sId == data['id'])
+    elif data['location'] == "Storage": #If the form is editing a storage
+        storage = Storages.get(Storages.sId == data['id']) #Get storage location to be edited and change all information to what was in form
         storage.name = data['name']
         storage.save()
         return render_template("views/sa/HomeView.html",

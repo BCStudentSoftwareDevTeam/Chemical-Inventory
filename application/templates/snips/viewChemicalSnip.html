@@ -13,8 +13,8 @@
     </ul>
     
     <div class="tab-content">
+      {# Table of all containers that is seen when the 'containers' tab is selected #}
         <div id="containers" class="tab-pane fade in active">
-          <h3>Containers</h3>
           <table class="table">
             <thead>
               <tr>
@@ -53,7 +53,7 @@
         </div>
         
         <div id="info" class="tab-pane fade">
-          <h3>Information</h3>
+          {# Table of all chemical information that is shown when 'info' tab is selected #}
           <table class="table table-striped">
           {% for field in chemConfig['addChemInputs'] %}
             {% set attribute = field.name %}
@@ -84,7 +84,7 @@
         </div>
         
         <div id="hazards" class="tab-pane fade">
-          <h3>Hazards</h3>
+          {# Show all hazards or chemical (nfpa, hmis, and pictograms) #}
           Primary Hazard: {{chemInfo.primaryHazard}}
           <div class="col-sm-7">
             <div class="panel panel-default text-center">

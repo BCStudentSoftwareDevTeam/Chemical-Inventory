@@ -4,9 +4,10 @@
       <div class="form-group row">
         <label for="{{group['id']}}" class="col-xs-6">{{group['name']}}</label>
         <div class="col-xs-4">
-          {% if group['id'] == 'name' %}
+          {% if group['id'] == 'name' %} {# Checking name oninput to determine whether percentage is required or not. #}
+          {# If name is equal to one already in the database, percentage should be required #}
             <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" oninput="checkName()" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
-          {% elif group['id'] == "sdsLink" %}
+          {% elif group['id'] == "sdsLink" %} {# If it is the sdsLink, add a link to msdsonline #}
             <div class="input-group-addon">https://</div>
             <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
             <div class="input-group-addon"><a target="blank" href="https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?nas=True">Find SDS Here</a></div>
@@ -20,11 +21,12 @@
    
     {%  for group in chemConfig['addChemDropdowns']  %}
     <div class="form-group row">
-      <label for="{{  group['name'] }}" class="col-xs-6">{{  group['name']  }}:</label>
+      <label for="{{  group['name'] }}" class="col-xs-6">{{group['name']}}:</label>
       <div class="col-xs-4">
         <select id="{{  group['id']  }}" name="{{  group['id']  }}" class="form-control">
           <option selected disabled value="">Select One</option>
           {%  for selection in group['selections']  %}
+          {# Dropdown selections #}
           <option value="{{  selection  }}">{{  selection  }}</option>
           {%  endfor  %}
         </select>
@@ -37,8 +39,8 @@
       <div class="col-xs-4">
         {%for division in chemConfig['NFPAdiamond']%}
           <label for="{{division['section']}}">{{division['section']}}</label>
-          <select id="{{division['id']}}" name="{{  division['id']  }}" class="form-control">
-            <option value="" selected disabled>Select One</option>
+          <select id="{{division['id']}}" name="{{division['id']}}" class="form-control">
+            <option value="" selected>Select One</option>
           {%for selection in division['selections']%}
             <option value="{{selection}}">{{selection}}</option>
           {%endfor%}
@@ -52,24 +54,26 @@
       {%  for check in chemConfig['addChemChecks']  %}
         <div class="checkbox col-sm-12">
           <label>
-            <input type="checkbox" name="{{check['name']}}" value="{{check['value']}}"/>
+            <input type="checkbox" id="{{check['id']}}" name="{{check['id']}}"/>
             {{check['name']}}
+            <input type="hidden" id="{{check['id']}}" name="{{check['id']}}" value=""> {# Needed for edit form. Forces form to update value of deselected checkboxes. #}
           </label>
         </div>
       {%  endfor  %}
     </div>
     
     <div class="form-group row">
-      <label for="pictograms">Please select the appropriate hazard pictogram.</label>
+      <label for="pictograms">Please select the appropriate hazard pictogram(s).</label>
       <div class="checkbox col-xs-7 col-xs-offset-2">
         <ul>
           {%for hazardPict in chemConfig['pictograms']%}
             <li>
-              <input type="checkbox" name="hazardPict" id="{{hazardPict['title']}}" value="{{hazardPict['title']}}" hidden>
-                <label for="{{hazardPict['title']}}" class="hazardLabel">
-                  <img src="{{hazardPict['pict']}}" id="{{hazardPict['title']}}" alt="{{hazardPict['alt']}}" class="hazardRadio"></img>
+              <input type="checkbox" name="{{hazardPict['id']}}" id="{{hazardPict['id']}}" value="{{hazardPict['id']}}" hidden> {# Needed for edit form. Forces form to update value of deselected checkboxes. #}
+                <label for="{{hazardPict['id']}}" class="hazardLabel">
+                  <img src="{{hazardPict['pict']}}" id="{{hazardPict['id']}}" alt="{{hazardPict['alt']}}" class="hazardRadio"></img>
                 </label>
               </input>
+              <input type="hidden" name="{{hazardPict['id']}}" id="{{hazardPict['id']}}" value="">
             </li>
           {%endfor%}
         </ul>

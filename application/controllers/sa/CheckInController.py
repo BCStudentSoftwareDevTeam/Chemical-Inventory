@@ -20,4 +20,4 @@ def saCheckIn():
                            config = config,
                            contConfig = contConfig,
                            checkInConfig = checkInConfig,
-                           container = None)
+                           container = None) #container = None is needed as a placeholder for the page before the barcode is entered.

@@ -16,13 +16,13 @@ class Containers (Model):
   receiveDate        = DateTimeField(default = datetime.datetime.now)
   disposalDate       = DateTimeField(null = True)
   conType            = CharField(default = "")
-  manufacturer       = CharField(null = True) # Why is manufacturer allowed to be null?
+  manufacturer       = CharField(null = True)
   capacityUnit       = CharField(default = "") # units container is initially measured in
   capacity           = FloatField(null = False)# amount of units that the container can hold
   checkedOut         = BooleanField(default = False) # set to True upon checkout
-  checkOutReason     = CharField(null = True) # Required field on checkout page
-  forProf            = CharField(null = True) # Required field on checkout page
-  checkedOutBy       = CharField(null = True) # Required field on checkout page
+  checkOutReason     = CharField(null = True)
+  forProf            = CharField(null = True)
+  checkedOutBy       = CharField(null = True) # Will be filled in with users username upon checkout
 
   class Meta:
     database = getDB("inventory")

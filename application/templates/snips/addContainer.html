@@ -8,6 +8,7 @@
     {% endfor %}
   {% endif %}
 {% endwith %}
+
 <div class="clearfix"></div>
 <script src="/static/js/local/createBarcode.js"></script>
 <div class="col-sm-offset-3">
@@ -17,15 +18,15 @@
   <form name="addCont" method="post" action="../../../AddContainer/{{chemInfo.name}}/{{chemInfo.chemId}}/">
     <input type="hidden" id="chemId" name="chemId" value="{{chemInfo.chemId}}"/>
       {%  for group in contConfig['containerInformation']  %}
-      {# {% if group.id == capacityUnit onselect = "PickUnit()" %} #}
+      {# {% if group.id == capacityUnit onselect = "PickUnit()" %} #} {# Not sure how this line is supposed to be used.... #}
         {%  if group.type != 'select'  %}
           {% if group.special == 'readonly' %}
             <div class="form-group row">
               <label for="{{group.id}}" class="col-sm-6">{{group.name}}</label>
               <div class="col-sm-6">
                 <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" value="" {{group.special}}/>
-                <script type="text/javascript">
-                  createBarcode('{{group.id}}', '{{lastCont.barcodeId}}');
+                <script>
+                  createBarcode('{{group.id}}', '{{lastCont.barcodeId}}'); {# Creates barcode based on last barcode, and date. Fills barcode field to show user. #}
                 </script>
               </div>
             </div>
@@ -33,7 +34,7 @@
             <div class="form-group row">
               <label for="{{group.id}}" class="col-sm-6">{{group.name}}</label>
               <div class="col-sm-6">
-              <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" placeholder="{{group.placeholder}}" min='0' max='10000' step="any" {{group.special}}/>
+              <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" placeholder="{{group.placeholder}}" min='1' max='10000' step="any" {{group.special}}/>
               </div>
             </div>
           {% endif %}
@@ -57,10 +58,10 @@
                   <select id="{{group.id}}" name="{{group.id}}" class="form-control" {{group.special}}>
                     <option selected disabled value="">Select One</option>
                     {% for building in buildingList %}
-                      <optgroup label="{{building.name}} Building"></optgroup>
+                      <optgroup label="{{building.name}} Building"></optgroup> {# Break dropdown up by building, but user cannot select a building #}
                       {% for storage in storageList %}
                         {% if storage.roomId.floorId.buildId.bId == building.bId %}
-                          {% if storage.roomId.name == storage.name %}
+                          {% if storage.roomId.name == storage.name %} {# Checking if storage name and room name are the same. #}
                             <option value="{{storage.sId}}">Room {{storage.roomId.name}}</option>
                           {% else %}
                             <option value="{{storage.sId}}">Room {{storage.roomId.name}} ({{storage.name}})</option>

@@ -2,7 +2,7 @@ from application.models.util import *
 
 class Buildings (Model):
   bId        = PrimaryKeyField()
-  name       = TextField()
+  name       = TextField() #Sans "Building"
   numFloors  = FloatField()
   address    = TextField()
 

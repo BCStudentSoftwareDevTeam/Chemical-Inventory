@@ -18,22 +18,22 @@ def maAddChemical():
       return render_template("views/ma/AddChemicalView.html",
                              config = config,
                              chemConfig = chemConfig)
-  data = request.form
+  data = request.form #If there is a form posted to the page
   
-  modelData, extraData = sortPost(data, chemicalsModel.Chemicals)
-  chemicalsModel.Chemicals.create(**modelData)
+  modelData, extraData = sortPost(data, chemicalsModel.Chemicals) #Only get relevant data for the current Model
+  chemicalsModel.Chemicals.create(**modelData) #Create instance of Chemical with mapped info in modelData
   return render_template("views/ma/AddChemicalView.html",
                          config = config,
                          chemConfig = chemConfig)
                          
-@app.route('/checkName/', methods=['GET'])
-def checkName(name):
-  chemName = request.args.get('chemName')
-  try:
-    chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.name == chemName)
-    return render_template('snips/AddChemical.html',
-                           avatar_url = process_data(data),
-                           config = config,
-                           chemConfig = chemConfig)
-  except:
-    pass
+# @app.route('/checkName/', methods=['GET'])
+# def checkName(name):
+#   chemName = request.args.get('chemName')
+#   try:
+#     chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.name == chemName)
+#     return render_template('snips/AddChemical.html',
+#                           avatar_url = process_data(data),
+#                           config = config,
+#                           chemConfig = chemConfig)
+#   except:
+#     pass

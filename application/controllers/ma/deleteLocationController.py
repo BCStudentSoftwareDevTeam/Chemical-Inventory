@@ -14,9 +14,9 @@ from flask import \
     request, \
     url_for
 
-@app.route('/ma/delete/<location>/<lId>/', methods = ['GET', 'POST'])
+@app.route('/ma/delete/<location>/<lId>/', methods = ['GET', 'POST']) #Called from delete location modals
 def maDelete(location, lId):
-    if request.method == "GET":
+    if request.method == "GET": #Calls delete queries based on what type of location is being deleted.
         if location == "Building":
             building = Buildings.delete().where(Buildings.bId == lId)
             building.execute()
@@ -29,4 +29,4 @@ def maDelete(location, lId):
         elif location == "Storage":
             storage = Storages.delete().where(Storages.sId == lId)
             storage.execute()
-    return redirect("ma/ManageBuildings/")
+    return redirect("ma/Home/")

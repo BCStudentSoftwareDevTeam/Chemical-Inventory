@@ -1,5 +1,5 @@
 
-<h1 align = "center"><a href="../../../ViewChemical/{{chemical.name}}/{{chemical.chemId}}/" >{{chemical.name}}</a></h1>
+<h1 align="center"><a href="../../../ViewChemical/{{chemical.name}}/{{chemical.chemId}}/" >{{chemical.name}}</a></h1>
 
 <div class="col-md-8 col-md-offset-2">
     <ul class="nav nav-tabs">
@@ -20,22 +20,23 @@
           <h3>Check Out</h3>
             <div class="form">
 
-              <form name="checkOutForm" method = "POST" action = "/ma/ContainerInfo/{{chemical.chemId}}/{{container.barcodeId}}/">
+              <form name="checkOutForm" method="POST" action="/ma/ContainerInfo/{{chemical.chemId}}/{{container.barcodeId}}/">
                 <label for="name" class="col-sm-2">Name:</label>
-                  <input class="form-control" type = "text" name ="chemname" value = "{{chemical.name}}" readonly>
-                <label for ="barcode" class="col-sm-2">Barcode:</label>
-                  <input class="form-control" type = "number" name ="barcode" value = "{{container.barcodeId}}" readonly>
-                <label for = "quantity" class = "col-sm-2"> Quantity:</label>
-                  <input class="form-control" type= "varchar" name ="quantity" value = "{{container.currentQuantity}} {{container.currentQuantityUnit}} " readonly>
-                <label for = "location" class = "col-sm-2"> Current Location:</label>
+                  <input class="form-control" type="text" name="chemname" value="{{chemical.name}}" readonly>
+                <label for="barcode" class="col-sm-2">Barcode:</label>
+                  <input class="form-control" type="number" name="barcode" value="{{container.barcodeId}}" readonly>
+                <label for="quantity" class="col-sm-2"> Quantity:</label>
+                  <input class="form-control" type="varchar" name="quantity" value="{{container.currentQuantity}} {{container.currentQuantityUnit}}" readonly>
+                <label for="locationShow" class="col-sm-2"> Current Location:</label>
                 {% if container.storageId.roomId.name != container.storageId.name %}
-                  <input class="form-control" type = "varchar" name = "location" value = "{{container.storageId.roomId.floorId.buildId.name}} {{container.storageId.roomId.name}}  {{container.storageId.name}}" readonly>
+                  <input class="form-control" type="varchar" name="locationShow" value="{{container.storageId.roomId.floorId.buildId.name}} {{container.storageId.roomId.name}}  {{container.storageId.name}}" readonly>
                 {% else %}
-                  <input class="form-control" type = "varchar" name = "location" value = "{{container.storageId.roomId.floorId.buildId.name}} {{container.storageId.roomId.name}}" readonly>
-                {% endif %}  
-                <label for = "Class Name" class = "col-sm-2"> Reason for Checkout:</label>
-                  <input class="form-control" id="class" type="text" placeholder="Reason" name="class">
-                <label for = "storage" class = "col-sm-2"> New Location:</label>
+                  <input class="form-control" type="varchar" name="locationShow" value="{{container.storageId.roomId.floorId.buildId.name}} {{container.storageId.roomId.name}}" readonly>
+                {% endif %}
+                <input type="hidden" value="{{container.storageId.sId}}" name="location">
+                <label for="Class Name" class="col-sm-2"> Reason for Checkout:</label>
+                  <input class="form-control" id="class" type="text" placeholder="Reason" name="class" value=''>
+                <label for="storage" class="col-sm-2"> New Location:</label>
                   <select id="storage" name="storageId" class="form-control" required>
                     <option selected disabled value="">Select One</option>
                     {% for building in buildingList %}
@@ -51,8 +52,8 @@
                       {% endfor %}
                     {%endfor%}
                   </select>
-                <label for = "Professor" class = "col-sm-2"> Person Responsible:</label>
-                  <input class="form-control" id = "profname" type="text" placeholder="Name of person responsible" name="forProf">
+                <label for="Professor" class="col-sm-2"> Person Responsible:</label>
+                  <input class="form-control" id="profname" type="text" placeholder="Name of person responsible" name="forProf" value=''>
                 <label for="checkout"></label>
                 <button id="checkout" type="submit" class="btn btn-primary">Check Out Chemical</button>
               </form>
@@ -65,8 +66,8 @@
         <div id="history" class="tab-pane fade in active">
         {% endif %}
           <h3>History</h3>
-          <div class = "container-fluid">
-            <table class = "table" id = "chemhistory" style = "cursor: pointer;">
+          <div class="container-fluid">
+            <table class="table" id="chemhistory" style="cursor: pointer;">
               <thead>
                 <tr>
                   <th>Name:</th>

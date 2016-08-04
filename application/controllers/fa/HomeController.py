@@ -5,6 +5,7 @@ from application.logic.validation import require_role
 
 from flask import \
     render_template, \
+    redirect, \
     request, \
     url_for
 
@@ -12,5 +13,5 @@ from flask import \
 @app.route('/fa/Home/', methods = ['GET'])
 @require_role('faculty')
 def Home():
-  return render_template("views/fa/HomeView.html", config = config)
+  return redirect("/fa/ChemTable/")
 
