@@ -15,7 +15,7 @@ from flask import \
 @app.route('/ma/ContainerInfo/<chemId>/<barcodeId>/', methods = ['GET', 'POST'])
 @require_role('admin')
 def maContainerInfo(chemId, barcodeId):
-  chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
+  chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.barcodeId == barcodeId)
   if chemical.remove == True:
     return redirect('ma/ChemTable')
   container = containersModel.Containers.get(containersModel.Containers.barcodeId == barcodeId)
@@ -38,7 +38,7 @@ def maContainerInfo(chemId, barcodeId):
     cont.storageId = data['storageId']
     cont.save()
     # add form data to container as checked out
-    return redirect('/ma/ViewChemical/%s/%s/' %(chemical.name, chemId))
+    return redirect('/ma/ViewChemical/%s/' %(chemId))
   else:
     return render_template("views/ma/ContainerInfoView.html",
                        config = config,
@@ -55,4 +55,4 @@ def maContainerDispose(chemId, barcodeId):
   container = containersModel.Containers.get(containersModel.Containers.barcodeId == barcodeId)
   container.disposalDate = datetime.date.today()
   container.save()
-  return redirect('/ma/ViewChemical/%s/%s/' %(chem.name, chem.chemId))
+  return redirect('/ma/ViewChemical/%s/' %(chem.chemId))

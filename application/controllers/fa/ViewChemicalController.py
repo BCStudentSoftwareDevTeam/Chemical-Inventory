@@ -12,9 +12,9 @@ from flask import \
     url_for
 
 # PURPOSE: Shows specific chemical and all containers of said chemical.
-@app.route('/fa/ViewChemical/<chemical>/<chemId>/', methods = ['GET'])
+@app.route('/fa/ViewChemical/<chemId>/', methods = ['GET'])
 @require_role('faculty')
-def faViewChemical(chemical, chemId):
+def faViewChemical(chemId):
   chemInfo = Chemicals.get(Chemicals.chemId == chemId) #Get chemical by correct chemId
   if chemInfo.remove == True: #If the chemical attribute, 'remove', was set to True, go back to the chemical table.
     return redirect('fa/ChemTable')
