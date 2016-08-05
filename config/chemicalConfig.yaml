@@ -116,7 +116,7 @@ addChemInputs:
       id: "concentration"
       type: "number"
       placeholder: "Percent Concentration"
-      addon: "Percent Sign"
+      addon: ""
     - name: "Flash Point"
       id: "flashPoint"
       type: "number"

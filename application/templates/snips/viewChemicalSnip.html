@@ -64,7 +64,7 @@
               {% if attribute == "Safety Data Sheet Link" %}
                 <tr>
                   <td>{{attribute}}</td>
-                  <td><a href="{{chemInfo[field.id]}}" target="blank">{{chemInfo[field.id]}}</a></td>
+                  <td><a href="{{chemInfo[field.id]}}" target="blank">MSDS Online ({{chemInfo.name}})</a></td>
                 </tr>
               {% elif field.small is defined %}
                 <tr>

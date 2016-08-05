@@ -14,9 +14,9 @@ from flask import \
     url_for
 
 # PURPOSE: Add Container for a certain chemical
-@app.route('/ma/AddContainer/<chemName>/<chemId>/', methods = ['GET', 'POST'])
+@app.route('/ma/AddContainer/<chemId>/', methods = ['GET', 'POST'])
 @require_role('admin')
-def maAddContainer(chemName, chemId):
+def maAddContainer(chemId):
   chemInfo = Chemicals.get(Chemicals.chemId == chemId)
   storageList = Storages.select().order_by(Storages.roomId)
   buildingList = Buildings.select()

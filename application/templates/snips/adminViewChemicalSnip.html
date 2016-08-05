@@ -40,7 +40,7 @@
         <li><a data-toggle="tab" href="#hazards">Hazards</a></li>
         <li><a data-toggle="tab" href="#edit">Edit Chemical</a></li>
         {% set chemName = (chemInfo.name) %}
-        <li><a data="tab" href="../../AddContainer/{{chemName}}/{{chemInfo.chemId}}/">Add a new Container</a></li>
+        <li><a data="tab" href="../../AddContainer/{{chemInfo.chemId}}/">Add a new Container</a></li>
         {# example code for tabs found here: http://jsfiddle.net/xfw8t/12/ #}
     </ul>
     
@@ -94,7 +94,7 @@
               {% if attribute == "Safety Data Sheet Link" %}
                 <tr>
                   <td>{{attribute}}</td>
-                  <td><a href="{{chemInfo[field.id]}}" target="blank">{{chemInfo[field.id]}}</a></td>
+                  <td><a href="{{chemInfo[field.id]}}" target="blank">MSDS Online ({{chemInfo.name}})</a></td>
                 </tr>
               {% elif field.small is defined %}
                 <tr>

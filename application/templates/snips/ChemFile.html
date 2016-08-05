@@ -14,7 +14,11 @@
                 {% if chemical.remove == False %}
                     {% set chemName = quote(chemical.name) %}
                     <tr onclick="window.location.href = '../ViewChemical/{{chemical.chemId}}/';"> {# The whole row is a link to the correct chemical page #}
-                        <td>{{chemical.name}}</td>
+                        {% if chemical.concentration is not none %} {# Easy way to differentiate chemicals when there are different concentrations #}
+                            <td>{{chemical.name}} ({{chemical.concentration}}%)</td>
+                        {% else %}
+                            <td>{{chemical.name}}</td>
+                        {% endif %}
                         <td>{{chemical.casNum}}</td>
                         {% if config.hazards[chemical.primaryHazard] is defined %}
                             <td>{{config.hazards[chemical.primaryHazard].hazardColor}}</td>
