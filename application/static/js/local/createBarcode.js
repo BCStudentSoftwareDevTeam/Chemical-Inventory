@@ -32,7 +32,8 @@ function createBarcode(elementId, lastBar){
         //current month, and '0000' as no containers have been created in either the current year or current month
     }
     
-    document.getElementById(elementId).value=newBar; //Set value of disabled barcode field to the new barcode
+    document.getElementById(elementId).value=newBar; //Set value of hidden barcode field to the new barcode
+    return newBar
 }
 
 function checkbarNumLen(barNum){

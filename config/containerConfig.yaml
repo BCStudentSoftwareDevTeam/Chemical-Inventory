@@ -42,5 +42,5 @@ containerInformation:
       special: "required"
     - name: "Barcode"
       id: "barcodeId"
-      type: "text"
+      type: "hidden"
       special: "readonly"
