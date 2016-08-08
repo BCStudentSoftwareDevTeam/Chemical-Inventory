@@ -21,6 +21,9 @@ contConfig = Configuration.from_file('config/containerConfig.yaml').configure()
 # Added for check in page
 checkInConfig = Configuration.from_file('config/checkInConfig.yaml').configure()
 
+# Added for check out page
+checkOutConfig = Configuration.from_file('config/checkOutConfig.yaml').configure()
+
 #Added for UserAcess page
 userConfig = Configuration.from_file('config/useraccessConfig.yaml').configure()
 

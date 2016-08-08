@@ -2,8 +2,10 @@
 
 {% block body %}
 
-{% include "Navigation/saMenu.html" %}
+{%  include "Navigation/saMenu.html"  %}
 
-{% include "snips/CheckIn.html" %}
+{% set config = checkInConfig %}
+
+{% include "snips/checkIn.html" %}
 
 {% endblock %}

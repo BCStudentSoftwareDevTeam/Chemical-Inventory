@@ -1,24 +1,59 @@
-
-<div class="col-sm-offset-3"><h3>Check In</h3></div>
-    <div class="container-fluid" style="float:left">
-        <form name="checkIn" class="form-inline">
+<div class="col-sm-offset-4 col-sm-4"><h3>{{config['page']}}</h3>
+    <div class="form">
+        <form name="{{config[formName]}}" class="form" method="post">
             <div class="form-group">
                 <label class="label-control" for="barcodeId">Barcode: </label>
                     <input class="form-control" type="text" id="barcodeId" name="barcodeId" required oninput="checkBar()" autofocus> {# This field is automatically selected on page load. When barcode is entered, checkBar() will get container's info #}
             </div>
-            {% for group in checkInConfig['inputs'] %}
+            {% for group in config['inputs'] %}
                 {% if group.autoPop == "true" %} {# These are the fields that checkBar will fill, they are not editable, and are helpful for the user to see #}
                     <div class="form-group">
-                        <label class="label-control" for="{{group.id}}">{{group.title}}</label>
+                        <label class="label-control" for="{{group.id}}">{{group.name}}</label>
                             <input class="form-control d" type="{{group.type}}" id="{{group.id}}" name="{{group.id}}" readonly>
                     </div>
                 {% else %} {# These are fields that the user will add info. They are disabled at first, but once a valid barcode is entered, checkBar() enables them #}
-                    <div class="form-group">
-                        <label class="label-control" for="{{group.id}}">{{group.title}}</label>
-                            <input class="form-control d" type="{{group.type}}" id="{{group.id}}" name="{{group.id}}" {{group.special}} disabled>
-                    </div>
+                    {%  if group.type == 'select'  %}
+                        {% if group.id == 'storageId' %}
+                          <div class="form-group">
+                            <label for="storage" class="col-sm-4"> New Location:</label>
+                              <select id="storage" name="storageId" class="form-control d" required disabled>
+                                <option selected disabled value="">Select One</option>
+                                {% for building in buildingList %}
+                                  <optgroup label="{{building.name}} Building"></optgroup>
+                                  {% for storage in storageList %}
+                                    {% if storage.roomId.floorId.buildId.bId == building.bId %}
+                                      {% if storage.roomId.name == storage.name %}
+                                        <option value="{{storage.sId}}">Room {{storage.roomId.name}}</option>
+                                      {% else %}
+                                        <option value="{{storage.sId}}">Room {{storage.roomId.name}} ({{storage.name}})</option>
+                                      {% endif %}
+                                    {% endif %}
+                                  {% endfor %}
+                                {%endfor%}
+                              </select>
+                          </div>
+                        {% else %}
+                            <div class="form-group">
+                              <label for="{{  group['name'] }}" class="col-sm-4">{{  group['name']  }}:</label>
+                                <select id="{{group['id']}}" name="{{group['id']}}" class="form-control d" disabled>
+                                  <option selected disabled value="">Select One</option>
+                                  {%  for unit in group['options']  %}
+                                  <option value="{{  unit  }}">{{  unit  }}</option>
+                                  {%  endfor  %}
+                                </select>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <div class="form-group">
+                            <label class="label-control" for="{{group.id}}">{{group.name}}</label>
+                                <input class="form-control d" type="{{group.type}}" id="{{group.id}}" name="{{group.id}}" {{group.special}} disabled>
+                        </div>        
+                    {% endif %}
                 {% endif %}
             {% endfor %}
+            <div class="form-group pull-right">
+                <button type="submit" class="btn btn-primary" id="checkIn">Submit</button>
+            </div>
         </form>
     </div>
 </div>

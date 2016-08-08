@@ -14,7 +14,7 @@ class Storages (Model):
   base          = BooleanField(default = False)
   peroxide      = BooleanField(default = False)
   pressure      = BooleanField(default = False)
-  #refridgerated = BooleanField(default = False) # Do we need to check if a storage is refridgerated?
+  # refridgerated = BooleanField(default = False) # Do we need to check if a storage is refridgerated?
 
   class Meta:
     database = getDB("inventory")
