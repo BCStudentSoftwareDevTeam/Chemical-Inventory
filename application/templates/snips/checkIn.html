@@ -1,11 +1,11 @@
-<div class="col-sm-offset-4 col-sm-4"><h3>{{config['page']}}</h3>
+<div class="col-sm-offset-4 col-sm-4"><h3>{{pageConfig['page']}}</h3>
     <div class="form">
-        <form name="{{config[formName]}}" class="form" method="post">
+        <form name="{{pageConfig[formName]}}" class="form" method="post">
             <div class="form-group">
                 <label class="label-control" for="barcodeId">Barcode: </label>
                     <input class="form-control" type="text" id="barcodeId" name="barcodeId" required oninput="checkBar()" autofocus> {# This field is automatically selected on page load. When barcode is entered, checkBar() will get container's info #}
             </div>
-            {% for group in config['inputs'] %}
+            {% for group in pageConfig['inputs'] %}
                 {% if group.autoPop == "true" %} {# These are the fields that checkBar will fill, they are not editable, and are helpful for the user to see #}
                     <div class="form-group">
                         <label class="label-control" for="{{group.id}}">{{group.name}}</label>
@@ -35,7 +35,7 @@
                         {% else %}
                             <div class="form-group">
                               <label for="{{  group['name'] }}" class="col-sm-4">{{  group['name']  }}:</label>
-                                <select id="{{group['id']}}" name="{{group['id']}}" class="form-control d" disabled>
+                                <select id="{{group['id']}}" name="{{group['id']}}" class="form-control d" step='any' disabled>
                                   <option selected disabled value="">Select One</option>
                                   {%  for unit in group['options']  %}
                                   <option value="{{  unit  }}">{{  unit  }}</option>

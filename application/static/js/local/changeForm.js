@@ -25,6 +25,7 @@ function getData(barcodeId){
         success: function(data) { //fill values of elements: 'chemId', 'prevStorageId', and 'prevQuantity' with info from database
             if (data['status'] === 'OK') {
                 document.getElementById("chemId").value = data['chemName'];
+                document.getElementById("primaryHazard").value = data['hazard']
                 document.getElementById('prevStorageId').value = data['storage'];
                 document.getElementById('prevQuantity').value = data['quantity'] + " " + data['unit'];
                 changeForm(false); //Enable fields
