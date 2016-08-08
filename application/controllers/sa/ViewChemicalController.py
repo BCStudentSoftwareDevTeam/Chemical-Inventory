@@ -12,10 +12,9 @@ from flask import \
     url_for
 
 # PURPOSE: Shows specific chemical and all containers of said chemical.
-@app.route('/sa/ViewChemical/<string:chemical>/<string:chemId>/', methods = ['GET', 'POST'])
+@app.route('/sa/ViewChemical/<chemId>/', methods = ['GET', 'POST'])
 @require_role('systemAdmin')
-
-def saViewChemical(chemical, chemId):
+def saViewChemical(chemId):
   chemInfo = Chemicals.get(Chemicals.chemId == chemId) #Get chemical by correct chemId
   chemDict = Chemicals.select().where(Chemicals.chemId == chemId).dicts().get() #Get chemical by correct chemId as a dictionary
   if chemInfo.remove == True: #If the chemical attribute, 'remove', was set to True, go back to the chemical table.
@@ -25,7 +24,7 @@ def saViewChemical(chemical, chemId):
     for i in data:
       var = setattr(chemInfo, i, data[i])
     chemInfo.save()
-    return redirect('/sa/ViewChemical/%s/%s/' %(chemInfo.name, chemInfo.chemId))
+    return redirect('/sa/ViewChemical/%s/' %(chemInfo.chemId))
   containers = (((Containers
                 .select())
                 .join(Chemicals))

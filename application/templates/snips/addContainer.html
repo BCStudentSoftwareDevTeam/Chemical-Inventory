@@ -12,10 +12,10 @@
 <div class="clearfix"></div>
 <script src="/static/js/local/createBarcode.js"></script>
 <div class="col-sm-offset-3">
-  <h3>Add a new Container of <a href="../../../ViewChemical/{{chemInfo.name}}/{{chemInfo.chemId}}/" >{{chemInfo.name}}</a></h3>
+  <h3>Add a new Container of <a href="../../ViewChemical/{{chemInfo.chemId}}/" >{{chemInfo.name}}</a></h3>
 </div>
 <div class="form col-sm-6 col-sm-offset-3">
-  <form name="addCont" method="post" action="../../../AddContainer/{{chemInfo.name}}/{{chemInfo.chemId}}/">
+  <form name="addCont" method="post" action="../../../AddContainer/{{chemInfo.chemId}}/">
     <input type="hidden" id="chemId" name="chemId" value="{{chemInfo.chemId}}"/>
       {%  for group in contConfig['containerInformation']  %}
       {# {% if group.id == capacityUnit onselect = "PickUnit()" %} #} {# Not sure how this line is supposed to be used.... #}
@@ -26,7 +26,7 @@
               <div class="col-sm-6">
                 <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" value="" {{group.special}}/>
                 <script>
-                  createBarcode('{{group.id}}', '{{lastCont.barcodeId}}'); {# Creates barcode based on last barcode, and date. Fills barcode field to show user. #}
+                  createBarcode('{{group.id}}', '{{lastCont}}'); {# Creates barcode based on last barcode, and date. Fills barcode field to show user. #}
                 </script>
               </div>
             </div>

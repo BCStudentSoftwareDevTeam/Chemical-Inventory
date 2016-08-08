@@ -32,4 +32,4 @@ function getData(barcodeId){
             console.log("Error: There are no containers with that barcode in the system.") //TODO: change to write to a log file as well as console.
         }
     });
-    }
+}

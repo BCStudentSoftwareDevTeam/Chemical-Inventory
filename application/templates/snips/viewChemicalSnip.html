@@ -1,6 +1,10 @@
 <div class="col-sm-6 col-sm-offset-2">
   <h1>{{chemInfo.name}} Information</h1>
-  <h3>Color Code: {{config.hazards[chemInfo.primaryHazard]}}</h3>
+  {% if config.hazards[chemInfo.primaryHazard] is defined %}
+    <h3 style="float:left; background-color: {{config.hazards[chemInfo.primaryHazard].hexColor}}; color: {{config.hazards[chemInfo.primaryHazard].textColor}}">Color Code: {{config.hazards[chemInfo.primaryHazard].hazardColor}} ({{chemInfo.primaryHazard}})</h3>
+  {% else %}
+    <h3>Color Code: Not Available</h3>
+  {% endif %}
 </div>
 
 
@@ -60,7 +64,7 @@
               {% if attribute == "Safety Data Sheet Link" %}
                 <tr>
                   <td>{{attribute}}</td>
-                  <td><a href="{{chemInfo[field.id]}}" target="blank">{{chemInfo[field.id]}}</a></td>
+                  <td><a href="{{chemInfo[field.id]}}" target="blank">MSDS Online ({{chemInfo.name}})</a></td>
                 </tr>
               {% elif field.small is defined %}
                 <tr>

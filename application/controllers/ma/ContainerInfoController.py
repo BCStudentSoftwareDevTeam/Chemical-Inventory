@@ -38,7 +38,7 @@ def maContainerInfo(chemId, barcodeId):
     cont.storageId = data['storageId']
     cont.save()
     # add form data to container as checked out
-    return redirect('/ma/ViewChemical/%s/%s/' %(chemical.name, chemId))
+    return redirect('/ma/ViewChemical/%s/' %(chemId))
   else:
     return render_template("views/ma/ContainerInfoView.html",
                        config = config,
@@ -49,10 +49,10 @@ def maContainerInfo(chemId, barcodeId):
                        histories = histories)
                        
                        
-@app.route('/sa/ContainerInfo/<chemId>/<barcodeId>/dispose/', methods = ['GET', 'POST'])
+@app.route('/ma/ContainerInfo/<chemId>/<barcodeId>/dispose/', methods = ['GET', 'POST'])
 def maContainerDispose(chemId, barcodeId):
   chem = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
   container = containersModel.Containers.get(containersModel.Containers.barcodeId == barcodeId)
   container.disposalDate = datetime.date.today()
   container.save()
-  return redirect('/ma/ViewChemical/%s/%s/' %(chem.name, chem.chemId))
+  return redirect('/ma/ViewChemical/%s/' %(chem.chemId))
