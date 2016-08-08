@@ -22,7 +22,6 @@ def maAddChemical():
   data = request.form #If there is a form posted to the page
   
   modelData, extraData = sortPost(data, chemicalsModel.Chemicals) #Only get relevant data for the current Model
-  print modelData
   if modelData['sdsLink'] == None:
     modelData['sdsLink'] = 'https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=%s' %(modelData['name'])
   print modelData['sdsLink']
@@ -46,9 +45,11 @@ def checkName():
 def checkConc():
   name = request.args.get('chemName')
   conc = request.args.get('concentration')
+  print name, conc
   try:
     chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.name == name,
                                             chemicalsModel.Chemicals.concentration == conc)
-    return jsonify({status: 'OK'})
+    if chemical is not None:
+      return jsonify({'status': 'disabled'})
   except:
-    return jsonify({status: 'Computer says no'})
+    return jsonify({'status': 'OK'})

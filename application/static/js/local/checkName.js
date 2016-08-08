@@ -7,7 +7,6 @@ function checkName(){
         data: {value : chemVal},
         type: "GET",
         success: function(data) {
-            console.log(data)
             document.getElementById('concentration').required = data['required']; //url will return a json object with either true or false as the value to this key.
         },
         error: function() {
@@ -18,9 +17,7 @@ function checkName(){
 }
 
 var concentrate = document.getElementById('concentration');
-concentrate.addEventListener("change", checkConc());
-
-function checkConc() {
+concentrate.addEventListener("input", function(){
     var chemName = document.getElementById('name').value;
     if (concentrate.required === true) {
         $.ajax({
@@ -28,11 +25,19 @@ function checkConc() {
             data: {chemName:chemName, concentration:concentrate.value},
             type:"GET",
             success: function(data) {
-                console.log(data);
+                if (data['status'] === 'OK'){
+                    document.getElementById('addChemSubmit').disabled = false;
+                    document.getElementById('concentrationParent').classList.remove('has-error');
+                    document.getElementById('messages').classList.add('hidden');
+                } else {
+                    document.getElementById('addChemSubmit').disabled = true;
+                    document.getElementById('concentrationParent').classList.add('has-error');
+                    document.getElementById('messages').classList.remove('hidden')
+                }
             },
             error: function() {
                 console.log("Error");
             }
         });
     };
-}
+});

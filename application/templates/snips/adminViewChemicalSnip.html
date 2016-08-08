@@ -74,6 +74,15 @@
                         {% else %}
                           <td>{{container[attribute].roomId.floorId.buildId.name}} Building, Room {{container[attribute].roomId.name}}, {{container[attribute].name}}</td>
                         {% endif %}
+                      {% elif attribute == "barcodeId" %}
+                        <td><svg id="barcode{{container.barcodeId}}"></svg></td> {# Creating barcode using JsBarcode library found here: http://lindell.me/JsBarcode #}
+                          <script type="text/javascript">
+                            JsBarcode("#barcode{{container.barcodeId}}", "{{container.barcodeId}}", {
+                              height:30,
+                              fontSize: 15,
+                              background: '' //set value to none to match background color of table row
+                            });
+                          </script>
                       {%  else  %}
                         <td>{{container[attribute]}}</td>
                       {%  endif  %}
