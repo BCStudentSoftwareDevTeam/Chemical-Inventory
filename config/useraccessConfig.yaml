@@ -1,13 +1,27 @@
 useraccess:
-    - name: "Name"
+    - name: "User Name"
       id: "username"
       type: "text"
-      placeholder: "User's Name"
+      placeholder: "username"
       special: "required"
       
     - name: "Report To"
-      id: "report"
+      id: "reportto"
       type: "text"
       placeholder: "Supervisor's Name"
       special: "required"
+      
+    - name: ""
+      id: "start_date"
+      type: "hidden"
+      placeholder: "Start Date"
+      special: "required"
+      
+    - name: "Email Address"
+      id: "emailadd"
+      type: "text"
+      placeholder: "Email Address"
+      special: "required"
+    
+    
       
