@@ -12,7 +12,6 @@
             </thead>
             {% for chemical in chemicals %}
                 {% if chemical.remove == False %}
-<<<<<<< HEAD
                 {% set chemName = quote(chemical.name) %}
                 <tr onclick="window.location.href = '../ViewChemical/{{chemName}}/{{chemical.chemId}}/';">
                     <td>{{chemical.name}}</td>
@@ -21,15 +20,6 @@
                     <td>{{contDict[chemical.name]}}</td>
     
                 </tr>
-=======
-                    {% set chemName = quote(chemical.name) %}
-                    <tr onclick="window.location.href = '../ViewChemical/{{chemName}}/{{chemical.chemId}}/';"> {# The whole row is a link to the correct chemical page #}
-                        <td>{{chemical.name}}</td>
-                        <td>{{chemical.casNum}}</td>
-                        <td>{{config['hazards'][chemical.primaryHazard]}}</td>
-                        <td>{{contDict[chemical.name]}}</td>
-                    </tr>
->>>>>>> 95e359d52a3ec8cc94b344492d4f90b36a7ddbb9
                 {%endif%}
             {%endfor%}
             
