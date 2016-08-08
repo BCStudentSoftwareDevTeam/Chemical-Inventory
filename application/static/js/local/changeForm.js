@@ -28,6 +28,7 @@ function getData(barcodeId){
                 document.getElementById("primaryHazard").value = data['hazard']
                 document.getElementById('prevStorageId').value = data['storage'];
                 document.getElementById('prevQuantity').value = data['quantity'] + " " + data['unit'];
+                document.getElementById('submit').disabled = false;
                 changeForm(false); //Enable fields
             } else {
                 changeForm(true); //Disable and clear fields when there are no containers with matching barcode
