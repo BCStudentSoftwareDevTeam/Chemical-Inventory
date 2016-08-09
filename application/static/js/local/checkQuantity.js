@@ -32,6 +32,7 @@ function checkVals(groups) {
         } else {
             removePreviousErrors();
             document.getElementById('capacityParent').classList.add('has-error');
+            document.getElementById('capacityMessage').classList.remove('hidden');
             return false; //Quantity in container is more than the container can hold.
         }
     } else {

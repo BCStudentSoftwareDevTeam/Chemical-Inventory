@@ -49,7 +49,7 @@
               <div class="col-sm-6">
               <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" placeholder="{{group.placeholder}}" min='1' max='10000' step="any" {{group.special}}/>
               {% if group.id == 'capacity' %}
-                <small>Value must be equal to or greater than value of Current Quantity</small>
+                <span class="label label-danger hidden messages" id="{{group.id}}Message">Value must be equal to or greater than value of Current Quantity</span>
               {% endif %}
               </div>
             </div>
