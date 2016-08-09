@@ -1,15 +1,11 @@
+//stripped down to include only measurements relevant to this system.
+//Names of measurements were changed to match what was already in BCIS
 window.conversionObject = {
     master: {
-        "Mass/Weight": {
+        "Weight": {
             "gram (g)": "1",
             "kilogram (kg)": "0.001",
             "pound (lb)": "2.20462262e-3",
-        },
-        "Temperature": {
-            "Celsius": "1",
-            "Kelvin": "1",
-            "Fahrenheit": "1",
-            "Rankine": "1"
         },
         "Volume": {
             "ounce (oz)": "33814.02220161",

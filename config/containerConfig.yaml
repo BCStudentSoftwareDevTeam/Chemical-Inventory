@@ -1,3 +1,15 @@
+options: &units
+  - measure: "Weight"
+    units:
+      - "gram (g)"
+      - "kilogram (kg)"
+      - "pound (lb)"
+  - measure: "Volume"
+    units:
+      - "ounce (oz)"
+      - "gallon (gal)"
+      - "liter (L)"
+      - "milliliter (mL)"
 containerInformation:
     - name: "Room"
       id: "storageId"
@@ -8,10 +20,12 @@ containerInformation:
       id: "conType"
       type: "select"
       options:
-        - "Bottle"
-        - "Jug"
-        - "Drum"
-        - "That's all I can think of right now"
+        - measure: ""
+          units:
+            - "Bottle"
+            - "Jug"
+            - "Drum"
+            - "That's all I can think of right now"
     - name: "Current Quantity"
       id: "currentQuantity"
       type: "number"
@@ -20,18 +34,7 @@ containerInformation:
     - name: "Current Unit"
       id: "currentQuantityUnit"
       type: "select"
-      options: &units
-        - measure: "Weight"
-          units:
-            - "gram (g)"
-            - "kilogram (kg)"
-            - "pound (lb)"
-        - measure: "Volume"
-          units:
-            - "ounce (oz)"
-            - "gallon (gal)"
-            - "liter (L)"
-            - "milliliter (mL)"
+      options: *units
       special: "required"
     - name: "Container Capacity"
       id: "capacity"

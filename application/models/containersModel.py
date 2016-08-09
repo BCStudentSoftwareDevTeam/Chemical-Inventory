@@ -10,7 +10,7 @@ class Containers (Model):
   chemId             = ForeignKeyField(Chemicals, related_name = 'chemical')
   storageId          = ForeignKeyField(Storages, related_name = 'storage')
   ##
-  barcodeId          = CharField(null = False)
+  barcodeId          = CharField(null = False, unique = True)
   currentQuantityUnit= TextField() # units of chemical
   currentQuantity    = FloatField()# amount of chemical currently in container
   receiveDate        = DateTimeField(default = datetime.datetime.now)
