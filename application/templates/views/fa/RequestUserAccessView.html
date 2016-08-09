@@ -12,7 +12,7 @@
       <label for="{{fields['name']}}" class = "col-sm-4">{{fields['name']}}</label>
       <div class = "col-sm-8">
         {% if fields['special'] == "required" %}
-        <input id="{{fields['id']}}" name="{{fields['id']}}" type="{{fields['type']}}"  placeholder="{{fields['placeholder']}}" {{fields['special']}} class="form-control">
+        <input id="{{fields['id']}}" name="{{fields['id']}}" type="{{fields['type']}}" value = "{{fields['value']}}" placeholder="{{fields['placeholder']}}" {{fields['special']}} class="form-control">
         {% endif %}
         
       </div>
