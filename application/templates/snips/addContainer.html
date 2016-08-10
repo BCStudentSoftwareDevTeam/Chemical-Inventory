@@ -1,10 +1,17 @@
 {% with messages = get_flashed_messages() %}
   {% if messages %}
     {% for message in messages %}
-      <div class="alert alert-success col-md-4 col-md-offset-4" role="alert">
+     {% if message == "Container could not be added" %}
+      <div class="alert alert-danger col-md-4 col-md-offset-4" role="alert" id="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <strong>{{message}}</strong>
       </div>
+     {% else %}
+      <div class="alert alert-success col-md-4 col-md-offset-4" role="alert" id="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>{{message}}</strong>
+      </div>
+     {% endif %}
     {% endfor %}
   {% endif %}
 {% endwith %}
@@ -15,11 +22,11 @@
   <h3>Add a new Container of <a href="../../ViewChemical/{{chemInfo.chemId}}/" >{{chemInfo.name}}</a></h3>
 </div>
 <div class="form col-sm-6 col-sm-offset-3">
-  <form name="addCont" method="post" action="../../../AddContainer/{{chemInfo.chemId}}/">
+  <form name="addCont" id="addCont" method="post" onsubmit="return checkVals({{contConfig['options']}})">
     <input type="hidden" id="chemId" name="chemId" value="{{chemInfo.chemId}}"/>
-      {%  for group in contConfig['containerInformation']  %}
+      {% for group in contConfig['containerInformation'] %}
       {# {% if group.id == capacityUnit onselect = "PickUnit()" %} #} {# Not sure how this line is supposed to be used.... #}
-        {%  if group.type != 'select'  %}
+        {% if group.type != 'select' %}
           {% if group.special == 'readonly' %}
             <div class="form-group row">
               <label for="{{group.id}}" class="col-sm-6">{{group.name}}</label>
@@ -32,29 +39,42 @@
                   JsBarcode('#barcode', bar, {
                               height:30,
                               fontSize: 15
-                              });
+                             });
                 </script>
               </div>
             </div>
           {% else %}
-            <div class="form-group row">
+            <div class="form-group row" id="{{group.id}}Parent">
               <label for="{{group.id}}" class="col-sm-6">{{group.name}}</label>
               <div class="col-sm-6">
               <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" placeholder="{{group.placeholder}}" min='1' max='10000' step="any" {{group.special}}/>
+              {% if group.id == 'capacity' %}
+                <span class="label label-danger hidden messages" id="{{group.id}}Message">Value must be equal to or greater than value of Current Quantity</span>
+              {% endif %}
               </div>
             </div>
           {% endif %}
-        {%  else  %}
+        {% else %}
           {% if group.id != 'storageId' %}
-            <div class="form-group row">
-              <label for="{{  group['name'] }}" class="col-sm-6">{{  group['name']  }}:</label>
+            <div class="form-group row" id="{{group.id}}Parent">
+              <label for="{{ group['name'] }}" class="col-sm-6">{{ group['name'] }}:</label>
               <div class="col-sm-6">
                 <select id="{{group['id']}}" name="{{group['id']}}" class="form-control" {{group.special}}>
                   <option selected disabled value="">Select One</option>
-                  {%  for unit in group['options']  %}
-                  <option value="{{  unit  }}">{{  unit  }}</option>
-                  {%  endfor  %}
-                </select> 
+                    {% for measure in group.options %}
+                     {% if measure.measure != "" %}
+                      <optgroup label="{{measure.measure}}"></optgroup>
+                      {% for unit in measure.units %}
+                        <option value="{{ unit }}">{{ unit }}</option>
+                      {% endfor %}
+                     {% else %}
+                      {% for unit in measure.units %}
+                        <option value="{{ unit }}">{{ unit }}</option>
+                      {% endfor %}
+                     {% endif %}
+                    {% endfor %}
+                </select>
+                <span class="label label-danger hidden messages" id="{{group.id}}Message">Measurements should be of the same type.</span>
               </div>
             </div>
           {% else %}
@@ -79,8 +99,17 @@
                 </div>
               </div>
           {% endif %}
-        {%  endif  %}
-      {%  endfor  %}
-  <button type="submit" class="btn btn-primary" id="submitCont">Submit</button>
+        {% endif %}
+      {% endfor %}
+  <button class="btn btn-primary" id="submitCont">Submit</button>
   </form>
 </div>
+<script src="/static/js/local/measurements.js-master/metrics.js"></script>
+<script src="/static/js/local/checkQuantity.js"></script>
+<script type="text/javascript">
+   window.setTimeout(function() {
+       $(".alert").fadeTo(500, 0).slideUp(500, function(){
+          $(this).remove(); 
+      });
+  }, 2000);
+</script>

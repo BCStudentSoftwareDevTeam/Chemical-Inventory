@@ -2,6 +2,19 @@ page: "Check In"
 
 formName: "checkIn"
 
+options: &units
+  - measure: "Weight"
+    units:
+      - "gram (g)"
+      - "kilogram (kg)"
+      - "pound (lb)"
+  - measure: "Volume"
+    units:
+      - "ounce (oz)"
+      - "gallon (gal)"
+      - "liter (L)"
+      - "milliliter (mL)"
+
 inputs:
   - name: "Chemical Name"
     id: "chemId" # This may need to change
@@ -30,11 +43,5 @@ inputs:
   - name: "Current Unit"
     id: "currentQuantityUnit"
     type: "select"
-    options:
-      - "gram (g)"
-      - "ounce (oz)"
-      - "pound (lb)"
-      - "liter (L)"
-      - "milliliter (mL)"
-      - "gallon (gal)"
+    options: *units
     special: "required"
