@@ -9,7 +9,6 @@ for file in glob.glob(directoryOfThisFile + "/*Model.py"):
     models.append(os.path.splitext(os.path.basename(file))[0])
 
 print "Found models: {0}".format(models)
-__all__ = models
 
 def classFromName(moduleName, className):
     # load the module, will raise ImportError if module cannot be loaded
