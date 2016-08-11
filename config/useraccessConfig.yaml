@@ -33,6 +33,14 @@ useraccess:
       placeholder: "Start Date"
       special: "required"
       value: ""
+    
+    - name: ""
+      id: "end_date"
+      type: "hidden"
+      placeholder: "End Date"
+      special: "required"
+      value: ""
+   
    
 maaccess:
     - name: "User Name"
@@ -47,11 +55,18 @@ maaccess:
       placeholder: "Supervisor's Name"
       special: "required"
       
-    - name: ""
+    - name: "Start Date"
       id: "start_date"
-      type: "hidden"
+      type: "datetime"
       placeholder: "Start Date"
-      special: "required"
+      special: "calendar"
+      
+    - name: "End Date"
+      id: "end_date"
+      type: "datetime"
+      placeholder: "End Date"
+      special: "calendar"
+      
       
     - name: "Email Address"
       id: "emailadd"
@@ -65,8 +80,8 @@ maaccess:
       placeholder: "Select One"
       special: &diffusers
         - "System Adminstrator"
-        - "Faculty and Staff"
-        - "Student"
+        - "fauser"
+        - "student"
     
         
 
