@@ -6,7 +6,7 @@ import datetime
 class Histories (Model):
   hId          = PrimaryKeyField()
   ##Foreign Keys
-  movedFrom     = ForeignKeyField(Storages, related_name="movedFrom")
+  movedFrom     = ForeignKeyField(Storages, related_name="movedFrom", null = True)
   movedTo       = ForeignKeyField(Storages, related_name="movedTo")
   containerId   = ForeignKeyField(Containers, related_name = "containers")
   ##

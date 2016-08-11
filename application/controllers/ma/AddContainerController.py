@@ -3,6 +3,7 @@ from application.models.containersModel import *
 from application.models.roomsModel import *
 from application.models.storagesModel import *
 from application.models.buildingsModel import *
+from application.models.historiesModel import *
 from application.config import *
 from application.logic.validation import require_role
 from application.logic.sortPost import *
@@ -25,6 +26,10 @@ def maAddContainer(chemId):
       data = request.form
       modelData, extraData = sortPost(data, Containers)
       Containers.create(**modelData)
+      Histories.create(movedTo = modelData['storageId'],
+                       containerId = modelData['barcodeId'], 
+                       modUser = extraData['user'], 
+                       pastQuantity = "%s %s" %(modelData['currentQuantity'], modelData['currentQuantityUnit']))
       flash("Container added successfully") #Flash a success message
     except:
       flash("Container could not be added") #If there was an error, flash an error message

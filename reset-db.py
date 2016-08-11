@@ -335,23 +335,23 @@ def init_db ():
     checkedOut = True,
     checkOutReason = "I think you get the reference",
     forProf = "Professor Utonium",
-    checkedOutBy = "UtoniumP").save()
-    
-  historiesModel.Histories(
-    movedFrom = 8,
-    movedTo = 1,
-    modUser = "Jesson Soto",
-    containerId = 4,
-    pastQuantity = "17 ounce (oz)",
-    modDate = "01/22/2012").save()
+    checkedOutBy = "UtoniumP").save()    
     
   historiesModel.Histories(
     movedFrom = 5,
     movedTo = 8,
     modUser = "Nick DeTore",
-    containerId = 4,
-    pastQuantity = "20 ounce (oz)",
+    containerId = 15080000,
+    pastQuantity = "20.0 ounce (oz)",
     modDate = "01/20/2012").save()
-  
+    
+  historiesModel.Histories(
+    movedFrom = 8,
+    movedTo = 1,
+    modUser = "Jesson Soto",
+    containerId = 15080000,
+    pastQuantity = "17.0 ounce (oz)",
+    modDate = "01/22/2012").save()
+
 if __name__ == "__main__":
   init_db()

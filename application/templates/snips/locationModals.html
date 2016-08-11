@@ -1,4 +1,4 @@
-{####### Remove Building Modal #######}
+{####### Remove Location Modal #######}
 <div class="modal fade" id="remove{{location}}{{attribute}}" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -19,7 +19,7 @@
     </div>
 </div>
 
-{####### Edit Building Modal #######}
+{####### Edit Location Modal #######}
 <div class="modal fade" id="edit{{location}}{{attribute}}" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -30,22 +30,65 @@
                 <h4 class="modal-title" id="edit{{location}}{{attribute}}Label">Edit {{location}}: {{item.name}}</h4>
             </div>
             <div class="modal-body text-center">
-                <form class="form" name="edit{{location}}{{attribute}}" method="post" action="#">
+                <form class="form" name="edit{{location}}{{attribute}}" method="post">
                     <input type="hidden" name="location" value="{{location}}">
+                    <input type="hidden" value="edit" name="action">
                     <input type="hidden" name="id" value="{{attribute}}">
-                    {% for group in locationConfig[location]['edit'] %}
-                        {% if group.type != "radio" %}
-                            <label class="col-sm-4 col-form-label" for="{{group.id}}">{{group.name}}</label>
-                            <input id="{{group.id}}" class="form-control" name="{{group.id}}" type="{{group.type}}" value="{{item[group.id]}}">
-                        {% else %}
-                            NO
-                        {% endif %}
-                    {% endfor %}
+                    {% if location == "Storage" %}
+                        {% for group in locationConfig[location]['edit'] %}
+                            {% if group.name == "foreignKey" %}
+                                <input type="{{group.type}}" value="{{attribute}}" name="{{group.id}}">
+                            {% elif group.type != "checkbox" %}
+                                <div class="form-group col-xs-8 col-xs-offset-2">
+                                    <label for="{{group.id}}" class="col-form-label">
+                                        {{group.name}}:
+                                    </label>
+                                    <input class="form-control" type="{{group.type}}" id="{{group.id}}" name="{{group.id}}" required='{{group.required}}' value="{{item[group.id]}}">
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        <table>
+                            <thead>
+                                <th>Type of Hazard this storage location can hold</th>
+                                <th>Yes</th>
+                                <th>No</th>
+                            </thead>
+                            {% for group in locationConfig[location]['edit'] %}
+                                {% if group.type == "checkbox" %}
+                                    <tr>
+                                        <td>{{group.name}}</td>
+                                        {% if item[group.id] == True %}
+                                            <td><input type="{{group.type}}" name="{{group.id}}" value="True" id="{{group.id}}" checked></td>
+                                        {% else %}
+                                            <td><input type="{{group.type}}" name="{{group.id}}" value="True" id="{{group.id}}"></td>
+                                        {% endif %}
+                                        <input type="hidden" name="{{group.id}}" value="" id="{{group.id}}">
+                                    </tr>
+                                
+                                {% endif %}
+                            {% endfor %}
+                        </table>
+                    {% else %}
+                        {% for group in locationConfig[location]['edit'] %}
+                            {% if group.name == "foreignKey" %}
+                                <input type="{{group.type}}" value="{{attribute}}" name="{{group.id}}">
+                            {% else %}
+                                <div class="form-group col-xs-8 col-xs-offset-2">
+                                    <label for="{{group.id}}" class="col-form-label">
+                                        {{group.name}}:
+                                    </label>
+                                    <input class="form-control" type="{{group.type}}" id="{{group.id}}" name="{{group.id}}" required='{{group.required}}' value="{{item[group.id]}}">
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-success">Save</button>
-                </form>
-                <a class="btn btn-danger" data-dismiss="modal">Cancel</a>
+                <div class="btn-group">
+                    <button onclick="edit{{location}}{{attribute}}.submit()" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</a>
+                </div>
             </div>
         </div>
     </div>
