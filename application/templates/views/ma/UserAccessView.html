@@ -4,40 +4,47 @@
 
 {%  include "Navigation/maMenu.html"  %}
 
-<div>
-  <div class= "container text-center"><h3>Add Users</h3>
-<div class= "form col-sm-offset-3 col-sm-4">
-  <form name = "requestuser" method = "post" class ="form-group">
-    {% for fields in userConfig['maaccess']%}
-    <div class = "form-group row">
-      <label for="{{fields['name']}}" class = "col-sm-4">{{fields['name']}}</label>
-      <div class = "col-sm-8">
-        {% if fields['special'] == "required" %}
-        <input id="{{fields['id']}}" name="{{fields['id']}}" type="{{fields['type']}}" value = "{{fields['value']}}" placeholder="{{fields['placeholder']}}" {{fields['special']}} class="form-control">
-        {% elif fields['special'] == "calendar" %}
-         {% include "snips/Date.html" %}
-        <input type='text'  class="form-control"  id = "{{fields['id']}}" name =  "{{fields['id']}}" placeholder = "MM/DD/YYYY HH:MM: PM/AM" >
-        <span onclick = "toggle('start_date')" 
-                  class = "input-group-addon">
-              <i class = "glyphicon glyphicon-th"></i>
-            </span>
-       
-        {% else %}
-        <select id="{{fields.id}}" name="{{fields.id}}" class="form-control">
-            <option value="" disabled selected>Select One</option>
-            {% for option in fields.special %}
-            <option value="{{option}}">{{option}}</option>
-            {% endfor %}
-        {% endif %} 
-        
-        
-      </div>
+<div class= "container text-center"><h3>Manage Users</h3>
+<div class = "nav nav-tabs">
+  <li class = "active"><a data-toggle = "tab" href = "#add">Add New Users</a></li>
+  <li><a data- toggle = "tab" href = "#approve"></a>Approve Users</li>
+  
+    <div class= "form col-sm-offset-3 col-sm-4">
+      <form name = "requestuser" method = "post" class ="form-group">
+        {% for fields in userConfig['maaccess']%}
+        <div class = "form-group row">
+          <label for="{{fields['name']}}" class = "col-sm-4">{{fields['name']}}</label>
+          <div class = "col-sm-8">
+            {% if fields['special'] == "required" %}
+            <input id="{{fields['id']}}" name="{{fields['id']}}" type="{{fields['type']}}" value = "{{fields['value']}}" placeholder="{{fields['placeholder']}}" {{fields['special']}} class="form-control">
+            {% elif fields['special'] == "calendar" %}
+             {% include "snips/Date.html" %}
+            <input type='text'  class="form-control"  id = "{{fields['id']}}" name =  "{{fields['id']}}" placeholder = "MM/DD/YYYY HH:MM: PM/AM" >
+            <span onclick = "toggle('start_date')" 
+                      class = "input-group-addon">
+                  <i class = "glyphicon glyphicon-th"></i>
+                </span>
+           
+            {% else %}
+            <select id="{{fields.id}}" name="{{fields.id}}" class="form-control">
+                <option value="" disabled selected>Select One</option>
+                {% for option in fields.special %}
+                <option value="{{option}}">{{option}}</option>
+                {% endfor %}
+            {% endif %} 
+            
+            
+          </div>
+        </div>
+        {%endfor%}
+          
+      <input class="btn btn-success" id="addChemSubmit" type="submit" value="Submit">
+      </form>
     </div>
-    {%endfor%}
-      
-  <input class="btn btn-success" id="addChemSubmit" type="submit" value="Submit">
-  </form>
-</div>
-</div>
+  </div>
 
 {% endblock %}
+
+    
+</div>
+  
