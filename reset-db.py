@@ -342,6 +342,7 @@ def init_db ():
     movedTo = 8,
     modUser = "Nick DeTore",
     containerId = 15080000,
+    action = "Created",
     pastQuantity = "20.0 ounce (oz)",
     modDate = "01/20/2012").save()
     
@@ -350,8 +351,18 @@ def init_db ():
     movedTo = 1,
     modUser = "Jesson Soto",
     containerId = 15080000,
+    action = "Checked Out",
+    pastQuantity = "20.0 ounce (oz)",
+    modDate = "01/22/2012").save()   
+    
+  historiesModel.Histories(
+    movedFrom = 1,
+    movedTo = 11,
+    modUser = "Zach Ball",
+    containerId = 15080000,
+    action = "Checked In",
     pastQuantity = "17.0 ounce (oz)",
-    modDate = "01/22/2012").save()
+    modDate = "08/11/2016").save()
 
 if __name__ == "__main__":
   init_db()

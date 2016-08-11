@@ -28,7 +28,8 @@ def maAddContainer(chemId):
       Containers.create(**modelData)
       Histories.create(movedTo = modelData['storageId'],
                        containerId = modelData['barcodeId'], 
-                       modUser = extraData['user'], 
+                       modUser = extraData['user'],
+                       action = "Created",
                        pastQuantity = "%s %s" %(modelData['currentQuantity'], modelData['currentQuantityUnit']))
       flash("Container added successfully") #Flash a success message
     except:

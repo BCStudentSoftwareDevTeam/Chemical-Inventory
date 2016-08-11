@@ -70,10 +70,10 @@
             <table class="table" id="createRecord">
               <thead>
                 <tr>
-                  <th>Created On:</th>
-                  <th>Initial Location:</th>
-                  <th>Initial Amount:</th>
-                  <th>Created By:</th>
+                  <th>Created On</th>
+                  <th>Initial Location</th>
+                  <th>Initial Amount</th>
+                  <th>Created By</th>
                 </tr>
               </thead>
               <tr>
@@ -87,20 +87,22 @@
                 <td>{{histories[0].modUser}}</td>
               </tr>
             </table>
-            <table class="table" id="chemhistory" style="cursor: pointer;">
+            <table class="table table-striped" id="chemhistory">
               <thead>
                 <tr>
-                  <th>Date Modified:</th>
-                  <th>Moved From:</th>
-                  <th>Moved To:</th>
-                  <th>Current Amount:</th>
-                  <th>Last Amount:</th>
-                  <th>Modified By:</th>
+                  <th>Date Modified</th>
+                  <th>Action</th>
+                  <th>Moved From</th>
+                  <th>Moved To</th>
+                  <th>Current Amount</th>
+                  <th>Last Amount</th>
+                  <th>Modified By</th>
                 </tr>
               </thead>
               {% for history in histories[1::] %}
               <tr>
                 <td>{{history.modDate}}</td>
+                <td>{{history.action}}</td>
                 {% if history.movedFrom.roomId.name == history.movedFrom.name %}
                   <td>{{history.movedFrom.roomId.floorId.buildId.name}} Building, Room: {{history.movedFrom.roomId.name}}</td>
                 {% else %}

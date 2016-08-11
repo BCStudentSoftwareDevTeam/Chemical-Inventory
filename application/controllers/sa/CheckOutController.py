@@ -3,6 +3,7 @@ from application.models.chemicalsModel import *
 from application.models.containersModel import *
 from application.models.storagesModel import *
 from application.models.buildingsModel import *
+from application.models.historiesModel import *
 from application.config import *
 from application.logic.validation import require_role
 
@@ -16,12 +17,17 @@ from flask import \
 @app.route('/sa/checkOut/', methods=['GET', 'POST'])
 @require_role('systemAdmin')
 def saCheckOut():
-    print checkOutConfig
     storageList = Storages.select()
     buildingList = Buildings.select()
     if request.method == "POST":
         data = request.form
         cont = Containers.get(Containers.barcodeId == data['barcodeId'])
+        Histories.create(movedFrom = cont.storageId,
+                        movedTo = data['storageId'],
+                        containerId = cont.barcodeId,
+                        modUser = "CheckOutTest",
+                        action = "Checked Out",
+                        pastQuantity = "%s %s" %(cont.currentQuantity, cont.currentQuantityUnit))
         cont.storageId = data['storageId']
         cont.checkedOut = True
         cont.checkOutReason = data['forClass']
