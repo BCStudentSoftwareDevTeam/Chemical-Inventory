@@ -11,6 +11,10 @@ options: &units
       - "liter (L)"
       - "milliliter (mL)"
 containerInformation:
+    - name: "Checked Out"
+      id: "checkedOut"
+      type: "hidden"
+      special: "noShow"
     - name: "Room"
       id: "storageId"
       type: "select"

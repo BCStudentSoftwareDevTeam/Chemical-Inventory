@@ -64,15 +64,15 @@
             {%  for container in containers  %}
               {% if (authLevel == 'admin' or authLevel == 'systemAdmin') %}
                 {% if container.checkedOut != True %}
-                  <tr class="success" style="cursor: pointer;" onclick="window.location.href = '../../ContainerInfo/{{chemInfo.chemId}}/{{container.barcodeId}}/'";>
+                  <tr class="success" style="cursor: pointer; vertical-align:middle" onclick="window.location.href = '../../ContainerInfo/{{chemInfo.chemId}}/{{container.barcodeId}}/'";>
                 {% else %}
-                  <tr class="danger" style="cursor: pointer;" onclick="window.location.href = '../../ContainerInfo/{{chemInfo.chemId}}/{{container.barcodeId}}/'";>
+                  <tr class="danger" style="cursor: pointer; vertical-align:center" onclick="window.location.href = '../../ContainerInfo/{{chemInfo.chemId}}/{{container.barcodeId}}/'";>
                 {% endif %}
               {% else %}
                 {% if container.checkedOut != True %}
-                  <tr class="success">
+                  <tr class="success" style="vertical-align:bottom">
                 {% else %}
-                  <tr class="danger">
+                  <tr class="danger" style="vertical-align:bottom">
                 {% endif %}
               {% endif %}
                 {%  for field in contConfig['containerInformation']  %}
@@ -95,6 +95,12 @@
                               background: '' //set value to none to match background color of table row
                             });
                           </script>
+                      {% elif attribute == 'checkedOut' %}
+                        {% if container[attribute] == True %}
+                          <td style="text-align:center; vertical-align: middle;"><span class="glyphicon glyphicon-ban-circle"></span></td>
+                        {% else %}
+                          <td><span></span></td>
+                        {% endif %}
                       {%  else  %}
                         <td>{{container[attribute]}}</td>
                       {%  endif  %}
