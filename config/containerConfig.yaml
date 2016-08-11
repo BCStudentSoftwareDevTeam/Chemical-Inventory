@@ -11,7 +11,7 @@ options: &units
       - "liter (L)"
       - "milliliter (mL)"
 containerInformation:
-    - name: "Checked Out"
+    - name: "Checked In"
       id: "checkedOut"
       type: "hidden"
       special: "noShow"
