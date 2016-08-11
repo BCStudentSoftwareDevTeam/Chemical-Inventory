@@ -2,10 +2,10 @@
 # This script deletes the database file and configures empty
 # tables for the models defined in the models module.
 from application.models import classes
-from application.models import *
 from application.config import *
+from application.models import *
 import datetime
-
+    
 def init_db ():
   # First, we create the databases.
   for database in config.databases:
@@ -335,23 +335,34 @@ def init_db ():
     checkedOut = True,
     checkOutReason = "I think you get the reference",
     forProf = "Professor Utonium",
-    checkedOutBy = "UtoniumP").save()
-    
-  historiesModel.Histories(
-    movedFrom = 8,
-    movedTo = 1,
-    modUser = "Jesson Soto",
-    containerId = 4,
-    pastQuantity = "17 ounce (oz)",
-    modDate = "01/22/2012").save()
+    checkedOutBy = "UtoniumP").save()    
     
   historiesModel.Histories(
     movedFrom = 5,
     movedTo = 8,
     modUser = "Nick DeTore",
-    containerId = 4,
-    pastQuantity = "20 ounce (oz)",
+    containerId = 15080000,
+    action = "Created",
+    pastQuantity = "20.0 ounce (oz)",
     modDate = "01/20/2012").save()
-  
+    
+  historiesModel.Histories(
+    movedFrom = 8,
+    movedTo = 1,
+    modUser = "Jesson Soto",
+    containerId = 15080000,
+    action = "Checked Out",
+    pastQuantity = "20.0 ounce (oz)",
+    modDate = "01/22/2012").save()   
+    
+  historiesModel.Histories(
+    movedFrom = 1,
+    movedTo = 11,
+    modUser = "Zach Ball",
+    containerId = 15080000,
+    action = "Checked In",
+    pastQuantity = "17.0 ounce (oz)",
+    modDate = "08/11/2016").save()
+
 if __name__ == "__main__":
   init_db()

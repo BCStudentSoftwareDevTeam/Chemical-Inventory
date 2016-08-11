@@ -3,6 +3,7 @@ from application.models.chemicalsModel import *
 from application.models.containersModel import *
 from application.models.storagesModel import *
 from application.models.buildingsModel import *
+from application.models.historiesModel import *
 from application.config import *
 from application.logic.validation import require_role
 
@@ -21,6 +22,11 @@ def saCheckIn():
     if request.method == "POST":
         data = request.form
         cont = Containers.get(Containers.barcodeId == data['barcodeId'])
+        Histories.create(movedFrom = cont.storageId,
+                       movedTo = data['storageId'],
+                       containerId = cont.barcodeId,
+                       modUser = "CheckInTest",
+                       pastQuantity = "%s %s" %(cont.currentQuantity, cont.currentQuantityUnit))
         cont.storageId = data['storageId']
         cont.currentQuantity = data['currentQuantity']
         cont.currentQuantityUnit = data['currentQuantityUnit']

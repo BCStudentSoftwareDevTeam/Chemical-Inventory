@@ -25,7 +25,7 @@
   <form name="addCont" id="addCont" method="post" onsubmit="return checkVals({{contConfig['options']}})">
     <input type="hidden" id="chemId" name="chemId" value="{{chemInfo.chemId}}"/>
       {% for group in contConfig['containerInformation'] %}
-      {# {% if group.id == capacityUnit onselect = "PickUnit()" %} #} {# Not sure how this line is supposed to be used.... #}
+      {% if group.special != "noShow" %}
         {% if group.type != 'select' %}
           {% if group.special == 'readonly' %}
             <div class="form-group row">
@@ -100,7 +100,9 @@
               </div>
           {% endif %}
         {% endif %}
+      {% endif %}
       {% endfor %}
+    <input type="hidden" name="user" value="testUser">
   <button class="btn btn-primary" id="submitCont">Submit</button>
   </form>
 </div>

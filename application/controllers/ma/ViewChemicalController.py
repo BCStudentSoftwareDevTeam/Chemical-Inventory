@@ -39,7 +39,8 @@ def maViewChemical(chemId):
                          chemInfo = chemInfo,
                          containers = containers,
                          contConfig = contConfig,
-                         chemConfig = chemConfig)
+                         chemConfig = chemConfig,
+                         authLevel = "admin")
                          
 @app.route('/ma/ViewChemical/<chemId>/delete/', methods = ['GET','POST']) #When master admin clicks on delete chemical button. (button only show up when all containers of it have been disposed of)
 def maDeleteChemical(chemId):

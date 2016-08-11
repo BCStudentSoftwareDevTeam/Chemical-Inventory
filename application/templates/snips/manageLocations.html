@@ -89,38 +89,50 @@
                                                                     </div>
                                                                 </div>
                                                                 {# Third Nested Accordian Ends (Storages) #}
-                                                                <button type="button" class="btn btn-success btn-xs addLink">
+                                                                <button type="button" class="btn btn-success btn-xs addLink" data-toggle="modal" data-target="#addStorageModal{{attribute}}">
                                                                     <span title="Add a storage location to room {{room.name}}" class="glyphicon glyphicon-plus"></span>
                                                                     Add Storage Location
                                                                 </button>
+                                                                {% with location = 'Storage' %}
+                                                                    {% include "snips/addLocationModals.html" %}
+                                                                {% endwith %}
                                                             </div>
                                                         </div>
                                                 {% endfor %}
                                             </div>
                                         </div>
                                         {# Second Nested Accordian Ends (Rooms) #}
-                                        <button title="Add a Room to floor: {{floor.name}}" type="button" class="btn btn-success btn-xs addLink">
+                                        <button title="Add a Room to floor: {{floor.name}}" type="button" class="btn btn-success btn-xs addLink" data-toggle="modal" data-target="#addRoomModal{{attribute}}">
                                             <span class="glyphicon glyphicon-plus"></span>
                                             Add Room
                                         </button>
+                                        {% with location = 'Room' %}
+                                            {% include "snips/addLocationModals.html" %}
+                                        {% endwith %}
                                     </div>
                                 </div>
                         {% endfor %}
                     </div>
                 </div>
                 {# First Nested Accordion Ends (Floors) #}
-                <button title="Add a floor to the {{building.name}} Building" type="button" class="btn btn-success btn-xs addLink">
+                <button title="Add a floor to the {{building.name}} Building" type="button" class="btn btn-success btn-xs addLink" data-toggle="modal" data-target="#addFloorModal{{attribute}}">
                     <span class="glyphicon glyphicon-plus"></span>
                     Add Floor
                 </button>
+                {% with location = 'Floor' %}
+                    {% include "snips/addLocationModals.html" %}
+                {% endwith %}
             </div>
         </div>
         {% endfor %}
     </div>
 </div>
-<button title="Add a Building" type="button" class="btn btn-success btn-xs addLink">
+<button title="Add a Building" type="button" class="btn btn-success btn-xs addLink" data-toggle="modal" data-target="#addBuildingModal0">
     <span class="glyphicon glyphicon-plus"></span>
     Add Building
 </button>
-
+{% with location = 'Building' %}
+    {% set attribute = 0 %}
+    {% include "snips/addLocationModals.html" %}
+{% endwith %}
 <script src="/static/js/local/highlightTab.js"></script>

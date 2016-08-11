@@ -30,6 +30,8 @@ def maContainerInfo(chemId, barcodeId):
                             movedFrom = data['location'],
                             movedTo = data['storageId'],
                             pastQuantity = data['quantity'],
+                            modUser = "ContainerInfoCheckOut",
+                            action = "Checked Out",
                             modDate = datetime.date.today()).save()
     cont = containersModel.Containers.get(barcodeId = barcodeId)
     cont.checkOutReason  = data['class']
@@ -48,7 +50,7 @@ def maContainerInfo(chemId, barcodeId):
                        buildingList = buildingList,
                        histories = histories)
                        
-                       
+
 @app.route('/ma/ContainerInfo/<chemId>/<barcodeId>/dispose/', methods = ['GET', 'POST'])
 def maContainerDispose(chemId, barcodeId):
   chem = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)

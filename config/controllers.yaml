@@ -27,17 +27,17 @@ layout:
 ################################################################################
 
   - directory:
-    name: fa # faculty
+    name: fa # superUser
     controllers:
       - name: RequestUserAccess
         handlers:
-          - purpose: "Faculty or Staff requesting for a student to have access to the system."
+          - purpose: "superUser or Staff requesting for a student to have access to the system."
             route: "/fa/RequestUserAccess/"
             methods:
               - GET
             function: RequestUserAccess
             roles:
-              - faculty
+              - superUser
               
       - name: faChemTable
         handlers:
@@ -48,7 +48,7 @@ layout:
               - GET
             function: faChemTable
             roles:
-              - faculty
+              - superUser
               
       - name: faViewChemical
         handlers:
@@ -59,7 +59,7 @@ layout:
               - GET
             function: faViewChemical
             roles:
-              - faculty
+              - superUser
               
       - name: Home
         handlers:
@@ -69,7 +69,7 @@ layout:
                 - GET
               function: Home
               roles:
-                - faculty
+                - superUser
                 
 ################################################################################
               

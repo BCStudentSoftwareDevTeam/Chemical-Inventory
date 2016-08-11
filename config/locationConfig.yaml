@@ -1,63 +1,82 @@
 Building:
-    edit:
+    edit: &buildAdd
       - name: "Name"
         id: "name"
         type: "text"
+        required: "true"
       - name: "Number of Floors"
         id: "numFloors"
         type: "number"
+        required: "true"
       - name: "Address"
         id: "address"
         type: "text"
+        required: "true"
     delete:
         message: "Are you sure you want to delete this building?"
+    add: *buildAdd
+
 Floor:
-    edit:
+    edit: &floorAdd
+      - name: "foreignKey"
+        id: "buildId"
+        type: "hidden"
       - name: "Floor Number"
         id: "name"
         type: "text"
+        required: "true"
       - name: "Storage Limits"
         id: "storageLimits"
         type: "text"
     delete:
         message: "Are you sure you want to delete this floor?"
+    add: *floorAdd
 
 Room:
-    edit:
+    edit: &roomAdd
+      - name: "foreignKey"
+        id: "floorId"
+        type: "hidden"
       - name: "Name"
         id: "name"
         type: "text"
+        required: "true"
     delete:
         message: "Are you sure you want to delete this room?"
-        
+    add: *roomAdd
+
 Storage:
-    edit:
+    edit: &storAdd
+      - name: "foreignKey"
+        id: "roomId"
+        type: "hidden"
       - name: "Name"
         id: "name"
         type: "text"
       - name: "Flammable"
         id: "flammable"
-        type: "radio"
+        type: "checkbox"
       - name: "Health Hazard"
         id: "healthHazard"
-        type: "radio"
+        type: "checkbox"
       - name: "Oxidizer"
         id: "oxidizer"
-        type: "radio"
+        type: "checkbox"
       - name: "Organic Acid"
         id: "orgAcid"
-        type: "radio"
+        type: "checkbox"
       - name: "Inorganic Acid"
         id: "inorgAcid"
-        type: "radio"
+        type: "checkbox"
       - name: "Base"
         id: "base"
-        type: "radio"
+        type: "checkbox"
       - name: "Peroxide"
         id: "peroxide"
-        type: "radio"
+        type: "checkbox"
       - name: "Pressure"
         id: "pressure"
-        type: "radio"
+        type: "checkbox"
     delete:
         message: "Are you sure you want to delete this Storage Location?"
+    add: *storAdd
