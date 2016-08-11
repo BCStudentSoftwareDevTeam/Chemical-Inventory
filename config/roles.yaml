@@ -8,13 +8,14 @@ systemAdmin:
   - group admin
   - AD systemAdmin
 
-faculty:
+superUser:
+#   - ubuntu
   - group admin
-  - AD faculty
+  - AD superUser
 
 systemUser:
 #   - ubuntu
-  - group faculty
+  - group superUser
 
 anon:
   - ANY

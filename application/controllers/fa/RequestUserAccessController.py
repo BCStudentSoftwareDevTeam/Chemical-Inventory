@@ -10,9 +10,9 @@ from flask import \
     redirect, \
     url_for
 
-# PURPOSE: Faculty or Staff requesting for a student to have access to the system.
+# PURPOSE: superUser or Staff requesting for a student to have access to the system.
 @app.route('/fa/RequestUserAccess/', methods = ['GET', 'POST'])
-@require_role('faculty')
+@require_role('superUser')
 def RequestUserAccess():
   if request.method == "POST":
     data = request.form

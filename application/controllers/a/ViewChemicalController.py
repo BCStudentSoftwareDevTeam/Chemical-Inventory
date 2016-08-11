@@ -32,5 +32,6 @@ def aViewChemical(chemId):
                          containers = containers,
                          contConfig = contConfig,
                          chemConfig = chemConfig,
-                         quote = quote)
+                         quote = quote,
+                         authLevel = "systemUser")
 

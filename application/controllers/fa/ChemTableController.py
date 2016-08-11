@@ -12,7 +12,7 @@ from flask import \
 
 # PURPOSE: Shows all Chemicals in Database.
 @app.route('/fa/ChemTable/', methods = ['GET'])
-@require_role('faculty')
+@require_role('superUser')
 def faChemTable():
   chemicals = Chemicals.select() #Get all chemicals from the database
   contDict = {} #Set up a dictionary for all containers

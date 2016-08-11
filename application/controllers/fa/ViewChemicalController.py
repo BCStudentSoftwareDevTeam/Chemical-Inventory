@@ -13,7 +13,7 @@ from flask import \
 
 # PURPOSE: Shows specific chemical and all containers of said chemical.
 @app.route('/fa/ViewChemical/<chemId>/', methods = ['GET'])
-@require_role('faculty')
+@require_role('superUser')
 def faViewChemical(chemId):
   chemInfo = Chemicals.get(Chemicals.chemId == chemId) #Get chemical by correct chemId
   if chemInfo.remove == True: #If the chemical attribute, 'remove', was set to True, go back to the chemical table.
@@ -32,4 +32,5 @@ def faViewChemical(chemId):
                          containers = containers,
                          contConfig = contConfig,
                          chemConfig = chemConfig,
-                         quote = quote)
+                         quote = quote,
+                         authLevel = "superUser")

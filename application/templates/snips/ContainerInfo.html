@@ -87,7 +87,7 @@
                 <td>{{histories[0].modUser}}</td>
               </tr>
             </table>
-            <table class="table table-striped" id="chemhistory">
+            <table class="table table-striped" id="conthistory">
               <thead>
                 <tr>
                   <th>Date Modified</th>
@@ -121,6 +121,16 @@
             </table>
           </div>
         </div>
+
+        <script>
+            $(document).ready(function(){
+            $('#conthistory').dataTable({
+              "ordering": false,
+              "searching": false
+              });
+            });
+            
+            </script>
 
         <div id="dispose" class="tab-pane fade">
           <div class="text-center">

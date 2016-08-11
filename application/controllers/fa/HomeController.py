@@ -11,7 +11,7 @@ from flask import \
 
 # PURPOSE: This is the homepage/dashboard for the professor
 @app.route('/fa/Home/', methods = ['GET'])
-@require_role('faculty')
+@require_role('superUser')
 def Home():
   return redirect("/fa/ChemTable/")
 
