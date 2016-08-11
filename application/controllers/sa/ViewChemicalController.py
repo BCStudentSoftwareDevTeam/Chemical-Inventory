@@ -38,4 +38,5 @@ def saViewChemical(chemId):
                          chemInfo = chemInfo,
                          containers = containers,
                          contConfig = contConfig,
-                         chemConfig = chemConfig)
+                         chemConfig = chemConfig,
+                         authLevel = "systemAdmin")
