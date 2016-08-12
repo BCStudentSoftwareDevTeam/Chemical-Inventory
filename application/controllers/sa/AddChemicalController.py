@@ -9,7 +9,7 @@ from flask import \
     request, \
     url_for
 
-# PURPOSE: Add Chemical to the database
+# PURPOSE: Add New Chemical to the database
 @app.route('/sa/AddChemical/', methods = ['GET', 'POST'])
 @require_role('systemAdmin')
 def AddChemical():

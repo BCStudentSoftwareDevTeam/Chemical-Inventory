@@ -12,7 +12,7 @@ config = Configuration.from_file('config/config.yaml').configure()
 # controllers = Configuration.from_file('controllers.yaml').configure()
 # config.controllers = controllers
 
-# Added for splitting up add chemical form config from config
+# Added for splitting up Add New Chemical form config from config
 chemConfig = Configuration.from_file('config/chemicalConfig.yaml').configure()
 
 # Added for add container page

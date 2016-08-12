@@ -1,4 +1,4 @@
-# Add Chemical form
+# Add New Chemical form
 pictograms:
   # Pictograms found @ https://www.osha.gov/dsg/hazcom/pictograms/
     - pict: "/static/pictograms/corrosivePict.png"

@@ -11,7 +11,7 @@ from flask import \
     jsonify, \
     url_for
 
-# PURPOSE: Add Chemical to the database
+# PURPOSE: Add New Chemical to the database
 @app.route('/ma/AddChemical/', methods = ['GET', 'POST'])
 @require_role('admin')
 def maAddChemical():

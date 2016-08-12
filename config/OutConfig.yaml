@@ -29,5 +29,6 @@ inputs:
   - name: "Person Responsible"
     id: "forProf"
     type: "text"
+    special: "required"
   - id: "user"
     type: "hidden"

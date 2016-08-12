@@ -142,7 +142,7 @@ layout:
               
       - name: saAddChemical
         handlers:
-          - purpose: "Add Chemical to the database"
+          - purpose: "Add New Chemical to the database"
             route: "/sa/AddChemical/"
             methods:
               - GET
@@ -287,7 +287,7 @@ layout:
               
       - name: maAddChemical
         handlers:
-          - purpose: "Add Chemical to the database"
+          - purpose: "Add New Chemical to the database"
             route: "/ma/AddChemical/"
             methods:
               - GET
