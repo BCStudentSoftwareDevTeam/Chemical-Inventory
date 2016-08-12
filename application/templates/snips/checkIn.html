@@ -3,7 +3,7 @@
         <form name="{{pageConfig[formName]}}" class="form" method="post">
             <div class="form-group">
                 <label class="label-control" for="barcodeId">Barcode: </label>
-                    <input class="form-control" type="text" id="barcodeId" name="barcodeId" required oninput="checkBar()" autofocus> {# This field is automatically selected on page load. When barcode is entered, checkBar() will get container's info #}
+                    <input class="form-control" type="text" id="barcodeId" name="barcodeId" required oninput="checkBar('{{pageConfig['formName']}}')" autofocus> {# This field is automatically selected on page load. When barcode is entered, checkBar() will get container's info #}
             </div>
             {% for group in pageConfig['inputs'] %}
                 {% if group.autoPop == "true" %} {# These are the fields that checkBar will fill, they are not editable, and are helpful for the user to see #}

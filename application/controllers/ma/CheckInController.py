@@ -53,10 +53,16 @@ def checkInData():
         storage = Storages.get(Storages.sId == container['storageId']) #Get the storageId that this container refers to
         if storage.name != storage.roomId.name: #If the storage name is not the same as it's room name, show the building, room, and storage names
             location = storage.roomId.floorId.buildId.name + " Building, Room: " + storage.roomId.name + " (" + storage.name + ")"
-        else: #If the storage name is the same as it's room name, only show building and roomm names
+        else: #If the storage name is the same as it's room name, only show building and room names
             location = storage.roomId.floorId.buildId.name + " Building, Room: " + storage.roomId.name
         if chemical is not None:
-            return jsonify({'status':'OK', 'chemName' : chemical.name, 'hazard': chemical.primaryHazard, 'storage' : location, 'quantity' : container['currentQuantity'], 'unit' : container['currentQuantityUnit']})
+            return jsonify({'status':'OK', 
+                            'chemName' : chemical.name, 
+                            'hazard': chemical.primaryHazard, 
+                            'storage' : location, 
+                            'quantity' : container['currentQuantity'], 
+                            'unit' : container['currentQuantityUnit'],
+                            'checkedOut' : container['checkedOut']})
             #Return all data as a JSON object
     except:
         return jsonify({'status':'Error: There are no containers with that barcode in the system.'})

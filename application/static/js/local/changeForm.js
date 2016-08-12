@@ -1,3 +1,12 @@
+function checkBar(formAction){
+    var barInput = document.getElementById('barcodeId').value;
+    if (barInput.length == 8){ //Only runs after user has entered 8 digits into barcode field (all barcodes will be 8 digits)
+        getData(barInput, formAction); //Fill enabled fields
+    }else{
+        changeForm(true); //Disable and clear fields when there are less than 8 digits in the field
+    }
+}
+
 function changeForm(status){
     var inputList = document.getElementsByClassName("d");
     for (var i = 0; i < inputList.length; i++){ //For all elements with class "d"
@@ -8,22 +17,21 @@ function changeForm(status){
     }
 }
 
-function checkBar(){
-    var barInput = document.getElementById('barcodeId').value;
-    if (barInput.length == 8){ //Only runs after user has entered 8 digits into barcode field (all barcodes will be 8 digits)
-        getData(barInput); //Fill enabled fields
-    }else{
-        changeForm(true); //Disable and clear fields when there are less than 8 digits in the field
-    }
-}
-
-function getData(barcodeId){
+function getData(barcodeId, formAction){
     $.ajax({ //AJAX call to url "/checkInData/" to get info with barcodeId that is passed in from checkBar function
         url: "/checkInData/",
         data: {barId : barcodeId},
         type: "GET",
         success: function(data) { //fill values of elements: 'chemId', 'prevStorageId', and 'prevQuantity' with info from database
             if (data['status'] === 'OK') {
+                if (formAction == 'checkOut') {
+                    if (data['checkedOut'] == true){
+                        changeForm(true);
+                        alert("That container is already checked out.");
+                        document.getElementById('submit').disabled = true;
+                        return false;
+                    };
+                };
                 document.getElementById("chemId").value = data['chemName'];
                 document.getElementById("primaryHazard").value = data['hazard']
                 document.getElementById('prevStorageId').value = data['storage'];
