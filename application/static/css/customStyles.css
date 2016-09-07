@@ -1,7 +1,4 @@
-body {
-    margin-bottom: 1350px;
-}
-
+/*Pictogram Checkboxes*/
 ul {
   list-style-type: none;
 }
@@ -14,7 +11,7 @@ input[type="checkbox"][id^="cb"] {
   display: none;
 }
 
-label {
+.hazardLabel {
   border: 1px solid #fff;
   padding: 10px;
   display: block;
@@ -62,4 +59,32 @@ label img {
   transform: scale(0.9);
   box-shadow: 0 0 5px #333;
   z-index: -1;
+}
+
+/*Class overloads*/
+/*edit and delete glyphicon buttons*/
+.glyphLink {
+  padding: 10px;
+  cursor: pointer;
+  text-decoration: none !important;
+  color: #3F333F;
+}
+
+.addLink {
+  margin: 10px;
+}
+
+/*Location Management tab*/
+.panel-open {
+  background-color: #696969 !important;
+  color: #fff !important;
+}
+
+.panel-closed {
+  background-color: #f5f5f5 !important;
+  color: #333333 !important;
+}
+
+.btn {
+  margin: 7px;
 }

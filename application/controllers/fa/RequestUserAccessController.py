@@ -1,16 +1,25 @@
 from application import app
-from application.models import *
+from application.models.usersModel import *
 from application.config import *
 from application.logic.validation import require_role
+from application.logic.sortPost import *
 
 from flask import \
     render_template, \
     request, \
+    redirect, \
     url_for
 
-# PURPOSE: Faculty or Staff requesting for a student to have access to the system.
-@app.route('/fa/RequestUserAccess/', methods = ['GET'])
-@require_role('faculty')
+# PURPOSE: superUser or Staff requesting for a student to have access to the system.
+@app.route('/fa/RequestUserAccess/', methods = ['GET', 'POST'])
+@require_role('superUser')
 def RequestUserAccess():
-  return render_template("views/fa/RequestUserAccessView.html", config = config)
-
+  if request.method == "POST":
+    data = request.form
+    modelData, extraData = sortPost(data, Users)
+    Users.create(**modelData)
+  return render_template("views/fa/RequestUserAccessView.html", config = config, userConfig = userConfig)
+    
+  
+ 
+ 

@@ -22,33 +22,52 @@ sys:
 
 # Color Codes
 hazards:
-  "Base": "Green"
-  "Flammable": "Red"
-  "Flammable Solid": "Copper"
-  "Organic Health Hazard": "Blue"
-  "Inorganic Health Hazard": "Blue"
-  "Inorganic Acid": "Rose"
-  "Organic Acid": "Lavender"
-  "Oxidizer": "Yellow"
-  "Reactive": "Orange"
+  "Base": 
+    hazardColor: "Green"
+    textColor: "#FFFFFF"
+    hexColor: "#329032"
+  "Flammable":
+    hazardColor: "Red"
+    textColor: "#FFFFFF"
+    hexColor: "#FF0000"
+  "Flammable Solid":
+    hazardColor: "Copper"
+    textColor: "White"
+    hexColor: "#B87333"
+  "Organic Health Hazard":
+    hazardColor: "Blue"
+    textColor: "#FFFFFF"
+    hexColor: "#0000FF"
+  "Inorganic Health Hazard":
+    hazardColor: "Blue"
+    textColor: "#FFFFFF"
+    hexColor: "#0000FF"
+  "Inorganic Acid":
+    hazardColor: "Rose"
+    textColor: "#333333"
+    hexColor: "#FFE4E1"
+  "Organic Acid":
+    hazardColor: "Lavender"
+    textColor: "#333333"
+    hexColor: "#E6E6FA"
+  "Oxidizer":
+    hazardColor: "Yellow"
+    textColor: "#333333"
+    hexColor: "#FFFF00"
+  "Reactive":
+    hazardColor: "Orange"
+    textColor: "#FFFFFF"
+    hexColor: "#FFA500"
  
 # Navigation bars   
 maMenu:
   - title: "Home"
     link: " /ma/Home/"
-  - title: "View Chemical Table"
+  - title: "View All Chemicals"
     link: "/ma/ChemTable/"
-  - title: "Check In a Container"
-    link: "/ma/CheckIn/"
-  - title: "Add a Chemical"
-    link: "/ma/AddChemical/"
-  - title: "Manage Users"
-    link: "/ma/ViewUser/"
 
 faMenu:
-  - title: "Home"
-    link: "/fa/Home/"
-  - title: "View Chemical Table"
+  - title: "View All Chemicals"
     link: "/fa/ChemTable/"
   - title: "Request Access For a Student"
     link: "/fa/RequestUserAccess/"
@@ -60,12 +79,9 @@ aMenu:
 saMenu:
   - title: "Home"
     link: "/sa/Home/"
-  - title: "View Chemical Table"
+  - title: "View All Chemicals"
     link: "/sa/ChemTable/"
-  - title: "Check In"
-    link: "/sa/CheckIn/"
-  - title: "Add Chemical"
-    link: "/sa/AddChemical/"
+
   
   
   

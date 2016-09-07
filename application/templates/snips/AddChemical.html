@@ -1,36 +1,35 @@
-<div class="col-sm-offset-3"><h3>Add a new Chemical</h3></div>
-<div class="form col-sm-offset-3 col-sm-4">
-  <form name="addChem" method="post">
+<div class="form container text-center">
+  <form name="addChem" method="post" class="form-group">
     {%  for group in chemConfig['addChemInputs']  %}
-      <div class="form-group row">
-        <label for="{{group['id']}}" class="col-sm-4">{{group['name']}}</label>
-        <div class="col-sm-8">
-          {% if group['special'] == "required" %}
-            {% if group['id'] == "sdsLink" %}
+      <div class="form-group row" id="{{group['id']}}Parent">
+        <label for="{{group['id']}}" class="col-xs-6">{{group['name']}}</label>
+        <div class="col-xs-4">
+          {% if group['id'] == 'name' %} {# Checking name oninput to determine whether percentage is required or not. #}
+          {# If name is equal to one already in the database, percentage should be required #}
+            <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" oninput="checkName()" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
+          {% elif group['id'] == "sdsLink" %} {# If it is the sdsLink, add a link to msdsonline #}
             <div class="input-group-addon">https://</div>
-            {% endif %}
             <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
+            <div class="input-group-addon"><a target="blank" href="https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?nas=True">Find SDS Here</a></div>
+          {% elif group['id'] == 'concentration' %}
+            <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
+            <span class="label label-danger hidden" id="messages">There is already a chemical with that name and concentration</span>
           {% else %}
             <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
           {% endif %}
-          {#{%  if group['addon'] is defined  %}
           <span class="form-group-addon">{{group['addon']}}</span>
-          {%  endif  %}
-          Need to get this working...#}
-          {%  if group['small'] is defined  %}
-          <small class="text-muted">{{group['small']}}</small>
-          {%  endif  %}
         </div>
       </div>
     {%endfor%}
    
     {%  for group in chemConfig['addChemDropdowns']  %}
     <div class="form-group row">
-      <label for="{{  group['name'] }}" class="col-sm-4">{{  group['name']  }}:</label>
-      <div class="col-sm-8">
-        <select id="{{  group['id']  }}" name="{{  group['id']  }}" class="form-control" required>
+      <label for="{{  group['name'] }}" class="col-xs-6">{{group['name']}}:</label>
+      <div class="col-xs-4">
+        <select id="{{  group['id']  }}" name="{{  group['id']  }}" class="form-control">
           <option selected disabled value="">Select One</option>
           {%  for selection in group['selections']  %}
+          {# Dropdown selections #}
           <option value="{{  selection  }}">{{  selection  }}</option>
           {%  endfor  %}
         </select>
@@ -39,12 +38,12 @@
     {%  endfor  %}
     
     <div class="form-group row">
-      <label for="nfpaDiamond" class="col-sm-4">NFPA 704:</label>
-      <div class="col-sm-8">
+      <label for="nfpaDiamond" class="col-xs-6">NFPA 704:</label>
+      <div class="col-xs-4">
         {%for division in chemConfig['NFPAdiamond']%}
           <label for="{{division['section']}}">{{division['section']}}</label>
-          <select id="{{division['id']}}" name="{{  division['id']  }}" class="form-control" required="true">
-            <option value="" selected disabled>Select One</option>
+          <select id="{{division['id']}}" name="{{division['id']}}" class="form-control">
+            <option value="" selected>Select One</option>
           {%for selection in division['selections']%}
             <option value="{{selection}}">{{selection}}</option>
           {%endfor%}
@@ -58,26 +57,60 @@
       {%  for check in chemConfig['addChemChecks']  %}
         <div class="checkbox col-sm-12">
           <label>
-            <input type="checkbox" name="{{check['name']}}" value="{{check['value']}}"/>
+            <input type="checkbox" id="{{check['id']}}" name="{{check['id']}}"/>
             {{check['name']}}
+            <input type="hidden" id="{{check['id']}}" name="{{check['id']}}" value=""> {# Needed for edit form. Forces form to update value of deselected checkboxes. #}
           </label>
         </div>
       {%  endfor  %}
     </div>
     
     <div class="form-group row">
-      <label for="pictograms" class="row">Please select the appropriate hazard pictogram.</label>
-      <div class="checkbox col-sm-11">
-        {%for hazardPict in chemConfig['pictograms']%}
-          <label for="{{hazardPict['title']}}"></label>
-          <input type="checkbox" name="hazardPict" id="{{hazardPict['title']}}" value="{{hazardPict['title']}}" class="hiddenRadio">
-            <img src="{{hazardPict['pict']}}" id="{{hazardPict['title']}}" alt="{{hazardPict['alt']}}" class="hazardRadio"  onclick="pictSelect({{hazardPict['title']}})"></img>
-          </input>
-        {%endfor%}
+      <label for="pictograms">Please select the appropriate hazard pictogram(s).</label>
+      <div class="checkbox col-xs-7 col-xs-offset-2">
+        <ul>
+          {%for hazardPict in chemConfig['pictograms']%}
+            <li>
+              <input type="checkbox" name="{{hazardPict['id']}}" id="{{hazardPict['id']}}" value="{{hazardPict['id']}}" hidden> {# Needed for edit form. Forces form to update value of deselected checkboxes. #}
+                <label for="{{hazardPict['id']}}" class="hazardLabel">
+                  <img src="{{hazardPict['pict']}}" id="{{hazardPict['id']}}" alt="{{hazardPict['alt']}}" class="hazardRadio"></img>
+                </label>
+              </input>
+              <input type="hidden" name="{{hazardPict['id']}}" id="{{hazardPict['id']}}" value="">
+            </li>
+          {%endfor%}
+        </ul>
       </div>
     </div>
     
+    <div class="col-xs-7 col-xs-offset-3">
+      <div class="panel panel-default text-center">
+        <div class="panel-heading">
+          <h3 class="panel-title">Hazardous Materials Identification System (HMIS)</h3>
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <tbody>
+              {% for row in chemConfig['HMIS'] %}
+                <tr BGCOLOR="{{row.color}}">
+                  <td><font color="{{row.text}}">{{row.name}}</font></td>
+                  <td class="col-md-6">
+                    <select id="{{row.id}}" name="{{row.id}}" class="form-control">
+                      <option value="" disabled selected>Select One</option>
+                      {% for option in row.selections %}
+                      <option value="{{option}}">{{option}}</option>
+                      {% endfor %}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  <div class="clearfix"></div>  
   <input class="btn btn-default btn" id="addChemSubmit" type="submit" value="Submit">
   </form>
 </div>
 <script src="/static/js/local/pictSelect.js"></script>
+<script src="/static/js/local/checkName.js"></script>

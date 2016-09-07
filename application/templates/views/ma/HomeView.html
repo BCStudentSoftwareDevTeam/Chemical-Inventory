@@ -4,14 +4,45 @@
 
 {%  include "Navigation/maMenu.html"  %}
 
-<div class="container-fluid">
-  <table class="table table-hover" style="cursor: pointer;">
-    <tr onclick="window.location.href = '{{url_for('maChemTable')}}';"><td>View Chemical Table</td></tr>
-    <tr onclick="window.location.href = '{{url_for('maCheckIn')}}';"><td>Check in Container(s)</td></tr>
-    <tr onclick="window.location.href = '{{url_for('maCheckedOut')}}';"><td>View Checked Out Containers</td></tr>
-    <tr onclick="window.location.href = '{{url_for('UserAccess')}}';"><td>User Access Requests</td>
-    <tr onclick="window.location.href = '{{url_for('ViewUser')}}';"><td>View all Users</td></tr>
-    <tr onclick="window.location.href = '{{url_for('ManageBuildings')}}';"><td>Manage Buildings</td></tr>
-  </table>
+<div class= "contianer-fluid">
+  <div class="col-md-8 col-md-offset-2">
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#inventory">Chemical Inventory Management</a></li>
+      <li><a data-toggle="tab" href="#buildings">Location Management</a></li>
+      <li><a data-toggle="tab" href="#user">User Management</a></li>
+      {# example code for tabs found here: http://jsfiddle.net/xfw8t/12/ #}
+    </ul>
+    
+    <div class = "tab-content">
+      
+      <div id = "inventory" class = "tab-pane fade in active">
+        {# Tab of all inventory management pages #}
+        <table class="table table-hover" style="cursor: pointer;">
+          <tr onclick="window.location.href = '{{url_for('maChemTable')}}';"><td>View All Chemicals</td></tr>
+          <tr onclick="window.location.href = '{{url_for('maCheckIn')}}';"><td>Container Return(s)</td></tr>
+          <tr onclick="window.location.href = '{{url_for('maCheckOut')}}';"><td>Check out Container(s)</td></tr>
+          <tr onclick="window.location.href = '{{url_for('maCheckedOut')}}';"><td>View Checked Out Containers</td></tr>
+          <tr onclick="window.location.href = '{{url_for('maAddChemical')}}';"><td>Add New Chemical</td></tr> 
+        </table>
+      </div>
+
+      <div id = "buildings" class = "tab-pane fade">
+        {# Tab that includes manageLocations page #}
+        {% include "snips/manageLocations.html" %}
+      </div>
+
+      
+      <div id = "user" class = "tab-pane fade">
+        {# Tab of all user management pages #}
+        <table class="table table-hover" style="cursor: pointer;">
+          <tr onclick="window.location.href = '{{url_for('UserAccess')}}';"><td>User Access Requests</td>
+          <tr onclick="window.location.href = '{{url_for('ViewUser')}}';"><td>View all Users</td></tr>
+        </table>
+      </div>
+      
+    </div>
+    
+  </div>
+</div>
 
 {% endblock %}

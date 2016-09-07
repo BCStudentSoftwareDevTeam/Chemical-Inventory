@@ -5,12 +5,13 @@ from application.logic.validation import require_role
 
 from flask import \
     render_template, \
+    redirect, \
     request, \
     url_for
 
 # PURPOSE: This is the homepage/dashboard for the professor
 @app.route('/fa/Home/', methods = ['GET'])
-@require_role('faculty')
+@require_role('superUser')
 def Home():
-  return render_template("views/fa/HomeView.html", config = config)
+  return redirect("/fa/ChemTable/")
 

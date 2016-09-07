@@ -41,7 +41,7 @@ layout:
   - directory:
     name: fac
     controllers:
-      - name: faculty
+      - name: superUser
         handlers:
         - purpose: "Collect the user's happiness."
           route: "/fac/happy"
