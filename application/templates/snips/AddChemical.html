@@ -1,5 +1,6 @@
 <div class="form container text-center">
   <form name="addChem" method="post" class="form-group">
+    <input type="hidden" name="formName" value="addChem">
     {%  for group in chemConfig['addChemInputs']  %}
       <div class="form-group row" id="{{group['id']}}Parent">
         <label for="{{group['id']}}" class="col-xs-6">{{group['name']}}</label>
