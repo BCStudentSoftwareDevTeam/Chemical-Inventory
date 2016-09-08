@@ -13,9 +13,11 @@ from flask import \
     render_template, \
     redirect, \
     request, \
+    flash, \
     url_for
 
 @app.route('/ma/delete/<location>/<lId>/', methods = ['GET', 'POST']) #Called from delete location modals
+@require_role('admin')
 def maDelete(location, lId):
     state = 0
     if request.method == "GET": #Calls delete queries based on what type of location is being deleted.
@@ -35,6 +37,8 @@ def maDelete(location, lId):
             if state != 1:
                 building = Buildings.delete().where(Buildings.bId == lId)
                 building.execute()
+            else:
+                flash("This building could not be deleted, as there are 1 or more containers still assigned to it.")
         elif location == "Floor":
             rooms = Rooms.select().where(Rooms.floorId == lId)
             for room in rooms:
@@ -49,6 +53,8 @@ def maDelete(location, lId):
             if state != 1:
                 floor = Floors.delete().where(Floors.fId == lId)
                 floor.execute()
+            else:
+                flash("This floor could not be deleted, as there are 1 or more containers still assigned to it.")
         elif location == "Room":
             storages = Storages.select().where(Storages.roomId == lId)
             for storage in storages:
@@ -61,6 +67,8 @@ def maDelete(location, lId):
             if state != 1:
                 room = Rooms.delete().where(Rooms.rId == lId)
                 room.execute()
+            else:
+                flash("This room could not be deleted, as there are 1 or more containers still assigned to it.")
         elif location == "Storage":
             try:
                 Containers.get(Containers.disposalDate == None,
@@ -71,4 +79,6 @@ def maDelete(location, lId):
             if state != 1:
                 storage = Storages.delete().where(Storages.sId == lId)
                 storage.execute()
+            else:
+                flash("This storage location could not be deleted, as there are 1 or more containers still assigned to it.")
     return redirect("ma/Home/")
