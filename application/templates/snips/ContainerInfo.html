@@ -97,6 +97,7 @@
                   <th>Current Amount</th>
                   <th>Last Amount</th>
                   <th>Modified By</th>
+                  <th>Checked Out By</th>
                 </tr>
               </thead>
               {% for history in histories[1::] %}
@@ -116,6 +117,7 @@
                 <td>{{container.currentQuantity}} {{container.currentQuantityUnit}}</td>
                 <td>{{history.pastQuantity}} {{history.pastUnit}}</td>
                 <td>{{history.modUser}}</td>
+                <td>{{container.checkedOutBy}}</td>
               </tr>
               {% endfor %}
             </table>

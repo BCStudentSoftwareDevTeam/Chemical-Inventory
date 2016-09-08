@@ -368,6 +368,24 @@ def init_db ():
     movedFrom = 8,
     movedTo = 1,
     modUser = "Jesson Soto",
+    containerId = 16060003,
+    action = "Checked Out",
+    pastQuantity = "20.0 ounce (oz)",
+    modDate = "01/22/2012").save()   
+
+  historiesModel.Histories(
+    movedFrom = 8,
+    movedTo = 1,
+    modUser = "Jesson Soto",
+    containerId = 15080000,
+    action = "Created",
+    pastQuantity = "20.0 ounce (oz)",
+    modDate = "01/22/2012").save()   
+    
+  historiesModel.Histories(
+    movedFrom = 8,
+    movedTo = 1,
+    modUser = "Jesson Soto",
     containerId = 15080000,
     action = "Checked Out",
     pastQuantity = "20.0 ounce (oz)",
