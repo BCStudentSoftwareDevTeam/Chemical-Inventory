@@ -20,14 +20,14 @@ def maDelete(location, lId):
     state = 0
     if request.method == "GET": #Calls delete queries based on what type of location is being deleted.
         if location == "Building":
-            floors = Floors.select().where(Floors.buildId == lId)
+            floors = Floors.select().where(Floors.buildId == lId) #All floors of the current building
             for floor in floors:
-                rooms = Rooms.select().where(Rooms.floorId == floor)
+                rooms = Rooms.select().where(Rooms.floorId == floor) #All rooms of current floor
                 for room in rooms:
-                    storages = Storages.select().where(Storages.roomId == room)
+                    storages = Storages.select().where(Storages.roomId == room) #All storage locations of current room
                     for storage in storages:
                         try:
-                            Containers.get(Containers.storageId == storage,
+                            Containers.get(Containers.storageId == storage, #Try to get any containers associated with current storage location
                                            Containers.disposalDate == None)
                             state = 1
                         except:
