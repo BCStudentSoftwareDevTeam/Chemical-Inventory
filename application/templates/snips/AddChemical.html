@@ -11,9 +11,6 @@
             <div class="input-group-addon">https://</div>
             <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
             <div class="input-group-addon"><a target="blank" href="https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?nas=True">Find SDS Here</a></div>
-          {% elif group['id'] == 'concentration' %}
-            <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
-            <span class="label label-danger hidden" id="messages">There is already a chemical with that name and concentration</span>
           {% else %}
             <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
           {% endif %}
