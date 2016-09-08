@@ -128,9 +128,6 @@
               </tr>
             {%  endfor  %}
           </table>
-          {% if (authLevel == 'admin' or authLevel == 'systemAdmin') %}
-            <a data="tab" href="../../AddContainer/{{chemName}}/{{chemInfo.chemId}}/"><span class="glyphicon glyphicon-plus"></span>Add a new Container of {{chemInfo.name}} </a>
-          {% endif %}
         </div>
         
         <div id="info" class="tab-pane fade">
