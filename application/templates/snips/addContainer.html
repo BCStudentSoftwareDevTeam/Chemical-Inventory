@@ -16,6 +16,7 @@
   {% endif %}
 {% endwith %}
 
+
 <div class="clearfix"></div>
 <script src="/static/js/local/createBarcode.js"></script>
 <div class="col-sm-offset-3">
@@ -108,10 +109,4 @@
 </div>
 <script src="/static/js/local/measurements.js-master/metrics.js"></script>
 <script src="/static/js/local/checkQuantity.js"></script>
-<script type="text/javascript">
-   window.setTimeout(function() {
-       $(".alert").fadeTo(500, 0).slideUp(500, function(){
-          $(this).remove(); 
-      });
-  }, 2000);
-</script>
+<script src="/static/js/local/alertFade.js"></script>
