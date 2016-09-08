@@ -323,7 +323,7 @@ def init_db ():
   
   containersModel.Containers(
     chemId = 2,
-    storageId = 1,
+    storageId = 11,
     barcodeId = "15080000",
     currentQuantityUnit = "ounce (oz)",
     currentQuantity = 17,
