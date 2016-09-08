@@ -11,6 +11,7 @@ from flask import \
     render_template, \
     redirect, \
     request, \
+    flash, \
     url_for
 
 ####################################################

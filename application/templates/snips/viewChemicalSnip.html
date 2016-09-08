@@ -1,3 +1,21 @@
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+     {% if message == "Container could not be added" %}
+      <div class="alert alert-danger col-md-4 col-md-offset-4" role="alert" id="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>{{message}}</strong>
+      </div>
+     {% else %}
+      <div class="alert alert-success col-md-4 col-md-offset-4" role="alert" id="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>{{message}}</strong>
+      </div>
+     {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
 <script src="/static/js/local/fillEditForm.js"></script>
 <div class="col-sm-8 col-sm-offset-2">
   <h1>{{chemInfo.name}} Information</h1>
@@ -44,7 +62,7 @@
         {% if (authLevel == 'admin' or authLevel == 'systemAdmin') %}
           <li><a data-toggle="tab" href="#edit">Edit Chemical</a></li>
           {% set chemName = (chemInfo.name) %}
-          <li><a data="tab" href="../../AddContainer/{{chemInfo.chemId}}/">Add a new Container</a></li>
+          <li><a data-toggle="tab" href="#addCont">Add a new Container</a></li>
         {% endif %}
         {# example code for tabs found here: http://jsfiddle.net/xfw8t/12/ #}
     </ul>
@@ -178,6 +196,13 @@
             <script>
               fillEditForm('{{chemInfo.chemId}}', "{{chemConfig | safe}}");
             </script>
+          </div>
+          
+          <div id="addCont" class="tab-pane fade">
+            <div class="text-center">
+              <h2>Add a new container</h2>
+            </div>
+            {% include "snips/addContainer.html" %}
           </div>
         {% endif %}
 
