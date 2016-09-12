@@ -1,9 +1,14 @@
 # About This Application
 
-You should, at this point, modify this file to include the information we need
-about this application. Among other things, it might be good to have
-some authorship information, who the client is, contact information...
-who knows.
+To build this application you must...
+1. Run the setup file with the command
+	source setup.sh
+2. Populate the database with generic values
+	python reset-db.py
+3. Add your current machine user id to admin in config/role.yaml 
+4. Start Appache server to serve application
+	python run.py
+5. Open 0.0.0.0:8000 in your browser
 
 # Relevant Documentation
 
