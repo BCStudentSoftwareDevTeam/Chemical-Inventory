@@ -1,7 +1,6 @@
 # Only certain people can be admins in this app
 admin:
   - ubuntu #For Testing
-  - hooverk
 #  - database Roles
 
 systemAdmin:

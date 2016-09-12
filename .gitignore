@@ -4,4 +4,3 @@ flask_session
 venv
 *.pyc
 data
-config/roles.yaml
