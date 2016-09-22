@@ -3,7 +3,7 @@ function checkName(){
     If the name is there, require user to enter a concentration as a way to prohibit repeated chemical names.*/
     var chemVal = document.getElementById('name').value;
     $.ajax({
-        url: '/checkName/',
+        url: '/../checkName/',
         data: {value : chemVal},
         type: 'GET',
         success: function(data) {
@@ -16,28 +16,4 @@ function checkName(){
     });
 }
 
-var concentrate = document.getElementById('concentration');
-concentrate.addEventListener('input', function(){
-    var chemName = document.getElementById('name').value;
-    if (concentrate.required === true) {
-        $.ajax({
-            url: '/checkConc/',
-            data: {chemName:chemName, concentration:concentrate.value},
-            type:'GET',
-            success: function(data) {
-                if (data['status'] === 'OK'){
-                    document.getElementById('addChemSubmit').disabled = false;
-                    document.getElementById('concentrationParent').classList.remove('has-error');
-                    document.getElementById('messages').classList.add('hidden');
-                } else {
-                    document.getElementById('addChemSubmit').disabled = true;
-                    document.getElementById('concentrationParent').classList.add('has-error');
-                    document.getElementById('messages').classList.remove('hidden')
-                }
-            },
-            error: function() {
-                console.log('Error');
-            }
-        });
-    };
-});
+
