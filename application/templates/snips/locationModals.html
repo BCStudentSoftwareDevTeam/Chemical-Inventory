@@ -25,10 +25,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-labeledby="editModalLabel">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-labeledby="editBuildingModalLabel">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="editModalLabel"></h4>
+                <h4 class="modal-title" id="editBuildingModalLabel"></h4>
             </div>
             <div class="modal-body text-center" id="editMessage">
                 {% for group in locationConfig['Building']['edit'] %}
@@ -43,6 +43,119 @@
                         </div>
                     {% endif %}
                 {% endfor %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+                <a id="editButton"><button class="btn btn-danger">Yes</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Edit Floor Modal #}
+<div class="modal fade" id="editFloorModal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-labeledby="editFloorLabel">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="editFloorModalLabel"></h4>
+            </div>
+            <div class="modal-body text-center" id="editMessage">
+                {% for group in locationConfig['Floor']['edit'] %}
+                    {% if group.name == "foreignKey" %}
+                        <input type="{{group.type}}" value="{#attribute#}" name="{{group.id}}" id="foreignKey">
+                    {% else %}
+                        <div class="form-group col-xs-8 col-xs-offset-2">
+                            <label for="{{group.id}}" class="col-form-label">
+                                {{group.name}}:
+                            </label>
+                            <input class="form-control" type="{{group.type}}" id="{{group.id}}" name="{{group.id}}" required='{{group.required}}' value="">
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+                <a id="editButton"><button class="btn btn-danger">Yes</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Edit Room Modal #}
+<div class="modal fade" id="editRoomModal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-labeledby="editRoomModalLabel">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="editRoomModalLabel"></h4>
+            </div>
+            <div class="modal-body text-center" id="editMessage">
+                {% for group in locationConfig['Room']['edit'] %}
+                    {% if group.name == "foreignKey" %}
+                        <input type="{{group.type}}" value="{#attribute#}" name="{{group.id}}" id="foreignKey">
+                    {% else %}
+                        <div class="form-group col-xs-8 col-xs-offset-2">
+                            <label for="{{group.id}}" class="col-form-label">
+                                {{group.name}}:
+                            </label>
+                            <input class="form-control" type="{{group.type}}" id="{{group.id}}" name="{{group.id}}" required='{{group.required}}' value="">
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+                <a id="editButton"><button class="btn btn-danger">Yes</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Edit Storage Modal #}
+<div class="modal fade" id="editStorageModal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-labeledby="editStorageModalLabel">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="editStorageModalLabel"></h4>
+            </div>
+            <div class="modal-body text-center" id="editMessage">
+                {% for group in locationConfig['Storage']['edit'] %}
+                    {% if group.name == "foreignKey" %}
+                        <input type="{{group.type}}" value="{#attribute#}" name="{{group.id}}">
+                    {% elif group.type != "checkbox" %}
+                        <div class="form-group col-xs-8 col-xs-offset-2">
+                            <label for="{{group.id}}" class="col-form-label">
+                                {{group.name}}:
+                            </label>
+                            <input class="form-control" type="{{group.type}}" id="{{group.id}}" name="{{group.id}}" required='{{group.required}}'>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <table>
+                    <thead>
+                        <th>Type of Hazard this storage location can hold</th>
+                        <th>Yes</th>
+                        <th>No</th>
+                    </thead>
+                    {% for group in locationConfig['Storage']['edit'] %}
+                        {% if group.type == "checkbox" %}
+                            <tr>
+                                <td>{{group.name}}</td>
+                                <td><input type="{{group.type}}" name="{{group.id}}" value="True" id="{{group.id}}"></td>
+                                <input type="hidden" name="{{group.id}}" value="" id="{{group.id}}">
+                            </tr>
+                        
+                        {% endif %}
+                    {% endfor %}
+            </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
