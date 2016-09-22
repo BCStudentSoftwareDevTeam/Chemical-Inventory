@@ -11,6 +11,7 @@ from flask import \
     render_template, \
     redirect, \
     request, \
+    jsonify, \
     flash, \
     url_for
 
@@ -78,3 +79,35 @@ def adminHome():
                            floors = floors,
                            rooms = rooms,
                            storages = storages)
+
+@app.route("/getBuildingData/", methods = ['GET'])
+def getBuildingData():
+    bId = request.args.get('bId')
+    building = Buildings.select().where(Buildings.bId == bId).dicts().get()
+    for key in building:
+        building[key] = str(building[key])
+    return jsonify(building)
+    
+@app.route("/getFloorData/", methods = ['GET'])
+def getFloorData():
+    fId = request.args.get('fId')
+    floor = Floors.select().where(Floors.fId == fId).dicts().get()
+    for key in floor:
+        floor[key] = str(floor[key])
+    return jsonify(floor)
+    
+@app.route("/getRoomData/", methods = ['GET'])
+def getRoomData():
+    rId = request.args.get('rId')
+    room = Rooms.select().where(Rooms.rId == rId).dicts().get()
+    for key in room:
+        room[key] = str(room[key])
+    return jsonify(room)
+    
+@app.route("/getStorageData/", methods = ['GET'])
+def getStorageData():
+    sId = request.args.get('sId')
+    storage = Storages.select().where(Storages.sId == sId).dicts().get()
+    for key in storage:
+        storage[key] = str(storage[key])
+    return jsonify(storage)

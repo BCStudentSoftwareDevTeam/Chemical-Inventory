@@ -57,7 +57,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-labeledby="editFloorLabel">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-labeledby="editFloorModalLabel">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title" id="editFloorModalLabel"></h4>
@@ -65,7 +65,7 @@
             <div class="modal-body text-center" id="editMessage">
                 {% for group in locationConfig['Floor']['edit'] %}
                     {% if group.name == "foreignKey" %}
-                        <input type="{{group.type}}" value="{#attribute#}" name="{{group.id}}" id="foreignKey">
+                        <input type="{{group.type}}" name="{{group.id}}" id="foreignKey">
                     {% else %}
                         <div class="form-group col-xs-8 col-xs-offset-2">
                             <label for="{{group.id}}" class="col-form-label">
