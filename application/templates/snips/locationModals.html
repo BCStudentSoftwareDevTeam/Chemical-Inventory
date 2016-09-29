@@ -148,31 +148,31 @@
                         {% if group.name == "foreignKey" %}
                             <input type="{{group.type}}" value="{#attribute#}" name="{{group.id}}">
                         {% elif group.type != "checkbox" %}
-                            <div class="form-group col-xs-8 col-xs-offset-2">
+                            <div class="form-group-row col-xs-8 col-xs-offset-2">
                                 <label for="{{group.id}}" class="col-form-label">
                                     {{group.name}}:
                                 </label>
                                 <input class="form-control" type="{{group.type}}" id="{{group.id}}" name="{{group.id}}" required='{{group.required}}'>
                             </div>
-                        {% endif %}
-                    {% endfor %}
-                    <table>
-                        <thead>
-                            <th>Type of Hazard this storage location can hold</th>
-                            <th>Yes</th>
-                            <th>No</th>
-                        </thead>
-                        {% for group in locationConfig['Storage']['edit'] %}
-                            {% if group.type == "checkbox" %}
-                                <tr>
-                                    <td>{{group.name}}</td>
-                                    <td><input type="{{group.type}}" name="{{group.id}}" value="" id="{{group.id}}"></td> {# Value="" is needed to set default value of all checkboxes to false.#}
-                                    <input type="hidden" name="{{group.id}}" value="" id="{{group.id}}">
-                                </tr>
-                            
                             {% endif %}
-                        {% endfor %}
-                </table>
+                    {% endfor %}
+                    <div class="clearfix"></div>
+                    <div class="form-group row">
+                        <table class="table table-striped">
+                            <thead>
+                                <h4>What hazards can this location hold?</h4>
+                            </thead>
+                            {% for group in locationConfig['Storage']['edit'] %}
+                                {% if group.type == "checkbox" %}
+                                    <tr>
+                                        <td><label for="{{group.id}}">{{group.name}}</label></td>
+                                        <td><input type="{{group.type}}" name="{{group.id}}" value="" id="{{group.id}}"></td> {# Value="" is needed to set default value of all checkboxes to false.#}
+                                        <input type="hidden" name="{{group.id}}" value="" id="{{group.id}}">
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </table>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
