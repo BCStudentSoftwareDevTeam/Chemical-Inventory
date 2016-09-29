@@ -14,6 +14,8 @@ databases:
     filename: data/roles.sqlite
   inventory:
     filename: data/inventory.sqlite
+  cispro:
+    filename: data/cispro.sqlite
 
 sys:
   debug: True
