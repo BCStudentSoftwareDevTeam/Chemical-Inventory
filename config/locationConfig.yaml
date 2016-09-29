@@ -12,8 +12,6 @@ Building:
         id: "address"
         type: "text"
         required: "true"
-    delete:
-        message: "Are you sure you want to delete this building?"
     add: *buildAdd
 
 Floor:
@@ -28,8 +26,6 @@ Floor:
       - name: "Storage Limits"
         id: "storageLimits"
         type: "text"
-    delete:
-        message: "Are you sure you want to delete this floor?"
     add: *floorAdd
 
 Room:
@@ -41,8 +37,6 @@ Room:
         id: "name"
         type: "text"
         required: "true"
-    delete:
-        message: "Are you sure you want to delete this room?"
     add: *roomAdd
 
 Storage:
@@ -77,6 +71,4 @@ Storage:
       - name: "Pressure"
         id: "pressure"
         type: "checkbox"
-    delete:
-        message: "Are you sure you want to delete this Storage Location?"
     add: *storAdd

@@ -73,3 +73,4 @@ def maDeleteChemical(chemId):
   chem.remove = True #Set chemical's remove attribute to true.
   chem.save() #We are not deleting the chemical because chemicals that are disposed still reference the chemical, and the containers are used for reports on disposal.
   return redirect('/ma/ChemTable')
+        
