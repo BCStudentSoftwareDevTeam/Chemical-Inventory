@@ -30,6 +30,7 @@ def adminHome():
     storages = {}
     if request.method == "POST":
         data = request.form #If a form is posted to the page
+        print data
         if data['location'] == "Building": #If the form is editing a building
             if data['action'] == 'edit':
                 building = Buildings.get(Buildings.bId == data['id']) #Get building to be edited
