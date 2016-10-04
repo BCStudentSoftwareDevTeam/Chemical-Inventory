@@ -1,6 +1,8 @@
 import datetime
 
 def sortPost( data, model):
+  print "sortPost"
+  # print data
   """
     Takes a dictionary and a model to replace empty strings with None.
     It also splits post data into two variable model_data and extra_data.
@@ -11,13 +13,15 @@ def sortPost( data, model):
       - data: form data to sort
       - model: the model related to the form data
     Returns:
-    - model data (e.g., activity) and extra data (anything that's not in input model, e.g., attendees) 
+    - model data (e.g., name) and extra data (anything that's not in input model, e.g., TimeSpentEatingLunchToday) 
   """
   model_data = dict()
   extra_data = dict()
   for key in iter( data ):
     if data[key] == "":
       if hasattr( model, key ):
+        print ("nope")
+        print (model, key)
         if getattr( model, key ).null is True:
           model_data[key] = None
         else:
@@ -26,6 +30,7 @@ def sortPost( data, model):
         extra_data[key] = data[key]
       
     elif hasattr( model, key ):
+      print (model, key)
       instance = getattr(model, key)
       field_type = getattr(instance, "db_field")
       if field_type == "datetime":

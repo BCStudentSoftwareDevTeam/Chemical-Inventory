@@ -41,26 +41,3 @@ def maCheckOut():
                            buildingList = buildingList,
                            storageList = storageList,
                            pageConfig = checkOutConfig)
-                           
-@app.route('/checkInData/', methods = ['GET']) #Called by AJAX from getData()
-def checkInData():
-    try:
-        barId = request.args.get('barId') #Gets the variable that was sent via the AJAX call
-        container = Containers.select().where(Containers.barcodeId == barId).dicts().get() #Get a dictionary of the container with matching barcode
-        chemical = Chemicals.get(Chemicals.chemId == container['chemId']) #Get the name of the chemical that this container refers to
-        storage = Storages.get(Storages.sId == container['storageId']) #Get the storageId that this container refers to
-        if storage.name != storage.roomId.name: #If the storage name is not the same as it's room name, show the building, room, and storage names
-            location = storage.roomId.floorId.buildId.name + " Building, Room: " + storage.roomId.name + " (" + storage.name + ")"
-        else: #If the storage name is the same as it's room name, only show building and room names
-            location = storage.roomId.floorId.buildId.name + " Building, Room: " + storage.roomId.name
-        if chemical is not None:
-            return jsonify({'status':'OK', 
-                            'chemName' : chemical.name, 
-                            'hazard': chemical.primaryHazard, 
-                            'storage' : location, 
-                            'quantity' : container['currentQuantity'], 
-                            'unit' : container['currentQuantityUnit'],
-                            'checkedOut' : container['checkedOut']})
-            #Return all data as a JSON object
-    except:
-        return jsonify({'status':'Error: There are no containers with that barcode in the system.'})
