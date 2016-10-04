@@ -8,8 +8,8 @@ import datetime
     
 def init_db ():
   # First, we create the databases.
-  for database in config.databases:
-    filename = config.databases[database].filename
+  for database in config.databases.dynamic:
+    filename = config.databases.dynamic[database].filename
     
     """Initializes the database."""
     # Remove the DB

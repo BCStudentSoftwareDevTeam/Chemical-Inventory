@@ -54,4 +54,4 @@ class Main(Model):
    DOT_TEXT         = TextField()
 
    class Meta:
-      database = getDB("cispro")
+      database = getDB("cispro", "static")

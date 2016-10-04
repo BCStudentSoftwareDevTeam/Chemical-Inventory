@@ -45,5 +45,5 @@ class Chemicals (Model):
   pressureFormer  = BooleanField(default = False)
 
   class Meta:
-    database = getDB("inventory")
+    database = getDB("inventory", "dynamic")
 

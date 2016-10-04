@@ -6,5 +6,5 @@ class Roles (Model):
   role          = TextField()
 
   class Meta:
-    database = getDB("roles")
+    database = getDB("roles", "dynamic")
 

@@ -20,7 +20,7 @@ def classFromName(moduleName, className):
 def getModelClasses():
   classes = []
   for m in models:
-    moduleName = "application.models.{0}".format(m) 
+    moduleName = "application.models.staticModels.{0}".format(m) 
     className  = re.sub("Model", "", m).capitalize()
     # print "Module Name: {0}\nClass Name: {1}".format(moduleName, className)
     c = classFromName(moduleName, className)

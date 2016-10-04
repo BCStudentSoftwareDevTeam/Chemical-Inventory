@@ -17,4 +17,4 @@ class Storages (Model):
   # refridgerated = BooleanField(default = False) # Do we need to check if a storage is refridgerated?
 
   class Meta:
-    database = getDB("inventory")
+    database = getDB("inventory", "dynamic")

@@ -7,4 +7,4 @@ class Rooms (Model):
   name       = TextField() #Room number. It is a text field to account for rooms like '13c'
 
   class Meta:
-    database = getDB("inventory")
+    database = getDB("inventory", "dynamic")

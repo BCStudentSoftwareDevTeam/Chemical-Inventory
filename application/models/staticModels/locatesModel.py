@@ -22,4 +22,4 @@ class Locates(Model):
 	UseStorType       = IntegerField()
 
 	class Meta:
-		database = getDB("cispro")
+		database = getDB("cispro", "static")

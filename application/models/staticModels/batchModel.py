@@ -1,6 +1,6 @@
 from application.models.util import *
-from application.models.locatesModel import *
-from application.models.mainModel import Main
+from application.models.staticModels.locatesModel import *
+from application.models.staticModels.mainModel import Main
 
 class Batch(Model):
    NameSorted         = PrimaryKeyField()
@@ -51,4 +51,4 @@ class Batch(Model):
    DateLastScanned    = TextField() 
 
    class Meta:
-     database = getDB("cispro")    
+     database = getDB("cispro", "static")    
