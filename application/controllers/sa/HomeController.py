@@ -4,7 +4,8 @@ from application.models.floorsModel import Floors
 from application.models.roomsModel import Rooms
 from application.models.storagesModel import Storages
 from application.config import *
-from application.logic.validation import require_role
+# from application.logic.validation import require_role
+from application.logic.getAuthUser import AuthorizedUser
 
 from flask import \
     render_template, \
@@ -13,8 +14,12 @@ from flask import \
 
 # PURPOSE: Edit, delete, and add buildings
 @app.route('/sa/Home/', methods = ['GET', 'POST'])
-@require_role('admin')
+# @require_role('admin')
 def saHome():
+    auth = AuthorizedUser()
+    user = auth.getUser()
+    userLevel = auth.userLevel()
+    print user.username, userLevel
     buildings = Buildings.select()
     floors = {}
     rooms = {}

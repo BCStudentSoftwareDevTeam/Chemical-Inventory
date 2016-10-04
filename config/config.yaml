@@ -92,3 +92,6 @@ flask:
   secretKey: RANDOM
 
 controllers: !include:controllers.yaml
+
+DEBUG:
+  user: "ballz" #admin
