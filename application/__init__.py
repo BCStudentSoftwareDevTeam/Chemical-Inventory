@@ -79,18 +79,14 @@ def _db_close(exc):
 
 def authUser(env):
     envK = "eppn"
-    print app.config
     if (envK in env):
-      print "evnK in env"
       # we need to sanitize the environment variable
       # TODO: this looks like a function that can be taken out
       return env[envK].split("@")[0].split('/')[-1].lower()
     elif ("DEBUG" in config) and config.sys["debug"]:
-      print "DEBUG"
       old_username =  config["DEBUG"]["user"]
       converted_user = config["DEBUG"]["user"].split('@')[0].split('/')[-1].lower()
       #TODO: log
       return config["DEBUG"]["user"].split('@')[0].split('/')[-1].lower()
     else:
-      print "Wat???"
       return None

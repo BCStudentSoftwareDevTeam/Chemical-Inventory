@@ -11,9 +11,9 @@ from flask import \
     url_for
 
 # PURPOSE: superUser or Staff requesting for a student to have access to the system.
-@app.route('/fa/RequestUserAccess/', methods = ['GET', 'POST'])
+@app.route('/fa/RequestUserAccessOld/', methods = ['GET', 'POST'])
 @require_role('superUser')
-def RequestUserAccess():
+def RequestUserAccessOld():
   if request.method == "POST":
     data = request.form
     modelData, extraData = sortPost(data, Users)
