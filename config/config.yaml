@@ -9,6 +9,7 @@ application:
   title: "Berea Chemical Inventory System"
   default: index
 
+<<<<<<< HEAD
 databases:
   dynamic:    
     roles:
@@ -18,6 +19,15 @@ databases:
   static:
     cispro:
       filename: data/sample.sqlite
+=======
+databases:    
+  roles:
+    filename: data/roles.sqlite
+  inventory:
+    filename: data/inventory.sqlite
+  cispro:
+    filename: data/sample.sqlite
+>>>>>>> 70461f0a338b4a029d016ede65a1018aff821fa0
 
 
 sys:
