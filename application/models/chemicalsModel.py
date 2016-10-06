@@ -2,6 +2,7 @@ from application.models.util import *
 
 class Chemicals (Model):
   chemId          = PrimaryKeyField()
+  oldPK           = IntegerField(null = True)
   ## General Information
   name            = CharField(null = False)
   casNum          = CharField(null = True)
@@ -11,6 +12,7 @@ class Chemicals (Model):
   structure       = CharField(null = True) # Organic or Inorganic
   flashPoint      = DecimalField(null = True)
   boilPoint       = DecimalField(null = True)
+  molecularWeight = DecimalField(null = True)
   storageTemp     = DecimalField(null = True)
   sdsLink         = CharField(null = True)
   description     = CharField(default = "")
