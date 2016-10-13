@@ -7,4 +7,4 @@ class Buildings (Model):
   address    = TextField()
 
   class Meta:
-    database = getDB("inventory")
+    database = getDB("inventory", "dynamic")

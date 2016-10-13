@@ -17,4 +17,4 @@ class Histories (Model):
   modDate       = DateTimeField(default = datetime.datetime.now) #If a history instance is made, and the call doesn't specify the date, the default will take care of it
 
   class Meta:
-    database = getDB("inventory")
+    database = getDB("inventory", "dynamic")

@@ -63,16 +63,16 @@ config.flask.username = gUFE()
 # but because we don't know which will be used...
 @app.before_request
 def _db_connect():
-  for db in config.databases:
-    theDB = config.databases[db].theDB
+  for db in config.databases.dynamic:
+    theDB = config.databases.dynamic[db].theDB
     theDB.connect()
 
 # This hook ensures that the connection is closed when we've finished
 # processing the request.
 @app.teardown_appcontext
 def _db_close(exc):
-  for db in config.databases:
-    theDB = config.databases[db].theDB
+  for db in config.databases.dynamic:
+    theDB = config.databases.dynamic[db].theDB
     if not theDB.is_closed():
         theDB.close()
 
