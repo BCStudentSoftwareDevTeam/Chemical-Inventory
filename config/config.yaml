@@ -65,27 +65,27 @@ hazards:
     hexColor: "#FFA500"
  
 # Navigation bars   
-maMenu:
+admin:
   - title: "Home"
-    link: " /ma/Home/"
+    link: " /Home/"
   - title: "View All Chemicals"
-    link: "/ma/ChemTable/"
+    link: "/ChemTable/"
 
-faMenu:
+superUser:
   - title: "View All Chemicals"
-    link: "/fa/ChemTable/"
+    link: "/ChemTable/"
   - title: "Request Access For a Student"
-    link: "/fa/RequestUserAccess/"
+    link: "/RequestUserAccess/"
     
-aMenu:
+systemUser:
   - title: "Home"
-    link: "/a/ChemTable/"
+    link: "/ChemTable/"
 
-saMenu:
+systemAdmin:
   - title: "Home"
-    link: "/sa/Home/"
+    link: "/Home/"
   - title: "View All Chemicals"
-    link: "/sa/ChemTable/"
+    link: "/ChemTable/"
 
   
   
@@ -97,3 +97,10 @@ flask:
   secretKey: RANDOM
 
 controllers: !include:controllers.yaml
+
+DEBUG:
+  # user: "ballz" #admin
+  # user: "hooverk" #systemAdmin
+  # user: "thakurr" #superUser
+  user: "williamsk" #systemUser
+  # user: "sheggen" #unnapproved systemUser

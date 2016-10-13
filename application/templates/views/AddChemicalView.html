@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+{%  include "Navigation/navMenu.html"  %}
+
+<div class="text-center">
+    <h2>Add New Chemical</h2>
+</div>
+{# Added because addChemical snip is also used as editChemical #}
+
+{%  include "snips/AddChemical.html"  %}
+
+{% endblock %}

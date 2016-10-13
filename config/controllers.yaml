@@ -264,14 +264,14 @@ layout:
             roles:
               - admin
               
-      - name: maCheckIn
+      - name: CheckIn
         handlers:
           - purpose: "CheckIn a container"
             route: "/ma/CheckIn/"
             methods:
               - GET
               - POST
-            function: maCheckIn
+            function: CheckIn
             roles:
               - admin
               
