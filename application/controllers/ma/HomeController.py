@@ -41,6 +41,7 @@ def adminHome():
             elif data['action'] == 'add':
                 modelData, extraData = sortPost(data, Buildings)
                 Buildings.create(**modelData)
+                print modelData
         elif data['location'] == "Floor": #If the form is editing a floor
             if data['action'] == 'edit':
                 floor = Floors.get(Floors.fId == data['id']) #Get floor to be edited and change all information to what was in form
@@ -58,6 +59,17 @@ def adminHome():
             elif data['action'] == 'add':
                 modelData, extraData = sortPost(data, Rooms)
                 Rooms.create(**modelData)
+                lastRoomId = Rooms.select().order_by(-Rooms.rId).get().rId
+                Storages.create(roomId = lastRoomId,
+                                name = modelData['name'],
+                                flammable = True,
+                                healthHazard = True,
+                                oxidizer = True,
+                                orgAcid = True,
+                                inorgAcid = True,
+                                base = True,
+                                peroxide = True,
+                                pressure = True)
         elif data['location'] == "Storage": #If the form is editing a storage
             if data['action'] == 'edit':
                 storage = Storages.get(Storages.sId == data['id']) #Get storage location to be edited and change all information to what was in form
