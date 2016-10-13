@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+{%  include "Navigation/navMenu.html"  %}
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-danger col-md-4 col-md-offset-4" role="alert" id="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>{{message}}</strong>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<div class= "contianer-fluid">
+  <div class="col-md-8 col-md-offset-2">
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#inventory">Chemical Inventory Management</a></li>
+      {% if authLevel == "admin" %}
+          <li><a data-toggle="tab" href="#buildings">Location Management</a></li>
+          <li><a data-toggle="tab" href="#user">User Management</a></li>
+      {% endif %}
+      {# example code for tabs found here: http://jsfiddle.net/xfw8t/12/ #}
+    </ul>
+    
+    <div class = "tab-content">
+      
+        <div id = "inventory" class = "tab-pane fade in active">
+            {# Tab of all inventory management pages #}
+            <table class="table table-hover" style="cursor: pointer;">
+                <tr onclick="window.location.href = '{{url_for('ChemTable')}}';"><td>View All Chemicals</td></tr>
+                <tr onclick="window.location.href = '{{url_for('CheckIn')}}';"><td>Container Return(s)</td></tr>
+                <tr onclick="window.location.href = '{{url_for('CheckOut')}}';"><td>Check out Container(s)</td></tr>
+                <tr onclick="window.location.href = '{{url_for('AddChemical')}}';"><td>Add New Chemical</td></tr> 
+            </table>
+        </div>
+
+        {% if authLevel == "admin" %}
+            <div id = "buildings" class = "tab-pane fade">
+                {# Tab that includes manageLocations page #}
+                {% include "snips/manageLocations.html" %}
+            </div>
+        
+              
+            <div id = "user" class = "tab-pane fade">
+                {# Tab of all user management pages #}
+                <table class="table table-hover" style="cursor: pointer;">
+                    <tr onclick="window.location.href = '{{url_for('UserAccess')}}';"><td>User Access Requests</td>
+                    <tr onclick="window.location.href = '{{url_for('ViewUser')}}';"><td>View all Users</td></tr>
+                </table>
+            </div>
+        {% endif %}
+      
+    </div>
+    
+  </div>
+</div>
+
+<script src="/static/js/local/alertFade.js"></script>
+
+{% endblock %}

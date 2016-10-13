@@ -391,5 +391,29 @@ def init_db ():
     pastQuantity = "20.0 ounce (oz)",
     modDate = "01/22/2012").save()   
 
+  usersModel.Users(
+    username = "ballz",
+    auth_level = "admin",
+    emailadd = "Does this matter?",
+    reportto = "Does this matter either?").save()
+    
+  usersModel.Users(
+    username = "hooverk",
+    auth_level = "systemAdmin",
+    emailadd = "Does this matter?",
+    reportto = "Does this matter either?").save()
+    
+  usersModel.Users(
+    username = "thakurr",
+    auth_level = "superUser",
+    emailadd = "Does this matter?",
+    reportto = "Does this matter either?").save()
+    
+  usersModel.Users(
+    username = "williamsk",
+    auth_level = "systemUser",
+    emailadd = "Does this matter?",
+    reportto = "Does this matter either?").save()
+    
 if __name__ == "__main__":
   init_db()
