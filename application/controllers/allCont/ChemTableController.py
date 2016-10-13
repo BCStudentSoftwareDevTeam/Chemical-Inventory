@@ -9,7 +9,8 @@ from flask import \
     render_template, \
     request, \
     jsonify, \
-    url_for
+    url_for, \
+    abort
 
 # PURPOSE: Shows all Chemicals in Database.
 @app.route('/ChemTable/', methods = ['GET'])
@@ -17,8 +18,10 @@ def ChemTable():
   auth = AuthorizedUser()
   user = auth.getUser()
   userLevel = auth.userLevel()
+  if userLevel == -1 or user == -1:
+    abort(403)
   print user.username, userLevel
-    
+  
   chemicals = Chemicals.select() #Get all chemicals from the database
   contDict = {} #Set up a dictionary for all containers
   for chemical in chemicals: #For each chemical

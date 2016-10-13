@@ -17,16 +17,15 @@ class AuthorizedUser:
         if user.exists():
             return user[0]
         else:
-            print self.username
-            abort(403)
+            return -1
         
     def userLevel(self):
         """Gets the system specific user level based on username"""
         user = self.getUser()
         try:
-            if user.auth_level is not None:
+            if user.auth_level is not None and user.approve == True:
                 return user.auth_level
             else:
-                return "Not approved"
+                return -1
         except:
-            return "error"
+            return -1
