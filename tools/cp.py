@@ -269,7 +269,7 @@ def createHandlerInController (controllerFile, d, c, h):
       .format (h["route"], h["methods"]))
       
     for role in h["roles"]:
-      cf.write("@require_role('{0}')\n".format(role))
+      cf.write("'{0}')\n".format(role))
     cf.write ("def {0}({1}):\n"
       .format(h["function"], 
               ",".join(getParams(h["route"]))
