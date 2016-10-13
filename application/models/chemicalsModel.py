@@ -2,16 +2,17 @@ from application.models.util import *
 
 class Chemicals (Model):
   chemId          = PrimaryKeyField()
+  oldPK           = IntegerField(null = True)
   ## General Information
   name            = CharField(null = False)
   casNum          = CharField(null = True)
   primaryHazard   = CharField(null = True)
   formula         = CharField(null = True)
-  concentration   = CharField(null = True) #This field can be left empty
   state           = CharField(null = True)
   structure       = CharField(null = True) # Organic or Inorganic
   flashPoint      = DecimalField(null = True)
   boilPoint       = DecimalField(null = True)
+  molecularWeight = DecimalField(null = True)
   storageTemp     = DecimalField(null = True)
   sdsLink         = CharField(null = True)
   description     = CharField(default = "")
@@ -46,5 +47,5 @@ class Chemicals (Model):
   pressureFormer  = BooleanField(default = False)
 
   class Meta:
-    database = getDB("inventory")
+    database = getDB("inventory", "dynamic")
 

@@ -40,16 +40,3 @@ def checkName():
   except:
     print "This should log something..."
     return jsonify({'required':False})
-    
-@app.route('/checkConc/', methods=["GET"])
-def checkConc():
-  name = request.args.get('chemName')
-  conc = request.args.get('concentration')
-  print name, conc
-  try:
-    chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.name == name,
-                                            chemicalsModel.Chemicals.concentration == conc)
-    if chemical is not None:
-      return jsonify({'status': 'disabled'})
-  except:
-    return jsonify({'status': 'OK'})

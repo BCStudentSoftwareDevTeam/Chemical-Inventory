@@ -3,5 +3,5 @@ flask_session
 .tmp
 venv
 *.pyc
-data
-
+data/roles.sqlite
+data/inventory.sqlite

@@ -27,9 +27,9 @@ containerInformation:
         - measure: ""
           units:
             - "Bottle"
-            - "Jug"
+            - "Can"
             - "Drum"
-            - "That's all I can think of right now"
+            - "Jug"
     - name: "Current Quantity"
       id: "currentQuantity"
       type: "number"
