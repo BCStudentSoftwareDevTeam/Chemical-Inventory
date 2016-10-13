@@ -8,8 +8,8 @@ import datetime
     
 def init_db ():
   # First, we create the databases.
-  for database in config.databases:
-    filename = config.databases[database].filename
+  for database in config.databases.dynamic:
+    filename = config.databases.dynamic[database].filename
     
     """Initializes the database."""
     # Remove the DB
@@ -267,7 +267,7 @@ def init_db ():
     primaryHazard = "Organic Health Hazard",
     formula = "ChEmIcaLX",
     state = "Liquid",
-    structure = "Organic",
+   structure = "Organic",
     sdsLink = "https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/32357647/",
     description = "This is chemicalX... I don't know what it does or looks like",
     hmisHealth = "4",

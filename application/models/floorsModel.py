@@ -8,4 +8,4 @@ class Floors (Model):
   storageLimits = TextField(null = True) # This is additional functionality that does not need to be in the initial system
 
   class Meta:
-    database = getDB("inventory")
+    database = getDB("inventory", "dynamic")

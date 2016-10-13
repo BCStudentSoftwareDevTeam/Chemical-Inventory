@@ -25,4 +25,4 @@ class Containers (Model):
   checkedOutBy       = CharField(null = True) # Will be filled in with users username upon checkout
 
   class Meta:
-    database = getDB("inventory")
+    database = getDB("inventory", "dynamic")

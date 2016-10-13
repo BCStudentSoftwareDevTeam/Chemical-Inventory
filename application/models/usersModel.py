@@ -12,4 +12,4 @@ class Users (Model):
     created_by = TextField(null = True)
     
     class Meta:
-        database = getDB("inventory")
+        database = getDB("inventory", "dynamic")
