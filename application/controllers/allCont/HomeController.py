@@ -16,10 +16,12 @@ from flask import \
     url_for
 
 ####################################################
-@app.route("/") # TAKE THIS OUT! JUST FOR TESTING ##
+@app.route("/") 
 def homeRedr():
     return redirect('/Home/')
 ####################################################
+
+
 # PURPOSE: Edit, delete, and add buildings
 @app.route('/Home/', methods = ['GET', 'POST'])
 # 'admin')
@@ -27,7 +29,9 @@ def adminHome():
     auth = AuthorizedUser()
     user = auth.getUser()
     userLevel = auth.userLevel()
-    print user.username, userLevel
+  if userLevel == -1 or user == -1:
+    abort(403)
+  print user.username, userLevel
     
     if userLevel == "admin" or userLevel == "systemAdmin":
         buildings = Buildings.select()

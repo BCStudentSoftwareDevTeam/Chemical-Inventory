@@ -17,6 +17,8 @@ def UserAccess():
   auth = AuthorizedUser()
   user = auth.getUser()
   userLevel = auth.userLevel()
+  if userLevel == -1 or user == -1:
+    abort(403)
   print user.username, userLevel
   
   if userLevel == "admin":

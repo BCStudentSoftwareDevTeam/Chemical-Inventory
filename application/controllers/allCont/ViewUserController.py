@@ -15,6 +15,8 @@ def ViewUser():
   auth = AuthorizedUser()
   user = auth.getUser()
   userLevel = auth.userLevel()
+  if userLevel == -1 or user == -1:
+    abort(403)
   print user.username, userLevel
   
   return render_template("views/ma/ViewUserView.html", config = config, authLevel = userLevel)
