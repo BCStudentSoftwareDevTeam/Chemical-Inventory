@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+{%  include "Navigation/navMenu.html"  %}
+
+<div class= "container text-center"><h3>Manage Users</h3>
+<ul class = "nav nav-tabs">
+  <li class = "active"><a data-toggle = "tab" href = "#add">Add New Users</a></li>
+  <li><a data- toggle = "tab" href = "#approve"></a>Approve Users</li>
+</ul>  
+    <div class= "form col-sm-offset-3 col-sm-4">
+      <div class="tab-content">
+        <div id="checkout" class="tab-pane fade in active">
+          
+      <form name = "requestuser" method = "post" class ="form-group">
+        {% for fields in userConfig['maaccess']%}
+        <div class = "form-group row">
+          <label for="{{fields['name']}}" class = "col-sm-4">{{fields['name']}}</label>
+          <div class = "col-sm-8">
+            {% if fields['special'] == "required" %}
+            <input id="{{fields['id']}}" name="{{fields['id']}}" type="{{fields['type']}}" value = "{{fields['value']}}" placeholder="{{fields['placeholder']}}" {{fields['special']}} class="form-control">
+            {% elif fields['special'] == "calendar" %}
+             {% include "snips/Date.html" %}
+            <input type='datetime'  class="form-control"  id = "{{fields['id']}}" name =  "{{fields['id']}}" placeholder = "MM/DD/YYYY HH:MM: PM/AM" >
+            
+            {% else %}
+            <select id="{{fields.id}}" name="{{fields.id}}" class="form-control">
+                <option value="" disabled selected>Select One</option>
+                {% for option in fields.special %}
+                <option value="{{option}}">{{option}}</option>
+                {% endfor %}
+            {% endif %} 
+            
+            
+          </div>
+        </div>
+        {%endfor%}
+          
+      <input class="btn btn-success" id="addChemSubmit" type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
+    
+</div>
+  
