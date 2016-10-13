@@ -1,4 +1,4 @@
-# CONFIGURATION
+#: CONFIGURATION
 # Top-level keys are categorical; where possible, introduce
 # new top-level keys to keep constants/ideas separate.
 # Note that we parse this with the configuration library,
@@ -9,11 +9,16 @@ application:
   title: "Berea Chemical Inventory System"
   default: index
 
+
 databases:
-  roles:
-    filename: data/roles.sqlite
-  inventory:
-    filename: data/inventory.sqlite
+  dynamic:
+    roles:
+      filename: data/roles.sqlite
+    inventory:
+      filename: data/inventory.sqlite
+  static:
+    cispro:
+      filename: data/sample.sqlite
 
 sys:
   debug: True
