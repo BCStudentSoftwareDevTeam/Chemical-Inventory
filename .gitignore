@@ -5,3 +5,4 @@ venv
 *.pyc
 data/roles.sqlite
 data/inventory.sqlite
+.~c9*
