@@ -34,7 +34,7 @@ def maChemTable():
                           chemicals = chemicals, 
                           contDict = contDict,
                           quote = quote)
-
+                          
 @app.route("/getEditData/", methods = ['GET']) #AJAX call to get data for edit chemical form
 def getEditData():
     chemId = request.args.get('chemId')

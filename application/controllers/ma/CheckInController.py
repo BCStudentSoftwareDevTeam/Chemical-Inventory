@@ -43,7 +43,7 @@ def maCheckIn():
                            buildingList = buildingList,
                            storageList = storageList,
                            pageConfig = checkInConfig)
-
+                           
 @app.route('/checkInData/', methods = ['GET']) #Called by AJAX from getData()
 def checkInData():
     try:

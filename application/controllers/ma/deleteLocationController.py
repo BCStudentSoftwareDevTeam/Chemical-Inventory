@@ -35,8 +35,8 @@ def maDelete(location, lId):
                         except:
                             pass
             if state != 1:
-                building = Buildings.delete().where(Buildings.bId == lId)
-                building.execute()
+                building = Buildings.get(Buildings.bId == lId)
+                building.delete_instance(recursive=True) # With recursive set to True, this will go through and delete the building and everything that is associated with it. ie: Floors, Rooms, and Storages
             else:
                 flash("This building could not be deleted, as there are 1 or more containers still assigned to it.")
         elif location == "Floor":
@@ -51,8 +51,8 @@ def maDelete(location, lId):
                     except:
                         pass
             if state != 1:
-                floor = Floors.delete().where(Floors.fId == lId)
-                floor.execute()
+                floor = Floors.get(Floors.fId == lId)
+                floor.delete_instance(recursive=True)
             else:
                 flash("This floor could not be deleted, as there are 1 or more containers still assigned to it.")
         elif location == "Room":
@@ -65,8 +65,8 @@ def maDelete(location, lId):
                 except:
                     pass
             if state != 1:
-                room = Rooms.delete().where(Rooms.rId == lId)
-                room.execute()
+                room = Rooms.get(Rooms.rId == lId)
+                room.delete_instance(recursive=True)
             else:
                 flash("This room could not be deleted, as there are 1 or more containers still assigned to it.")
         elif location == "Storage":
@@ -77,8 +77,8 @@ def maDelete(location, lId):
             except:
                 pass
             if state != 1:
-                storage = Storages.delete().where(Storages.sId == lId)
-                storage.execute()
+                storage = Storages.get(Storages.sId == lId)
+                storage.delete_instance(recursive=True)
             else:
                 flash("This storage location could not be deleted, as there are 1 or more containers still assigned to it.")
     return redirect("ma/Home/")
