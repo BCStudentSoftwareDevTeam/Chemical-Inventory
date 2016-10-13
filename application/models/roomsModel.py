@@ -3,7 +3,6 @@ from application.models.floorsModel import Floors
 
 class Rooms (Model):
   rId        = PrimaryKeyField()
-  oldPK      = IntegerField(null = True)
   floorId    = ForeignKeyField(Floors, related_name = "floor")
   name       = TextField() #Room number. It is a text field to account for rooms like '13c' 
 

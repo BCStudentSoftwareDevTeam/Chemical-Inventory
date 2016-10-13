@@ -11,7 +11,7 @@ application:
 
 
 databases:
-  dynamic:    
+  dynamic:
     roles:
       filename: data/roles.sqlite
     inventory:
