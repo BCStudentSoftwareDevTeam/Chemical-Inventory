@@ -13,7 +13,7 @@
                 <a class="glyphLink" data-toggle="modal" data-target="#removeModal" data-location="Building" data-attribute="{{building.bId}}" data-name="{{building.name}}" aria-hidden="true">
                     <span class="glyphicon glyphicon-trash"></span>
                 </a>
-                <a class="glyphLink" data-toggle="modal" data-target="#editBuildingModal" data-location="Building" data-attribute="{{building.bId}}" data-name="{{building.name}}" aria-hidden="true">
+                <a class="glyphLink" data-toggle="modal" data-target="#editBuildingModal" data-location="Building" data-attribute="{{building.bId}}" data-name="{{building.name}}" aria-hidden="true" data-action="edit">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </a>
             </h4>
@@ -23,6 +23,7 @@
                 {# First Nested Accordion Begins (Floors) #}
                 <div class="panel-group" id="floorAccordion{{building.bId}}" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
+                        {% set parent = attribute %}
                         {% for floor in floors[building.bId] %}
                             {% set location = "Floor" %}
                             {% set attribute = floor.fId %}
@@ -35,7 +36,7 @@
                                         <a class="glyphLink" data-toggle="modal" data-target="#removeModal" data-location="Floor" data-attribute="{{floor.fId}}" data-name="{{floor.name}}">
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </a>
-                                        <a class="glyphLink" data-toggle="modal" data-target="#editFloorModal" data-location="Floor" data-attribute="{{floor.fId}}" data-name="{{floor.name}}">
+                                        <a class="glyphLink" data-toggle="modal" data-target="#editFloorModal" data-location="Floor" data-attribute="{{floor.fId}}" data-name="{{floor.name}}" data-action="edit">
                                             <span class="glyphicon glyphicon-pencil"></span>
                                         </a>
                                     </h4>
@@ -45,6 +46,7 @@
                                         {# Second Nested Accordion Begins (Rooms) #}
                                         <div class="panel-group" id="roomAccordian{{floor.fId}}" role="tablist" aria-mulitselectable="true">
                                             <div class="panel panel-default">
+                                                {% set parent = attribute %}
                                                 {% for room in rooms[floor.fId] %}                                                      
                                                     {% set location = 'Room' %}
                                                     {% set attribute = room.rId %}
@@ -57,7 +59,7 @@
                                                                 <a class="glyphLink" data-toggle="modal" data-target="#removeModal" data-location="Room" data-attribute="{{room.rId}}" data-name="{{room.name}}">
                                                                     <span class="glyphicon glyphicon-trash"></span>
                                                                 </a>
-                                                                <a class="glyphLink" data-toggle="modal" data-target="#editRoomModal" data-location="Floor" data-attribute="{{floor.fId}}" data-name="{{floor.name}}">
+                                                                <a class="glyphLink" data-toggle="modal" data-target="#editRoomModal" data-location="Floor" data-attribute="{{floor.fId}}" data-name="{{floor.name}}" data-action="edit">
                                                                     <span class="glyphicon glyphicon-pencil"></span>
                                                                 </a>
                                                             </h4>
@@ -67,6 +69,7 @@
                                                                 {# Third Nested Accordian Begins (Storages) #}
                                                                 <div class="panel-group" id="storageAccordian{{room.rId}}" role="tablist" aria-multiselectable="true">
                                                                     <div class="panel panel-default">
+                                                                        {% set parent = attribute %}
                                                                         {% for storage in storages[room.rId] %}
                                                                             {% set location = "Storage" %}
                                                                             {% set item = storage %}
@@ -77,7 +80,7 @@
                                                                                         <a title="Remove Storage Location" class="glyphLink" data-toggle="modal" data-target="#removeModal" data-location="Storage" data-attribute="{{storage.sId}}" data-name="{{storage.name}}">
                                                                                             <span class="glyphicon glyphicon-trash"></span>
                                                                                         </a>
-                                                                                        <a title="Edit Storage Location" class="glyphLink" data-toggle="modal" data-target="#editStorageModal" data-location="Storage" data-attribute="{{storage.sId}}" data-name="{{storage.name}}">
+                                                                                        <a title="Edit Storage Location" class="glyphLink" data-toggle="modal" data-target="#editStorageModal" data-location="Storage" data-attribute="{{storage.sId}}" data-name="{{storage.name}}" data-action="edit">
                                                                                             <span class="glyphicon glyphicon-pencil"></span>
                                                                                         </a>
                                                                                     </h4>
@@ -86,7 +89,7 @@
                                                                     </div>
                                                                 </div>
                                                                 {# Third Nested Accordian Ends (Storages) #}
-                                                                <button type="button" class="btn btn-success btn-xs addLink" data-toggle="modal" data-target="#addStorageModal{{attribute}}">
+                                                                <button type="button" class="btn btn-success btn-xs addLink" data-toggle="modal" data-target="#editStorageModal" data-action="add" data-parent="{{parent}}">
                                                                     <span title="Add a storage location to room {{room.name}}" class="glyphicon glyphicon-plus"></span>
                                                                     Add Storage Location
                                                                 </button>
@@ -96,7 +99,7 @@
                                             </div>
                                         </div>
                                         {# Second Nested Accordian Ends (Rooms) #}
-                                        <button title="Add a Room to floor: {{floor.name}}" type="button" class="btn btn-success btn-xs addLink" data-toggle="modal" data-target="#addRoomModal{{attribute}}">
+                                        <button title="Add a Room to floor: {{floor.name}}" type="button" class="btn btn-success btn-xs addLink" data-toggle="modal" data-target="#editRoomModal" data-action="add" data-parent="{{parent}}">
                                             <span class="glyphicon glyphicon-plus"></span>
                                             Add Room
                                         </button>
@@ -106,7 +109,7 @@
                     </div>
                 </div>
                 {# First Nested Accordion Ends (Floors) #}
-                <button title="Add a floor to the {{building.name}} Building" type="button" class="btn btn-success btn-xs addLink" data-toggle="modal" data-target="#addFloorModal{{attribute}}">
+                <button title="Add a floor to the {{building.name}} Building" type="button" class="btn btn-success btn-xs addLink" data-toggle="modal" data-target="#editFloorModal" data-action="add" data-parent="{{parent}}">
                     <span class="glyphicon glyphicon-plus"></span>
                     Add Floor
                 </button>
@@ -115,7 +118,7 @@
         {% endfor %}
     </div>
 </div>
-<button title="Add a Building" type="button" class="btn btn-success btn-xs addLink" data-toggle="modal" data-target="#addBuildingModal0">
+<button title="Add a Building" type="button" class="btn btn-success btn-xs addLink" data-toggle="modal" data-target="#editBuildingModal" data-action="add">
     <span class="glyphicon glyphicon-plus"></span>
     Add Building
 </button>
