@@ -6,6 +6,7 @@ from application.models.staticModels.mainModel import *
 from application.models.staticModels.locatesModel import *
 from application.models.chemicalsModel import *
 from application.models.storagesModel import *
+from application.models.historiesModel import *
 from application.models.usersModel import *
 import random
 import datetime
@@ -152,7 +153,19 @@ def init_db():
                 receiveDate= cont.ReservedDate).save()
         #print cont.UniqueContainerID + " was added to Containers"i
     print "Containers were added to the database"
-
+    ####
+    #Init container histories
+    ####
+    newCons = Containers.select()
+    for newcon in newCons:
+        currentQuant = str(newcon.currentQuantity) + str(newcon.currentQuantityUnit)
+        historiesModel.Histories(
+            movedTo       = newcon.storageId,
+            containerId   = newcon.conId,
+            action        = "Created",
+            pastQuantity  = currentQuant 
+            ).save()
+    print "Initial Container Histories Created"
     ####
     # Make all testing users
     ####

@@ -99,8 +99,8 @@ flask:
 controllers: !include:controllers.yaml
 
 DEBUG:
-  # user: "ballz" #admin
+   user: "ballz" #admin
   # user: "hooverk" #systemAdmin
   # user: "thakurr" #superUser
-  user: "williamsk" #systemUser
+  # user: "williamsk" #systemUser
   # user: "sheggen" #unnapproved systemUser
