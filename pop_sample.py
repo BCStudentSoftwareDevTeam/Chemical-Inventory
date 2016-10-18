@@ -163,7 +163,7 @@ def init_db():
             movedTo       = newcon.storageId,
             containerId   = newcon.conId,
             action        = "Created",
-            pastQuantity  = currentQuant 
+            pastQuantity  = currentQuant
             ).save()
     print "Initial Container Histories Created"
     ####
