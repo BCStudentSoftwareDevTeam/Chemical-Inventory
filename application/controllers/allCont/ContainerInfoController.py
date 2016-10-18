@@ -29,7 +29,7 @@ def maContainerInfo(chemId, barcodeId):
       return redirect('ma/ChemTable')
     storageList = storagesModel.Storages.select()
     buildingList = buildingsModel.Buildings.select()
-    histories = historiesModel.Histories.select().where(historiesModel.Histories.containerId == barcodeId)
+    histories = historiesModel.Histories.select().where(historiesModel.Histories.containerId == container.conId)
     if request.method =="POST":
       data = request.form
       historiesModel.Histories(containerId = data['barcode'],
