@@ -90,9 +90,6 @@ systemAdmin:
     link: "/Home/"
   - title: "View All Chemicals"
     link: "/ChemTable/"
-
-  
-  
   
 flask:
   # Secret key for signing cookies
