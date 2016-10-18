@@ -22,7 +22,7 @@ def migrateChem():
     #locdict = Batch.select().dicts().get() This was used for datamodel testing
     if userLevel == 'admin' or userLevel == "systemAdmin":
         if request.method == "GET":
-            return render_template("views/RequestMigrateChem.html",
+            return render_template("views/MigrateChem.html",
                     config = config)
     
 
