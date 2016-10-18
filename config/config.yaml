@@ -70,13 +70,17 @@ admin:
     link: " /Home/"
   - title: "View All Chemicals"
     link: "/ChemTable/"
+  - title: "Migrate Chemical"
+    link: "/migrateChem/"
 
 superUser:
   - title: "View All Chemicals"
     link: "/ChemTable/"
   - title: "Request Access For a Student"
-    link: "/RequestUserAccess/"
-    
+    link: "/RequestUserAccess/" 
+  - title: "Migrate Chemical"
+    link: "/migrateChem/"
+
 systemUser:
   - title: "Home"
     link: "/ChemTable/"
