@@ -4,8 +4,17 @@
         <label class="label-control" for="barcodeID">Barcode: </label>
         <input class="form-control" type="text" id="barcodeID" name = "barcodeID" required>
     </form>
-    <p>{{container.Id.NameSorted}}</p>
 
+    {% if alreadyMoved %} {#If chemical has already been moved#}
+      <p>Container {{container.barcodeId}} of {{container.chemId.name}} is already in the system<p>
+
+    {%elif container %} {#If chemical has not been moved#}
+      <p>Not is system but belongs in {{container.Id.NameSorted}}</p>
+
+    {% else %}
+    <div>
+      <p>Chemical is not in the system. Would you like to add it?<p>
+    {% endif %}
 
 </div>  
 {#
