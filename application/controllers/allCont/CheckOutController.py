@@ -30,7 +30,7 @@ def CheckOut():
             cont = Containers.get(Containers.barcodeId == data['barcodeId'])
             Histories.create(movedFrom = cont.storageId,
                             movedTo = data['storageId'],
-                            containerId = cont.barcodeId,
+                            containerId = cont.conId,
                             modUser = "CheckOutTest",
                             action = "Checked Out",
                             pastQuantity = "%s %s" %(cont.currentQuantity, cont.currentQuantityUnit))
@@ -47,7 +47,8 @@ def CheckOut():
                                buildingList = buildingList,
                                storageList = storageList,
                                pageConfig = checkOutConfig,
-                               authLevel = userLevel)
+                               authLevel = userLevel,
+                               user = user)
     else:
         # This will later have a slightly different render_template. To allow for all other users to access a specific checkout page.
         abort(403)

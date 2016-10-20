@@ -30,7 +30,7 @@ def CheckIn():
             cont = Containers.get(Containers.barcodeId == data['barcodeId'])
             Histories.create(movedFrom = cont.storageId,
                            movedTo = data['storageId'],
-                           containerId = cont.barcodeId,
+                           containerId = cont.conId,
                            modUser = "CheckInTest",
                            action = "Checked In",
                            pastQuantity = "%s %s" %(cont.currentQuantity, cont.currentQuantityUnit))
