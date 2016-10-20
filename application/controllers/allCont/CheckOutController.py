@@ -47,7 +47,8 @@ def CheckOut():
                                buildingList = buildingList,
                                storageList = storageList,
                                pageConfig = checkOutConfig,
-                               authLevel = userLevel)
+                               authLevel = userLevel,
+                               user = user)
     else:
         # This will later have a slightly different render_template. To allow for all other users to access a specific checkout page.
         abort(403)

@@ -1,21 +1,29 @@
 <div class="col-sm-offset-4 col-sm-4"><h3>{{pageConfig['page']}}</h3>
     <div class="form">
+      <strong><p style="color:#e32; display:inline">*</p> indicates required field</strong>
         <form name="{{pageConfig[formName]}}" class="form" method="post">
             <div class="form-group">
-                <label class="label-control" for="barcodeId">Barcode: </label>
-                    <input class="form-control" type="text" id="barcodeId" name="barcodeId" required oninput="checkBar('{{pageConfig['formName']}}')" autofocus> {# This field is automatically selected on page load. When barcode is entered, checkBar() will get container's info #}
+                <label class="label-control required" for="barcodeId">Barcode: </label>
+                    <input class="form-control" type="text" id="barcodeId" name="barcodeId" required oninput="checkBar('{{pageConfig['formName']}}')" autofocus class="required"> {# This field is automatically selected on page load. When barcode is entered, checkBar() will get container's info #}
             </div>
             {% for group in pageConfig['inputs'] %}
                 {% if group.autoPop == "true" %} {# These are the fields that checkBar will fill, they are not editable, and are helpful for the user to see #}
-                    <div class="form-group">
-                        <label class="label-control" for="{{group.id}}">{{group.name}}</label>
-                            <input class="form-control d" type="{{group.type}}" id="{{group.id}}" name="{{group.id}}" readonly>
-                    </div>
+                    {% if group.id == "forProf" %}
+                      <div class="form-group">
+                          <label class="label-control" for="{{group.id}}">{{group.name}}</label>
+                              <input class="form-control" type="{{group.type}}" id="{{group.id}}" name="{{group.id}}" value="{{user.reportto}}">
+                      </div>
+                    {% else %}
+                      <div class="form-group">
+                          <label class="label-control" for="{{group.id}}">{{group.name}}</label>
+                              <input class="form-control d" type="{{group.type}}" id="{{group.id}}" name="{{group.id}}" readonly>
+                      </div>
+                    {% endif %}
                 {% else %} {# These are fields that the user will add info. They are disabled at first, but once a valid barcode is entered, checkBar() enables them #}
                     {%  if group.type == 'select'  %}
                         {% if group.id == 'storageId' %}
                           <div class="form-group">
-                            <label for="storage" class="col-sm-4"> New Location:</label>
+                            <label for="storage" class="col-sm-4 required">New Location:</label>
                               <select id="storage" name="storageId" class="form-control d" required disabled>
                                 <option selected disabled value="">Select One</option>
                                 {% for building in buildingList %}
@@ -54,7 +62,7 @@
                         {% endif %}
                     {% else %}
                         <div class="form-group">
-                            <label class="label-control" for="{{group.id}}">{{group.name}}</label>
+                            <label class="label-control {{group['special']}}" for="{{group.id}}">{{group.name}}</label>
                                 <input class="form-control d" type="{{group.type}}" id="{{group.id}}" name="{{group.id}}" {{group.special}} disabled>
                         </div>        
                     {% endif %}
@@ -67,4 +75,4 @@
     </div>
 </div>
 
-<script src="/static/js/local/changeForm.js"></script>
+<script src="/static/js/local/checkBar.js"></script>
