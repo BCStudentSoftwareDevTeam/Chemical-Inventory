@@ -39,11 +39,7 @@ hazards:
     hazardColor: "Copper"
     textColor: "White"
     hexColor: "#B87333"
-  "Organic Health Hazard":
-    hazardColor: "Blue"
-    textColor: "#FFFFFF"
-    hexColor: "#0000FF"
-  "Inorganic Health Hazard":
+  "Health Hazard":
     hazardColor: "Blue"
     textColor: "#FFFFFF"
     hexColor: "#0000FF"
@@ -63,7 +59,10 @@ hazards:
     hazardColor: "Orange"
     textColor: "#FFFFFF"
     hexColor: "#FFA500"
- 
+  "General Hazard":
+    hazardColor: "N/A"
+    textColor: "#333333"
+    hexColor: "" 
 # Navigation bars   
 admin:
   - title: "Home"
