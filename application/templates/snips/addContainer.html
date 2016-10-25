@@ -1,5 +1,4 @@
 <div class="clearfix"></div>
-<script src="/static/js/local/createBarcode.js"></script>
 <div class="form col-sm-6 col-sm-offset-3">
   <form name="addCont" id="addCont" method="post" onsubmit="return checkVals({{contConfig['options']}})">
     <input type="hidden" id="chemId" name="chemId" value="{{chemInfo.chemId}}"/>
@@ -11,12 +10,12 @@
             <div class="form-group row">
               <label for="{{group.id}}" class="col-sm-6">{{group.name}}</label>
               <div class="col-sm-6">
-                <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" value="" {{group.special}}/>
-                <svg id="barcode"></svg>
+                <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" value="{{barcode}}" {{group.special}}/>
+                <svg id="barcode" value = "{{barcode}}"></svg>
                 {# Creates barcode based on last barcode, and date. returns barcode as string. #}
                 <script>
-                  var bar = createBarcode('{{group.id}}', '{{lastCont}}');
-                  JsBarcode('#barcode', bar, {
+                  //var bar = createBarcode('{{group.id}}', '{{barcode}}');
+                  JsBarcode('#barcode', '{{barcode}}', {
                               height:30,
                               fontSize: 15
                              });
