@@ -10,12 +10,14 @@ from application.models.buildingsModel import *
 from application.models.historiesModel import *
 from application.config import *
 from application.logic.getAuthUser import AuthorizedUser
+from application.logic.sortPost import *
 
 
 from flask import render_template, \
                           request, \
                           jsonify, \
-                          redirect
+                          redirect, \
+                          flash
 
 @app.route('/migrateChem/', methods = ['GET', 'POST'])
 def migrateChem():
@@ -28,11 +30,12 @@ def migrateChem():
     if userLevel == 'admin' or userLevel == "systemAdmin":
         if request.method == "GET":
             return render_template("views/MigrateChem.html",
-                    config = config,
+                    config = config
                     )
     
 
         elif request.method == "POST":
+            data = request.form
             if request.form['formName'] == "searchBcode":
                 ########
                 INIT = -1    #Inial start state(Not really needed but looks nice)
@@ -100,7 +103,7 @@ def migrateChem():
                             #Chemical is not yet in BCCIS
                             print str(e)
                             state = NIETHER
-                            return render_template("views/migrateChem.html",
+                            return render_template("views/MigrateChem.html",
                                     state = state,
                                     container = containerObj,
                                     chemInfo = chemObj,
@@ -116,18 +119,38 @@ def migrateChem():
                     else:
                         pass
 
-                return render_template("views/migrateChem.html",
+                return render_template("views/MigrateChem.html",
                                 state = state,
                                 container = containerObj,
                                 chemical = chemObj,
                                 inputBar = inputBar,
                                 config = config,
                                 contConfig = contConfig)
+            elif request.form['formName'] == 'addCont':
+                ###
+                ##Process the form of adding a Container
+                ###
+                try:
+                    modelData, extraData = sortPost(data, Containers)
+                    cont = Containers.create(**modelData)
+                    Histories.create(movedTo = modelData['storageId'],
+                                    containerId = cont.barcodeId,
+                                    modUser = extraData['user'],
+                                    action = "Created",
+                                    pastQuantity = "%s %s" %(modelData['currentQuantity'], modelData['currentQuantityUnit']))
+                    flash("Container added successfully")
+                except Exception as e:
+                    print str(e)
+                    flash("Container could not be added")
+                return render_template("views/MigrateChem.html",
+                        config = config)
+
             elif request.form['formName'] == 'addChem':
                 for i in data: #Loop through the keys in the form dictionary
                     setattr(chemInfo, i, data[i]) #Set the attribute, 'i' (the current key in the form), of 'chemInfo' (the chemical) to the value of the current key in the form
                 chemInfo.save()
-                return redirect('views/migrateChem.html')
+                return render_template('views/MigrateChem.html',
+                        config = config)
             #Left Off here
             #elif request.form[] == 'addCont':
                 ##BUILD OUT WITH ZACHS CODE FROM THE MERGE. ViewContainer.html
