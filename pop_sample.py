@@ -150,7 +150,8 @@ def init_db():
                 currentQuantityUnit = "G",
                 currentQuantity     = 4.0,
                 capacity            = 5.0,
-                receiveDate= cont.ReservedDate).save()
+                receiveDate= cont.ReservedDate,
+                migrated            = 1).save()
         #print cont.UniqueContainerID + " was added to Containers"i
     print "Containers were added to the database"
     ####

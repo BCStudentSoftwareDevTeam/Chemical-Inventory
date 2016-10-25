@@ -57,10 +57,14 @@ def ViewChemical(chemId):
           flash("Container added successfully") #Flash a success message
         except Exception as e:
           flash("Container could not be added") #If there was an error, flash an error message
-    lastCont = Containers.select()\ 
-            .order_by(-Containers.barcodeId).get().barcodeId # Gets the last entered container. Used for creating the next barcode
-    print lastCont
-    barcode = genBarcode(lastCont)
+    try:
+        lastCont = Containers.select().where(Containers.migrated >> None)\
+            .order_by(-Containers.barcodeId).get().barcodeId # Gets the last entered container that was not migrated. Used for creating the next barcode
+        barcode = genBarcode(lastCont)
+    except Exception as e:
+        print str(e)
+        barcode = genBarcode("00000000")
+        print barcode
     #lastCont needs to be assigned after any potential updates to the last barcode, and before render_template
     containers = (((Containers
                   .select())
