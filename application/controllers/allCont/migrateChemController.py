@@ -85,8 +85,6 @@ def migrateChem():
                             storageList = Storages.select().order_by(Storages.roomId)
 
                             buildingList = Buildings.select()
-                        
-                            lastCont = inputBar
 
                             state = ONLYCHEM
                             return render_template("views/MigrateChem.html",
@@ -98,7 +96,7 @@ def migrateChem():
                                     contConfig = contConfig,
                                     storageList = storageList,
                                     buildingList = buildingList,
-                                    lastCont = lastCont)
+                                    barcode = inputBar)
                         except Exception, e:
                             #Chemical is not yet in BCCIS
                             print str(e)
@@ -134,7 +132,7 @@ def migrateChem():
                     modelData, extraData = sortPost(data, Containers)
                     cont = Containers.create(**modelData)
                     Histories.create(movedTo = modelData['storageId'],
-                                    containerId = cont.barcodeId,
+                                    containerId = cont.conId,
                                     modUser = extraData['user'],
                                     action = "Created",
                                     pastQuantity = "%s %s" %(modelData['currentQuantity'], modelData['currentQuantityUnit']))
