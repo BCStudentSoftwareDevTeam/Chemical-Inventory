@@ -23,10 +23,10 @@ def maContainerInfo(chemId, barcodeId):
   if userLevel == "admin" or userLevel == "systemAdmin":
     chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
     if chemical.remove == True:
-      return redirect('ma/ChemTable')
+      return redirect('/ChemTable')
     container = containersModel.Containers.get(containersModel.Containers.barcodeId == barcodeId)
     if container.disposalDate is not None:
-      return redirect('ma/ChemTable')
+      return redirect('/ChemTable')
     storageList = storagesModel.Storages.select()
     buildingList = buildingsModel.Buildings.select()
     histories = historiesModel.Histories.select().where(historiesModel.Histories.containerId == container.conId)
