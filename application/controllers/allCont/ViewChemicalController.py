@@ -31,9 +31,9 @@ def ViewChemical(chemId):
   try:
     chemInfo = Chemicals.get(Chemicals.chemId == chemId) #Get chemical by correct chemId
   except:
-    return redirect('ma/ChemTable')
+    return redirect('ChemTable')
   if chemInfo.remove == True: #If the chemical attribute, 'remove', was set to True, go back to the chemical table.
-    return redirect('ma/ChemTable')
+    return redirect('ChemTable')
   if userLevel == "admin" or userLevel == "systemAdmin":
     chemDict = Chemicals.select().where(Chemicals.chemId == chemId).dicts().get() #Get chemical by correct chemId as a dictionary
     storageList = Storages.select().order_by(Storages.roomId)
@@ -49,14 +49,15 @@ def ViewChemical(chemId):
           modelData, extraData = sortPost(data, Containers)
           cont = Containers.create(**modelData)
           Histories.create(movedTo = modelData['storageId'],
-                          containerId = cont.barcodeId, 
+                          containerId = cont.conId, 
                           modUser = extraData['user'],
                           action = "Created",
                           pastQuantity = "%s %s" %(modelData['currentQuantity'], modelData['currentQuantityUnit']))
           flash("Container added successfully") #Flash a success message
         except Exception as e:
+          print e
           flash("Container could not be added") #If there was an error, flash an error message
-    lastCont = Containers.select().order_by(-Containers.barcodeId).get().barcodeId # Gets the last entered container. Used for creating the next barcode
+    lastCont = Containers.select().order_by(-Containers.conId).get().barcodeId # Gets the last entered container. Used for creating the next barcode
     #lastCont needs to be assigned after any potential updates to the last barcode, and before render_template
     containers = (((Containers
                   .select())

@@ -48,3 +48,41 @@ function getData(barcodeId, formAction){
         }
     });
 }
+
+function manualBar(){
+    var manualSel = document.getElementById('manualSel');
+    var hiddenField = document.getElementById('nullbarcodeId');
+    var autoField = document.getElementById('barcodeId');
+    var barNum = document.getElementById('barcode');
+    if (manualSel.checked) {
+        //Hide the autopopulated barcode field and reveal the manual barcode entry field
+        $(autoField).empty();
+        autoField.setAttribute("name", "nullbarcodeId");
+        hiddenField.setAttribute("name", "barcodeId");
+        hiddenField.style.visibility = "visible";
+        hiddenField.select();
+    } else {
+        //Clear value from manual barcode entry field, hide manual field, and reveal autopopulated field
+        hiddenField.value = null;
+        hiddenField.style.visibility = "hidden";
+        hiddenField.setAttribute("name", "nullbarcodeId");
+        autoField.setAttribute("name", "barcodeId");
+        $.getScript("/static/js/local/createBarcode.js", function(){
+            JsBarcode(barNum, autoField.value, {
+                              height:30,
+                              fontSize: 15
+                             });
+        })
+    }
+};
+
+function spaceCheck(barcode){
+    var regex = new RegExp("^[a-zA-Z0-9-]*$");
+    if (!regex.test(barcode.value)) {
+        barcode.parentElement.classList.add('has-error');
+        document.getElementById("barcodeIdMessage").classList.remove('hidden');
+    } else {
+        barcode.parentElement.classList.remove('has-error');
+        document.getElementById("barcodeIdMessage").classList.add('hidden');
+    }
+};
