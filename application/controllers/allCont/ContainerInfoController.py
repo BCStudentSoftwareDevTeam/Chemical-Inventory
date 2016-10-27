@@ -23,25 +23,27 @@ def maContainerInfo(chemId, barcodeId):
   if userLevel == "admin" or userLevel == "systemAdmin":
     chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
     if chemical.remove == True:
-      return redirect('ma/ChemTable')
+      return redirect('/ChemTable')
     container = containersModel.Containers.get(containersModel.Containers.barcodeId == barcodeId)
     if container.disposalDate is not None:
-      return redirect('ma/ChemTable')
+      return redirect('/ChemTable')
     storageList = storagesModel.Storages.select()
     buildingList = buildingsModel.Buildings.select()
     histories = historiesModel.Histories.select().where(historiesModel.Histories.containerId == container.conId)
     if request.method =="POST":
       data = request.form
-      historiesModel.Histories(containerId = data['barcode'],
-                              movedFrom = data['location'],
+      historiesModel.Histories(containerId = container.conId,
+                              barcodeId  = container.barcodeId,
+                              movedFrom = container.storageId_id,
                               movedTo = data['storageId'],
-                              pastQuantity = data['quantity'],
-                              modUser = "ContainerInfoCheckOut",
+                              pastQuantity = str(container.currentQuantity) + str(container.currentQuantityUnit),
+                              modUser = user.username,
                               action = "Checked Out",
                               modDate = datetime.date.today()).save()
       cont = containersModel.Containers.get(barcodeId = barcodeId)
       cont.checkOutReason  = data['class']
       cont.checkedOut = True
+      cont.checkedOutBy = user.username
       cont.forProf = data ['forProf']
       cont.storageId = data['storageId']
       cont.save()

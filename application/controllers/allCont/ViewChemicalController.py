@@ -9,6 +9,7 @@ from application.config import *
 from application.logic.getAuthUser import AuthorizedUser
 from urllib import *
 from application.logic.sortPost import *
+from application.logic.genBarcode import *
 
 from flask import \
     render_template, \
@@ -57,7 +58,14 @@ def ViewChemical(chemId):
         except Exception as e:
           print e
           flash("Container could not be added") #If there was an error, flash an error message
-    lastCont = Containers.select().order_by(-Containers.conId).get().barcodeId # Gets the last entered container. Used for creating the next barcode
+    try:
+        lastCont = Containers.select().where(Containers.migrated >> None)\
+            .order_by(-Containers.barcodeId).get().barcodeId # Gets the last entered container that was not migrated. Used for creating the next barcode
+        barcode = genBarcode(lastCont)
+    except Exception as e:
+        print str(e)
+        barcode = genBarcode("00000000")
+        print barcode
     #lastCont needs to be assigned after any potential updates to the last barcode, and before render_template
     containers = (((Containers
                   .select())
@@ -75,7 +83,7 @@ def ViewChemical(chemId):
                            chemConfig = chemConfig,
                            storageList = storageList,
                            buildingList = buildingList,
-                           lastCont = lastCont,
+                           barcode = barcode,
                            authLevel = userLevel)
   else:
     containers = (((Containers

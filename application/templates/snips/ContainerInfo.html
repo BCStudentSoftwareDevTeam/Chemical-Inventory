@@ -20,11 +20,11 @@
           <h3>Check Out</h3>
             <div class="form">
 
-              <form name="checkOutForm" method="POST" action="/ma/ContainerInfo/{{chemical.chemId}}/{{container.barcodeId}}/">
+              <form name="checkOutForm" method="POST">
                 <label for="name" class="col-sm-2">Name:</label>
                   <input class="form-control" type="text" name="chemname" value="{{chemical.name}}" readonly>
                 <label for="barcode" class="col-sm-2">Barcode:</label>
-                  <input class="form-control" type="number" name="barcode" value="{{container.barcodeId}}" readonly>
+                  <input class="form-control" type="text" name="barcode" value="{{container.barcodeId}}" readonly>
                 <label for="quantity" class="col-sm-2"> Quantity:</label>
                   <input class="form-control" type="varchar" name="quantity" value="{{container.currentQuantity}} {{container.currentQuantityUnit}}" readonly>
                 <label for="locationShow" class="col-sm-2"> Current Location:</label>
@@ -134,6 +134,7 @@
             
             </script>
 
+            {# DISPOSE OF CONTAINER TAB#}
         <div id="dispose" class="tab-pane fade">
           <div class="text-center">
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#disposeModal">Dispose this container</button> {# This could look a lot better, and maybe function better #}

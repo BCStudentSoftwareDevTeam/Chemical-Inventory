@@ -23,6 +23,7 @@ class Containers (Model):
   checkOutReason     = CharField(null = True)
   forProf            = CharField(null = True)
   checkedOutBy       = CharField(null = True) # Will be filled in with users username upon checkout
+  migrated           = IntegerField(null = True) # If the container was migrated from CISPro
 
   class Meta:
     database = getDB("inventory", "dynamic")

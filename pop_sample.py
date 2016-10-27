@@ -63,7 +63,7 @@ def init_db():
             oxidizer = False 
         
         #List of all possible Primary Hazards, one of these is randomly selected for the chem hazard. This is because of incosistant id3 data. ONLY FOR TESTING
-        primaryHazard= ["Base", "Flammable", "Flammable Solid", "Organic Health Hazard", "Inorganic Health Hazard", "Inorganic Acid", "Organic Acid", "Oxidizer", "Reactive"]  
+        primaryHazard= ["Base", "Flammable", "Flammable Solid", "Health Hazard", "Inorganic Acid", "Organic Acid", "Oxidizer", "Reactive", "General Hazard"]  
 
         #Checks if BoilingPoint or MolecularWeight are empty fields, so that Peewee doesn't default the value to 0.
         if chem.BoilingPoint == "":
@@ -80,7 +80,7 @@ def init_db():
             oldPK          = chem.NameSorted, #This keeps track of old primary key in CISPro so conts can relate back.
             name           = chem.NameRaw,
             casNum         = chem.casNo,
-            primaryHazard  = primaryHazard[random.randrange(0, 8)],#chem.Id3 #This randomly selects pHaz
+            primaryHazard  = primaryHazard[random.randrange(0, 9)],#chem.Id3 #This randomly selects pHaz
             formula        = chem.StructuralFormula,
             state          = state,
             structure      = struct,
@@ -150,7 +150,8 @@ def init_db():
                 currentQuantityUnit = "G",
                 currentQuantity     = 4.0,
                 capacity            = 5.0,
-                receiveDate= cont.ReservedDate).save()
+                receiveDate= cont.ReservedDate,
+                migrated            = 1).save()
         #print cont.UniqueContainerID + " was added to Containers"i
     print "Containers were added to the database"
     ####
