@@ -31,7 +31,7 @@ def CheckOut():
             Histories.create(movedFrom = cont.storageId,
                             movedTo = data['storageId'],
                             containerId = cont.conId,
-                            modUser = "CheckOutTest",
+                            modUser = user.username,
                             action = "Checked Out",
                             pastQuantity = "%s %s" %(cont.currentQuantity, cont.currentQuantityUnit))
             cont.storageId = data['storageId']
