@@ -56,6 +56,7 @@ def migrateChem():
                             .where((Containers.barcodeId == inputBar)\
                             |(Containers.barcodeId == inputBar.upper()))\
                             .get()
+                    flash("Container " + inputBar + " Already Migrated Into System")
                     state = MIGRATED
                 except Exception,e:
                     #print str(e)
@@ -136,7 +137,7 @@ def migrateChem():
                                     modUser = extraData['user'],
                                     action = "Created",
                                     pastQuantity = "%s %s" %(modelData['currentQuantity'], modelData['currentQuantityUnit']))
-                    flash("Container added successfully")
+                    flash("Container Successfully Migrated Into System")
                 except Exception as e:
                     print str(e)
                     flash("Container could not be added")
