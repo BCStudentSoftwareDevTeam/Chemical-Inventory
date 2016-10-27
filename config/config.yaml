@@ -39,11 +39,7 @@ hazards:
     hazardColor: "Copper"
     textColor: "White"
     hexColor: "#B87333"
-  "Organic Health Hazard":
-    hazardColor: "Blue"
-    textColor: "#FFFFFF"
-    hexColor: "#0000FF"
-  "Inorganic Health Hazard":
+  "Health Hazard":
     hazardColor: "Blue"
     textColor: "#FFFFFF"
     hexColor: "#0000FF"
@@ -63,20 +59,27 @@ hazards:
     hazardColor: "Orange"
     textColor: "#FFFFFF"
     hexColor: "#FFA500"
- 
+  "General Hazard":
+    hazardColor: "N/A"
+    textColor: "#333333"
+    hexColor: "" 
 # Navigation bars   
 admin:
   - title: "Home"
     link: " /Home/"
   - title: "View All Chemicals"
     link: "/ChemTable/"
+  - title: "Migrate Chemical"
+    link: "/migrateChem/"
 
 superUser:
   - title: "View All Chemicals"
     link: "/ChemTable/"
   - title: "Request Access For a Student"
-    link: "/RequestUserAccess/"
-    
+    link: "/RequestUserAccess/" 
+  - title: "Migrate Chemical"
+    link: "/migrateChem/"
+
 systemUser:
   - title: "Home"
     link: "/ChemTable/"
@@ -86,9 +89,6 @@ systemAdmin:
     link: "/Home/"
   - title: "View All Chemicals"
     link: "/ChemTable/"
-
-  
-  
   
 flask:
   # Secret key for signing cookies
@@ -99,8 +99,8 @@ flask:
 controllers: !include:controllers.yaml
 
 DEBUG:
-  # user: "ballz" #admin
+   user: "ballz" #admin
   # user: "hooverk" #systemAdmin
   # user: "thakurr" #superUser
-  user: "williamsk" #systemUser
+  # user: "williamsk" #systemUser
   # user: "sheggen" #unnapproved systemUser
