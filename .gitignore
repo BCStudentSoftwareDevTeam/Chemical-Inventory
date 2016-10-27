@@ -6,3 +6,5 @@ venv
 data/roles.sqlite
 data/inventory.sqlite
 .~c9*
+*.sqlite-shm
+*.sqlite-wal
