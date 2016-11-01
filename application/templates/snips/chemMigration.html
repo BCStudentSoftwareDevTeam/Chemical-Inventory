@@ -1,32 +1,49 @@
 <div class="form container text-center">
   <form name="addChem" method="post" class="form-group">
     <input type="hidden" name="formName" value="addChem">
+    {# Goes through the chemical inputs #}
     {%  for group in chemConfig['addChemInputs']  %}
       <div class="form-group row" id="{{group['id']}}Parent">
         <label for="{{group['id']}}" class="col-xs-6">{{group['name']}}</label>
         <div class="col-xs-4">
+
         {# Checking name oninput to determine whether percentage is required or not. #}
-        {% if group['id'] == 'name' %}
+       	{% if group['id'] == 'name' %}
           {# If name is equal to one already in the database, percentage should be required #}
-          <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" oninput="checkName()" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
-        {# If it is the sdsLink, add a link to msdsonline #}
+          <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" oninput="checkName()" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control", value={{container.NameRaw.NameRaw}}>
+        {# If it is a casNum#}
+        {% elif group['id'] == "casNum" %}
+          <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control" value={{container.NameRaw.casNo}}>
+        {# If it is a Formula #}
+        {% elif group['id'] == "formula"%}
+        <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control" value={{container.NameRaw.MolecularFormula}}>
+        {# Once you get the Flash Point details you need to build out form for it #}
+        {# If it is a boilPoint #}
+        {% elif group['id'] ==  "boilPoint" %}
+        <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control" value={{container.NameRaw.BoilingPoint}}>
+        {# If it is a Description input#}
+        {% elif group['id'] ==  "description" %}
+          <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control" value={{container.NameRaw.Description}}>
+	      {# If it is the sdsLink, add a link to msdsonline #}
         {% elif group['id'] == "sdsLink" %}
           <div class="input-group-addon">https://</div>
           <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
-          <div class="input-group-addon"><a target="blank" href="https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?nas=True">Find SDS Here</a></div> 
+          <div class="input-group-addon"><a target="blank" href="https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?nas=True">Find SDS Here</a></div>
+          {#If it is not one of the above#}
         {% else %}
             <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control">
-          {% endif %}
+      {% endif %}
           <span class="form-group-addon">{{group['addon']}}</span>
         </div>
       </div>
     {%endfor%}
-
+    {#  #}
     {%  for group in chemConfig['addChemDropdowns']  %}
     <div class="form-group row">
       <label for="{{  group['name'] }}" class="col-xs-6">{{group['name']}}:</label>
       <div class="col-xs-4">
         <select id="{{  group['id']  }}" name="{{  group['id']  }}" class="form-control">
+          <p>it was {{container.NameRaw.Id3}}</p>
           <option selected disabled value="">Select One</option>
           {%  for selection in group['selections']  %}
           {# Dropdown selections #}
@@ -112,6 +129,5 @@
   <input class="btn btn-default btn" id="addChemSubmit" type="submit" value="Submit">
   </form>
 </div>
-<script src="/static/js/local/autoPop.js"></script>
 <script src="/static/js/local/pictSelect.js"></script>
 <script src="/static/js/local/checkName.js"></script>

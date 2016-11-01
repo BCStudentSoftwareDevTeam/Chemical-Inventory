@@ -1,6 +1,6 @@
 from application import app
 from application.models.staticModels.batchModel import *
-from application.models.staticModels.mainModel import * 
+from application.models.staticModels.mainModel import *
 from application.models.staticModels.locatesModel import *
 from application.models.chemicalsModel import *
 from application.models.containersModel import *
@@ -33,7 +33,7 @@ def migrateChem():
 		    authLevel = userLevel,
                     config = config
                     )
-    
+
 
         elif request.method == "POST":
             data = request.form
@@ -75,15 +75,15 @@ def migrateChem():
                     except:
                         #Not in CISPro
                         state = UNKNOWN
-                
+
                     ########
                     #If Continer in CISPro check if parent Chemical is Migrated
                     if state != UNKNOWN: #If the container is found in the old system. Check for Chem
-                        try: 
+                        try:
                             #Check if parent Chemical is in BCCIS
                             chemObj = Chemicals.select()\
                                 .where(Chemicals.oldPK == containerObj.NameRaw_id).get()
-                        
+
                             storageList = Storages.select().order_by(Storages.roomId)
 
                             buildingList = Buildings.select()
@@ -146,14 +146,16 @@ def migrateChem():
                     print str(e)
                     flash("Container could not be added")
                 return render_template("views/MigrateChem.html",
-                        config = config)
+                        config = config,
+			authLevel = userLevel)
 
             elif request.form['formName'] == 'addChem':
                 for i in data: #Loop through the keys in the form dictionary
                     setattr(chemInfo, i, data[i]) #Set the attribute, 'i' (the current key in the form), of 'chemInfo' (the chemical) to the value of the current key in the form
                 chemInfo.save()
-                return render_template('views/MigrateChem.html',
-                        config = config)
+                return reder_template('views/MigrateChem.html',
+			config = config,
+			authLevel = userLevel)
             #Left Off here
             #elif request.form[] == 'addCont':
                 ##BUILD OUT WITH ZACHS CODE FROM THE MERGE. ViewContainer.html

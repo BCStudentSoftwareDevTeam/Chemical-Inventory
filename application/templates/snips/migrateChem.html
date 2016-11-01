@@ -11,10 +11,11 @@
     {% endwith %}
 
     {% if state == 1 %}
-      <p>Need to add container {{inputBar}} to '{{chemInfo.name}}' in BCCIS</p>
+      <h2><center>Migrate {{inputBar}} container of {{chemInfo.name}}</center></h2>
       {% include 'snips/addContainer.html' %}
     {% elif state == 2 %}
-      {% include 'snips/AddChemical.html' %}
+      <h2><center>Migrate Chemical</center></h2>
+      {% include 'snips/chemMigration.html' %}
       <p>Need to add both Container {{inputBar}} and Chemical {{container.NameRaw.Id}} to BCCIS </p>
     {% elif state == 3 %}
       <p>Container does not seem to exist</p>
