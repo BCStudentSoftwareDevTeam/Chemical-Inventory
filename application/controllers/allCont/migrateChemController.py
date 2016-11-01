@@ -30,6 +30,7 @@ def migrateChem():
     if userLevel == 'admin' or userLevel == "systemAdmin":
         if request.method == "GET":
             return render_template("views/MigrateChem.html",
+		    authLevel = userLevel,
                     config = config
                     )
     
@@ -97,7 +98,8 @@ def migrateChem():
                                     contConfig = contConfig,
                                     storageList = storageList,
                                     buildingList = buildingList,
-                                    barcode = inputBar)
+                                    barcode = inputBar,
+				    authLevel = userLevel)
                         except Exception, e:
                             #Chemical is not yet in BCCIS
                             print str(e)
@@ -108,7 +110,8 @@ def migrateChem():
                                     chemInfo = chemObj,
                                     inputBar = inputBar,
                                     config = config,
-                                    chemConfig = chemConfig)
+                                    chemConfig = chemConfig,
+				    authLevel = userLevel)
                             ##########
                             ###
                             ###YOU ARE STUCK HERE FROM NOT RECOGNIZING THIS FILE PATH
@@ -124,7 +127,8 @@ def migrateChem():
                                 chemical = chemObj,
                                 inputBar = inputBar,
                                 config = config,
-                                contConfig = contConfig)
+                                contConfig = contConfig,
+				authLevel = userLevel)
             elif request.form['formName'] == 'addCont':
                 ###
                 ##Process the form of adding a Container
