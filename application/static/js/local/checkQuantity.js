@@ -2,7 +2,17 @@ function checkVals(groups) {
     /*Checks the input of capacity and quantity of container. If the container
     capacity is smaller than the amount of chemical that is entered, the form
     cannot be submitted. Values will be converted to a common unit of measurement
-    for comparison.*/
+    for comparison.
+    Also checking manual barcode against a RegExp*/
+    var regex = new RegExp("^[a-zA-Z0-9-]*$");
+    var barcode = document.getElementById('nullbarcodeId');
+    // console.log(barcode, regex.test(barcode))
+    if (regex.test(barcode.value) == false){
+        barcode.parentElement.classList.add('has-error');
+        document.getElementById("barcodeIdMessage").classList.remove('hidden');
+        return false;
+    }
+    
     var quantityUnit = document.getElementById('currentQuantityUnit');
     quantityUnit = quantityUnit[quantityUnit.selectedIndex].text;
     var capacityUnit = document.getElementById('capacityUnit');
@@ -28,14 +38,14 @@ function checkVals(groups) {
         var convertedCapacity = window.conversionObject.functions.converter(capacityMeasure, capacityUnit, convertTo, capacity) //convert capacity to correct measurement
         var convertedQuanity = window.conversionObject.functions.converter(quantityMeasure, quantityUnit, convertTo, quantity) //convert quantity to correct measurment
         if (convertedCapacity >= convertedQuanity){
-            return 0; //No errors, the form can be submitted as is
+            return true; //No errors, the form can be submitted as is
         } else {
             removePreviousErrors();
             document.getElementById('capacityParent').classList.add('has-error');
             document.getElementById('capacityMessage').classList.remove('hidden');
             return false; //Quantity in container is more than the container can hold.
         }
-    } else {
+    }else {
         removePreviousErrors();
         document.getElementById('capacityUnitParent').classList.add('has-error');
         document.getElementById('currentQuantityUnitParent').classList.add('has-error');

@@ -32,9 +32,9 @@ def ViewChemical(chemId):
   try:
     chemInfo = Chemicals.get(Chemicals.chemId == chemId) #Get chemical by correct chemId
   except:
-    return redirect('ma/ChemTable')
+    return redirect('ChemTable')
   if chemInfo.remove == True: #If the chemical attribute, 'remove', was set to True, go back to the chemical table.
-    return redirect('ma/ChemTable')
+    return redirect('ChemTable')
   if userLevel == "admin" or userLevel == "systemAdmin":
     chemDict = Chemicals.select().where(Chemicals.chemId == chemId).dicts().get() #Get chemical by correct chemId as a dictionary
     storageList = Storages.select().order_by(Storages.roomId)
@@ -56,6 +56,7 @@ def ViewChemical(chemId):
                           pastQuantity = "%s %s" %(modelData['currentQuantity'], modelData['currentQuantityUnit']))
           flash("Container added successfully") #Flash a success message
         except Exception as e:
+          print e
           flash("Container could not be added") #If there was an error, flash an error message
     try:
         lastCont = Containers.select().where(Containers.migrated >> None)\

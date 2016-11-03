@@ -1,6 +1,8 @@
 <div class="clearfix"></div>
+<script src="/static/js/local/createBarcode.js"></script>
+<script src="/static/js/local/checkBar.js"></script>
 <div class="form col-sm-6 col-sm-offset-3">
-  <form name="addCont" id="addCont" method="post" onsubmit="return checkVals({{contConfig['options']}})">
+  <form name="addCont" id="addCont" method="post">
     <input type="hidden" id="chemId" name="chemId" value="{{chemInfo.chemId}}"/>
     <input type="hidden" name="formName" value="addCont"/>
       {% for group in contConfig['containerInformation'] %}
@@ -20,6 +22,12 @@
                               fontSize: 15
                              });
                 </script>
+                {# Hidden manual entry barcode field #}
+                <input type="text" class="form-control" id="null{{group.id}}" name="hidden{{group.id}}" style="visibility:hidden" oninput="spaceCheck(this); JsBarcode('#barcode', this.value, {height:30, fontSize: 15});">
+                <span class="label label-danger hidden messages" id="{{group.id}}Message">Barcode must not include any spaces or special characters</span>
+                {# Manual VS Autopopulated barcode select #}
+                <label for="manualSel">Manually enter a barcode</label>
+                <input type="checkbox" id="manualSel" onclick="manualBar()">
               </div>
             </div>
           {% else %}
@@ -82,7 +90,7 @@
       {% endif %}
       {% endfor %}
     <input type="hidden" name="user" value="testUser">
-  <button class="btn btn-primary" id="submitCont">Submit</button>
+  <input type="submit" class="btn btn-primary" id="submitCont" value="Submit" onclick="return checkVals({{contConfig['options']}});">
   </form>
 </div>
 <script src="/static/js/local/measurements.js-master/metrics.js"></script>
