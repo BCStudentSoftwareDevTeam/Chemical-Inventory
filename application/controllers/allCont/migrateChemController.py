@@ -104,6 +104,7 @@ def migrateChem():
                             #Chemical is not yet in BCCIS
                             print str(e)
                             state = NIETHER
+                            print containerObj.NameRaw.Description
                             return render_template("views/MigrateChem.html",
                                     state = state,
                                     container = containerObj,
@@ -112,12 +113,6 @@ def migrateChem():
                                     config = config,
                                     chemConfig = chemConfig,
 				    authLevel = userLevel)
-                            ##########
-                            ###
-                            ###YOU ARE STUCK HERE FROM NOT RECOGNIZING THIS FILE PATH
-                            ###THIS IS WHEN YOU INPUT N1-15
-                            ###
-                            ##########
                     else:
                         pass
 
