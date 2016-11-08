@@ -69,7 +69,7 @@
               {% elif container.NameRaw.State == "1" and selection == 'Liquid' %}
                 <option value="Liquid" selected="selected">Liquid</option>
               {% elif container.NameRaw.State == "2" and selection == 'Gas' %}
-                <option value="Gas" selected="Gas">Gas</option>
+                <option value="Gas" selected="selected">Gas</option>
               {% else %}
                 <option value="{{  selection  }}">{{  selection  }}</option>
               {% endif %}
@@ -86,16 +86,25 @@
       </div>
     </div>
     {%  endfor  %}
-
     <div class="form-group row">
       <label for="nfpaDiamond" class="col-xs-6">NFPA 704:</label>
       <div class="col-xs-4">
         {%for division in chemConfig['NFPAdiamond']%}
-          <label for="{{division['section']}}">{{division['section']}}</label>
-          <select id="{{division['id']}}" name="{{division['id']}}" class="form-control">
+        <label for="{{division['section']}}">{{division['section']}}</label>
+        <select id="{{division['id']}}" name="{{division['id']}}" class="form-control"> 
             <option value="" selected>Select One</option>
-          {%for selection in division['selections']%}
-            <option value="{{selection}}">{{selection}}</option>
+            {%for selection in division['selections']%}
+              {% if division['id'] == 'healthHazard' and container.NameRaw.Nfpa_Health == selection%}
+              <option value="{{selection}}" selected="selected">{{selection}}</option>
+              {% elif division['id'] == 'flammable' and container.NameRaw.Nfpa_Flamable == selection%}
+                 <option value="{{selection}}" selected="selected">{{selection}}</option>
+              {% elif division['id'] == 'reactive' and container.NameRaw.Nfpa_Reactive == selection%} 
+                 <option value="{{selection}}" selected="selected">{{selection}}</option>
+              {% elif division['id'] == 'other' and container.NameRaw.Nfpa_Specific == selection%} 
+                <option value="{{selection}}" selected="selected">{{selection}}</option>
+              {% else %}
+                <option value="{{selection}}">{{selection}}</option>
+              {% endif %}
           {%endfor%}
           </select>
         {%endfor%}
@@ -103,7 +112,7 @@
     </div>
 
     <div class="form-group row">
-      <label>Other Hazards</label>
+      <label>Time-Sensitive Hazards</label>
       {%  for check in chemConfig['addChemChecks']  %}
         <div class="checkbox col-sm-12">
           <label>
@@ -119,8 +128,10 @@
       <label for="pictograms">Please select the appropriate hazard pictogram(s).</label>
       <div class="checkbox col-xs-7 col-xs-offset-2">
         <ul>
+
           {%for hazardPict in chemConfig['pictograms']%}
             <li>
+{############### LEFT OFF HERE, WHAT IS ZACH DOING WITH THESE RADIO BOXES!! ##########################>
               <input type="checkbox" name="{{hazardPict['id']}}" id="{{hazardPict['id']}}" value="{{hazardPict['id']}}" hidden> {# Needed for edit form. Forces form to update value of deselected checkboxes. #}
                 <label for="{{hazardPict['id']}}" class="hazardLabel">
                   <img src="{{hazardPict['pict']}}" id="{{hazardPict['id']}}" alt="{{hazardPict['alt']}}" class="hazardRadio"></img>
