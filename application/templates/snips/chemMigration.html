@@ -1,6 +1,8 @@
 <div class="form container text-center">
   <form name="addChem" method="post" class="form-group">
     <input type="hidden" name="formName" value="addChem">
+    <input type="hidden" name="oldPK" value="{{container.NameRaw.NameSorted}}">
+    <input type="hidden" name="barcode" value="{{container.UniqueContainerID}}">
     {# Goes through the chemical inputs #}
     {%  for group in chemConfig['addChemInputs']  %}
       <div class="form-group row" id="{{group['id']}}Parent">
@@ -128,12 +130,18 @@
       <label for="pictograms">Please select the appropriate hazard pictogram(s).</label>
       <div class="checkbox col-xs-7 col-xs-offset-2">
         <ul>
-
           {%for hazardPict in chemConfig['pictograms']%}
-            <li>
-{############### LEFT OFF HERE, WHAT IS ZACH DOING WITH THESE RADIO BOXES!! ##########################>
+          <li>
+            {% if hazardPict['id'] == "corrosivePict" and container.NameRaw.Corrosive == "1" %}
+              <input type="checkbox" name="{{hazardPict['id']}}" id="{{hazardPict['id']}}" value="{{hazardPict['id']}}" checked hidden> {# Needed for edit form. Forces form to update value of deselected checkboxes. #}
+            {% elif hazardPict['id'] == "hhPict" and container.NameRaw.Carcinogenic == "1" %}
+              <input type="checkbox" name="{{hazardPict['id']}}" id="{{hazardPict['id']}}" value="{{hazardPict['id']}}" checked hidden> {# Needed for edit form. Forces form to update value of deselected checkboxes. #}
+            {% elif hazardPict['id'] == "flamePict" and container.NameRaw.Flamable == "1" %}
+             <input type="checkbox" name="{{hazardPict['id']}}" id="{{hazardPict['id']}}" value="{{hazardPict['id']}}" checked hidden> {# Needed for edit form. Forces form to update value of deselected checkboxes. #}
+             {% else %}
               <input type="checkbox" name="{{hazardPict['id']}}" id="{{hazardPict['id']}}" value="{{hazardPict['id']}}" hidden> {# Needed for edit form. Forces form to update value of deselected checkboxes. #}
-                <label for="{{hazardPict['id']}}" class="hazardLabel">
+            {% endif %}
+              <label for="{{hazardPict['id']}}" class="hazardLabel">
                   <img src="{{hazardPict['pict']}}" id="{{hazardPict['id']}}" alt="{{hazardPict['alt']}}" class="hazardRadio"></img>
                 </label>
               </input>
@@ -173,5 +181,6 @@
   <input class="btn btn-default btn" id="addChemSubmit" type="submit" value="Submit">
   </form>
 </div>
+
 <script src="/static/js/local/pictSelect.js"></script>
 <script src="/static/js/local/checkName.js"></script>

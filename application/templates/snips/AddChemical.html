@@ -71,7 +71,7 @@
         <ul>
           {%for hazardPict in chemConfig['pictograms']%}
             <li>
-              <input type="checkbox" name="{{hazardPict['id']}}" id="{{hazardPict['id']}}" value="{{hazardPict['id']}}" hidden> {# Needed for edit form. Forces form to update value of deselected checkboxes. #}
+              <input type="checkbox" name="{{hazardPict['id']}}" id="{{hazardPict['id']}}" value="{{hazardPict['id']}}"  hidden> {# Needed for edit form. Forces form to update value of deselected checkboxes. #}
                 <label for="{{hazardPict['id']}}" class="hazardLabel">
                   <img src="{{hazardPict['pict']}}" id="{{hazardPict['id']}}" alt="{{hazardPict['alt']}}" class="hazardRadio"></img>
                 </label>

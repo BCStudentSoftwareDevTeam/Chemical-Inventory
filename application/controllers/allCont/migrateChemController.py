@@ -34,96 +34,11 @@ def migrateChem():
                     config = config
                     )
 
-
         elif request.method == "POST":
             data = request.form
             if request.form['formName'] == "searchBcode":
-                ########
-                INIT = -1    #Inial start state(Not really needed but looks nice)
-                MIGRATED = 0 #Both Chemical and Container already Migrated
-                ONLYCHEM = 1 #Only Chemical has been Migrated. Container needs to be migrated
-                NIETHER = 2  #Both Chemical and Container need to be migrated
-                UNKNOWN = 3  #This container does not exist anywhere
-                ########
-                inputBar = request.form['barcodeID']
-                state = INIT
-                containerObj = None
-                chemObj = None
-                ########
-                #Gets container from new DB by input barcode whether lower or upper case
-                try:
-                    containerObj = Containers.select()\
-                            .join(Chemicals, on=(Containers.chemId_id == Chemicals.chemId))\
-                            .where((Containers.barcodeId == inputBar)\
-                            |(Containers.barcodeId == inputBar.upper()))\
-                            .get()
-                    flash("Container " + inputBar + " Already Migrated Into System")
-                    state = MIGRATED
-                except Exception,e:
-                    #print str(e)
-                    pass
-
-                ########
-                #If not already Migrated checks if chemical is migrated
-                if state != MIGRATED:
-                    #Try and Retrieve Container and Chemical Informatoin from CISPro
-                    try:
-                        containerObj = Batch.select()\
-                                .join(Main, on =(Batch.NameRaw_id == Main.NameSorted))\
-                                .join(Locates, on=(Batch.Id_id == Locates.Location))\
-                                .where((Batch.UniqueContainerID == inputBar)|(Batch.UniqueContainerID == inputBar.upper())).get()
-                    except:
-                        #Not in CISPro
-                        state = UNKNOWN
-
-                    ########
-                    #If Continer in CISPro check if parent Chemical is Migrated
-                    if state != UNKNOWN: #If the container is found in the old system. Check for Chem
-                        try:
-                            #Check if parent Chemical is in BCCIS
-                            chemObj = Chemicals.select()\
-                                .where(Chemicals.oldPK == containerObj.NameRaw_id).get()
-
-                            storageList = Storages.select().order_by(Storages.roomId)
-
-                            buildingList = Buildings.select()
-
-                            state = ONLYCHEM
-                            return render_template("views/MigrateChem.html",
-                                    state = state,
-                                    container = containerObj,
-                                    chemInfo = chemObj,
-                                    inputBar = inputBar,
-                                    config = config,
-                                    contConfig = contConfig,
-                                    storageList = storageList,
-                                    buildingList = buildingList,
-                                    barcode = inputBar,
-				    authLevel = userLevel)
-                        except Exception, e:
-                            #Chemical is not yet in BCCIS
-                            print str(e)
-                            state = NIETHER
-                            print containerObj.NameRaw.Description
-                            return render_template("views/MigrateChem.html",
-                                    state = state,
-                                    container = containerObj,
-                                    chemInfo = chemObj,
-                                    inputBar = inputBar,
-                                    config = config,
-                                    chemConfig = chemConfig,
-				    authLevel = userLevel)
-                    else:
-                        pass
-
-                return render_template("views/MigrateChem.html",
-                                state = state,
-                                container = containerObj,
-                                chemical = chemObj,
-                                inputBar = inputBar,
-                                config = config,
-                                contConfig = contConfig,
-				authLevel = userLevel)
+               return renderCorrectTemplate(request.form['barcodeID'])
+               print "I made it here?"
             elif request.form['formName'] == 'addCont':
                 ###
                 ##Process the form of adding a Container
@@ -145,12 +60,103 @@ def migrateChem():
 			authLevel = userLevel)
 
             elif request.form['formName'] == 'addChem':
-                for i in data: #Loop through the keys in the form dictionary
-                    setattr(chemInfo, i, data[i]) #Set the attribute, 'i' (the current key in the form), of 'chemInfo' (the chemical) to the value of the current key in the form
-                chemInfo.save()
-                return reder_template('views/MigrateChem.html',
-			config = config,
-			authLevel = userLevel)
-            #Left Off here
-            #elif request.form[] == 'addCont':
-                ##BUILD OUT WITH ZACHS CODE FROM THE MERGE. ViewContainer.html
+                try:
+                    data = request.form
+                    modelData, extraData = sortPost(data, Chemicals)
+                    if modelData['sdsLink'] == None:
+                        modelData['sdsLink'] = "https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=%s" %(modelData['name'])
+                    Chemicals.create(**modelData)
+                    flash("Chemical was successfully added to the DB")
+                    print data['barcode']
+                    return renderCorrectTemplate(data['barcode'])
+                except Exception as e:
+                    flash("Chemical could not be added")
+
+            return render_template('views/MigrateChem.html',
+                    config = config,
+                    authLevel = userLevel)
+
+def renderCorrectTemplate(barcode):
+                auth = AuthorizedUser()
+                user = auth.getUser()
+                userLevel = auth.userLevel()
+                ########
+                INIT = -1    #Inial start state(Not really needed but looks nice)
+                MIGRATED = 0 #Both Chemical and Container already Migrated
+                ONLYCHEM = 1 #Only Chemical has been Migrated. Container needs to be migrated
+                NIETHER = 2  #Both Chemical and Container need to be migrated
+                UNKNOWN = 3  #This container does not exist anywhere
+                ########
+                inputBar = barcode
+                state = INIT
+                containerObj = None
+                chemObj = None
+                ########
+                try:
+                    containerObj = Containers.select()\
+                            .join(Chemicals, on=(Containers.chemId_id == Chemicals.chemId))\
+                            .where((Containers.barcodeId == inputBar)\
+                            |(Containers.barcodeId == inputBar.upper()))\
+                            .get()
+                    flash("Container " + inputBar + " Already Migrated Into System")
+                    state = MIGRATED
+                except Exception,e:
+                    #print str(e)
+                    pass
+                #Try and Retrieve Container and Chemical Informatoin from CISPro
+                if state != MIGRATED:
+                    try:
+                        containerObj = Batch.select()\
+                            .join(Main, on =(Batch.NameRaw_id == Main.NameSorted))\
+                            .join(Locates, on=(Batch.Id_id == Locates.Location))\
+                            .where((Batch.UniqueContainerID == inputBar)|(Batch.UniqueContainerID == inputBar.upper())).get()
+                    except:
+                        #Not in CISPro
+                        flash("Container " + inputBar + " Is Not In CISPro Database")
+                        state = UNKNOWN
+                    if state != UNKNOWN:
+                        ########
+                        #If Continer in CISPro check if parent Chemical is Migrated
+                        try:
+                            #Check if parent Chemical is in BCCIS
+                            chemObj = Chemicals.select()\
+                                .where(Chemicals.oldPK == containerObj.NameRaw_id).get()
+
+                            storageList = Storages.select().order_by(Storages.roomId)
+
+                            buildingList = Buildings.select()
+
+                            state = ONLYCHEM
+                            return render_template("views/MigrateChem.html",
+                                state = state,
+                                container = containerObj,
+                                chemInfo = chemObj,
+                                inputBar = inputBar,
+                                config = config,
+                                contConfig = contConfig,
+                                storageList = storageList,
+                                buildingList = buildingList,
+                                barcode = inputBar,
+                                authLevel = userLevel)
+                        except Exception, e:
+                            #Chemical is not yet in BCCIS
+                            #print str(e)
+                            state = NIETHER
+                            print containerObj.NameRaw.Description
+                            return render_template("views/MigrateChem.html",
+                                state = state,
+                                container = containerObj,
+                                chemInfo = chemObj,
+                                inputBar = inputBar,
+                                config = config,
+                                chemConfig = chemConfig,
+                                authLevel = userLevel)
+
+                return render_template("views/MigrateChem.html",
+                    state = state,
+                    container = containerObj,
+                    chemical = chemObj,
+                    inputBar = inputBar,
+                    config = config,
+                    contConfig = contConfig,
+                    authLevel = userLevel)

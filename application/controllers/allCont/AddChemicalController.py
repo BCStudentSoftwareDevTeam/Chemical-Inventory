@@ -19,14 +19,14 @@ def AddChemical():
   user = auth.getUser()
   userLevel = auth.userLevel()
   print user.username, userLevel
-  
-  if userLevel == "admin" or userLevel == "systemAdmin":  
+
+  if userLevel == "admin" or userLevel == "systemAdmin":
     if request.method == "GET":
         return render_template("views/AddChemicalView.html",
                                config = config,
                                chemConfig = chemConfig)
     data = request.form #If there is a form posted to the page
-    
+
     modelData, extraData = sortPost(data, chemicalsModel.Chemicals) #Only get relevant data for the current Model
     if modelData['sdsLink'] == None:
       modelData['sdsLink'] = 'https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=%s' %(modelData['name'])
@@ -38,7 +38,7 @@ def AddChemical():
                            authLevel = userLevel)
   else:
     abort(403)
- 
+
 @app.route('/checkName/', methods=['GET'])
 def checkName():
   nameVal = request.args.get('value')

@@ -17,8 +17,6 @@
       <h2><center>Migrate Chemical</center></h2>
       {% include 'snips/chemMigration.html' %}
       <p>Need to add both Container {{inputBar}} and Chemical {{container.NameRaw.Id}} to BCCIS </p>
-    {% elif state == 3 %}
-      <p>Container does not seem to exist</p>
     {% else %}
     <h1>Migrate Container</h1>
     <div class = "container-fluid">
