@@ -38,7 +38,6 @@ def migrateChem():
             data = request.form
             if request.form['formName'] == "searchBcode":
                return renderCorrectTemplate(request.form['barcodeID'])
-               print "I made it here?"
             elif request.form['formName'] == 'addCont':
                 ###
                 ##Process the form of adding a Container
@@ -54,7 +53,7 @@ def migrateChem():
                     flash("Container Successfully Migrated Into System")
                 except Exception as e:
                     print str(e)
-                    flash("Container could not be added")
+                    flash("Container Could Not Be Added")
                 return render_template("views/MigrateChem.html",
                         config = config,
 			authLevel = userLevel)
@@ -66,11 +65,11 @@ def migrateChem():
                     if modelData['sdsLink'] == None:
                         modelData['sdsLink'] = "https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=%s" %(modelData['name'])
                     Chemicals.create(**modelData)
-                    flash("Chemical was successfully added to the DB")
+                    flash("Chemical Was Successfully Added To The DB")
                     print data['barcode']
                     return renderCorrectTemplate(data['barcode'])
                 except Exception as e:
-                    flash("Chemical could not be added")
+                    flash("Chemical Could Not Be Added")
 
             return render_template('views/MigrateChem.html',
                     config = config,
@@ -87,7 +86,7 @@ def renderCorrectTemplate(barcode):
                 NIETHER = 2  #Both Chemical and Container need to be migrated
                 UNKNOWN = 3  #This container does not exist anywhere
                 ########
-                inputBar = barcode
+                inputBar = barcode.upper()
                 state = INIT
                 containerObj = None
                 chemObj = None
