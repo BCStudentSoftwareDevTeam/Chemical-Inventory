@@ -25,7 +25,7 @@
         <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control" value={{container.NameRaw.BoilingPoint}}>
         {# If it is a Description input#}
         {% elif group['id'] ==  "description" %}
-          <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control" value={{container.NameRaw.Description}}>
+        <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control" value="{{container.NameRaw.Description}}">
 	      {# If it is the sdsLink, add a link to msdsonline #}
         {% elif group['id'] == "sdsLink" %}
           <div class="input-group-addon">https://</div>
@@ -183,6 +183,5 @@
   <input class="btn btn-default btn" id="addChemSubmit" type="submit" value="Submit">
   </form>
 </div>
-
 <script src="/static/js/local/pictSelect.js"></script>
 <script src="/static/js/local/checkName.js"></script>
