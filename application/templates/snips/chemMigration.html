@@ -12,13 +12,13 @@
         {# Checking name oninput to determine whether percentage is required or not. #}
        	{% if group['id'] == 'name' %}
           {# If name is equal to one already in the database, percentage should be required #}
-          <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" oninput="checkName()" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control", value={{container.NameRaw.NameRaw}}>
+          <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" oninput="checkName()" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control", value="{{container.NameRaw.NameRaw}}">
         {# If it is a casNum#}
         {% elif group['id'] == "casNum" %}
-          <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control" value={{container.NameRaw.casNo}}>
+          <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control" value="{{container.NameRaw.casNo}}">
         {# If it is a Formula #}
         {% elif group['id'] == "formula"%}
-        <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control" value={{container.NameRaw.MolecularFormula}}>
+        <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" step="any" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control" value="{{container.NameRaw.MolecularFormula}}">
         {# Once you get the Flash Point details you need to build out form for it #}
         {# If it is a boilPoint #}
         {% elif group['id'] ==  "boilPoint" %}

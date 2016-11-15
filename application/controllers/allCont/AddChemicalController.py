@@ -23,6 +23,7 @@ def AddChemical():
   if userLevel == "admin" or userLevel == "systemAdmin":
     if request.method == "GET":
         return render_template("views/AddChemicalView.html",
+                               authLevel = userLevel,
                                config = config,
                                chemConfig = chemConfig)
     data = request.form #If there is a form posted to the page
