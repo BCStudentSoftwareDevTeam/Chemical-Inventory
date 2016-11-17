@@ -136,7 +136,8 @@ def renderCorrectTemplate(barcode):
                                 storageList = storageList,
                                 buildingList = buildingList,
                                 barcode = inputBar,
-                                authLevel = userLevel)
+                                authLevel = userLevel,
+                                migrated = 1)
                         except Exception, e:
                             #Chemical is not yet in BCCIS
                             #print str(e)

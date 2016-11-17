@@ -28,7 +28,7 @@ def ViewChemical(chemId):
   if userLevel == -1 or user == -1:
     abort(403)
   print user.username, userLevel
-  
+
   try:
     chemInfo = Chemicals.get(Chemicals.chemId == chemId) #Get chemical by correct chemId
   except:
@@ -50,7 +50,7 @@ def ViewChemical(chemId):
           modelData, extraData = sortPost(data, Containers)
           cont = Containers.create(**modelData)
           Histories.create(movedTo = modelData['storageId'],
-                          containerId = cont.conId, 
+                          containerId = cont.conId,
                           modUser = extraData['user'],
                           action = "Created",
                           pastQuantity = "%s %s" %(modelData['currentQuantity'], modelData['currentQuantityUnit']))
@@ -59,16 +59,18 @@ def ViewChemical(chemId):
           print e
           flash("Container could not be added") #If there was an error, flash an error message
     try:
-        lastCont = Containers.select().where(Containers.migrated >> None)\
+        lastCont = Containers.select().where(Containers.migrated >> 0)\
             .order_by(-Containers.barcodeId).get().barcodeId # Gets the last entered container that was not migrated. Used for creating the next barcode
+        #print lastCont
         barcode = genBarcode(lastCont)
+        print "Try " + str(barcode)
     except Exception as e:
-        print str(e)
+        #print str(e)
         barcode = genBarcode("00000000")
-        print barcode
+        print "Except " + barcode
     #lastCont needs to be assigned after any potential updates to the last barcode, and before render_template
     containers = (((Containers
-                  .select())
+                    .select())
                   .join(Chemicals))
                   .where(
                     (Containers.chemId == chemId) &
@@ -84,7 +86,8 @@ def ViewChemical(chemId):
                            storageList = storageList,
                            buildingList = buildingList,
                            barcode = barcode,
-                           authLevel = userLevel)
+                           authLevel = userLevel,
+                           migrated = 0)
   else:
     containers = (((Containers
                  .select())
@@ -101,8 +104,9 @@ def ViewChemical(chemId):
                            contConfig = contConfig,
                            chemConfig = chemConfig,
                            quote = quote,
-                           authLevel = userLevel)
-                         
+                           authLevel = userLevel,
+                           migrated = 0)
+
 @app.route('/ViewChemical/<chemId>/delete/', methods = ['GET','POST']) #When master admin clicks on delete chemical button. (button only show up when all containers of it have been disposed of)
 def maDeleteChemical(chemId):
   chem = Chemicals.get(Chemicals.chemId == chemId) #Get chemical by correct chemId
@@ -110,4 +114,4 @@ def maDeleteChemical(chemId):
   chem.remove = True #Set chemical's remove attribute to true.
   chem.save() #We are not deleting the chemical because chemicals that are disposed still reference the chemical, and the containers are used for reports on disposal.
   return redirect('/ma/ChemTable')
-        
+
