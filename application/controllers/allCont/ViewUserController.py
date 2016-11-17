@@ -1,6 +1,7 @@
 from application import app
 from application.models import *
 from application.config import *
+from application.models.usersModel import *
 from application.logic.getAuthUser import AuthorizedUser
 
 from flask import \
@@ -18,6 +19,6 @@ def ViewUser():
   if userLevel == -1 or user == -1:
     abort(403)
   print user.username, userLevel
-  
-  return render_template("views/ma/ViewUserView.html", config = config, authLevel = userLevel)
+  usersList = Users.select().where(Users.approve == True)
+  return render_template("views/ViewUserView.html", config = config, authLevel = userLevel, usersList = usersList)
 

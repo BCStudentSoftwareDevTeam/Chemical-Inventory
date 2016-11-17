@@ -20,6 +20,16 @@ databases:
     cispro:
       filename: data/sample.sqlite
 
+roles:
+  admin:
+    printable: "Master Administrator"
+  systemAdmin:
+    printable: "System Administrator (EHS Workers)"
+  superUser:
+    printable: "Super User (Faculty & Staff)"
+  systemUser:
+    printable: "System User (Students)"
+
 sys:
   debug: True
   host: "0.0.0.0"
