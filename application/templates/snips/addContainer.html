@@ -5,6 +5,7 @@
   <form name="addCont" id="addCont" method="post">
     <input type="hidden" id="chemId" name="chemId" value="{{chemInfo.chemId}}"/>
     <input type="hidden" name="formName" value="addCont"/>
+    <input type="hidden" id="migrated" name="migrated" value={{migrated}}>
       {% for group in contConfig['containerInformation'] %}
       {% if group.special != "noShow" %}
         {% if group.type != 'select' %}
@@ -16,8 +17,7 @@
                 <svg id="barcode" value = "{{barcode}}"></svg>
                 {# Creates barcode based on last barcode, and date. returns barcode as string. #}
                 <script>
-                  //var bar = createBarcode('{{group.id}}', '{{barcode}}');
-                  JsBarcode('#barcode', '{{barcode}}', {
+                JsBarcode('#barcode', '{{barcode}}', {
                               height:30,
                               fontSize: 15
                              });

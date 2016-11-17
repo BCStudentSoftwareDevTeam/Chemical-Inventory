@@ -2,6 +2,7 @@
   <form name="addChem" method="post" class="form-group">
     <input type="hidden" name="formName" value="addChem">
     <input type="hidden" name="oldPK" value="{{container.NameRaw.NameSorted}}">
+    <input type="hidden" name="migrated" value="1">
     <input type="hidden" name="barcode" value="{{container.UniqueContainerID}}">
     {# Goes through the chemical inputs #}
     {%  for group in chemConfig['addChemInputs']  %}
