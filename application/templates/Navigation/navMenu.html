@@ -1,16 +1,26 @@
 <!--This is the navigation bar that is found at the top of the page-->
 <nav class="navbar navbar-default">
   <div class="container-fluid">
-    <ul class="nav navbar-nav"> 
-    {% for menuItem in config[authLevel] %}
-      {% if menuItem['link'] == request.path %}
-        <li class="active">
-          <a href="{{menuItem['link']}}">{{menuItem['title']}}</a>
-        </li>
-      {% else %}
-        <li><a href="{{menuItem['link']}}">{{menuItem['title']}}</a></li>
-      {% endif %}  
-    {% endfor %} 
-    </ul>
-  </div>
+    <div class="navbar-header"
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-selection">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse-section"<div>
+      <ul class="nav navbar-nav">
+        {% for menuItem in config[authLevel] %}
+          {% if menuItem['link'] == request.path %}
+            <li class="active">
+              <a href="{{menuItem['link']}}">{{menuItem['title']}}</a>
+            </li>
+          {% else %}
+            <li><a href="{{menuItem['link']}}">{{menuItem['title']}}</a></li>
+          {% endif %}
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
 </nav>

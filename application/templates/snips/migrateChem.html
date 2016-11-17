@@ -1,32 +1,35 @@
 <div clss="container">
-    <h1>Migrate Container</h1>
-    <form name="searchBcode" id="searchBcode" method="post" class="form-group">
-        <label class="label-control" for="barcodeID">Barcode: </label>
-        <input type="hidden" name="formName" value="searchBcode"/>
-        <input class="form-control" type="text" id="barcodeID" name = "barcodeID" required>
-    </form>
-    
-    {% if state == 0 %}
-    <p>The container {{container.barcodeId}} of {{container.chemId.name}} is already in the system</p>
-    {% elif state == 1 %}
-      <p>Need to add container {{inputBar}} to '{{chemInfo.name}}' in BCCIS</p>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          {% if 'Not' in message%}
+             <div class="alert alert-danger container-fluid" role="alert" id="alert">
+          {% else %}
+             <div class="alert alert-success container-fluid" role="alert" id="alert">
+          {% endif %}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>{{message}}</strong>
+            </div>
+        {% endfor %}
+       {% endif %}
+    {% endwith %}
+  <div class="container-fluid">
+    {% if state == 1 %}
+      <h2><center>Migrate {{inputBar}} container of {{chemInfo.name}}</center></h2>
       {% include 'snips/addContainer.html' %}
     {% elif state == 2 %}
-      {% include 'snips/AddChemical.html' %}
-      <p>Need to add both Container {{inputBar}} and Chemical {{container.NameRaw.Id}} to BCCIS </p>
-    {% elif state == 3 %}
-      <p>Container does not seem to exist</p>
+      <h2><center>Migrate Chemical</center></h2>
+      {% include 'snips/chemMigration.html' %}
     {% else %}
-      <p>Error</p>
-    {% endif %}
-
-</div>  
-{#
-    {{location}}
-    
-     {% for loc in location%}
-     {% for key in locdict %}
-         <h>{{loc[key]}}</h>
-         {% endfor %} 
-         {% endfor %}
-         #}
+    <h1>Migrate Container</h1>
+    <div class = "container-fluid">
+      <form name="searchBcode" id="searchBcode" method="post" class="form-group">
+          <label class="label-control" for="barcodeID">Barcode: </label>
+          <input type="hidden" name="formName" value="searchBcode"/>
+          <input class="form-control" type="text" id="barcodeID" name = "barcodeID" required>
+        </form>
+      </div>
+      {% endif %}
+    </div>
+</div>
+<script src="/static/js/local/alertFade.js"></script>

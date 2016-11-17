@@ -25,16 +25,16 @@
       {% endif %}
       {# example code for tabs found here: http://jsfiddle.net/xfw8t/12/ #}
     </ul>
-    
+
     <div class = "tab-content">
-      
+
         <div id = "inventory" class = "tab-pane fade in active">
             {# Tab of all inventory management pages #}
             <table class="table table-hover" style="cursor: pointer;">
                 <tr onclick="window.location.href = '{{url_for('ChemTable')}}';"><td>View All Chemicals</td></tr>
                 <tr onclick="window.location.href = '{{url_for('CheckIn')}}';"><td>Container Return(s)</td></tr>
                 <tr onclick="window.location.href = '{{url_for('CheckOut')}}';"><td>Check out Container(s)</td></tr>
-                <tr onclick="window.location.href = '{{url_for('AddChemical')}}';"><td>Add New Chemical</td></tr> 
+                <tr onclick="window.location.href = '{{url_for('AddChemical')}}';"><td>Add New Chemical</td></tr>
             </table>
         </div>
 
@@ -43,8 +43,8 @@
                 {# Tab that includes manageLocations page #}
                 {% include "snips/manageLocations.html" %}
             </div>
-        
-              
+
+
             <div id = "user" class = "tab-pane fade">
                 {# Tab of all user management pages #}
                 <table class="table table-hover" style="cursor: pointer;">
@@ -53,9 +53,9 @@
                 </table>
             </div>
         {% endif %}
-      
+
     </div>
-    
+
   </div>
 </div>
 

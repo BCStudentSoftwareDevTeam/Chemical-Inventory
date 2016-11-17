@@ -29,7 +29,7 @@
 {% if authLevel == "admin" %}
   {% if containers | length == 0 %} {# If there are no containers currently referencing this chemical, then show delete button #}
     <div class="col-sm-offset-2 col-sm-8">
-      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete {{chemInfo.name}} </button> 
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete {{chemInfo.name}} </button>
     </div>
     {# Modal Starts #}
       <div class="modal fade" id="deleteModal" role="dialog">
@@ -66,7 +66,7 @@
         {% endif %}
         {# example code for tabs found here: http://jsfiddle.net/xfw8t/12/ #}
     </ul>
-    
+
     <div class="tab-content">
       {# Table of all containers that is seen when the 'Containers' tab is selected #}
         <div id="containers" class="tab-pane fade in active">
@@ -129,7 +129,7 @@
             {%  endfor  %}
           </table>
         </div>
-        
+
         <div id="info" class="tab-pane fade">
           {# Table of all chemical information that is shown when 'info' tab is selected #}
           <table class="table table-striped">
@@ -154,7 +154,7 @@
           {% endfor %}
           </table>
         </div>
-        
+
         <div id="hazards" class="tab-pane fade">
           {# Show all hazards or chemical (nfpa, hmis, and pictograms) #}
           Primary Hazard: {{chemInfo.primaryHazard}}
@@ -182,7 +182,7 @@
             </div>
           </div>
         </div>
-       
+
        {% if (authLevel == 'admin' or authLevel == 'systemAdmin') %}
           <div id="edit" class="tab-pane fade">
             {# Uses the same form as Add New Chemical, then runs javascript to fill the values of the fields with the proper information from the database #}
@@ -194,7 +194,7 @@
               fillEditForm('{{chemInfo.chemId}}', "{{chemConfig | safe}}");
             </script>
           </div>
-          
+
           <div id="addCont" class="tab-pane fade">
             <div class="text-center">
               <h2>Add a new container</h2>

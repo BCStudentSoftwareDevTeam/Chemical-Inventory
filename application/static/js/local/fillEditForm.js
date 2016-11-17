@@ -18,9 +18,9 @@ function fillEditForm(chemId, config){
                         dropdownList.value = data[curElement.id] //Setting selected values of dropdowns to values from database
                     }
                     else if (curElement.type == "checkbox"){
-                        var checkbox = document.getElementById(curElement.id);
-                        if (data[curElement.id] == 'True'){
-                            checkbox.checked = true; //Setting selected boxes to true if they are set to true in database
+                      var checkbox = document.getElementById(curElement.id);
+                      if (data[curElement.id] == 'True'){
+                          checkbox.checked = true; //Setting selected boxes to true if they are set to true in database
                         }
                     }
                 }
