@@ -9,7 +9,6 @@
       <div class="form-group row" id="{{group['id']}}Parent">
         <label for="{{group['id']}}" class="col-xs-6">{{group['name']}}</label>
         <div class="col-xs-4">
-          {## THIS IS WHERE YOU LEFT OFF ##}
         {# Checking name oninput to determine whether percentage is required or not. #}
        	{% if group['id'] == 'name' %}
           {# If name is equal to one already in the database, percentage should be required #}
@@ -49,7 +48,7 @@
         {% if group['id'] == 'primaryHazard' %}
           <p>CISPro value: <b>{{container.NameRaw.Id3}}</b><p>
         {% endif %}
-        <select id="{{ group['id'] }}" name="{{  group['id']  }}" class="form-control">
+        <select id="{{ group['id'] }}" name="{{  group['id']  }}" class="form-control" required>
           <option selected disabled value="">Select One</option>
           {# Autofill the structures #}
           {% if group['id'] == 'structure' %}
