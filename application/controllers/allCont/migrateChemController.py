@@ -141,8 +141,7 @@ def renderCorrectTemplate(barcode):
                         except Exception, e:
                             #Chemical is not yet in BCCIS
                             #print str(e)
-                            state = NIETHER
-                            print containerObj.NameRaw.Description
+                            state = NIETHER 
                             return render_template("views/MigrateChem.html",
                                 state = state,
                                 container = containerObj,

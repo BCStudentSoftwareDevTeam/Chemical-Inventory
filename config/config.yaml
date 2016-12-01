@@ -71,6 +71,8 @@ admin:
     link: "/ChemTable/"
   - title: "Migrate Chemical"
     link: "/migrateChem/"
+  - title: "Add Chemical"
+    link: "/AddChemical/"
 
 superUser:
   - title: "View All Chemicals"
