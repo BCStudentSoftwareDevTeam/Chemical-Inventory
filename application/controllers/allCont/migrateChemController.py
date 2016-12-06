@@ -35,10 +35,11 @@ def migrateChem():
                     )
 
         elif request.method == "POST":
-            data = request.form
-            if request.form['formName'] == "searchBcode":
+           data = request.form
+           print data
+           if request.form['formName'] == "searchBcode":
                return renderCorrectTemplate(request.form['barcodeID'])
-            elif request.form['formName'] == 'addCont':
+           elif request.form['formName'] == 'addCont':
                 ###
                 ##Process the form of adding a Container
                 ###
@@ -58,7 +59,7 @@ def migrateChem():
                         config = config,
 			authLevel = userLevel)
 
-            elif request.form['formName'] == 'addChem':
+           elif request.form['formName'] == 'addChem':
                 try:
                     data = request.form
                     print data['name']
@@ -80,7 +81,7 @@ def migrateChem():
                 except Exception as e:
                     flash("Chemical Could Not Be Added")
 
-            return render_template('views/MigrateChem.html',
+           return render_template('views/MigrateChem.html',
                     config = config,
                     authLevel = userLevel)
 

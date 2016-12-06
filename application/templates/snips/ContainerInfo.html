@@ -4,12 +4,11 @@
 <div class="col-md-8 col-md-offset-2">
     <ul class="nav nav-tabs">
         {% if container.checkedOut == False %}
-        <li class="active"><a data-toggle="tab" href="#checkout">Check Out this Container</a></li>
-        <li><a data-toggle="tab" href="#history">History of Container</a></li>
+          <li class="active"><a data-toggle="tab" href="#checkout">Check Out Container</a></li>
         {% else %}
-        <li class="active"><a data-toggle="tab" href="#history">History of Container</a></li>
+        <li class="active"><a data-toggle="tab" href="#checkin">Check In Container</a></li>
         {% endif %}
-
+        <li><a data-toggle="tab" href="#history">History of Container</a></li>
         <li><a data-toggle="tab" href="#dispose">Dispose of Container</a></li>
 
         {# example code for tabs found here: http://jsfiddle.net/xfw8t/12/ #}
@@ -19,8 +18,7 @@
         <div id="checkout" class="tab-pane fade in active">
           <h3>Check Out</h3>
             <div class="form">
-
-              <form name="checkOutForm" method="POST">
+              <form name="checkOutForm" id="checkOutForm" method="post">
                 <label for="name" class="col-sm-2">Name:</label>
                   <input class="form-control" type="text" name="chemname" value="{{chemical.name}}" readonly>
                 <label for="barcode" class="col-sm-2">Barcode:</label>
@@ -54,17 +52,18 @@
                   </select>
                 <label for="Professor" class="col-sm-2"> Person Responsible:</label>
                   <input class="form-control" id="profname" type="text" placeholder="Name of person responsible" name="forProf" value=''>
-                <label for="checkout"></label>
+                  <input type="hidden" name="formName" value="checkOutForm">
+                  <label for="checkout"></label>
                 <button id="checkout" type="submit" class="btn btn-primary">Check Out Chemical</button>
               </form>
             </div>
-        </div>
-        {% endif %}
-        {% if container.checkedOut == False %} {# If container is checked out, then only show the history tab #}
-        <div id="history" class="tab-pane fade">
-        {% else %}
-        <div id="history" class="tab-pane fade in active">
-        {% endif %}
+          </div>
+          {%else%}
+            <div id="checkin" class="tab-pane fade in active"> 
+            {% include "snips/checkIn.html" %}
+            </div>
+          {% endif %}
+       <div id="history" class="tab-pane fade">
           <h3>History</h3>
           <div class="container-fluid">
             <table class="table" id="createRecord">
@@ -131,7 +130,7 @@
               "searching": false
               });
             });
-            
+
             </script>
 
             {# DISPOSE OF CONTAINER TAB#}
@@ -161,4 +160,3 @@
         </div>
 
     </div>
-      
