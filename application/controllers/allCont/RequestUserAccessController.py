@@ -11,7 +11,7 @@ from flask import \
     url_for
 
 # PURPOSE: superUser or Staff requesting for a student to have access to the system.
-@app.route('/fa/RequestUserAccess/', methods = ['GET', 'POST'])
+@app.route('/RequestUserAccess/', methods = ['GET', 'POST'])
 def RequestUserAccess():
   # User authorization
   auth = AuthorizedUser()
@@ -24,8 +24,11 @@ def RequestUserAccess():
   if request.method == "POST":
     data = request.form
     modelData, extraData = sortPost(data, Users)
+    modelData['auth_level'] = "systemUser"
+    modelData['created_by'] = user.username
+    modelData['username'] = modelData['username'].lower()
     Users.create(**modelData)
-  return render_template("views/fa/RequestUserAccessView.html", config = config, userConfig = userConfig)
+  return render_template("views/RequestUserAccessView.html", config = config, userConfig = userConfig)
     
   
  

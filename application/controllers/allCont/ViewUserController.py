@@ -20,5 +20,10 @@ def ViewUser():
     abort(403)
   print user.username, userLevel
   usersList = Users.select().where(Users.approve == True)
+  if request.method == "POST":
+    data = request.form
+    #Updating selected user to a new selected auth_level
+    updateQuery = Users.update(auth_level = data['auth_level']).where(Users.username == data['username'])
+    updateQuery.execute()
   return render_template("views/ViewUserView.html", config = config, authLevel = userLevel, usersList = usersList)
 
