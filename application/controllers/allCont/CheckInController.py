@@ -12,6 +12,7 @@ from flask import \
     request, \
     jsonify, \
     url_for, \
+    flash, \
     abort
 
 # PURPOSE: CheckIn a container
@@ -21,27 +22,31 @@ def CheckIn():
     user = auth.getUser()
     userLevel = auth.userLevel()
     print user.username, userLevel
-    
+
     if userLevel == "admin" or userLevel == "systemAdmin":
         storageList = Storages.select()
         buildingList = Buildings.select()
         if request.method == "POST":
-            data = request.form
-            cont = Containers.get(Containers.barcodeId == data['barcodeId'])
-            Histories.create(movedFrom = cont.storageId,
-                           movedTo = data['storageId'],
-                           containerId = cont.conId,
-                           modUser = user.username,
-                           action = "Checked In",
-                           pastQuantity = "%s %s" %(cont.currentQuantity, cont.currentQuantityUnit))
-            cont.storageId = data['storageId']
-            cont.currentQuantity = data['currentQuantity']
-            cont.currentQuantityUnit = data['currentQuantityUnit']
-            cont.checkedOut = False
-            cont.checkOutReason =''
-            cont.forProf = ''
-            cont.checkedOutBy = ''
-            cont.save()
+            try:
+                data = request.form
+                cont = Containers.get(Containers.barcodeId == data['barcodeId'])
+                Histories.create(movedFrom = cont.storageId,
+                               movedTo = data['storageId'],
+                               containerId = cont.conId,
+                               modUser = user.username,
+                               action = "Checked In",
+                               pastQuantity = "%s %s" %(cont.currentQuantity, cont.currentQuantityUnit))
+                cont.storageId = data['storageId']
+                cont.currentQuantity = data['currentQuantity']
+                cont.currentQuantityUnit = data['currentQuantityUnit']
+                cont.checkedOut = False
+                cont.checkOutReason =''
+                cont.forProf = ''
+                cont.checkedOutBy = ''
+                cont.save()
+                flash(data['barcodeId']+" Successfully Checked-In")
+            except:
+                flash("Failed to Check-In "+ data['barcodeId'])
         return render_template("views/CheckInView.html",
                                config = config,
                                contConfig = contConfig,
@@ -53,7 +58,7 @@ def CheckIn():
     else:
         # This will also be replaced for a specific checkin control for all other users
         abort(403)
-  
+
 @app.route('/checkInData/', methods = ['GET']) #Called by AJAX from getData()
 def checkInData():
     try:
@@ -66,11 +71,11 @@ def checkInData():
         else: #If the storage name is the same as it's room name, only show building and room names
             location = storage.roomId.floorId.buildId.name + " Building, Room: " + storage.roomId.name
         if chemical is not None:
-            return jsonify({'status':'OK', 
-                            'chemName' : chemical.name, 
-                            'hazard': chemical.primaryHazard, 
-                            'storage' : location, 
-                            'quantity' : container['currentQuantity'], 
+            return jsonify({'status':'OK',
+                            'chemName' : chemical.name,
+                            'hazard': chemical.primaryHazard,
+                            'storage' : location,
+                            'quantity' : container['currentQuantity'],
                             'unit' : container['currentQuantityUnit'],
                             'checkedOut' : container['checkedOut']})
             #Return all data as a JSON object

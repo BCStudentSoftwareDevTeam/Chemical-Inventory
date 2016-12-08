@@ -7,6 +7,7 @@ from application.logic.sortPost import *
 
 from flask import \
     render_template, \
+    redirect, \
     request, \
     jsonify, \
     url_for, \
@@ -32,11 +33,8 @@ def AddChemical():
     if modelData['sdsLink'] == None:
       modelData['sdsLink'] = 'https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=%s' %(modelData['name'])
     print modelData['sdsLink']
-    chemicalsModel.Chemicals.create(**modelData) #Create instance of Chemical with mapped info in modelData
-    return render_template("views/AddChemicalView.html",
-                           config = config,
-                           chemConfig = chemConfig,
-                           authLevel = userLevel)
+    newChem = chemicalsModel.Chemicals.create(**modelData) #Create instance of Chemical with mapped info in modelData
+    return redirect(url_for('ViewChemical', chemId = newChem.chemId)) #Redirect to the new chemical page
   else:
     abort(403)
 
