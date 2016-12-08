@@ -22,8 +22,12 @@ def ViewUser():
   usersList = Users.select().where(Users.approve == True)
   if request.method == "POST":
     data = request.form
-    #Updating selected user to a new selected auth_level
-    updateQuery = Users.update(auth_level = data['auth_level']).where(Users.username == data['username'])
-    updateQuery.execute()
+    if 'auth_level' in data:
+      #Updating selected user to a new selected auth_level
+      updateQuery = Users.update(auth_level = data['auth_level']).where(Users.username == data['username'])
+      updateQuery.execute()
+    else:
+      removeQuery = Users.delete().where(Users.username == data['username'])
+      removeQuery.execute()
   return render_template("views/ViewUserView.html", config = config, authLevel = userLevel, usersList = usersList)
 
