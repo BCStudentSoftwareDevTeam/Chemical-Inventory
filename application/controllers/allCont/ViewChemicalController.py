@@ -48,6 +48,7 @@ def ViewChemical(chemId):
       elif data["formName"] == "addCont":
         try: #If a form was posted, try to create a new container with info from form
           modelData, extraData = sortPost(data, Containers)
+          
           cont = Containers.create(**modelData)
           Histories.create(movedTo = modelData['storageId'],
                           containerId = cont.conId,

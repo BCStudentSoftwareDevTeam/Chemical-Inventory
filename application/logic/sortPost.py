@@ -20,7 +20,6 @@ def sortPost( data, model):
   for key in iter( data ):
     if data[key] == "":
       if hasattr( model, key ):
-        print ("nope")
         print (model, key)
         if getattr( model, key ).null is True:
           model_data[key] = None
