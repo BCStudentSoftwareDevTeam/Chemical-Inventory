@@ -8,7 +8,8 @@ from flask import \
     render_template, \
     request, \
     redirect, \
-    url_for
+    url_for, \
+    flash
 
 # PURPOSE: superUser or Staff requesting for a student to have access to the system.
 @app.route('/RequestUserAccess/', methods = ['GET', 'POST'])
@@ -27,8 +28,15 @@ def RequestUserAccess():
     modelData['auth_level'] = "systemUser"
     modelData['created_by'] = user.username
     modelData['username'] = modelData['username'].lower()
-    Users.create(**modelData)
-  return render_template("views/RequestUserAccessView.html", config = config, userConfig = userConfig)
+    try:
+      Users.create(**modelData)
+      flash(u"Success: User added successfully.", 'list-group-item list-group-item-success')
+    except:
+      flash(u"Error: User could not be added.", 'list-group-item list-group-item-danger')
+  return render_template("views/RequestUserAccessView.html",
+                          config = config,
+                          userConfig = userConfig,
+                          authLevel = userLevel)
     
   
  

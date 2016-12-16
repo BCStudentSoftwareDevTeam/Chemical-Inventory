@@ -1,9 +1,8 @@
 from application import app
-from application.models import *
+from application.models.chemicalsModel import *
 from application.models.util import *
 from application.config import *
 from application.logic.getAuthUser import AuthorizedUser
-from application.logic.sortPost import *
 
 from flask import \
     render_template, \
@@ -25,13 +24,9 @@ def AddChemical():
         return render_template("views/AddChemicalView.html",
                                config = config,
                                chemConfig = chemConfig)
-    data = request.form #If there is a form posted to the page
     
-    modelData, extraData = sortPost(data, chemicalsModel.Chemicals) #Only get relevant data for the current Model
-    if modelData['sdsLink'] == None:
-      modelData['sdsLink'] = 'https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=%s' %(modelData['name'])
-    print modelData['sdsLink']
-    chemicalsModel.Chemicals.create(**modelData) #Create instance of Chemical with mapped info in modelData
+    createChemical(request.form) # Function located in chemicalsModel.py
+    
     return render_template("views/AddChemicalView.html",
                            config = config,
                            chemConfig = chemConfig,
