@@ -23,7 +23,7 @@ def AddUser():
   print user.username, userLevel
   if userLevel == "admin":
     if request.method == "POST":
-      flashMessage, flashFormat = createUser(request.form, user)
+      flashMessage, flashFormat = createUser(request.form, user.username, True) # createUser function located in usersModel.py
       flash(flashMessage, flashFormat)
   date = time.strftime("%d/%m/%Y")
   return render_template("views/AddUserView.html", config = config, authLevel = userLevel, date = date)

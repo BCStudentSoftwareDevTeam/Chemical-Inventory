@@ -23,16 +23,8 @@ def RequestUserAccess():
   print user.username, userLevel
   
   if request.method == "POST":
-    data = request.form
-    modelData, extraData = sortPost(data, Users)
-    modelData['auth_level'] = "systemUser"
-    modelData['created_by'] = user.username
-    modelData['username'] = modelData['username'].lower()
-    try:
-      Users.create(**modelData)
-      flash(u"Success: User added successfully.", 'list-group-item list-group-item-success')
-    except:
-      flash(u"Error: User could not be added.", 'list-group-item list-group-item-danger')
+    flashMessage, flashFormat = createUser(request.form, user.username, False)
+    flash(flashMessage, flashFormat)
   return render_template("views/RequestUserAccessView.html",
                           config = config,
                           userConfig = userConfig,

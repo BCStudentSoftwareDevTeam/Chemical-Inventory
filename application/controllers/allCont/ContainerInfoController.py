@@ -1,4 +1,10 @@
 from application import app
+from application.models.containersModel import *
+from application.models.chemicalsModel import *
+from application.models.storagesModel import *
+from application.models.buildingsModel import *
+from application.models.historiesModel import *
+from application.models.containersModel import *
 from application.models import *
 from application.config import *
 from application.logic.getAuthUser import AuthorizedUser
@@ -21,32 +27,20 @@ def maContainerInfo(chemId, barcodeId):
   print user.username, userLevel
   
   if userLevel == "admin" or userLevel == "systemAdmin":
-    chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
+    chemical = getChemical(chemId)
     if chemical.remove == True:
       return redirect('/ChemTable')
-    container = containersModel.Containers.get(containersModel.Containers.barcodeId == barcodeId)
+    container = getContainer(barcodeId)
     if container.disposalDate is not None:
       return redirect('/ChemTable')
-    storageList = storagesModel.Storages.select()
-    buildingList = buildingsModel.Buildings.select()
-    histories = historiesModel.Histories.select().where(historiesModel.Histories.containerId == container.conId)
+    storageList = getStorages()
+    buildingList = getBuildings()
+    histories = getContainerHistory(container.conId)
     if request.method =="POST":
       data = request.form
-      historiesModel.Histories(containerId = container.conId,
-                              barcodeId  = container.barcodeId,
-                              movedFrom = container.storageId_id,
-                              movedTo = data['storageId'],
-                              pastQuantity = str(container.currentQuantity) + str(container.currentQuantityUnit),
-                              modUser = user.username,
-                              action = "Checked Out",
-                              modDate = datetime.date.today()).save()
-      cont = containersModel.Containers.get(barcodeId = barcodeId)
-      cont.checkOutReason  = data['class']
-      cont.checkedOut = True
-      cont.checkedOutBy = user.username
-      cont.forProf = data ['forProf']
-      cont.storageId = data['storageId']
-      cont.save()
+      cont = getContainer(barcodeId)
+      updateHistory(cont, "Checked Out", data['storageId'], user)
+      changeLocation(cont, True, data) #This line is causing issues because the container info page checkout is different from the snip
       # add form data to container as checked out
       return redirect('/ViewChemical/%s/' %(chemId))
     else:

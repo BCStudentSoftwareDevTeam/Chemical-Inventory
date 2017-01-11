@@ -15,12 +15,25 @@ class Users (Model):
     class Meta:
         database = getDB("inventory", "dynamic")
 
-def createUser(data, createdBy):
+def createUser(data, createdBy, approval, authLevel = "systemUser"):
+    """Used to check containers in and out
+  
+    Args:
+        data (dict): A dictionary with keys for each field in users, and values for a specific user instance
+        createdBy (str): Username of the user that has accessed the page that calls this function
+        approval (bool): True for admin, False for superUser
+    Returns:
+        tuple:
+            element[0]: Message to flash to user
+            element[1]: Formatting for the flash message
+    """ #should return something else for unit testing later
     modelData, extraData = sortPost(data, Users)
-    modelData['approve'] = True
+    modelData['approve'] = approval
     modelData['username'] = modelData['username'].lower()
     modelData['created_by'] = createdBy
     modelData['created_date'] = datetime.date.today()
+    if 'auth_level' not in modelData:
+        modelData['auth_level'] = authLevel
     # Peewee has a get_or_create function. Would that be more useful than putting this in a try/except?
     try:
         Users.create(**modelData)

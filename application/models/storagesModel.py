@@ -1,7 +1,7 @@
 from application.models.util import *
 from application.models.roomsModel import Rooms
 
-class Storages (Model):
+class Storages(Model):
   sId           = PrimaryKeyField()
   roomId        = ForeignKeyField(Rooms) # When creating a container, select room first, then populate dropdown with all storages with matching roomId.
   oldPK         = IntegerField(null = True)
@@ -19,3 +19,13 @@ class Storages (Model):
 
   class Meta:
     database = getDB("inventory", "dynamic")
+
+def getStorages(room = None):
+  if room == None:
+    return Storages.select()
+  else:
+    return Storages.select().where(Storages.roomId == room)
+    
+def deleteStorage(storage):
+  storage = Storages.get(Storages.sId == storage)
+  storage.delete_instance(recursive=True)

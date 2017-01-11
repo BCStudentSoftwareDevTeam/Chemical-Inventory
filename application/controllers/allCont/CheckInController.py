@@ -23,25 +23,13 @@ def CheckIn():
     print user.username, userLevel
     
     if userLevel == "admin" or userLevel == "systemAdmin":
-        storageList = Storages.select()
-        buildingList = Buildings.select()
+        storageList = getStorages()
+        buildingList = getBuildings()
         if request.method == "POST":
             data = request.form
-            cont = Containers.get(Containers.barcodeId == data['barcodeId'])
-            Histories.create(movedFrom = cont.storageId,
-                           movedTo = data['storageId'],
-                           containerId = cont.conId,
-                           modUser = user.username,
-                           action = "Checked In",
-                           pastQuantity = "%s %s" %(cont.currentQuantity, cont.currentQuantityUnit))
-            cont.storageId = data['storageId']
-            cont.currentQuantity = data['currentQuantity']
-            cont.currentQuantityUnit = data['currentQuantityUnit']
-            cont.checkedOut = False
-            cont.checkOutReason =''
-            cont.forProf = ''
-            cont.checkedOutBy = ''
-            cont.save()
+            cont = getContainer(data['barcodeId'])
+            updateHistory(cont, "Checked In", data['storageId'], user.username) # updateHistory located in historiesModel.py
+            changeLocation(cont, False, data) # changeLocation located in containersModel.py
         return render_template("views/CheckInView.html",
                                config = config,
                                contConfig = contConfig,

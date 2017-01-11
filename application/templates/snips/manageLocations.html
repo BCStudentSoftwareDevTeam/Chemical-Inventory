@@ -30,7 +30,7 @@
                             {% set item = floor %}
                                 <div class="panel-heading panel-change panel-closed" id="{{location}}{{attribute}}Tab" role="tab">
                                     <h4 class="panel-title">
-                                        <a role="button" data-toggle="collapse" onclick="highlightTab('{{location}}{{attribute}}Tab')" data-parent="#floorAccordion{{building.bId}}" href="#{{floor.name}}{{floor.fId}}" aria-expanded="true" aria-controls="{{floor.name}}{{floor.fId}}">
+                                        <a role="button" data-toggle="collapse" onclick="highlightTab('{{location}}{{attribute}}Tab')" data-parent="#floorAccordion{{building.bId}}" href="#floor{{floor.fId}}" aria-expanded="true" aria-controls="floor{{floor.fId}}">
                                             Floor: {{floor.name}}
                                         </a>
                                         <a class="glyphLink" data-toggle="modal" data-target="#removeModal" data-location="Floor" data-attribute="{{floor.fId}}" data-name="{{floor.name}}">
@@ -41,7 +41,7 @@
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="{{floor.name}}{{floor.fId}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{floor.name}}{{floor.fId}}">
+                                <div id="floor{{floor.fId}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="floor{{floor.fId}}">
                                     <div class="panel-body">
                                         {# Second Nested Accordion Begins (Rooms) #}
                                         <div class="panel-group" id="roomAccordian{{floor.fId}}" role="tablist" aria-mulitselectable="true">
@@ -53,7 +53,7 @@
                                                     {% set item = room %}
                                                         <div class="panel-heading panel-change panel-closed" id="{{location}}{{attribute}}Tab" role="tab">
                                                             <h4 class="panel-title">
-                                                                <a role="button" data-toggle="collapse" onclick="highlightTab('{{location}}{{attribute}}Tab')" data-parent="#roomAccordian{{floor.fId}}" href="#{{room.name}}{{room.rId}}" aria-expanded="true" aria-controls="{{room.name}}{{room.rId}}">
+                                                                <a role="button" data-toggle="collapse" onclick="highlightTab('{{location}}{{attribute}}Tab')" data-parent="#roomAccordian{{floor.fId}}" href="#room{{room.rId}}" aria-expanded="true" aria-controls="room{{room.rId}}">
                                                                     Room: {{room.name}}
                                                                 </a> 
                                                                 <a class="glyphLink" data-toggle="modal" data-target="#removeModal" data-location="Room" data-attribute="{{room.rId}}" data-name="{{room.name}}">
@@ -64,7 +64,7 @@
                                                                 </a>
                                                             </h4>
                                                         </div>
-                                                        <div id="{{room.name}}{{room.rId}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{room.name}}{{room.rId}}">
+                                                        <div id="room{{room.rId}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="room{{room.rId}}">
                                                             <div class="panel-body">
                                                                 {# Third Nested Accordian Begins (Storages) #}
                                                                 <div class="panel-group" id="storageAccordian{{room.rId}}" role="tablist" aria-multiselectable="true">

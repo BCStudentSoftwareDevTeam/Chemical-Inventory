@@ -56,3 +56,9 @@ def createChemical(data):
   if modelData['sdsLink'] == None:
     modelData['sdsLink'] = 'https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=%s' %(modelData['name'])
   Chemicals.create(**modelData) #Create instance of Chemical with mapped info in modelData
+  
+def getChemical(chemId):
+  return Chemicals.get(Chemicals.chemId == chemId)
+  
+def getChemicals():
+  return Chemicals.select()

@@ -22,20 +22,9 @@ def ChemTable():
     abort(403)
   print user.username, userLevel
   
-  chemicals = Chemicals.select() #Get all chemicals from the database
-  contDict = {} #Set up a dictionary for all containers
-  for chemical in chemicals: #For each chemical
-    contDict[chemical.name] = ((((Chemicals
-                              .select())
-                              .join(Containers))
-                              .where(
-                                (Containers.disposalDate == None) &
-                                (Containers.chemId == chemical.chemId) &
-                                (Containers.checkedOut == False)&
-                                (Chemicals.remove == False))
-                              .count()))
-  #(Above) Set value for the chemicals name to a count of how many containers of this chemical that are not checked out, and have not been disposed of
-                              
+  chemicals = getChemicals() #Get all chemicals from the database
+  contDict = contCount(chemicals)
+
   return render_template("views/ChemTableView.html",
                           config = config, 
                           chemicals = chemicals, 
