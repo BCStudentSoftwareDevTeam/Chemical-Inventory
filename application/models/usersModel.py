@@ -40,3 +40,12 @@ def createUser(data, createdBy, approval, authLevel = "systemUser"):
         return(u"Success: User added successfully.", 'list-group-item list-group-item-success')
     except:
         return(u"Error: User could not be added.", 'list-group-item list-group-item-danger')
+        
+def approveUsers(usersList):
+    for user in usersList:
+        try:
+            query = Users.update(approve = True).where(Users.userId == user)
+            query.execute()
+            yield("Success: User approved.", 'list-group-item list-group-item-success')
+        except:
+            yield("Error: User could not be approved.", 'list-group-item list-group-item-danger')

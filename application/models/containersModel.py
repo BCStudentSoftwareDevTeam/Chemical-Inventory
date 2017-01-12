@@ -75,7 +75,6 @@ def contCount(chemicals):
                               .where(
                                 (Containers.disposalDate == None) &
                                 (Containers.chemId == chemical.chemId) &
-                                (Containers.checkedOut == False)&
                                 (Chemicals.remove == False))
                               .count()))
   return contDict

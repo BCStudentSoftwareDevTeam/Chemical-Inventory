@@ -26,17 +26,12 @@ def UserApproval():
     if request.method == "POST":
       data = request.form
       usersList = request.form.getlist("users")
-      print usersList
-      print data
+      # print usersList
+      # print data
       if 'approveButton' in data:
-        print data['approveButton']
-        for user in usersList:
-          try:
-            query = Users.update(approve = True).where(Users.userId == user)
-            query.execute()
-            flash("Success: User approved.", 'list-group-item list-group-item-success')
-          except:
-            flash("Error: User could not be approved.", 'list-group-item list-group-item-danger')
+        # print data['approveButton']
+        flashMessage, flashFormat = approveUsers(usersList)
+        flash(flashMessage, flashFormat)
       elif 'denyButton' in data:
         #TODO: delete users that were denied
         print data['denyButton']
