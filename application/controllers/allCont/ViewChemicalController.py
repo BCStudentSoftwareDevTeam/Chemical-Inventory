@@ -48,6 +48,7 @@ def ViewChemical(chemId):
       elif data["formName"] == "addCont":
         try: #If a form was posted, try to create a new container with info from form
           modelData, extraData = sortPost(data, Containers)
+          
           cont = Containers.create(**modelData)
           Histories.create(movedTo = modelData['storageId'],
                           containerId = cont.conId,
@@ -114,8 +115,8 @@ def maDeleteChemical(chemId):
     chem.deleteDate = datetime.date.today() #Set chemical's delete date to the current date
     chem.remove = True #Set chemical's remove attribute to true.
     chem.save() #We are not deleting the chemical because chemicals that are disposed still reference the chemical, and the containers are used for reports on disposal.
-    flash("Chemical was succesfully deleted")
-  except Exception as e:
-    flash("Chemical could not be added")
+    flash("Successfully Deleted " + chem.name + " From the System")
+  except:
+      flash("Failed to Remove " + chem.name + " From the System")
   return redirect('/ChemTable')
 

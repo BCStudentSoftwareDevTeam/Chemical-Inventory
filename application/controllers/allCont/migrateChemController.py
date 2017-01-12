@@ -35,10 +35,11 @@ def migrateChem():
                     )
 
         elif request.method == "POST":
-            data = request.form
-            if request.form['formName'] == "searchBcode":
+           data = request.form
+           print data
+           if request.form['formName'] == "searchBcode":
                return renderCorrectTemplate(request.form['barcodeID'])
-            elif request.form['formName'] == 'addCont':
+           elif request.form['formName'] == 'addCont':
                 ###
                 ##Process the form of adding a Container
                 ###
@@ -58,20 +59,29 @@ def migrateChem():
                         config = config,
 			authLevel = userLevel)
 
-            elif request.form['formName'] == 'addChem':
+           elif request.form['formName'] == 'addChem':
                 try:
                     data = request.form
-                    modelData, extraData = sortPost(data, Chemicals)
-                    if modelData['sdsLink'] == None:
-                        modelData['sdsLink'] = "https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=%s" %(modelData['name'])
-                    Chemicals.create(**modelData)
-                    flash("Chemical Was Successfully Added To The DB")
-                    print data['barcode']
-                    return renderCorrectTemplate(data['barcode'])
+                    print data['name']
+                    try:
+                        ##############
+                        ##
+                        ## Left Off Here CHECKING IF NAME IS DUPLICATE
+                        ##
+                        ##############
+                        Chemicals.select().where(Chemicals.name == data['name']).get()
+                        flash(data['name'] + "Already in the System")
+                    except:
+                        modelData, extraData = sortPost(data, Chemicals)
+                        if modelData['sdsLink'] == None:
+                            modelData['sdsLink'] = "https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=%s" %(modelData['name'])
+                        Chemicals.create(**modelData)
+                        flash("Chemical Was Successfully Added To The DB") 
+                        return renderCorrectTemplate(data['barcode'])
                 except Exception as e:
                     flash("Chemical Could Not Be Added")
 
-            return render_template('views/MigrateChem.html',
+           return render_template('views/MigrateChem.html',
                     config = config,
                     authLevel = userLevel)
 

@@ -4,7 +4,7 @@ class Chemicals (Model):
   chemId          = PrimaryKeyField()
   oldPK           = IntegerField(null = True)
   ## General Information
-  name            = CharField(null = False)
+  name            = CharField(null = True, unique = True)
   casNum          = CharField(null = True)
   primaryHazard   = CharField(null = True)
   formula         = CharField(null = True)

@@ -21,7 +21,7 @@ def ChemTable():
   if userLevel == -1 or user == -1:
     abort(403)
   print user.username, userLevel
-  
+
   chemicals = Chemicals.select() #Get all chemicals from the database
   contDict = {} #Set up a dictionary for all containers
   for chemical in chemicals: #For each chemical
@@ -35,14 +35,14 @@ def ChemTable():
                                 (Chemicals.remove == False))
                               .count()))
   #(Above) Set value for the chemicals name to a count of how many containers of this chemical that are not checked out, and have not been disposed of
-                              
+
   return render_template("views/ChemTableView.html",
-                          config = config, 
-                          chemicals = chemicals, 
+                          config = config,
+                          chemicals = chemicals,
                           contDict = contDict,
                           quote = quote,
                           authLevel = userLevel)
-                          
+
 @app.route("/getEditData/", methods = ['GET']) #AJAX call to get data for edit chemical form
 def getEditData():
     chemId = request.args.get('chemId')
