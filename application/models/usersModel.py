@@ -35,17 +35,26 @@ def createUser(data, createdBy, approval, authLevel = "systemUser"):
     if 'auth_level' not in modelData:
         modelData['auth_level'] = authLevel
     # Peewee has a get_or_create function. Would that be more useful than putting this in a try/except?
+    if modelData['end_date'] >= datetime.date.today():
+        return(u"Error: User could not be added. End Date must be later than today.", 'list-group-item list-group-item-danger')
     try:
         Users.create(**modelData)
         return(u"Success: User added successfully.", 'list-group-item list-group-item-success')
     except:
         return(u"Error: User could not be added.", 'list-group-item list-group-item-danger')
         
-def approveUsers(usersList):
-    for user in usersList:
-        try:
-            query = Users.update(approve = True).where(Users.userId == user)
-            query.execute()
-            yield("Success: User approved.", 'list-group-item list-group-item-success')
-        except:
-            yield("Error: User could not be approved.", 'list-group-item list-group-item-danger')
+def approveUsers(user):
+    try:
+        query = Users.update(approve = True).where(Users.userId == user)
+        query.execute()
+        return("Success: User approved.", 'list-group-item list-group-item-success')
+    except:
+        return("Error: User could not be approved.", 'list-group-item list-group-item-danger')
+        
+def denyUsers(user):
+    try:
+        query = Users.delete().where(Users.userId == user)
+        query.execute()
+        return("Success: User has been denied.", 'list-group-item list-group-item-success')
+    except:
+        return("Error: User could not be removed.", 'list-group-item list-group-item-danger')

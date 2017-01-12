@@ -30,8 +30,9 @@ def UserApproval():
       # print data
       if 'approveButton' in data:
         # print data['approveButton']
-        flashMessage, flashFormat = approveUsers(usersList)
-        flash(flashMessage, flashFormat)
+        for user in usersList:
+          flashMessage, flashFormat = approveUsers(user)
+          flash(flashMessage, flashFormat)
       elif 'denyButton' in data:
         #TODO: delete users that were denied
         print data['denyButton']
