@@ -16,14 +16,14 @@ config = Configuration.from_file(config_path).configure()
 
 # Added for splitting up Add New Chemical form config from config
 chemConfig_path = getAbsolutePath('config/chemicalConfig.yaml')
-chemConfig = Configuration.from_file(chemicalConfig_path).configure()
+chemConfig = Configuration.from_file(chemConfig_path).configure()
 
 # Added for add container page
-cont_path = getAbsolutePath('config/containerConfig.yaml')
+contConfig_path = getAbsolutePath('config/containerConfig.yaml')
 contConfig = Configuration.from_file(contConfig_path).configure()
 
 # Added for check in page
-checkInConfig_path = getAbsolutePath('config_path/checkInConfig.yaml')
+checkInConfig_path = getAbsolutePath('config/checkInConfig.yaml')
 checkInConfig = Configuration.from_file(checkInConfig_path).configure()
 
 # Added for check out page
