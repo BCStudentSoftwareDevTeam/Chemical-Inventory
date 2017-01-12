@@ -5,6 +5,7 @@
   <form name="addCont" id="addCont" method="post">
     <input type="hidden" id="chemId" name="chemId" value="{{chemInfo.chemId}}"/>
     <input type="hidden" name="formName" value="addCont"/>
+    <input type="hidden" id="migrated" name="migrated" value={{migrated}}>
       {% for group in contConfig['containerInformation'] %}
       {% if group.special != "noShow" %}
         {% if group.type != 'select' %}
@@ -16,8 +17,7 @@
                 <svg id="barcode" value = "{{barcode}}"></svg>
                 {# Creates barcode based on last barcode, and date. returns barcode as string. #}
                 <script>
-                  //var bar = createBarcode('{{group.id}}', '{{barcode}}');
-                  JsBarcode('#barcode', '{{barcode}}', {
+                JsBarcode('#barcode', '{{barcode}}', {
                               height:30,
                               fontSize: 15
                              });
@@ -89,8 +89,8 @@
         {% endif %}
       {% endif %}
       {% endfor %}
-    <input type="hidden" name="user" value="testUser">
-  <input type="submit" class="btn btn-primary" id="submitCont" value="Submit" onclick="return checkVals({{contConfig['options']}});">
+      <input type="hidden" name="user" value="testUser">
+      <input type="submit" class="btn btn-primary" id="submitCont" value="Submit" onclick="return checkVals({{contConfig['options']}});">
   </form>
 </div>
 <script src="/static/js/local/measurements.js-master/metrics.js"></script>

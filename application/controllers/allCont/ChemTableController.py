@@ -26,12 +26,12 @@ def ChemTable():
   contDict = contCount(chemicals)
 
   return render_template("views/ChemTableView.html",
-                          config = config, 
-                          chemicals = chemicals, 
+                          config = config,
+                          chemicals = chemicals,
                           contDict = contDict,
                           quote = quote,
                           authLevel = userLevel)
-                          
+
 @app.route("/getEditData/", methods = ['GET']) #AJAX call to get data for edit chemical form
 def getEditData():
     chemId = request.args.get('chemId')

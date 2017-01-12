@@ -42,19 +42,19 @@ def changeLocation(cont, status, data):
   Returns:
       Nothing
   """ #should return something for unit testing later
-  if status:
+  if status: # True if checking out
     cont.storageId = data['storageId']
     cont.checkedOut = status
     cont.checkOutReason = data['forClass']
     cont.forProf = data['forProf']
     cont.checkedOutBy = data['user']
     cont.save()
-  else:
+  else: # Checking in
     cont.storageId = data['storageId']
     cont.currentQuantity = data['currentQuantity']
     cont.currentQuantityUnit = data['currentQuantityUnit']
     cont.checkedOut = status
-    cont.checkOutReason =''
+    cont.checkOutReason = ''
     cont.forProf = ''
     cont.checkedOutBy = ''
     cont.save()

@@ -6,9 +6,11 @@ from application.logic.getAuthUser import AuthorizedUser
 
 from flask import \
     render_template, \
+    redirect, \
     request, \
     jsonify, \
     url_for, \
+    flash, \
     abort
 
 # PURPOSE: Add New Chemical to the database
@@ -18,22 +20,28 @@ def AddChemical():
   user = auth.getUser()
   userLevel = auth.userLevel()
   print user.username, userLevel
-  
-  if userLevel == "admin" or userLevel == "systemAdmin":  
+
+  if userLevel == "admin" or userLevel == "systemAdmin":
     if request.method == "GET":
         return render_template("views/AddChemicalView.html",
+                               authLevel = userLevel,
                                config = config,
                                chemConfig = chemConfig)
     
-    createChemical(request.form) # Function located in chemicalsModel.py
+    status, flashMessage, flashFormat, newChem = createChemical(request.form) # Function located in chemicalsModel.py
+    if status: # Chemical created successfully
+      flash(flashMessage, flashFormat)
+      return redirect(url_for('ViewChemical', chemId = newChem.chemId)) #Redirect to the new chemical page
+    else:
+      flash(flashMessage, flashFormat)
+      return render_template("views/AddChemicalView.html",
+                             authLevel = userLevel,
+                             config = config,
+                             chemConfig = chemConfig)
     
-    return render_template("views/AddChemicalView.html",
-                           config = config,
-                           chemConfig = chemConfig,
-                           authLevel = userLevel)
   else:
     abort(403)
- 
+
 @app.route('/checkName/', methods=['GET'])
 def checkName():
   nameVal = request.args.get('value')

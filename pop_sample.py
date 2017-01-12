@@ -1,8 +1,8 @@
-from application.models import classes 
+from application.models import classes
 from application.config import *
 from application.models import *
 from application.models.staticModels.batchModel import *
-from application.models.staticModels.mainModel import * 
+from application.models.staticModels.mainModel import *
 from application.models.staticModels.locatesModel import *
 from application.models.chemicalsModel import *
 from application.models.storagesModel import *
@@ -15,14 +15,14 @@ def init_db():
     #Create the databases
     for database in config.databases.dynamic:
         filename = config.databases.dynamic[database].filename
-        
+
         #Remove the DB
         if os.path.isfile(filename):
             os.remove(filename)
-        
+
         #create an empty DB file
         open(filename, 'a').close()
-    
+
     #Go through modules in models directory, and create a table for each one
     for c in classes:
         c.create_table(True)
@@ -60,10 +60,10 @@ def init_db():
             else:
                 oxidizer = False
         except:
-            oxidizer = False 
-        
+            oxidizer = False
+
         #List of all possible Primary Hazards, one of these is randomly selected for the chem hazard. This is because of incosistant id3 data. ONLY FOR TESTING
-        primaryHazard= ["Base", "Flammable", "Flammable Solid", "Health Hazard", "Inorganic Acid", "Organic Acid", "Oxidizer", "Reactive", "General Hazard"]  
+        primaryHazard= ["Base", "Flammable", "Flammable Solid", "Health Hazard", "Inorganic Acid", "Organic Acid", "Oxidizer", "Reactive", "General Hazard"]
 
         #Checks if BoilingPoint or MolecularWeight are empty fields, so that Peewee doesn't default the value to 0.
         if chem.BoilingPoint == "":
@@ -98,7 +98,7 @@ def init_db():
             oxidizerPict   = oxidizer).save()
         #print chem.NameRaw + " was added to the database"
     print "Chemicals were added to the database"
-   
+
     ####
     #Makes one building that the one floor is put in
     ####
@@ -114,7 +114,7 @@ def init_db():
     floorsModel.Floors(
         buildId         = 1,
         name            = "First Floor").save()
-    print "Floors were added to the database" 
+    print "Floors were added to the database"
 
     ####
     #Makes a single room that all storages are put in
@@ -183,7 +183,7 @@ def init_db():
         emailadd = "Does this matter?",
         reportto = "Does this matter either?",
         approve = True).save()
-    
+
     usersModel.Users(
         username = "thakurr",
         auth_level = "superUser",
@@ -197,7 +197,7 @@ def init_db():
         emailadd = "Does this matter?",
         reportto = "Does this matter either?",
         approve = True).save()
-        
+
     usersModel.Users(
         username = "heggens",
         auth_level = "systemUser",
