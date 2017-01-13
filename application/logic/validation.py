@@ -4,11 +4,13 @@
 from configure import Configuration
 from application.config import config
 from application.models import getModelFromName
+from application.absolutepath import getAbsolutePath
 from functools import wraps
 from flask import request, redirect, url_for
 import os, re
 
-roleConfig = Configuration.from_file('config/roles.yaml').configure()
+roleConfigFilePath = getAbsolutePath('config/roles.yaml')
+roleConfig = Configuration.from_file(roleConfigFilePath).configure()
 
 def getUsernameFromEnv():
   # FIXME: This is wrong.
