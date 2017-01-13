@@ -20,6 +20,16 @@ databases:
     cispro:
       filename: data/sample.sqlite
 
+roles:
+  admin:
+    printable: "Master Administrator"
+  systemAdmin:
+    printable: "System Administrator (EHS Workers)"
+  superUser:
+    printable: "Super User (Faculty & Staff)"
+  systemUser:
+    printable: "System User (Students)"
+
 sys:
   debug: True
   host: "0.0.0.0"
@@ -79,8 +89,6 @@ superUser:
     link: "/ChemTable/"
   - title: "Request Access For a Student"
     link: "/RequestUserAccess/" 
-  - title: "Migrate Chemical"
-    link: "/migrateChem/"
 
 systemUser:
   - title: "Home"
@@ -91,6 +99,8 @@ systemAdmin:
     link: "/Home/"
   - title: "View All Chemicals"
     link: "/ChemTable/"
+  - title: "Migrate Chemical"
+    link: "/migrateChem/"
   
 flask:
   # Secret key for signing cookies

@@ -1,4 +1,5 @@
 from application.models.util import *
+from application.logic.sortPost import *
 
 class Chemicals (Model):
   chemId          = PrimaryKeyField()
@@ -49,3 +50,19 @@ class Chemicals (Model):
   class Meta:
     database = getDB("inventory", "dynamic")
 
+def createChemical(data):
+  """Creates chemical based on input from user."""
+  try:
+    modelData, extraData = sortPost(data, Chemicals) #Only get relevant data for the current Model
+    if modelData['sdsLink'] == None:
+      modelData['sdsLink'] = 'https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=%s' %(modelData['name'])
+    newChem = Chemicals.create(**modelData) #Create instance of Chemical with mapped info in modelData
+    return(True, "Chemical Created Successfully!", "list-group-item list-group-item-success", newChem)
+  except:
+    return(False, "Chemical Could Not Be Created.", "list-group-item list-group-item-danger", None)
+  
+def getChemical(chemId):
+  return Chemicals.get(Chemicals.chemId == chemId)
+  
+def getChemicals():
+  return Chemicals.select()

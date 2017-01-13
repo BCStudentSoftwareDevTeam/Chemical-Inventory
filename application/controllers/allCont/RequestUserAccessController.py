@@ -8,10 +8,11 @@ from flask import \
     render_template, \
     request, \
     redirect, \
-    url_for
+    url_for, \
+    flash
 
 # PURPOSE: superUser or Staff requesting for a student to have access to the system.
-@app.route('/fa/RequestUserAccess/', methods = ['GET', 'POST'])
+@app.route('/RequestUserAccess/', methods = ['GET', 'POST'])
 def RequestUserAccess():
   # User authorization
   auth = AuthorizedUser()
@@ -22,10 +23,12 @@ def RequestUserAccess():
   print user.username, userLevel
   
   if request.method == "POST":
-    data = request.form
-    modelData, extraData = sortPost(data, Users)
-    Users.create(**modelData)
-  return render_template("views/fa/RequestUserAccessView.html", config = config, userConfig = userConfig)
+    flashMessage, flashFormat = createUser(request.form, user.username, False)
+    flash(flashMessage, flashFormat)
+  return render_template("views/RequestUserAccessView.html",
+                          config = config,
+                          userConfig = userConfig,
+                          authLevel = userLevel)
     
   
  

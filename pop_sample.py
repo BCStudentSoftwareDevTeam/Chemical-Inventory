@@ -199,11 +199,29 @@ def init_db():
         approve = True).save()
 
     usersModel.Users(
-        username = "sheggen",
+        username = "heggens",
         auth_level = "systemUser",
         emailadd = "Does this matter?",
-        reportto = "Does this matter either?").save()
-
+        reportto = "Does this matter either?",
+        created_by = "thakurr",
+        end_date = "08/16/2017").save()
+        
+    usersModel.Users(
+        username = "settersz",
+        auth_level = "systemUser",
+        emailadd = "settersz@berea.edu",
+        reportto = "I REPORT TO NO MAN!",
+        created_by = "ballz",
+        end_date = "10/31/2025").save()
+        
+    usersModel.Users(
+        username = "whismanc",
+        auth_level = "systemUser",
+        emailadd = "I don't care",
+        reportto = "Someone",
+        created_by = "thakurr",
+        end_date = "08/16/2017").save()
+    
     print "Test Users were added to the database"
 
 init_db()

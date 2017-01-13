@@ -1,8 +1,8 @@
 from application import app
-from application.models.buildingsModel import Buildings
-from application.models.floorsModel import Floors
-from application.models.roomsModel import Rooms
-from application.models.storagesModel import Storages
+from application.models.buildingsModel import *
+from application.models.floorsModel import *
+from application.models.roomsModel import *
+from application.models.storagesModel import *
 from application.models.containersModel import Containers
 from application.models.util import *
 from application.config import *
@@ -30,63 +30,55 @@ def maDelete(location, lId):
         state = 0
         if request.method == "GET": #Calls delete queries based on what type of location is being deleted.
             if location == "Building":
-                floors = Floors.select().where(Floors.buildId == lId) #All floors of the current building
+                floors = getFloors(lId) #All floors of the current building
                 for floor in floors:
-                    rooms = Rooms.select().where(Rooms.floorId == floor) #All rooms of current floor
+                    rooms = getRooms(floor) #All rooms of current floor
                     for room in rooms:
-                        storages = Storages.select().where(Storages.roomId == room) #All storage locations of current room
+                        storages = getRooms(room) #All storage locations of current room
                         for storage in storages:
                             try:
-                                Containers.get(Containers.storageId == storage, #Try to get any containers associated with current storage location
-                                               Containers.disposalDate == None)
+                                getContainers(storage) # Try to get any containers related to this storage, they do not need to be saved as their mere existence prohibits this building from being deleted.
                                 state = 1
                             except:
                                 pass
                 if state != 1:
-                    building = Buildings.get(Buildings.bId == lId)
-                    building.delete_instance(recursive=True) # With recursive set to True, this will go through and delete the building and everything that is associated with it. ie: Floors, Rooms, and Storages
+                    deleteBuilding(lId)
                 else:
                     flash("This building could not be deleted, as there are 1 or more containers still assigned to it.")
             elif location == "Floor":
                 rooms = Rooms.select().where(Rooms.floorId == lId)
                 for room in rooms:
-                    storages = Storages.select().where(Storages.roomId == room)
+                    storages = getStorages(room)
                     for storage in storages:
                         try:
-                            Containers.get(Containers.disposalDate == None,
-                                           Containers.storageId == storage)
+                            getContainers(storage)
                             state = 1
                         except:
                             pass
                 if state != 1:
-                    floor = Floors.get(Floors.fId == lId)
-                    floor.delete_instance(recursive=True)
+                    deleteFloor()
                 else:
                     flash("This floor could not be deleted, as there are 1 or more containers still assigned to it.")
             elif location == "Room":
-                storages = Storages.select().where(Storages.roomId == lId)
+                storages = getStorages(lId)
                 for storage in storages:
                     try:
-                        Containers.get(Containers.disposalDate == None,
-                                       Containers.storageId == storage)
+                        getContainers(storage)
                         state = 1
                     except:
                         pass
                 if state != 1:
-                    room = Rooms.get(Rooms.rId == lId)
-                    room.delete_instance(recursive=True)
+                    deleteRoom(lId)
                 else:
                     flash("This room could not be deleted, as there are 1 or more containers still assigned to it.")
             elif location == "Storage":
                 try:
-                    Containers.get(Containers.disposalDate == None,
-                                   Containers.storageId == lId)
+                    getContainers(lId)
                     state = 1
                 except:
                     pass
                 if state != 1:
-                    storage = Storages.get(Storages.sId == lId)
-                    storage.delete_instance(recursive=True)
+                    deleteStorage(lId)
                 else:
                     flash("This storage location could not be deleted, as there are 1 or more containers still assigned to it.")
         return redirect("/Home/") #need some js to handle this and edit in order to reload the page on the location tab

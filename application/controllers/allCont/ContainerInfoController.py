@@ -1,4 +1,10 @@
 from application import app
+from application.models.containersModel import *
+from application.models.chemicalsModel import *
+from application.models.storagesModel import *
+from application.models.buildingsModel import *
+from application.models.historiesModel import *
+from application.models.containersModel import *
 from application.models import *
 from application.models.containersModel import *
 from application.models.historiesModel import *
@@ -23,18 +29,24 @@ def maContainerInfo(chemId, barcodeId):
   print user.username, userLevel
 
   if userLevel == "admin" or userLevel == "systemAdmin":
-    chemical = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
+    chemical = getChemical(chemId)
     if chemical.remove == True:
       return redirect('/ChemTable')
-    container = containersModel.Containers.get(containersModel.Containers.barcodeId == barcodeId)
+    container = getContainer(barcodeId)
     if container.disposalDate is not None:
       return redirect('/ChemTable')
-    storageList = storagesModel.Storages.select()
-    buildingList = buildingsModel.Buildings.select()
-    histories = historiesModel.Histories.select().where(historiesModel.Histories.containerId == container.conId)
+    storageList = getStorages()
+    buildingList = getBuildings()
+    histories = getContainerHistory(container.conId)
     if request.method =="POST":
       data = request.form
-      if data['formName'] == 'checkOutForm':
+      cont = getContainer(barcodeId)
+      updateHistory(cont, "Checked Out", data['storageId'], user)
+      changeLocation(cont, True, data) #This line is causing issues because the container info page checkout is different from the snip
+      # add form data to container as checked out
+      return redirect('/ViewChemical/%s/' %(chemId))
+      # Find a way to combine these
+      """if data['formName'] == 'checkOutForm':
           print "Check Out Form"
           historiesModel.Histories(containerId = container.conId,
                                   barcodeId  = container.barcodeId,
@@ -58,11 +70,11 @@ def maContainerInfo(chemId, barcodeId):
             data = request.form
             cont = Containers.get(Containers.barcodeId == data['barcodeId'])
             Histories.create(movedFrom = cont.storageId,
-                           movedTo = data['storageId'],
-                           containerId = cont.conId,
-                           modUser = user.username,
-                           action = "Checked In",
-                           pastQuantity = "%s %s" %(cont.currentQuantity, cont.currentQuantityUnit))
+                          movedTo = data['storageId'],
+                          containerId = cont.conId,
+                          modUser = user.username,
+                          action = "Checked In",
+                          pastQuantity = "%s %s" %(cont.currentQuantity, cont.currentQuantityUnit))
             cont.storageId = data['storageId']
             cont.currentQuantity = data['currentQuantity']
             cont.currentQuantityUnit = data['currentQuantityUnit']
@@ -74,7 +86,7 @@ def maContainerInfo(chemId, barcodeId):
         except Exception as e:
             print data
             print e
-        return redirect('/ViewChemical/%s/' %(chemId))
+        return redirect('/ViewChemical/%s/' %(chemId))"""
     else:
       return render_template("views/ContainerInfoView.html",
                          config = config,
