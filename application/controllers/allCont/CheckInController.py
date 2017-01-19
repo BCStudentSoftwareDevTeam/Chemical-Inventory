@@ -24,10 +24,15 @@ def CheckIn():
     print user.username, userLevel
 
     if userLevel == "admin" or userLevel == "systemAdmin":
-        storageList = Storages.select()
-        buildingList = Buildings.select()
+        storageList = getStorages()
+        buildingList = getBuildings()
         if request.method == "POST":
-            try:
+            data = request.form
+            cont = getContainer(data['barcodeId'])
+            updateHistory(cont, "Checked In", data['storageId'], user.username) # updateHistory located in historiesModel.py
+            changeLocation(cont, False, data) # changeLocation located in containersModel.py
+            # Move Try and Except to containersModel.py changeLocation()
+            """try:
                 data = request.form
                 cont = Containers.get(Containers.barcodeId == data['barcodeId'])
                 Histories.create(movedFrom = cont.storageId,
@@ -46,7 +51,7 @@ def CheckIn():
                 cont.save()
                 flash(data['barcodeId']+" Successfully Checked-In")
             except:
-                flash("Failed to Check-In "+ data['barcodeId'])
+                flash("Failed to Check-In "+ data['barcodeId'])"""
         return render_template("views/CheckInView.html",
                                config = config,
                                contConfig = contConfig,

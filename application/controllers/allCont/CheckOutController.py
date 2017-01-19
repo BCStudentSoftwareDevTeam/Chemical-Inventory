@@ -23,23 +23,13 @@ def CheckOut():
     print user.username, userLevel
     
     if userLevel == "admin" or userLevel == "systemAdmin":
-        storageList = Storages.select()
-        buildingList = Buildings.select()
+        storageList = getStorages()
+        buildingList = getBuildings()
         if request.method == "POST":
             data = request.form
-            cont = Containers.get(Containers.barcodeId == data['barcodeId'])
-            Histories.create(movedFrom = cont.storageId,
-                            movedTo = data['storageId'],
-                            containerId = cont.conId,
-                            modUser = user.username,
-                            action = "Checked Out",
-                            pastQuantity = "%s %s" %(cont.currentQuantity, cont.currentQuantityUnit))
-            cont.storageId = data['storageId']
-            cont.checkedOut = True
-            cont.checkOutReason = data['forClass']
-            cont.forProf = data['forProf']
-            cont.checkedOutBy = data['user']
-            cont.save()
+            cont = getContainer(data['barcodeId'])
+            updateHistory(cont, "Checked Out", data['storageId'], user.username)
+            changeLocation(cont, True, data)
         return render_template("views/CheckOutView.html",
                                config = config,
                                contConfig = contConfig,

@@ -18,3 +18,30 @@ class Histories (Model):
 
   class Meta:
     database = getDB("inventory", "dynamic")
+
+def updateHistory(container, action, location, modifiedBy):
+  """Creates a new history instance everytime a container is moved
+  
+  Args:
+      container (Containers): the container to be changed
+      action (str): 'Checked In' -OR- 'Checked Out' -OR- 'Created'
+      location (Storages): Specific storage location that the container is being moved to
+      modifiedBy (str): Username of user that accessed the page that called this function
+  Returns:
+      Nothing
+  """ #should return something for unit testing later
+  Histories.create(movedFrom = container.storageId,
+                  movedTo = location,
+                  containerId = container.conId,
+                  modUser = modifiedBy,
+                  action = action,
+                  pastQuantity = "%s %s" %(container.currentQuantity, container.currentQuantityUnit))
+                  
+def getContainerHistory(containerId):
+  """Gets all history objects of a specific container
+  
+  Args:
+      containerId (str): Unique identifier for one container
+  Returns:
+      All history objects of a specific container"""
+  return Histories.select().where(Histories.containerId == containerId)

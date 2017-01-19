@@ -1,9 +1,8 @@
 from application import app
-from application.models import *
+from application.models.chemicalsModel import *
 from application.models.util import *
 from application.config import *
 from application.logic.getAuthUser import AuthorizedUser
-from application.logic.sortPost import *
 
 from flask import \
     render_template, \
@@ -11,6 +10,7 @@ from flask import \
     request, \
     jsonify, \
     url_for, \
+    flash, \
     abort
 
 # PURPOSE: Add New Chemical to the database
@@ -27,14 +27,18 @@ def AddChemical():
                                authLevel = userLevel,
                                config = config,
                                chemConfig = chemConfig)
-    data = request.form #If there is a form posted to the page
-
-    modelData, extraData = sortPost(data, chemicalsModel.Chemicals) #Only get relevant data for the current Model
-    if modelData['sdsLink'] == None:
-      modelData['sdsLink'] = 'https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=%s' %(modelData['name'])
-    print modelData['sdsLink']
-    newChem = chemicalsModel.Chemicals.create(**modelData) #Create instance of Chemical with mapped info in modelData
-    return redirect(url_for('ViewChemical', chemId = newChem.chemId)) #Redirect to the new chemical page
+    
+    status, flashMessage, flashFormat, newChem = createChemical(request.form) # Function located in chemicalsModel.py
+    if status: # Chemical created successfully
+      flash(flashMessage, flashFormat)
+      return redirect(url_for('ViewChemical', chemId = newChem.chemId)) #Redirect to the new chemical page
+    else:
+      flash(flashMessage, flashFormat)
+      return render_template("views/AddChemicalView.html",
+                             authLevel = userLevel,
+                             config = config,
+                             chemConfig = chemConfig)
+    
   else:
     abort(403)
 

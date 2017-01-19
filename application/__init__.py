@@ -9,9 +9,10 @@ sess = Session()
 # Import all of the controllers for your application
 from application.controllers import *
 from application.config import config
+from absolutepath import getAbsolutePath
 # from application.models import *
 
-# We need to track session information for using the 
+# We need to track session information for using the
 # admin console. This is not fully understood yet.
 # The admin console does not work without it, though.
 import uuid
@@ -21,6 +22,7 @@ else:
   app.secret_key = "secretsecretsecret"
 
 app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SESSION_FILE_DIR'] = getAbsolutePath('flask_session')
 sess.init_app(app)
 
 # Set up the administrative interface
@@ -39,8 +41,8 @@ class RoleVerifiedAdminIndexView(admin.AdminIndexView):
         # print "No Role Verified"
         return redirect("/", code = 302)
 
-admin = admin.Admin(app, 
-                    name = config.application.title, 
+admin = admin.Admin(app,
+                    name = config.application.title,
                     index_view = RoleVerifiedAdminIndexView(),
                     template_mode = 'bootstrap3')
 from application.models import classes
@@ -49,7 +51,7 @@ for c in classes:
   admin.add_view(ModelView(c))
 
 # Store the username (which will have been set by the webserver)
-# into the config. 
+# into the config.
 # FIXME: This is temporary. Fix with proper code for running
 # under Apache/Shibboleth
 import os

@@ -44,3 +44,6 @@ def sortPost( data, model):
      extra_data[key] = data[key]
     
   return ( model_data, extra_data )
+  
+def convert_to_datetime(dateString):
+  datetime_object = datetime.datetime.strptime(dateString, '%Y-%m-%d')
