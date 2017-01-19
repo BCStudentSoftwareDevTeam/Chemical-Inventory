@@ -39,22 +39,13 @@ def migrateChem():
            print data
            if request.form['formName'] == "searchBcode":
                return renderCorrectTemplate(request.form['barcodeID'])
+
            elif request.form['formName'] == 'addCont':
                 ###
                 ##Process the form of adding a Container
                 ###
-                try:
-                    modelData, extraData = sortPost(data, Containers)
-                    cont = Containers.create(**modelData)
-                    Histories.create(movedTo = modelData['storageId'],
-                                    containerId = cont.conId,
-                                    modUser = extraData['user'],
-                                    action = "Created",
-                                    pastQuantity = "%s %s" %(modelData['currentQuantity'], modelData['currentQuantityUnit']))
-                    flash("Container Successfully Migrated Into System")
-                except Exception as e:
-                    print str(e)
-                    flash("Container Could Not Be Added")
+                status, flashMessage, flashFormat, newChem = addContainer(data, user.username)
+                flash(flashMessage, flashFormat)
                 return render_template("views/MigrateChem.html",
                         config = config,
 			authLevel = userLevel)
@@ -76,7 +67,7 @@ def migrateChem():
                         if modelData['sdsLink'] == None:
                             modelData['sdsLink'] = "https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=%s" %(modelData['name'])
                         Chemicals.create(**modelData)
-                        flash("Chemical Was Successfully Added To The DB") 
+                        flash("Chemical Was Successfully Added To The DB")
                         return renderCorrectTemplate(data['barcode'])
                 except Exception as e:
                     flash("Chemical Could Not Be Added")
@@ -151,7 +142,7 @@ def renderCorrectTemplate(barcode):
                         except Exception, e:
                             #Chemical is not yet in BCCIS
                             #print str(e)
-                            state = NIETHER 
+                            state = NIETHER
                             return render_template("views/MigrateChem.html",
                                 state = state,
                                 container = containerObj,

@@ -23,7 +23,7 @@ class Chemicals (Model):
   healthHazard    = CharField(null = True) # 0-4
   flammable       = CharField(null = True) # 0-4
   reactive        = CharField(null = True) # 0-4
-  other           = CharField(null = True) 
+  other           = CharField(null = True)
   ## NFPA "Fire Diamond" DATABASE DOES NOT SUPPORT THESE YET!
   #simpleAsphyxiant= BooleanField(default = False) # Simple Asphyxiant
   #oxidizer        = BooleanField(default = False) # Oxidizer
@@ -60,9 +60,9 @@ def createChemical(data):
     return(True, "Chemical Created Successfully!", "list-group-item list-group-item-success", newChem)
   except:
     return(False, "Chemical Could Not Be Created.", "list-group-item list-group-item-danger", None)
-  
+
 def getChemical(chemId):
   return Chemicals.get(Chemicals.chemId == chemId)
-  
+
 def getChemicals():
   return Chemicals.select()
