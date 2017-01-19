@@ -10,6 +10,6 @@ class Users (Model):
     end_date   = DateTimeField(null = True)
     reportto   = TextField(null = False)
     created_by = TextField(null = True)
-    
+
     class Meta:
         database = getDB("inventory", "dynamic")
