@@ -50,7 +50,7 @@ def addContainer(data, user):
         print e
         return (False, "Container Could Not Be Created!", "list-group-item list-group-item-danger", None)
 
-def changeLocation(cont, status, data):
+def changeLocation(cont, status, data, user):
   """Used to check containers in and out
 
   Args:
@@ -63,11 +63,11 @@ def changeLocation(cont, status, data):
   if status: # True if checking out
     cont.storageId = data['storageId']
     cont.checkedOut = status
-    cont.checkOutReason = data['forClass']
+    cont.checkOutReason = data['class']
     cont.forProf = data['forProf']
-    cont.checkedOutBy = data['user']
+    cont.checkedOutBy = user
     cont.save()
-  else: # Checking in
+  else: # Checking
     cont.storageId = data['storageId']
     cont.currentQuantity = data['currentQuantity']
     cont.currentQuantityUnit = data['currentQuantityUnit']

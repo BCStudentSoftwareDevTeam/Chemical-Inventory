@@ -42,7 +42,7 @@ def maContainerInfo(chemId, barcodeId):
       data = request.form
       cont = getContainer(barcodeId)
       updateHistory(cont, "Checked Out", data['storageId'], user)
-      changeLocation(cont, True, data) #This line is causing issues because the container info page checkout is different from the snip
+      changeLocation(cont, True, data, user.username) #This line is causing issues because the container info page checkout is different from the snip
       # add form data to container as checked out
       return redirect('/ViewChemical/%s/' %(chemId))
       # Find a way to combine these
