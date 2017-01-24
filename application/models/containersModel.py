@@ -60,7 +60,6 @@ def changeLocation(cont, status, data, user):
   Returns:
       Nothing
   """ #should return something for unit testing later
-  print data
   if status: # True if checking out
     cont.storageId = data['storageId']
     cont.checkedOut = status
