@@ -58,8 +58,15 @@ def createChemical(data):
       modelData['sdsLink'] = 'https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=%s' %(modelData['name'])
     newChem = Chemicals.create(**modelData) #Create instance of Chemical with mapped info in modelData
     return(True, "Chemical Created Successfully!", "list-group-item list-group-item-success", newChem)
-  except:
+  except Exception as e:
+    print e
     return(False, "Chemical Could Not Be Created.", "list-group-item list-group-item-danger", None)
+
+def getChemicalOldPK(oldpk):
+    try:
+        return Chemicals.select().where(Chemicals.oldPK == oldpk).get()
+    except:
+        return False
 
 def getChemical(chemId):
   return Chemicals.get(Chemicals.chemId == chemId)

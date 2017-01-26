@@ -35,7 +35,7 @@ def migrateChem():
                     )
 
         elif request.method == "POST":
-           data = request.form 
+           data = request.form
            if request.form['formName'] == "searchBcode":
                return renderCorrectTemplate(request.form['barcodeID'])
 
@@ -51,9 +51,7 @@ def migrateChem():
 
            elif request.form['formName'] == 'addChem':
                 data = request.form
-                print data['name']
                 status, flashMessage, flashFormat, newChem = createChemical(request.form)
-                modelData, extraData = sortPost(data, Chemicals)
                 flash(flashMessage, flashFormat)
                 if status:
                     return renderCorrectTemplate(data['barcode'])
@@ -77,41 +75,24 @@ def renderCorrectTemplate(barcode):
                 state = INIT
                 containerObj = None
                 chemObj = None
-                ########
-                try:
-                    containerObj = Containers.select()\
-                            .join(Chemicals, on=(Containers.chemId_id == Chemicals.chemId))\
-                            .where((Containers.barcodeId == inputBar)\
-                            |(Containers.barcodeId == inputBar.upper()))\
-                            .get()
-                    flash("Container " + inputBar + " Already Migrated Into System")
+                #######
+                if getContainer(inputBar):
+                    flash("Container " + inputBar + " Already Migrated Into System", "list-group-item list-group-item-success")
                     state = MIGRATED
-                except Exception,e:
-                    #print str(e)
-                    pass
                 #Try and Retrieve Container and Chemical Informatoin from CISPro
                 if state != MIGRATED:
-                    try:
-                        containerObj = Batch.select()\
-                            .join(Main, on =(Batch.NameRaw_id == Main.NameSorted))\
-                            .join(Locates, on=(Batch.Id_id == Locates.Location))\
-                            .where((Batch.UniqueContainerID == inputBar)|(Batch.UniqueContainerID == inputBar.upper())).get()
-                    except:
-                        #Not in CISPro
-                        flash("Container " + inputBar + " Is Not In CISPro Database")
+                    containerObj = getCisProContainer(inputBar)
+                    print containerObj
+                    if containerObj == False:
+                        flash("Container " + inputBar + " Is Not In CISPro Database", "list-group-item list-group-item-danger")
                         state = UNKNOWN
                     if state != UNKNOWN:
                         ########
                         #If Continer in CISPro check if parent Chemical is Migrated
-                        try:
-                            #Check if parent Chemical is in BCCIS
-                            chemObj = Chemicals.select()\
-                                .where(Chemicals.oldPK == containerObj.NameRaw_id).get()
-
-                            storageList = Storages.select().order_by(Storages.roomId)
-
-                            buildingList = Buildings.select()
-
+                        chemObj = getChemicalOldPK(containerObj.NameRaw_id)
+                        if chemObj:
+                            storageList = getStorages()
+                            buildingList = getBuildings()
                             state = ONLYCHEM
                             return render_template("views/MigrateChem.html",
                                 state = state,
@@ -125,7 +106,7 @@ def renderCorrectTemplate(barcode):
                                 barcode = inputBar,
                                 authLevel = userLevel,
                                 migrated = 1)
-                        except Exception, e:
+                        else:
                             #Chemical is not yet in BCCIS
                             #print str(e)
                             state = NIETHER

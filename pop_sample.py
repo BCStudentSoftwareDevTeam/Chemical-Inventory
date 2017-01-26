@@ -147,7 +147,7 @@ def init_db():
                 chemId              = relChemId.chemId,
                 storageId           = relStorId.sId,
                 barcodeId           = cont.UniqueContainerID,
-                currentQuantityUnit = "G",
+                currentQuantityUnit = "gram (g)",
                 currentQuantity     = 4.0,
                 capacity            = 5.0,
                 receiveDate= cont.ReservedDate,

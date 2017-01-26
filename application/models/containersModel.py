@@ -30,7 +30,10 @@ class Containers (Model):
 
 def getContainer(barcode):
   """Returns a Containers object with the given barcode"""
-  return Containers.get(Containers.barcodeId == barcode)
+  try:
+    return Containers.get((Containers.barcodeId == barcode)|(Containers.barcodeId == str(barcode).upper()))
+  except:
+    return False
 
 def addContainer(data, user):
     """Used to add a new container
@@ -67,7 +70,7 @@ def changeLocation(cont, status, data, user):
     cont.forProf = data['forProf']
     cont.checkedOutBy = user
     cont.save()
-  else: # Checking 
+  else: # Checking
     cont.storageId = data['storageId']
     cont.currentQuantity = data['currentQuantity']
     cont.currentQuantityUnit = data['currentQuantityUnit']

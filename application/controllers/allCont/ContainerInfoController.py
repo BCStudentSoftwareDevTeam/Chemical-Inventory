@@ -48,7 +48,7 @@ def maContainerInfo(chemId, barcodeId):
         updateHistory(cont, "Checked In", data['storageId'], user)
         changeLocation(cont, False, data, user.username)
       return redirect('/ViewChemical/%s/' %(chemId))
-    else:
+    else: #It is a GET
       return render_template("views/ContainerInfoView.html",
                          config = config,
                          contConfig = contConfig,
