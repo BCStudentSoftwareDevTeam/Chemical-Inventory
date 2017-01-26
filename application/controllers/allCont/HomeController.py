@@ -15,7 +15,7 @@ from flask import \
     url_for
 
 ####################################################
-@app.route("/") 
+@app.route("/")
 def homeRedr():
     return redirect('/Home/')
 ####################################################
@@ -28,8 +28,10 @@ def adminHome():
     auth = AuthorizedUser()
     user = auth.getUser()
     userLevel = auth.userLevel()
+    if user == -1:
+        render_template("views/UnathorizedView.html")
     print user.username, userLevel
-    
+
     if userLevel == "admin" or userLevel == "systemAdmin":
         buildings = getBuildings()
         floors = {}
@@ -76,7 +78,7 @@ def adminHome():
                                rooms = rooms,
                                storages = storages,
                                authLevel = userLevel)
-        
+
     else:
         return redirect("/ChemTable")
 
@@ -87,7 +89,7 @@ def getBuildingData():
     for key in building:
         building[key] = str(building[key])
     return jsonify(building)
-    
+
 @app.route("/getFloorData/", methods = ['GET'])
 def getFloorData():
     fId = request.args.get('fId')
@@ -95,7 +97,7 @@ def getFloorData():
     for key in floor:
         floor[key] = str(floor[key])
     return jsonify(floor)
-    
+
 @app.route("/getRoomData/", methods = ['GET'])
 def getRoomData():
     rId = request.args.get('rId')
@@ -103,7 +105,7 @@ def getRoomData():
     for key in room:
         room[key] = str(room[key])
     return jsonify(room)
-    
+
 @app.route("/getStorageData/", methods = ['GET'])
 def getStorageData():
     sId = request.args.get('sId')

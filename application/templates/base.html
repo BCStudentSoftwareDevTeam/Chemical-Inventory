@@ -14,7 +14,7 @@
     <!--File for the dynamic search bar-->
     <script  src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <!-- Include library for barcode generation -->
-    <script src="{{ url_for('static', filename = 'js/JsBarcode.code128.min.js') }}"></script> 
+    <script src="{{ url_for('static', filename = 'js/JsBarcode.code128.min.js') }}"></script>
 
     <!--ALL CSS IMPORTS -->
     <link href = "//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
@@ -29,10 +29,10 @@
 
   </head>
   <body>
-    
+
     {% include "Navigation/navMenu.html" %}
     {% include "snips/messagesSnip.html" %}
-    
+
     {% block body %}{% endblock %}
 
     <div class="clearfix"></div>

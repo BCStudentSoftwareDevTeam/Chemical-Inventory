@@ -3,16 +3,16 @@ import argparse, os, re, shutil
 
 parser = argparse.ArgumentParser(description = 'Setup Flask controllers.')
 
-parser.add_argument('-g', '--generate', 
+parser.add_argument('-g', '--generate',
                     action = "store_true",
                     help = 'Generate files as opposed to just testing syntax. True or False.')
-                    
+
 parser.add_argument('-c', '--config',
                     type = str,
                     help = "Name of the config file to process."
                     )
 
-parser.add_argument('-v', '--verbose', 
+parser.add_argument('-v', '--verbose',
                     action = "store_true",
                     help = 'Talk a lot.')
 
@@ -36,8 +36,8 @@ def is_sequence(arg):
 
 def isDirectoryDictionary (obj):
   return isinstance(obj, dict) and ("directory" in obj)
-          
-# http://stackoverflow.com/questions/35784074/does-python-have-andmap-ormap            
+
+# http://stackoverflow.com/questions/35784074/does-python-have-andmap-ormap
 def isListOfDirectories (layout):
   return  is_sequence(layout) and \
           all(isDirectoryDictionary(obj) for obj in layout)
@@ -65,7 +65,7 @@ def checkValidMethods (h):
     if not m in ["GET", "POST", "PUT", "DELETE"]:
       print "==> {0} is not a valid method.".format(m)
       result = False
-  return result 
+  return result
 
 def checkValidRoles (h):
   result = True
@@ -80,7 +80,7 @@ def findRepeats (ls):
   s = set()
   repeats = set()
   for obj in ls:
-    if obj in s: 
+    if obj in s:
       repeats.add(obj)
     s.add(obj)
   return repeats
@@ -92,8 +92,8 @@ def findRepeats (ls):
     })
 """
 def checkSyntax (cc):
-  
-  check ({'fun': lambda: cc["layout"], 
+
+  check ({'fun': lambda: cc["layout"],
     'err': lambda: "Top-level should be a 'layout'.",
     'aok': lambda: "Layout found."
   })
@@ -109,20 +109,20 @@ def checkSyntax (cc):
     'err': lambda: "The file should begin as a list of 'directory' dictionaries.",
     'aok': lambda: "Layout contains a list of 'directory' dictionaries."
   })
-  
+
   check ({'fun': lambda: isListOfDictsWithKey (directories, "name"),
     'err': lambda: "Every directory should have a 'name' key.",
     'aok': lambda: "All directories have a name."
   })
-  
+
   # We now know there is a valid list of controllers in every directory
   for d in directories:
     print "------------------"
     print "Checking directory '{0}'".format(d["name"])
     print "------------------"
-    
+
     controllers = d["controllers"]
-    
+
     check ({'fun': lambda: isNonEmptyList (controllers),
       'err': lambda: "Directory '{0}' has a non-empty list of controllers.".format(d["name"]),
       'aok': lambda: "Directory '{0}' has a list of controllers.".format(d["name"])
@@ -132,26 +132,26 @@ def checkSyntax (cc):
       'err': lambda: "Directory '{0}' has a non-dictionaries in its list of controllers.".format(d["name"]),
       'aok': lambda: "Directory '{0}' has a list of controller dicts.".format(d["name"])
     })
-    
+
     # Now, we check every controller
     for c in controllers:
       check ({'fun': lambda: hasKey (c, "name"),
         'err': lambda: "Directory '{0}' has a controller missing a 'name'.".format(d["name"]),
         'aok': lambda: "Controller '{0}' has a name.".format(c["name"])
       })
-      
+
       check ({'fun': lambda: hasKey(c, "handlers"),
         'err': lambda: "'{0}' is missing a 'handlers' key.".format(c["name"]),
         'aok': lambda: "'{0}' has a 'handlers' key.".format(c["name"])
       })
-      
+
       # We know we have the key now.
       handlers = c["handlers"]
       check ({'fun': lambda: isNonEmptyList (handlers),
         'err': lambda: "Controller '{0}' does not have a list of handlers.".format(c["name"]),
         'aok': lambda: "Controller '{0}' has a list of handlers.".format(c["name"])
       })
-      
+
       # Check each handler
       for h in handlers:
         check ({'fun': lambda: hasKey (h, "route"),
@@ -165,7 +165,7 @@ def checkSyntax (cc):
             'err': lambda: "Handler for route '{0}' is missing '{1}'.".format(h["route"], key),
             'aok': lambda: "Handler for route '{0} has key '{1}'.".format(h["route"], key)
           })
-        
+
         # Make sure we only have valid methods.
         check ({'fun': lambda: checkValidMethods (h),
           'err': lambda: "Handler for route '{0}' has invalid methods.".format(h["route"]),
@@ -176,13 +176,13 @@ def checkSyntax (cc):
           'err': lambda: "Handler for route '{0}' has invalid roles.".format(h["route"]),
           'aok': lambda: "Handler for '{0}' has valid roles.".format(h["route"])
         })
-        
+
   # Now, make sure none of the routes in any of the controllers are the same
-  
+
   routes = []
   funs   = []
 
-  print 
+  print
   print "Looking for repeats of routes and function names."
   print "-------------------------------------------------"
   for d in directories:
@@ -197,7 +197,7 @@ def checkSyntax (cc):
         print
         routes.append(h["route"])
         funs.append(h["function"])
-  
+
   print ""
   # Now, do a cute set uniqueness check.
   # http://stackoverflow.com/questions/5278122/checking-if-all-elements-in-a-list-are-unique
@@ -216,7 +216,7 @@ def checkSyntax (cc):
     for f in repeats:
       print "function: {0}".format(f)
     error ("Function names cannot repeat.")
-  
+
   # If we get here, we pass syntax.
   return True
 
@@ -232,7 +232,7 @@ def copyDefault (src, dest):
   if not os.path.exists(dest):
     print "Copying default file:\n\t'{0}'.".format(src)
     shutil.copy(src, dest)
-  
+
 
 def touchController(f):
   copyDefault ("config/defaultController.txt", f)
@@ -244,34 +244,34 @@ def handlerExists (f, h):
   f = open(f, 'r')
   result = False
   for line in f:
-    if re.search(h["route"], line): 
+    if re.search(h["route"], line):
       print "=> Route '{0}' already exists. Skipping.".format(h["route"])
       result = True
   return result
 
 def getParams(routeString):
-  # print "RS: %s" % routeString 
+  # print "RS: %s" % routeString
   matches = re.findall("<.*?:(.*?)>", routeString)
   if matches:
     return matches
   else:
     return []
-  
+
 def createHandlerInController (controllerFile, d, c, h):
   # If the handler isn't already there
   if not handlerExists(controllerFile, h):
     print "Adding route '{0}' to {1}.".format(h["route"], c["name"])
     cf = open(controllerFile, 'a')
     cf.write("\n")
-    
+
     cf.write ("# PURPOSE: {0}\n".format(h["purpose"]))
     cf.write ("@app.route('{0}', methods = {1})\n"
       .format (h["route"], h["methods"]))
-      
+
     for role in h["roles"]:
       cf.write("'{0}')\n".format(role))
     cf.write ("def {0}({1}):\n"
-      .format(h["function"], 
+      .format(h["function"],
               ",".join(getParams(h["route"]))
               ))
     cf.write ('  return render_template("views/{0}/{1}View.html", config = config)\n'.format(d["name"], h["function"]))
@@ -290,7 +290,7 @@ def insertViewName (viewFile, h):
 
 def insertDefaultInitFile (dir):
   shutil.copy("config/default__init__.txt", dir + "/__init__.py")
-  
+
 def generateFiles (cc):
   directories = cc["layout"]
   for d in directories:
@@ -299,20 +299,20 @@ def generateFiles (cc):
     createDirectory(controllerDir)
     createDirectory(viewDir)
     controllers = d["controllers"]
-    
+
     for c in controllers:
       controllerFile = controllerDir + "/" + c["name"] + "Controller.py"
-      
+
       touchController (controllerFile)
       insertDefaultInitFile(controllerDir)
-      
+
       handlers = c["handlers"]
       for h in handlers:
         createHandlerInController(controllerFile, d, c, h)
         viewFile = viewDir + "/" + h["function"] + "View.html"
         touchView (viewFile)
         insertViewName(viewFile, h)
-        
+
   # Create the top-level import
   impPath = "application/controllers/__init__.py"
   if os.path.exists(impPath):
@@ -321,23 +321,23 @@ def generateFiles (cc):
   for d in directories:
     imp.write("from application.controllers.{0} import *\n".format(d["name"]))
   imp.close()
-    
-    
+
+
 
 if __name__ == "__main__":
   if args.config is None:
     cc = Configuration.from_file('config/controllers.yaml').configure()
   else:
     cc = Configuration.from_file(args.config).configure()
-  
+
   syntaxOK = checkSyntax (cc)
-  
+
   if syntaxOK:
     print "Syntax checks."
-  
+
   if syntaxOK and args.generate:
     print
     print "Generating files."
     print "-----------------"
     generateFiles (cc)
-    
+
