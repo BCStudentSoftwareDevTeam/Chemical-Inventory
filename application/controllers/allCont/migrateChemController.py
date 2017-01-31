@@ -76,7 +76,7 @@ def migrateChem():
                         if modelData['sdsLink'] == None:
                             modelData['sdsLink'] = "https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=%s" %(modelData['name'])
                         Chemicals.create(**modelData)
-                        flash("Chemical Was Successfully Added To The DB") 
+                        flash("Chemical Was Successfully Added To The DB")
                         return renderCorrectTemplate(data['barcode'])
                 except Exception as e:
                     flash("Chemical Could Not Be Added")
@@ -151,7 +151,7 @@ def renderCorrectTemplate(barcode):
                         except Exception, e:
                             #Chemical is not yet in BCCIS
                             #print str(e)
-                            state = NIETHER 
+                            state = NIETHER
                             return render_template("views/MigrateChem.html",
                                 state = state,
                                 container = containerObj,
