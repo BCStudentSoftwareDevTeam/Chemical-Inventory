@@ -6,11 +6,11 @@ function loadDependencies() {
         document.write('<script src="https://code.jquery.com/jquery-1.12.4.js"><\/script>\n')
         document.write('<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"><\/script>\n')
         $(function(){
-            $('#end_date').datepicker({
+          $('#end_date').datepicker({
                 changeMonth: true,
                 changeYear: true,
                 minDate: "-0D",
-                maxDate: "+2Y"
+                maxDate: "+2Y" 
             });
         });
     }
