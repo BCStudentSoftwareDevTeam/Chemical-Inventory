@@ -34,8 +34,7 @@ def sortPost( data, model):
       field_type = getattr(instance, "db_field")
       if field_type == "datetime":
         fixed_date = convert_to_datetime(data[key])
-        fixed_date_string = datetime.date.today()
-        model_data[key] = fixed_date_string
+        model_data[key] = fixed_date
       elif field_type == bool:
         model_data[key] = bool(data[key])
       else:
@@ -46,4 +45,4 @@ def sortPost( data, model):
   return ( model_data, extra_data )
   
 def convert_to_datetime(dateString):
-  datetime_object = datetime.datetime.strptime(dateString, '%Y-%m-%d')
+  return datetime.datetime.strptime(dateString, '%Y-%m-%d').date()

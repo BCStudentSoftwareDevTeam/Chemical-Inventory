@@ -12,6 +12,7 @@ PEEWEE_VERSION="${PEEWEE_VERSION:-2.8.1}"
 WTF_PEEWEE_VERSION="${WTF_PEEWEE_VERSION:-0.2.6}"
 PYYAML_VERSION="${PYYAML_VERSION:-3.11}"
 CONFIGURE_VERSION="${CONFIGURE_VERSION:-0.5}"
+PYTEST_VERSION="${PYTEST_VERSION:-3.0.5}"
 
 # Check for virtualenv
 command -v virtualenv >/dev/null 2>&1 || { 
@@ -68,3 +69,6 @@ pip install -U "wtf-peewee==$WTF_PEEWEE_VERSION"
 
 pip install -U "configure==$CONFIGURE_VERSION"
 # http://configure.readthedocs.io/en/latest/#
+
+pip install -U "pytest==$PYTEST_VERSION"
+# http://docs.pytest.org/en/latest/

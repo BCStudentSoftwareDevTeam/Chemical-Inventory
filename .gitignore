@@ -8,3 +8,4 @@ data/inventory.sqlite
 .~c9*
 *.sqlite-shm
 *.sqlite-wal
+.cache/
