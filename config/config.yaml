@@ -37,7 +37,7 @@ sys:
 
 # Color Codes
 hazards:
-  "Base": 
+  "Base":
     hazardColor: "Green"
     textColor: "#FFFFFF"
     hexColor: "#329032"
@@ -72,8 +72,9 @@ hazards:
   "General Hazard":
     hazardColor: "N/A"
     textColor: "#333333"
-    hexColor: "" 
-# Navigation bars   
+    hexColor: ""
+
+# Navigation bars
 admin:
   - title: "Home"
     link: " /Home/"
@@ -88,7 +89,7 @@ superUser:
   - title: "View All Chemicals"
     link: "/ChemTable/"
   - title: "Request Access For a Student"
-    link: "/RequestUserAccess/" 
+    link: "/RequestUserAccess/"
 
 systemUser:
   - title: "Home"
@@ -101,7 +102,7 @@ systemAdmin:
     link: "/ChemTable/"
   - title: "Migrate Chemical"
     link: "/migrateChem/"
-  
+
 flask:
   # Secret key for signing cookies
   # Only needed for admin module, and we don't seem to rely on
