@@ -2,6 +2,7 @@
 be located here.'''
 from application.__init__ import *
 from application.models.usersModel import *
+from flask import abort
 
 class AuthorizedUser:
     def __init__(self):
@@ -17,7 +18,7 @@ class AuthorizedUser:
         if user.exists():
             return user[0]
         else:
-            return -1
+            abort(401)
 
     def userLevel(self):
         """Gets the system specific user level based on username"""
