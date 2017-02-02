@@ -54,7 +54,10 @@
                   <input class="form-control" id="profname" type="text" placeholder="Name of person responsible" name="forProf" value=''>
                   <input type="hidden" name="formName" value="checkOutForm">
                   <label for="checkout"></label>
-                <button id="checkout" type="submit" class="btn btn-primary">Check Out Chemical</button>
+                  <br>
+                <div class="form-group pull-right">
+                  <button id="checkout" type="submit" class="btn btn-primary">Check Out Chemical</button>
+                </div>
               </form>
             </div>
           </div>
@@ -136,6 +139,7 @@
             {# DISPOSE OF CONTAINER TAB#}
         <div id="dispose" class="tab-pane fade">
           <div class="text-center">
+            <br>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#disposeModal">Dispose this container</button> {# This could look a lot better, and maybe function better #}
           </div>
           <div class="modal fade" id="disposeModal" role="dialog">
