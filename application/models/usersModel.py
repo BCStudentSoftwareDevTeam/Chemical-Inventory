@@ -12,7 +12,7 @@ class Users (Model):
     end_date     = DateTimeField(null = True)
     reportto     = TextField(null = False)
     created_by   = TextField(null = True)
-    
+
     class Meta:
         database = getDB("inventory", "dynamic")
 
@@ -21,7 +21,7 @@ def getUsers(username = None):
         return Users.get(Users.username == username)
     else:
         return Users.select()
-        
+
 @pytest.fixture
 def getUsersTest():
     assert type(getUsers('ballz')) is Users
@@ -30,7 +30,7 @@ def getUsersTest():
 
 def createUser(data, createdBy, approval, authLevel = "systemUser"):
     """Used to check containers in and out
-  
+
     Args:
         data (dict): A dictionary with keys for each field in users, and values for a specific user instance
         createdBy (str): Username of the user that has accessed the page that calls this function
@@ -55,7 +55,7 @@ def createUser(data, createdBy, approval, authLevel = "systemUser"):
         return("Success: User added successfully.", 'list-group-item list-group-item-success')
     except:
         return("Error: User could not be added.", 'list-group-item list-group-item-danger')
-        
+
 def approveUsers(user):
     try:
         query = Users.update(approve = True).where(Users.userId == user)
@@ -63,7 +63,7 @@ def approveUsers(user):
         return("Success: User approved.", 'list-group-item list-group-item-success')
     except:
         return("Error: User could not be approved.", 'list-group-item list-group-item-danger')
-        
+
 def denyUsers(user):
     try:
         query = Users.delete().where(Users.userId == user)

@@ -11,7 +11,7 @@ from flask import \
     url_for, \
     flash
 
-# PURPOSE: View all the user and add new users 
+# PURPOSE: View all the user and add new users
 @app.route('/AddUser/', methods = ['GET', 'POST'])
 def AddUser():
   # User authorization
@@ -27,4 +27,3 @@ def AddUser():
       flash(flashMessage, flashFormat)
   date = time.strftime("%d/%m/%Y")
   return render_template("views/AddUserView.html", config = config, authLevel = userLevel, date = date)
-

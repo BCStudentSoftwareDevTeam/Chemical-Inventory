@@ -1,6 +1,6 @@
 from application.models.util import *
 from application.models.storagesModel import Storages
-from application.models.containersModel import Containers
+from application.models.containersModel import Containers 
 import datetime
 
 class Histories (Model):
@@ -21,7 +21,7 @@ class Histories (Model):
 
 def updateHistory(container, action, location, modifiedBy):
   """Creates a new history instance everytime a container is moved
-  
+
   Args:
       container (Containers): the container to be changed
       action (str): 'Checked In' -OR- 'Checked Out' -OR- 'Created'
@@ -30,16 +30,20 @@ def updateHistory(container, action, location, modifiedBy):
   Returns:
       Nothing
   """ #should return something for unit testing later
-  Histories.create(movedFrom = container.storageId,
+  try:
+    Histories.create(movedFrom = container.storageId,
                   movedTo = location,
                   containerId = container.conId,
                   modUser = modifiedBy,
                   action = action,
                   pastQuantity = "%s %s" %(container.currentQuantity, container.currentQuantityUnit))
-                  
+    print "Passed"
+  except:
+    print "Failed"
+
 def getContainerHistory(containerId):
   """Gets all history objects of a specific container
-  
+
   Args:
       containerId (str): Unique identifier for one container
   Returns:

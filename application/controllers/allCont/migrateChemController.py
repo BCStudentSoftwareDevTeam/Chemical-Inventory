@@ -36,50 +36,25 @@ def migrateChem():
 
         elif request.method == "POST":
            data = request.form
-           print data
            if request.form['formName'] == "searchBcode":
                return renderCorrectTemplate(request.form['barcodeID'])
+
            elif request.form['formName'] == 'addCont':
                 ###
                 ##Process the form of adding a Container
                 ###
-                try:
-                    modelData, extraData = sortPost(data, Containers)
-                    cont = Containers.create(**modelData)
-                    Histories.create(movedTo = modelData['storageId'],
-                                    containerId = cont.conId,
-                                    modUser = extraData['user'],
-                                    action = "Created",
-                                    pastQuantity = "%s %s" %(modelData['currentQuantity'], modelData['currentQuantityUnit']))
-                    flash("Container Successfully Migrated Into System")
-                except Exception as e:
-                    print str(e)
-                    flash("Container Could Not Be Added")
+                status, flashMessage, flashFormat, newChem = addContainer(data, user.username)
+                flash(flashMessage, flashFormat)
                 return render_template("views/MigrateChem.html",
                         config = config,
 			authLevel = userLevel)
 
            elif request.form['formName'] == 'addChem':
-                try:
-                    data = request.form
-                    print data['name']
-                    try:
-                        ##############
-                        ##
-                        ## Left Off Here CHECKING IF NAME IS DUPLICATE
-                        ##
-                        ##############
-                        Chemicals.select().where(Chemicals.name == data['name']).get()
-                        flash(data['name'] + "Already in the System")
-                    except:
-                        modelData, extraData = sortPost(data, Chemicals)
-                        if modelData['sdsLink'] == None:
-                            modelData['sdsLink'] = "https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=%s" %(modelData['name'])
-                        Chemicals.create(**modelData)
-                        flash("Chemical Was Successfully Added To The DB") 
-                        return renderCorrectTemplate(data['barcode'])
-                except Exception as e:
-                    flash("Chemical Could Not Be Added")
+                data = request.form
+                status, flashMessage, flashFormat, newChem = createChemical(request.form)
+                flash(flashMessage, flashFormat)
+                if status:
+                    return renderCorrectTemplate(data['barcode'])
 
            return render_template('views/MigrateChem.html',
                     config = config,
@@ -100,41 +75,24 @@ def renderCorrectTemplate(barcode):
                 state = INIT
                 containerObj = None
                 chemObj = None
-                ########
-                try:
-                    containerObj = Containers.select()\
-                            .join(Chemicals, on=(Containers.chemId_id == Chemicals.chemId))\
-                            .where((Containers.barcodeId == inputBar)\
-                            |(Containers.barcodeId == inputBar.upper()))\
-                            .get()
-                    flash("Container " + inputBar + " Already Migrated Into System")
+                #######
+                if getContainer(inputBar):
+                    flash("Container " + inputBar + " Already Migrated Into System", "list-group-item list-group-item-success")
                     state = MIGRATED
-                except Exception,e:
-                    #print str(e)
-                    pass
                 #Try and Retrieve Container and Chemical Informatoin from CISPro
                 if state != MIGRATED:
-                    try:
-                        containerObj = Batch.select()\
-                            .join(Main, on =(Batch.NameRaw_id == Main.NameSorted))\
-                            .join(Locates, on=(Batch.Id_id == Locates.Location))\
-                            .where((Batch.UniqueContainerID == inputBar)|(Batch.UniqueContainerID == inputBar.upper())).get()
-                    except:
-                        #Not in CISPro
-                        flash("Container " + inputBar + " Is Not In CISPro Database")
+                    containerObj = getCisProContainer(inputBar)
+                    print containerObj
+                    if containerObj == False:
+                        flash("Container " + inputBar + " Is Not In CISPro Database", "list-group-item list-group-item-danger")
                         state = UNKNOWN
                     if state != UNKNOWN:
                         ########
                         #If Continer in CISPro check if parent Chemical is Migrated
-                        try:
-                            #Check if parent Chemical is in BCCIS
-                            chemObj = Chemicals.select()\
-                                .where(Chemicals.oldPK == containerObj.NameRaw_id).get()
-
-                            storageList = Storages.select().order_by(Storages.roomId)
-
-                            buildingList = Buildings.select()
-
+                        chemObj = getChemicalOldPK(containerObj.NameRaw_id)
+                        if chemObj:
+                            storageList = getStorages()
+                            buildingList = getBuildings()
                             state = ONLYCHEM
                             return render_template("views/MigrateChem.html",
                                 state = state,
@@ -148,10 +106,10 @@ def renderCorrectTemplate(barcode):
                                 barcode = inputBar,
                                 authLevel = userLevel,
                                 migrated = 1)
-                        except Exception, e:
+                        else:
                             #Chemical is not yet in BCCIS
                             #print str(e)
-                            state = NIETHER 
+                            state = NIETHER
                             return render_template("views/MigrateChem.html",
                                 state = state,
                                 container = containerObj,

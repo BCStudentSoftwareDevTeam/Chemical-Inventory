@@ -30,11 +30,33 @@ class Containers (Model):
 
 def getContainer(barcode):
   """Returns a Containers object with the given barcode"""
-  return Containers.get(Containers.barcodeId == barcode)
-  
+  try:
+    return Containers.get((Containers.barcodeId == barcode)|(Containers.barcodeId == str(barcode).upper()))
+  except:
+    return False
+
+def addContainer(data, user):
+    """Used to add a new container
+
+    Args:
+        data (dict): From data input by user
+        user (str): User creating container
+    Returns:
+        Array containing status details (Bool, Str, Str, Object_Created)
+        """
+    try:
+        modelData, extraData = sortPost(data, Containers)
+        cont = Containers.create(**modelData)
+        application.models.historiesModel.updateHistory(cont, "Created", data['storageId'], user)
+        return (True, "Container Created Successfully!", "list-group-item list-group-item-success", cont)
+    except Exception as e:
+        print e
+        return (False, "Container Could Not Be Created!", "list-group-item list-group-item-danger", None)
+    return Containers.get(Containers.barcodeId == barcode)
+
 def changeLocation(cont, status, data, user):
   """Used to check containers in and out
-  
+
   Args:
       container (Containers): the container to be changed
       status (bool): True if container is being checked out, False if checked in
@@ -49,7 +71,7 @@ def changeLocation(cont, status, data, user):
     cont.forProf = data['forProf']
     cont.checkedOutBy = user
     cont.save()
-  else: # Checking in
+  else: # Checking
     cont.storageId = data['storageId']
     cont.currentQuantity = data['currentQuantity']
     cont.currentQuantityUnit = data['currentQuantityUnit']
@@ -58,10 +80,10 @@ def changeLocation(cont, status, data, user):
     cont.forProf = ''
     cont.checkedOutBy = ''
     cont.save()
-    
+
 def contCount(chemicals):
   """Gets a count of how many containers are currently checked in and not disposed of for each chemical
-  
+
   Args:
       chemicals (list): a list of all chemicals in the database
   Returns:

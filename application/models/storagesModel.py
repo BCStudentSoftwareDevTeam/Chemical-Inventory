@@ -25,7 +25,7 @@ def getStorages(room = None):
     return Storages.select()
   else:
     return Storages.select().where(Storages.roomId == room)
-    
+
 def deleteStorage(storage):
   storage = Storages.get(Storages.sId == storage)
   storage.delete_instance(recursive=True)

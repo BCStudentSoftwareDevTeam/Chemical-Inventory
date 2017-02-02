@@ -41,56 +41,14 @@ def maContainerInfo(chemId, barcodeId):
     if request.method =="POST":
       data = request.form
       cont = getContainer(barcodeId)
-      updateHistory(cont, "Checked Out", data['storageId'], user)
-      status = False
       if data['formName'] == 'checkOutForm':
-        status = True
-      changeLocation(cont, status, data, user.username) #This line is causing issues because the container info page checkout is different from the snip
-      # add form data to container as checked out
+        updateHistory(cont, "Checked Out", data['storageId'], user)
+        changeLocation(cont, True, data, user.username)
+      else:
+        updateHistory(cont, "Checked In", data['storageId'], user)
+        changeLocation(cont, False, data, user.username)
       return redirect('/ViewChemical/%s/' %(chemId))
-      # Find a way to combine these
-      """if data['formName'] == 'checkOutForm':
-          print "Check Out Form"
-          historiesModel.Histories(containerId = container.conId,
-                                  barcodeId  = container.barcodeId,
-                                  movedFrom = container.storageId_id,
-                                  movedTo = data['storageId'],
-                                  pastQuantity = str(container.currentQuantity) + str(container.currentQuantityUnit),
-                                  modUser = user.username,
-                                  action = "Checked Out",
-                                  modDate = datetime.date.today()).save()
-          cont = containersModel.Containers.get(barcodeId = barcodeId)
-          cont.checkOutReason  = data['class']
-          cont.checkedOut = True
-          cont.checkedOutBy = user.username
-          cont.forProf = data ['forProf']
-          cont.storageId = data['storageId']
-          cont.save()
-          # add form data to container as checked out
-          return redirect('/ViewChemical/%s/' %(chemId))
-      else: #If it is checkIn
-        try:
-            data = request.form
-            cont = Containers.get(Containers.barcodeId == data['barcodeId'])
-            Histories.create(movedFrom = cont.storageId,
-                          movedTo = data['storageId'],
-                          containerId = cont.conId,
-                          modUser = user.username,
-                          action = "Checked In",
-                          pastQuantity = "%s %s" %(cont.currentQuantity, cont.currentQuantityUnit))
-            cont.storageId = data['storageId']
-            cont.currentQuantity = data['currentQuantity']
-            cont.currentQuantityUnit = data['currentQuantityUnit']
-            cont.checkedOut = False
-            cont.checkOutReason =''
-            cont.forProf = ''
-            cont.checkedOutBy = ''
-            cont.save()
-        except Exception as e:
-            print data
-            print e
-        return redirect('/ViewChemical/%s/' %(chemId))"""
-    else:
+    else: #It is a GET
       return render_template("views/ContainerInfoView.html",
                          config = config,
                          contConfig = contConfig,
