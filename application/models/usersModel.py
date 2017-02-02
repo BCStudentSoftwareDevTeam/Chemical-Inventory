@@ -1,5 +1,6 @@
 from application.models.util import *
 from application.logic.sortPost import *
+import pytest
 
 class Users (Model):
     userId       = PrimaryKeyField()
@@ -14,6 +15,18 @@ class Users (Model):
 
     class Meta:
         database = getDB("inventory", "dynamic")
+
+def getUsers(username = None):
+    if username != None:
+        return Users.get(Users.username == username)
+    else:
+        return Users.select()
+
+@pytest.fixture
+def getUsersTest():
+    assert type(getUsers('ballz')) is Users
+    from peewee import SelectQuery
+    assert type(getUsers()) is SelectQuery
 
 def createUser(data, createdBy, approval, authLevel = "systemUser"):
     """Used to check containers in and out
@@ -35,9 +48,7 @@ def createUser(data, createdBy, approval, authLevel = "systemUser"):
     if 'auth_level' not in modelData:
         modelData['auth_level'] = authLevel
     # Peewee has a get_or_create function. Would that be more useful than putting this in a try/except?
-    if modelData['end_date'] >= datetime.date.today():
-        print modelData['end_date']
-        print datetime.date.today()
+    if modelData['end_date'] <= datetime.date.today():
         return("Error: User could not be added. End Date must be later than today.", 'list-group-item list-group-item-danger')
     try:
         Users.create(**modelData)

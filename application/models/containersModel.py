@@ -52,6 +52,7 @@ def addContainer(data, user):
     except Exception as e:
         print e
         return (False, "Container Could Not Be Created!", "list-group-item list-group-item-danger", None)
+  return Containers.get(Containers.barcodeId == barcode)
 
 def changeLocation(cont, status, data, user):
   """Used to check containers in and out
