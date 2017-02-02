@@ -35,10 +35,10 @@ def createUser(data, createdBy, approval, authLevel = "systemUser"):
     if 'auth_level' not in modelData:
         modelData['auth_level'] = authLevel
     # Peewee has a get_or_create function. Would that be more useful than putting this in a try/except?
-    """if modelData['end_date'] >= datetime.date.today():
+    if modelData['end_date'] >= datetime.date.today():
         print modelData['end_date']
         print datetime.date.today()
-        return("Error: User could not be added. End Date must be later than today.", 'list-group-item list-group-item-danger')"""
+        return("Error: User could not be added. End Date must be later than today.", 'list-group-item list-group-item-danger')
     try:
         Users.create(**modelData)
         return("Success: User added successfully.", 'list-group-item list-group-item-success')
