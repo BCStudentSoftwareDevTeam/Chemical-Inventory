@@ -21,7 +21,7 @@ def getUsers(username = None):
         return Users.get(Users.username == username)
     else:
         return Users.select()
-        
+
 @pytest.fixture
 def getUsersTest():
     assert type(getUsers('ballz')) is Users

@@ -30,7 +30,7 @@ def CheckIn():
             data = request.form
             cont = getContainer(data['barcodeId'])
             updateHistory(cont, "Checked In", data['storageId'], user.username) # updateHistory located in historiesModel.py
-            changeLocation(cont, False, data) # changeLocation located in containersModel.py
+            changeLocation(cont, False, data, user.username) # changeLocation located in containersModel.py
             # Move Try and Except to containersModel.py changeLocation()
             """try:
                 data = request.form

@@ -1,19 +1,5 @@
 <div clss="container">
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        {% for message in messages %}
-          {% if 'Not' in message%}
-             <div class="alert alert-danger container-fluid" role="alert" id="alert">
-          {% else %}
-             <div class="alert alert-success container-fluid" role="alert" id="alert">
-          {% endif %}
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <strong>{{message}}</strong>
-            </div>
-        {% endfor %}
-       {% endif %}
-    {% endwith %}
-  <div class="container-fluid">
+ <div class="container-fluid">
     {% if state == 1 %}
       <h2><center>Migrate {{inputBar}} container of {{chemInfo.name}}</center></h2>
       {% include 'snips/addContainer.html' %}

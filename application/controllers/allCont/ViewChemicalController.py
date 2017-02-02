@@ -46,27 +46,16 @@ def ViewChemical(chemId):
           setattr(chemInfo, i, data[i]) #Set the attribute, 'i' (the current key in the form), of 'chemInfo' (the chemical) to the value of the current key in the form
         chemInfo.save()
       elif data["formName"] == "addCont":
-        try: #If a form was posted, try to create a new container with info from form
-          modelData, extraData = sortPost(data, Containers)
-          
-          cont = Containers.create(**modelData)
-          Histories.create(movedTo = modelData['storageId'],
-                          containerId = cont.conId,
-                          modUser = extraData['user'],
-                          action = "Created",
-                          pastQuantity = "%s %s" %(modelData['currentQuantity'], modelData['currentQuantityUnit']))
-          flash("Container added successfully") #Flash a success message
-        except Exception as e:
-          print e
-          flash("Container could not be added") #If there was an error, flash an error message
+          status, flashMessage, flashFormat, newChem = addContainer(data, user.username)
+          flash(flashMessage, flashFormat)
     try:
         lastCont = Containers.select().where(Containers.migrated >> 0)\
             .order_by(-Containers.barcodeId).get().barcodeId # Gets the last entered container that was not migrated. Used for creating the next barcode
-        #print lastCont
+        print lastCont
         barcode = genBarcode(lastCont)
         print "Try " + str(barcode)
     except Exception as e:
-        #print str(e)
+        print str(e)
         barcode = genBarcode("00000000")
         print "Except " + barcode
     #lastCont needs to be assigned after any potential updates to the last barcode, and before render_template

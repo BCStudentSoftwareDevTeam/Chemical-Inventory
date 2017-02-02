@@ -1,6 +1,6 @@
 from application.models.util import *
 from application.models.staticModels.locatesModel import *
-from application.models.staticModels.mainModel import Main
+from application.models.staticModels.mainModel import *
 
 class Batch(Model):
    NameSorted         = PrimaryKeyField()
@@ -16,7 +16,7 @@ class Batch(Model):
    UniqueContainerID  = TextField()
    Rollbac_           = TextField()
    InitialDate        = TextField()
-   InitialTimeSeconds = TextField() 
+   InitialTimeSeconds = TextField()
    InitialTimeMinutes = TextField()
    InitialTimeHours   = TextField()
    DecayedRate        = TextField()
@@ -48,7 +48,18 @@ class Batch(Model):
    UseType            = TextField()
    ContDescript       = TextField()
    open_date          = TextField()
-   DateLastScanned    = TextField() 
+   DateLastScanned    = TextField()
 
    class Meta:
-     database = getDB("cispro", "static")    
+       database = getDB("cispro", "static")
+
+def getCisProContainer(barcode):
+    try:
+        return Batch.select()\
+                .join(Main, on=(Batch.NameRaw_id == Main.NameSorted))\
+                .join(Locates, on=(Batch.Id_id == Locates.Location))\
+                .where((Batch.UniqueContainerID == barcode)|(Batch.UniqueContainerID == str(barcode).upper())).get()
+    except Exception as e:
+        return False
+
+

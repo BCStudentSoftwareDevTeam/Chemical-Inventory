@@ -27,7 +27,7 @@ def AddChemical():
                                authLevel = userLevel,
                                config = config,
                                chemConfig = chemConfig)
-    
+
     status, flashMessage, flashFormat, newChem = createChemical(request.form) # Function located in chemicalsModel.py
     if status: # Chemical created successfully
       flash(flashMessage, flashFormat)
@@ -38,7 +38,7 @@ def AddChemical():
                              authLevel = userLevel,
                              config = config,
                              chemConfig = chemConfig)
-    
+
   else:
     abort(403)
 
