@@ -33,7 +33,7 @@ from application.logic.validation import doesUserHaveRole
 
 class RoleVerifiedAdminIndexView(admin.AdminIndexView):
     @expose('/')
-    def index(self):
+    def index(self): 
       if doesUserHaveRole("admin"):
         # print "Role Verified"
         return super(RoleVerifiedAdminIndexView, self).index()
