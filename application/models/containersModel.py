@@ -32,7 +32,7 @@ def getContainer(barcode):
   """Returns a Containers object with the given barcode"""
   return Containers.get(Containers.barcodeId == barcode)
   
-def changeLocation(cont, status, data):
+def changeLocation(cont, status, data, user):
   """Used to check containers in and out
   
   Args:
@@ -45,9 +45,9 @@ def changeLocation(cont, status, data):
   if status: # True if checking out
     cont.storageId = data['storageId']
     cont.checkedOut = status
-    cont.checkOutReason = data['forClass']
+    cont.checkOutReason = data['class']
     cont.forProf = data['forProf']
-    cont.checkedOutBy = data['user']
+    cont.checkedOutBy = user
     cont.save()
   else: # Checking in
     cont.storageId = data['storageId']
