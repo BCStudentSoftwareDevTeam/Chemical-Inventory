@@ -173,39 +173,80 @@ def init_db():
     usersModel.Users(
         username = "ballz",
         auth_level = "admin",
-        emailadd = "Does this matter?",
-        reportto = "Does this matter either?",
+        emailadd = "test.berea.edu?",
+        reportto = "test.berea.edu?",
         approve = True).save()
 
     usersModel.Users(
         username = "hooverk",
-        auth_level = "systemAdmin",
-        emailadd = "Does this matter?",
-        reportto = "Does this matter either?",
-        approve = True).save()
-
-    usersModel.Users(
-        username = "thakurr",
-        auth_level = "superUser",
-        emailadd = "Does this matter?",
-        reportto = "Does this matter either?",
-        approve = True).save()
-
-    usersModel.Users(
-        username = "williamsk",
-        auth_level = "systemUser",
-        emailadd = "Does this matter?",
-        reportto = "Does this matter either?",
+        auth_level = "admin",
+        emailadd = "test.berea.edu?",
+        reportto = "test.berea.edu?",
         approve = True).save()
 
     usersModel.Users(
         username = "heggens",
-        auth_level = "systemUser",
-        emailadd = "Does this matter?",
-        reportto = "Does this matter either?",
-        created_by = "thakurr",
-        end_date = "08/16/2017").save()
-        
+        auth_level = "admin",
+        emailadd = "test.berea.edu?",
+        reportto = "test.berea.edu?",
+        approve = True).save()
+
+    usersModel.Users(
+        username = "sagorj",
+        auth_level = "admin",
+        emailadd = "test.berea.edu?",
+        reportto = "test.berea.edu?",
+        approve = True).save()
+
+    usersModel.Users(
+        username = "kaylorl",
+        auth_level = "admin",
+        emailadd = "test.berea.edu?",
+        reportto = "test.berea.edu?",
+        approve = True).save()
+
+    usersModel.Users(
+        username = "morrism",
+        auth_level = "admin",
+        emailadd = "test.berea.edu?",
+        reportto = "test.berea.edu?",
+        approve = True).save()
+
+    usersModel.Users(
+        username = "saintilnordw",
+        auth_level = "admin",
+        emailadd = "test.berea.edu?",
+        reportto = "test.berea.edu?",
+        approve = True).save()
+
+    usersModel.Users(
+        username = "quesadab",
+        auth_level = "admin",
+        emailadd = "test.berea.edu?",
+        reportto = "test.berea.edu?",
+        approve = True).save()
+
+    usersModel.Users(
+        username = "nandaa",
+        auth_level = "admin",
+        emailadd = "test.berea.edu?",
+        reportto = "test.berea.edu?",
+        approve = True).save()
+
+    usersModel.Users(
+        username = "moranm",
+        auth_level = "admin",
+        emailadd = "test.berea.edu?",
+        reportto = "test.berea.edu?",
+        approve = True).save()
+
+    usersModel.Users(
+        username = "moorert",
+        auth_level = "admin",
+        emailadd = "test.berea.edu?",
+        reportto = "test.berea.edu?",
+        approve = True).save()
+
     usersModel.Users(
         username = "settersz",
         auth_level = "systemUser",
@@ -213,7 +254,7 @@ def init_db():
         reportto = "I REPORT TO NO MAN!",
         created_by = "ballz",
         end_date = "10/31/2025").save()
-        
+
     usersModel.Users(
         username = "whismanc",
         auth_level = "systemUser",
@@ -221,7 +262,7 @@ def init_db():
         reportto = "Someone",
         created_by = "thakurr",
         end_date = "08/16/2017").save()
-    
+
     print "Test Users were added to the database"
 
 init_db()
