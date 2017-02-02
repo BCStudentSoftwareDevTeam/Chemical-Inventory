@@ -18,7 +18,7 @@ class AuthorizedUser:
         if user.exists():
             return user[0]
         else:
-            abort(401)
+            return abort(401)
 
     def userLevel(self):
         """Gets the system specific user level based on username"""
