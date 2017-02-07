@@ -22,10 +22,19 @@ class Storages(Model):
 
 def getStorages(room = None):
   if room == None:
-    return Storages.select()
+    try:
+      return Storages.select()
+    except Exception as e:
+      return e
   else:
-    return Storages.select().where(Storages.roomId == room)
+    try:
+      return Storages.select().where(Storages.roomId == room)
+    except Exception as e:
+      return e
 
 def deleteStorage(storage):
-  storage = Storages.get(Storages.sId == storage)
-  storage.delete_instance(recursive=True)
+  try:
+    storage = Storages.get(Storages.sId == storage)
+    storage.delete_instance(recursive=True)
+  except Exception as e:
+    return e

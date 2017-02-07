@@ -17,23 +17,32 @@ def editRoom(data):
   room.save()
   
 def createRoom(data):
-  modelData, extraData = sortPost(data, Rooms)
-  Rooms.create(**modelData)
-  lastRoomId = Rooms.select().order_by(-Rooms.rId).get().rId
-  application.models.storagesModel.Storages.create(roomId = lastRoomId, # This isn't letting me import Storages or storagesModel. I think it is because that file in turn imports this one.
-                  name = modelData['name'],
-                  flammable = True,
-                  healthHazard = True,
-                  oxidizer = True,
-                  orgAcid = True,
-                  inorgAcid = True,
-                  base = True,
-                  peroxide = True,
-                  pressure = True)
+  try:
+    modelData, extraData = sortPost(data, Rooms)
+    Rooms.create(**modelData)
+    lastRoomId = Rooms.select().order_by(-Rooms.rId).get().rId
+    application.models.storagesModel.Storages.create(roomId = lastRoomId, # This isn't letting me import Storages or storagesModel. I think it is because that file in turn imports this one.
+                    name = modelData['name'],
+                    flammable = True,
+                    healthHazard = True,
+                    oxidizer = True,
+                    orgAcid = True,
+                    inorgAcid = True,
+                    base = True,
+                    peroxide = True,
+                    pressure = True)
+  except Exception as e:
+    return e
 
 def getRooms(floor):
-  return Rooms.select().where(Rooms.floorId == floor)
-  
+  try:
+    return Rooms.select().where(Rooms.floorId == floor)
+  except Exception as e:
+    return e
+    
 def deleteRoom(room):
-  room = Rooms.get(Rooms.rId == room)
-  room.delete_instance(recursive=True)
+  try:
+    room = Rooms.get(Rooms.rId == room)
+    room.delete_instance(recursive=True)
+  except Exception as e:
+    return e
