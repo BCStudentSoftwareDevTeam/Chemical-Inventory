@@ -37,7 +37,7 @@ def updateHistory(container, action, location, modifiedBy):
                   modUser = modifiedBy,
                   action = action,
                   pastQuantity = "%s %s" %(container.currentQuantity, container.currentQuantityUnit))
-    print "Passed"
+    print modifiedBy
   except:
     print "Failed"
 

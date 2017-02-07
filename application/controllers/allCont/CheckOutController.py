@@ -15,7 +15,7 @@ from flask import \
     abort
     
 # PURPOSE: Check out a container
-@app.route('/checkOut/', methods=['GET', 'POST'])
+@app.route('/CheckOut/', methods=['GET', 'POST'])
 def CheckOut():
     auth = AuthorizedUser()
     user = auth.getUser()
@@ -29,7 +29,7 @@ def CheckOut():
             data = request.form
             cont = getContainer(data['barcodeId'])
             updateHistory(cont, "Checked Out", data['storageId'], user.username)
-            changeLocation(cont, True, data)
+            changeLocation(cont, True, data, user.username)
         return render_template("views/CheckOutView.html",
                                config = config,
                                contConfig = contConfig,

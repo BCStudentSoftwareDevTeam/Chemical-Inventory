@@ -67,11 +67,11 @@ def changeLocation(cont, status, data, user):
   if status: # True if checking out
     cont.storageId = data['storageId']
     cont.checkedOut = status
-    cont.checkOutReason = data['class']
+    cont.checkOutReason = data['forClass']
     cont.forProf = data['forProf']
     cont.checkedOutBy = user
     cont.save()
-  else: # Checking
+  else: # Checking in
     cont.storageId = data['storageId']
     cont.currentQuantity = data['currentQuantity']
     cont.currentQuantityUnit = data['currentQuantityUnit']

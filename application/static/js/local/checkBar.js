@@ -37,6 +37,7 @@ function getData(barcodeId, formAction){
                 document.getElementById('prevStorageId').value = data['storage'];
                 document.getElementById('prevQuantity').value = data['quantity'] + " " + data['unit'];
                 document.getElementById('submit').disabled = false;
+                document.getElementById('currentQuantityUnit').value = data['unit'];
                 changeForm(false); //Enable fields
             } else {
                 changeForm(true); //Disable and clear fields when there are no containers with matching barcode

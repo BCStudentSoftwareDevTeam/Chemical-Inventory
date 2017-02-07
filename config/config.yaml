@@ -84,6 +84,10 @@ admin:
     link: "/migrateChem/"
   - title: "Add Chemical"
     link: "/AddChemical/"
+  - title: "Check In"
+    link: "/CheckIn/"
+  - title: "Check Out"
+    link: "/CheckOut/"
 
 superUser:
   - title: "View All Chemicals"
@@ -102,6 +106,10 @@ systemAdmin:
     link: "/ChemTable/"
   - title: "Migrate Chemical"
     link: "/migrateChem/"
+  - title: "Check In Container"
+    link: "/CheckIn/"
+  - title: "Check Out Container"
+    link: "/CheckOut/"
 
 flask:
   # Secret key for signing cookies

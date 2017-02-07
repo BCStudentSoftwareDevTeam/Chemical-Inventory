@@ -30,5 +30,3 @@ inputs:
     id: "forProf"
     type: "text"
     special: "required"
-  - id: "user"
-    type: "hidden"
