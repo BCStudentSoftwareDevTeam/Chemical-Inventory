@@ -84,3 +84,17 @@ label img {
   background-color: #f5f5f5 !important;
   color: #333333 !important;
 }
+
+@media print{
+  header nav, footer{
+    display:none;
+  }
+  
+  @page {
+    size: 3in 1in landscape;
+    margin-top: 0.4;
+    margin-bottom: 0.4;
+    margin-left: 0.11;
+    margin-right: 0.11;
+  }
+}
