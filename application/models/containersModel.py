@@ -65,21 +65,27 @@ def changeLocation(cont, status, data, user):
       Nothing
   """ #should return something for unit testing later
   if status: # True if checking out
-    cont.storageId = data['storageId']
-    cont.checkedOut = status
-    cont.checkOutReason = data['forClass']
-    cont.forProf = data['forProf']
-    cont.checkedOutBy = user
-    cont.save()
+    try:
+      cont.storageId = data['storageId']
+      cont.checkedOut = status
+      cont.checkOutReason = data['forClass']
+      cont.forProf = data['forProf']
+      cont.checkedOutBy = user
+      cont.save()
+    except Exception as e:
+      return e
   else: # Checking in
-    cont.storageId = data['storageId']
-    cont.currentQuantity = data['currentQuantity']
-    cont.currentQuantityUnit = data['currentQuantityUnit']
-    cont.checkedOut = status
-    cont.checkOutReason = ''
-    cont.forProf = ''
-    cont.checkedOutBy = ''
-    cont.save()
+    try:
+      cont.storageId = data['storageId']
+      cont.currentQuantity = data['currentQuantity']
+      cont.currentQuantityUnit = data['currentQuantityUnit']
+      cont.checkedOut = status
+      cont.checkOutReason = ''
+      cont.forProf = ''
+      cont.checkedOutBy = ''
+      cont.save()
+    except Exception as e:
+      return e
 
 def contCount(chemicals):
   """Gets a count of how many containers are currently checked in and not disposed of for each chemical
@@ -91,16 +97,22 @@ def contCount(chemicals):
   """
   contDict = {} #Set up a dictionary for all containers
   for chemical in chemicals: #For each chemical
-    contDict[chemical.name] = ((((Chemicals
-                              .select())
-                              .join(Containers))
-                              .where(
-                                (Containers.disposalDate == None) &
-                                (Containers.chemId == chemical.chemId) &
-                                (Chemicals.remove == False))
-                              .count()))
+    try:
+      contDict[chemical.name] = ((((Chemicals
+                                .select())
+                                .join(Containers))
+                                .where(
+                                  (Containers.disposalDate == None) &
+                                  (Containers.chemId == chemical.chemId) &
+                                  (Chemicals.remove == False))
+                                .count()))
+    except:
+      contDict[chemical.name] = "n/a"
   return contDict
 
 def getContainers(storage):
-  Containers.get(Containers.storageId == storage,
-                 Containers.disposalDate == None)
+  try:
+    Containers.get(Containers.storageId == storage,
+                   Containers.disposalDate == None)
+  except Exception as e:
+    return e

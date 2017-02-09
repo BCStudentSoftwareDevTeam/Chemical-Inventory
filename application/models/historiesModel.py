@@ -37,9 +37,9 @@ def updateHistory(container, action, location, modifiedBy):
                   modUser = modifiedBy,
                   action = action,
                   pastQuantity = "%s %s" %(container.currentQuantity, container.currentQuantityUnit))
-    print modifiedBy
+    return "History updated"
   except:
-    print "Failed"
+    return "History failed to update"
 
 def getContainerHistory(containerId):
   """Gets all history objects of a specific container
@@ -48,4 +48,7 @@ def getContainerHistory(containerId):
       containerId (str): Unique identifier for one container
   Returns:
       All history objects of a specific container"""
-  return Histories.select().where(Histories.containerId == containerId)
+  try:
+    return Histories.select().where(Histories.containerId == containerId)
+  except Exception as e:
+    return e

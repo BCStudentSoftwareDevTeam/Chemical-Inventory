@@ -12,18 +12,30 @@ class Floors (Model):
     database = getDB("inventory", "dynamic")
 
 def editFloor(data):
-  floor = Floors.get(Floors.fId == data['id']) #Get floor to be edited and change all information to what was in form
-  floor.name = data['name']
-  floor.storageLimits = data['storageLimits']
-  floor.save()
-  
+  try:
+    floor = Floors.get(Floors.fId == data['id']) #Get floor to be edited and change all information to what was in form
+    floor.name = data['name']
+    floor.storageLimits = data['storageLimits']
+    floor.save()
+  except Exception as e:
+    return e
+
 def createFloor(data):
-  modelData, extraData = sortPost(data, Floors)
-  Floors.create(**modelData)
-  
+  try:
+    modelData, extraData = sortPost(data, Floors)
+    Floors.create(**modelData)
+  except Exception as e:
+    return e
+    
 def getFloors(building):
-  return Floors.select().where(Floors.buildId == building)
-  
+  try:
+    return Floors.select().where(Floors.buildId == building)
+  except Exception as e:
+    return e
+
 def deleteFloor(building):
-  Floors.get(Floors.fId == building)
-  floor.delete_instance(recursive=True)
+  try:
+    Floors.get(Floors.fId == building)
+    floor.delete_instance(recursive=True)
+  except Exception as e:
+    return e

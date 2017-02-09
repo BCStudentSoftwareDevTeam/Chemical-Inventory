@@ -11,23 +11,38 @@ class Buildings (Model):
     database = getDB("inventory", "dynamic")
 
 def getBuilding(lId):
-  return Buildings.get(Buildings.bId == lId)
+  try:
+    return Buildings.get(Buildings.bId == lId)
+  except Exception as e:
+    return e
 
 def getBuildings():
-  return Buildings.select()
-
+  try:
+    return Buildings.select()
+  except Exception as e:
+    return e
+    
 def editBuilding(data):
-  building = Buildings.get(Buildings.bId == data['id']) #Get building to be edited
-  building.name = data['name'] #Change all information to what was in the form
-  building.numFloors = data['numFloors']
-  building.address = data['address']
-  building.save()
-
+  try:
+    building = Buildings.get(Buildings.bId == data['id']) #Get building to be edited
+    building.name = data['name'] #Change all information to what was in the form
+    building.numFloors = data['numFloors']
+    building.address = data['address']
+    building.save()
+  except Exception as e:
+    return e
+    
 def createBuilding(data):
-  modelData, extraData = sortPost(data, Buildings)
-  Buildings.create(**modelData)
-
+  try:
+    modelData, extraData = sortPost(data, Buildings)
+    Buildings.create(**modelData)
+  except Exception as e:
+    return e
+    
 def deleteBuilding(bId):
-  building = getBuilding(bId)
-  print bId
-  building.delete_instance(recursive=True) # With recursive set to True, this will go through and delete the building and everything that is associated with it. ie: Floors, Rooms, and Storages
+  try:  
+    building = getBuilding(bId)
+    print bId
+    building.delete_instance(recursive=True) # With recursive set to True, this will go through and delete the building and everything that is associated with it. ie: Floors, Rooms, and Storages
+  except Exception as e:
+    return e

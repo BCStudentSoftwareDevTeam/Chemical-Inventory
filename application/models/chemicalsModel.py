@@ -65,11 +65,17 @@ def createChemical(data):
 def getChemicalOldPK(oldpk):
     try:
         return Chemicals.select().where(Chemicals.oldPK == oldpk).get()
-    except:
-        return False
+    except Exception as e:
+        return e
 
 def getChemical(chemId):
-  return Chemicals.get(Chemicals.chemId == chemId)
+  try:
+    return Chemicals.get(Chemicals.chemId == chemId)
+  except Exception as e:
+    return e
 
 def getChemicals():
-  return Chemicals.select()
+  try:
+    return Chemicals.select()
+  except Exception as e:
+    return e
