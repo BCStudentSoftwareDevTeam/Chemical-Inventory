@@ -24,7 +24,7 @@
     <div class="tab-content">
       {# Table of all containers that is seen when the 'Containers' tab is selected #}
         <div id="containers" class="tab-pane fade in active">
-          <table class="table">
+          <table class="table" id="containers">
             <thead>
               <tr>
                 {%  for field in contConfig['containerInformation']  %}
@@ -37,9 +37,9 @@
             {%  for container in containers  %}
               {% if (authLevel == 'admin' or authLevel == 'systemAdmin') %}
                 {% if container.checkedOut != True %}
-                  <tr class="success" style="cursor: pointer" onclick="window.location.href = '../../ContainerInfo/{{chemInfo.chemId}}/{{container.barcodeId}}/'";>
+                  <tr class="success" style="cursor: pointer">
                 {% else %}
-                  <tr class="danger" style="cursor: pointer" onclick="window.location.href = '../../ContainerInfo/{{chemInfo.chemId}}/{{container.barcodeId}}/'";>
+                  <tr class="danger" style="cursor: pointer">
                 {% endif %}
               {% else %}
                 {% if container.checkedOut != True %}
@@ -61,9 +61,11 @@
                         {% endif %}
                       {% elif attribute == "barcodeId" %}
                         <td>
-                          <div class="barcode" id="barcodeDiv{{container.barcodeId}}">
-                            <svg id="barcode{{container.barcodeId}}"></svg>
-                          </div>
+                          <a href="../../ContainerInfo/{{chemInfo.chemId}}/{{container.barcodeId}}/">
+                            <div class="barcode" id="barcodeDiv{{container.barcodeId}}">
+                              <svg id="barcode{{container.barcodeId}}"></svg>
+                            </div>
+                          </a>
                         </td> {# Creating barcode using JsBarcode library found here: http://lindell.me/JsBarcode #}
                           <script type="text/javascript">
                             JsBarcode("#barcode{{container.barcodeId}}", "{{container.barcodeId}}", {
@@ -83,6 +85,7 @@
                       {%  endif  %}
                     {%  endif  %}
                 {%  endfor  %}
+                <td style="vertical-align: middle;"><span class="glyphicon glyphicon-print" id="barcodeDiv{{container.barcodeId}}"></span></td>
               </tr>
               {%  endfor  %}
             </table>
@@ -199,3 +202,5 @@
 
     </div>
   </div>
+
+<script src="/static/js/local/printBarcode.js"></script>
