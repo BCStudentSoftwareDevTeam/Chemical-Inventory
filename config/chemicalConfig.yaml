@@ -143,6 +143,19 @@ addChemChecks:
     - name: "Peroxide Former"
       id: "peroxideFormer"
       type: "checkbox"
+    - name: "Requires Stabalizer"
+      id: "reqStabalizer"
+      type: "checkbox"
+    - name: "Forms Toxins Over Time"
+      id: "toxicFormation"
+      type: "checkbox"
+    - name: "Carcinogen"
+      id: "carcinogen"
+      type: "checkbox"
+    - name: "P-List Acute Toxicity"
+      id: "pListAcute"
+      type: "checkbox"
+
 
 addChemDropdowns:
     - name: "Primary Hazard"
