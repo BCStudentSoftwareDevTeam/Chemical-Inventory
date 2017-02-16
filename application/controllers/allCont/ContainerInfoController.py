@@ -18,7 +18,8 @@ from flask import \
     request, \
     redirect, \
     url_for, \
-    abort
+    abort,  \
+    flash
 
 # PURPOSE: CheckOut a container
 @app.route('/ContainerInfo/<chemId>/<barcodeId>/', methods = ['GET', 'POST'])
@@ -65,8 +66,9 @@ def maContainerInfo(chemId, barcodeId):
 
 @app.route('/ContainerInfo/<chemId>/<barcodeId>/dispose/', methods = ['GET', 'POST'])
 def maContainerDispose(chemId, barcodeId):
-  chem = chemicalsModel.Chemicals.get(chemicalsModel.Chemicals.chemId == chemId)
-  container = containersModel.Containers.get(containersModel.Containers.barcodeId == barcodeId)
-  container.disposalDate = datetime.date.today()
-  container.save()
-  return redirect('/ViewChemical/%s/' %(chem.chemId))
+  status, flashMessage, flashFormat = disposeContainer(barcodeId)
+  flash(flashMessage, flashFormat)
+  if status: #Container disposed successfully
+    return redirect('/ViewChemical/%s/' %(chemId))
+  else:
+    return redirect('/ContainerInfo/%s/%s/' %(chemId, barcodeId))
