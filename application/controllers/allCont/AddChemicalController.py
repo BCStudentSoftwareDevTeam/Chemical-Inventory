@@ -29,11 +29,10 @@ def AddChemical():
                                chemConfig = chemConfig)
 
     status, flashMessage, flashFormat, newChem = createChemical(request.form) # Function located in chemicalsModel.py
+    flash(flashMessage, flashFormat)
     if status: # Chemical created successfully
-      flash(flashMessage, flashFormat)
       return redirect(url_for('ViewChemical', chemId = newChem.chemId)) #Redirect to the new chemical page
     else:
-      flash(flashMessage, flashFormat)
       return render_template("views/AddChemicalView.html",
                              authLevel = userLevel,
                              config = config,
