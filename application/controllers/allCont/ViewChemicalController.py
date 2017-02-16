@@ -54,6 +54,7 @@ def ViewChemical(chemId):
         barcode = genBarcode(lastCont)
         while getContainer(barcode) != False:
             barcode = genBarcode(barcode)
+
     except Exception as e:
         barcode = genBarcode("00000000")
     #lastCont needs to be assigned after any potential updates to the last barcode, and before render_template

@@ -24,6 +24,9 @@ class Containers (Model):
   forProf            = CharField(null = True)
   checkedOutBy       = CharField(null = True) # Will be filled in with users username upon checkout
   migrated           = IntegerField(null = True) # If the container was migrated from CISPro
+  waste              = BooleanField(default = False) # If the container is in waste
+  removalDate        = DateTimeField(null = True) # This will be for when waste is disposed
+  peroxideCheckDate  = DateTimeField(null = True)
 
   class Meta:
     database = getDB("inventory", "dynamic")
@@ -116,3 +119,13 @@ def getContainers(storage):
                    Containers.disposalDate == None)
   except Exception as e:
     return e
+
+def disposeContainer(bId):
+    try:
+        cont = getContainer(bId)
+        cont.disposalDate = datetime.date.today()
+        cont.save()
+        return (True, "Container "+ bId +" was removed successfully!", "list-group-item list-group-item-success")
+    except Exception as e:
+        return (False, "Container "+ bId +" was could not be removed!", "list-group-item list-group-item-danger")
+
