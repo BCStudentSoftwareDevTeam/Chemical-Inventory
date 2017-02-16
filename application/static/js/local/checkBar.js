@@ -55,7 +55,9 @@ function manualBar(){
     var hiddenField = document.getElementById('nullbarcodeId');
     var autoField = document.getElementById('barcodeId');
     var barNum = document.getElementById('barcode');
+    var migrated = document.getElementById('migrated');
     if (manualSel.checked) {
+        migrated.value = 1
         //Hide the autopopulated barcode field and reveal the manual barcode entry field
         $(autoField).empty();
         autoField.setAttribute("name", "nullbarcodeId");
@@ -64,6 +66,7 @@ function manualBar(){
         hiddenField.select();
     } else {
         //Clear value from manual barcode entry field, hide manual field, and reveal autopopulated field
+        migrated.value = 0
         hiddenField.value = null;
         hiddenField.style.visibility = "hidden";
         hiddenField.setAttribute("name", "nullbarcodeId");

@@ -52,6 +52,9 @@ def ViewChemical(chemId):
         lastCont = Containers.select().where(Containers.migrated >> 0)\
             .order_by(-Containers.barcodeId).get().barcodeId # Gets the last entered container that was not migrated. Used for creating the next barcode
         barcode = genBarcode(lastCont)
+        while getContainer(barcode) != False:
+            barcode = genBarcode(barcode)
+
     except Exception as e:
         barcode = genBarcode("00000000")
     #lastCont needs to be assigned after any potential updates to the last barcode, and before render_template
