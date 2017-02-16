@@ -106,6 +106,8 @@ systemAdmin:
     link: "/ChemTable/"
   - title: "Migrate Chemical"
     link: "/migrateChem/"
+  - title: "Add Chemical"
+    link: "/AddChemical/" 
   - title: "Check In Container"
     link: "/CheckIn/"
   - title: "Check Out Container"
