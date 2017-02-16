@@ -1,5 +1,4 @@
 function printBarcode(barId){
-    // e.stopImmediatePropogation();
     var barcode = document.getElementById(barId);
     var openWindow = window.open("", "", "width=800, height=700");
     openWindow.document.write("<title>Print Barcode</title>");
