@@ -56,6 +56,8 @@ def createChemical(data):
     modelData, extraData = sortPost(data, Chemicals) #Only get relevant data for the current Model
     if modelData['sdsLink'] == None:
       modelData['sdsLink'] = 'https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=%s' %(modelData['name'])
+    elif modelData['sdsLink'][0:8] != 'https://' and  modelData['sdsLink'][0:7] != 'http://':
+	modelData['sdsLink'] = 'https://' + modelData['sdsLink'] 
     newChem = Chemicals.create(**modelData) #Create instance of Chemical with mapped info in modelData
     return(True, "Chemical Created Successfully!", "list-group-item list-group-item-success", newChem)
   except Exception as e:
