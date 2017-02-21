@@ -90,11 +90,11 @@ def init_db():
             reactive       = chem.Nfpa_Reactive,
             boilPoint      = bPoint,
             molecularWeight= mWeight,
-            flamePict      = chem.Flamable,
-            hhPict         = hhazard,
+            flamePict      = int(chem.Flamable),
+            hhPict         = int(chem.Hazardous),
             gcPict         = gascylinder,
-            corrosivePict  = chem.Corrosive,
-            expPict        = chem.Explosive,
+            corrosivePict  = int(chem.Corrosive),
+            expPict        = int(chem.Explosive),
             oxidizerPict   = oxidizer).save()
         #print chem.NameRaw + " was added to the database"
     print "Chemicals were added to the database"

@@ -33,6 +33,10 @@ pictograms:
       id: "toxicPict"
       type: "checkbox"
       alt: "Skull and Crossbones"
+    - pict: "/static/pictograms/explPict.png"
+      id: "expPict"
+      type: "checkbox"
+      alt: "Explosion"
 
 HMIS:
    - name: "Health"
@@ -136,19 +140,22 @@ addChemInputs:
       type: "text"
       placeholder: "Description of Chemical"
 
-addChemChecks:
+
+timeSensitive:
     - name: "Pressure Former"
       id: "pressureFormer"
-      type: "checkbox"
-    - name: "Peroxide Former"
-      id: "peroxideFormer"
       type: "checkbox"
     - name: "Requires Stabalizer"
       id: "reqStabalizer"
       type: "checkbox"
+    - name: "Peroxide Former"
+      id: "peroxideFormer"
+      type: "checkbox"
     - name: "Forms Toxins Over Time"
       id: "toxicFormation"
       type: "checkbox"
+
+addChemChecks:
     - name: "Carcinogen"
       id: "carcinogen"
       type: "checkbox"

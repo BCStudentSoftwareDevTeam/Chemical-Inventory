@@ -12,7 +12,7 @@ class Main(Model):
    Id3              = TextField()
    Description      = TextField()
    BoilingPoint     = TextField()
-   MeltingPoint     = TextField() 
+   MeltingPoint     = TextField()
    VaporPressure    = TextField()
    SpecificGravity  = TextField()
    Flamable         = TextField()

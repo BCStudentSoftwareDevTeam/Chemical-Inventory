@@ -72,7 +72,7 @@ def getChemicalOldPK(oldpk):
     try:
         return Chemicals.select().where(Chemicals.oldPK == oldpk).get()
     except Exception as e:
-        return e
+        return False
 
 def getChemical(chemId):
   try:
