@@ -11,28 +11,15 @@ input[type="checkbox"][id^="cb"] {
   display: none;
 }
 
-.navbar-default{
-  background-color: gainsboro;
-}
-
-.navbar-right>li>a{ /*Formats the logout button*/
-  background-color:gainsboro;
-  border-color:#9fa1a3;
-  border-width:1px;
-}
-
 .navbar-nav>.active>a{
-  background-color:lightsteelblue !important;
-  border-color:#9fa1a3;
+  background-color:#d1d1e0 !important;
+  border-color:whitesmoke;
   border-width:1px;
 }
 
-.nav-tabs>li>a{
-  background-color:whitesmoke;
-  border-color:#d1d1e0;
-  border-width:1px;
+.navbar-nav>a{
+  border
 }
-
 
 .hazardLabel {
   border: 1px solid #fff;

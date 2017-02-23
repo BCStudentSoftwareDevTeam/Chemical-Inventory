@@ -77,7 +77,7 @@ hazards:
 # Navigation bars
 admin:
   - title: "Home"
-    link: " /Home/"
+    link: "/Home/"
   - title: "View All Chemicals"
     link: "/ChemTable/"
   - title: "Migrate Chemical"
