@@ -12,17 +12,18 @@ input[type="checkbox"][id^="cb"] {
 }
 
 .navbar-default{
-  background-color: gainsboro;
+  background-color: whitesmoke;
 }
 
 .navbar-right>li>a{ /*Formats the logout button*/
-  background-color:gainsboro;
+  color:black !important;
+  background-color:#ef2828;
   border-color:#9fa1a3;
   border-width:1px;
 }
 
 .navbar-nav>.active>a{
-  background-color:lightsteelblue !important;
+  background-color:lightgrey !important;
   border-color:#9fa1a3;
   border-width:1px;
 }
