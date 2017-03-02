@@ -4,14 +4,17 @@ Building:
         id: "name"
         type: "text"
         required: "true"
+        disabled: ""
       - name: "Number of Floors"
         id: "numFloors"
         type: "number"
         required: "true"
+        disabled: "disabled"
       - name: "Address"
         id: "address"
         type: "text"
-        required: "true"
+        required: "false"
+        disabled: ""
     add: *buildAdd
 
 Floor:
@@ -19,13 +22,10 @@ Floor:
       - name: "foreignKey"
         id: "buildId"
         type: "hidden"
-      - name: "Floor Number"
+      - name: "Floor Name"
         id: "name"
         type: "text"
         required: "true"
-      - name: "Storage Limits"
-        id: "storageLimits"
-        type: "text"
     add: *floorAdd
 
 Room:

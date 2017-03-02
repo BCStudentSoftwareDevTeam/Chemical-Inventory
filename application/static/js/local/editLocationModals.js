@@ -18,6 +18,7 @@ $(document).on('shown.bs.modal', '#editBuildingModal', function(event){
     var name = button.data('name');
     var modal = $(this);
     console.log(action)
+  if(action != "add"){
     modal.find('input[name="action"]').val(action);
     modal.find('.modal-title').text('Edit ' + location + ': ' + name);
     $.ajax({
@@ -28,13 +29,23 @@ $(document).on('shown.bs.modal', '#editBuildingModal', function(event){
             modal.find('input[id="name"]').val(data['name']);
             modal.find('input[id="id"]').val(attribute);
             document.getElementById('numFloors').value = data['numFloors'];
+            document.getElementById('numFloors').disabled = true;
             document.getElementById('address').value = data['address'];
         },
         error: function() {
             console.log("Error")
         }
     });
-    document.getElementById('foreignKey').value = (attribute);
+  }
+  else{
+    modal.find('input[name="action"]').val(action);
+    modal.find('.modal-title').text('Add Building');
+    document.getElementById('numFloors').value = "";
+    document.getElementById('address').value = "";
+    document.getElementById('name').value = "";
+    document.getElementById('numFloors').disabled = false;
+  }
+  document.getElementById('foreignKey').value = (attribute);
 });
 
 $(document).on('shown.bs.modal', '#editFloorModal', function(event) {
@@ -56,7 +67,6 @@ $(document).on('shown.bs.modal', '#editFloorModal', function(event) {
                 console.log(data);
                 modal.find('input[id="name"]').val(data['name']);
                 modal.find('input[id="id"]').val(attribute);
-                document.getElementById('storageLimits').value = data['storageLimits']
             },
             error: function(){
                 console.log("Error")

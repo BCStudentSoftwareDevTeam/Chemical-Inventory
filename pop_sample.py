@@ -105,7 +105,7 @@ def init_db():
     ####
     buildingsModel.Buildings(
         name               = "Science Building",
-        numFloors          = 12,
+        numFloors          = 1,
         address            = "101 Chestnut St. Berea, KY").save()
     print "Buildings were added to the database"
 
@@ -114,7 +114,8 @@ def init_db():
     ####
     floorsModel.Floors(
         buildId         = 1,
-        name            = "First Floor").save()
+        name            = "First Floor",
+        level           = 0).save()
     print "Floors were added to the database"
 
     ####
