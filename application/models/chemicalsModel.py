@@ -68,6 +68,17 @@ def createChemical(data):
     print e
     return(False, "Chemical Could Not Be Created.", "list-group-item list-group-item-danger", None)
 
+def deleteChemical(chemId):
+    """Deletes a Chemical from the database"""
+    try:
+        chem = Chemicals.get(Chemicals.chemId == chemId)
+        chem.deleteDate = datetime.date.today()
+        chem.remove = True
+        chem.save()
+        return(True, "Successfully Deleted " + chem.name + " From the System", "list-group-item list-group-item-success", chem)
+    except Exception as e:
+        return(False, "Failed to Delete " + chem.name + " From the System", "list-group-item list-group-item-danger", None)
+
 def getChemicalOldPK(oldpk):
     try:
         return Chemicals.select().where(Chemicals.oldPK == oldpk).get()

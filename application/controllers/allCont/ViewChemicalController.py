@@ -98,13 +98,7 @@ def ViewChemical(chemId):
 
 @app.route('/ViewChemical/<chemId>/delete/', methods = ['GET','POST']) #When master admin clicks on delete chemical button. (button only show up when all containers of it have been disposed of)
 def maDeleteChemical(chemId):
-  try:
-    chem = Chemicals.get(Chemicals.chemId == chemId) #Get chemical by correct chemId
-    chem.deleteDate = datetime.date.today() #Set chemical's delete date to the current date
-    chem.remove = True #Set chemical's remove attribute to true.
-    chem.save() #We are not deleting the chemical because chemicals that are disposed still reference the chemical, and the containers are used for reports on disposal.
-    flash("Successfully Deleted " + chem.name + " From the System")
-  except:
-      flash("Failed to Remove " + chem.name + " From the System")
-  return redirect('/ChemTable')
+    status, flashMessage, flashFormat, object = deleteChemical(chemId)
+    flash(flashMessage, flashFormat)
+    return redirect('/ChemTable')
 
