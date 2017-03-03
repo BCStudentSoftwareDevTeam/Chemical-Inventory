@@ -150,7 +150,7 @@ def init_db():
                 currentQuantityUnit = "gram (g)",
                 currentQuantity     = 4.0,
                 capacity            = 5.0,
-                receiveDate= cont.ReservedDate,
+                receiveDate         = datetime.date.today(),
                 migrated            = 1).save()
         #print cont.UniqueContainerID + " was added to Containers"i
     print "Containers were added to the database"

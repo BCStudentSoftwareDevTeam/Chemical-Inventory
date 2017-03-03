@@ -1,4 +1,5 @@
 <script src="/static/js/local/fillEditForm.js"></script>
+<script src="/static/js/local/printBarcode.js"></script>
 <div class="col-sm-8 col-sm-offset-2">
   <h1>{{chemInfo.name}} Information</h1>
   <a href="{{chemInfo.sdsLink}}" target="blank"><h5>Safety Data Sheet</h5></a>
@@ -63,7 +64,15 @@
                         <td>
                           <a href="../../ContainerInfo/{{chemInfo.chemId}}/{{container.barcodeId}}/">
                             <div class="barcode" id="barcodeDiv{{container.barcodeId}}">
-                              <svg id="barcode{{container.barcodeId}}"></svg>
+                              <div class="printInfo" style="font-size: small;">
+                                {{chemInfo.name}}
+                              </div>
+                              <svg name="barcodeSVG" id="barcode{{container.barcodeId}}"></svg>
+                              <div class="printInfo" style="font-size: x-small;">
+                                {% with date = container.receiveDate %}
+                                  Received on: {{date | formatDateTime}}
+                                {% endwith %}
+                              </div>
                             </div>
                           </a>
                         </td> {# Creating barcode using JsBarcode library found here: http://lindell.me/JsBarcode #}
@@ -85,7 +94,7 @@
                       {%  endif  %}
                     {%  endif  %}
                 {%  endfor  %}
-                <td style="vertical-align: middle;"><span class="glyphicon glyphicon-print" id="barcodeDiv{{container.barcodeId}}"></span></td>
+                <td style="vertical-align: middle;"><span class="glyphicon glyphicon-print" id="{{container.barcodeId}}"></span></td>
               </tr>
               {%  endfor  %}
             </table>
@@ -202,5 +211,3 @@
 
     </div>
   </div>
-
-<script src="/static/js/local/printBarcode.js"></script>

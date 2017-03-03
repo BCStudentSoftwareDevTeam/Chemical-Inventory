@@ -76,7 +76,8 @@ def ViewChemical(chemId):
                            buildingList = buildingList,
                            barcode = barcode,
                            authLevel = userLevel,
-                           migrated = 0)
+                           migrated = 0,
+                           date = datetime.date.today().strftime("%m-%d-%Y"))
   else:
     containers = (((Containers
                  .select())
@@ -94,7 +95,8 @@ def ViewChemical(chemId):
                            chemConfig = chemConfig,
                            quote = quote,
                            authLevel = userLevel,
-                           migrated = 0)
+                           migrated = 0,
+                           date = datetime.date.today().strftime("%m-%d-%Y"))
 
 @app.route('/ViewChemical/<chemId>/delete/', methods = ['GET','POST']) #When master admin clicks on delete chemical button. (button only show up when all containers of it have been disposed of)
 def maDeleteChemical(chemId):
