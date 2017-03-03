@@ -43,3 +43,7 @@ locationConfig = Configuration.from_file(locationConfig_path).configure()
 # can reference it.
 import os
 config.sys.base_dir = os.path.abspath(os.path.dirname(__file__))
+
+from application import app
+from application.customFilters import filters
+app.jinja_env.filters['formatDateTime'] = filters.formatDateTime

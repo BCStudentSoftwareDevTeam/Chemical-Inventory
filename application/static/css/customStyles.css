@@ -108,3 +108,8 @@ label img {
   background-color: #f5f5f5 !important;
   color: #333333 !important;
 }
+
+/*Hides the Name and Recieved Date from Barcodes on screen*/
+.printInfo{
+    display: none;
+}
