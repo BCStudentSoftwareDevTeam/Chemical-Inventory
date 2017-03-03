@@ -6,10 +6,9 @@ function printBarcode(barId){
     var barIMG = openWindow.document.getElementById("barcode" + barId); //Get the new div, relevant to the open window
     barIMG.style.width = '50%'; //Resize the barcode image (make it small enough to fit on the label)
     barIMG.style.height = 'auto';
-    // openWindow.document.close();
     openWindow.focus();
     openWindow.print();
-    // openWindow.close();
+    openWindow.close();
 }
 
 $(document).ready(function(){ //Binding for all rows in container table, with the print glyphicon having a seperate action
