@@ -47,7 +47,7 @@
                                         <div class="panel-group" id="roomAccordian{{floor.fId}}" role="tablist" aria-mulitselectable="true">
                                             <div class="panel panel-default">
                                                 {% set parent = attribute %}
-                                                {% for room in rooms[floor.fId] %}                                                      
+                                                {% for room in rooms[floor.fId] %}
                                                     {% set location = 'Room' %}
                                                     {% set attribute = room.rId %}
                                                     {% set item = room %}
@@ -55,7 +55,7 @@
                                                             <h4 class="panel-title">
                                                                 <a role="button" data-toggle="collapse" onclick="highlightTab('{{location}}{{attribute}}Tab')" data-parent="#roomAccordian{{floor.fId}}" href="#room{{room.rId}}" aria-expanded="true" aria-controls="room{{room.rId}}">
                                                                     Room: {{room.name}}
-                                                                </a> 
+                                                                </a>
                                                                 <a class="glyphLink" data-toggle="modal" data-target="#removeModal" data-location="Room" data-attribute="{{room.rId}}" data-name="{{room.name}}">
                                                                     <span class="glyphicon glyphicon-trash"></span>
                                                                 </a>

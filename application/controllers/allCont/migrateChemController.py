@@ -108,7 +108,6 @@ def renderCorrectTemplate(barcode):
                                 migrated = 1)
                         else:
                             #Chemical is not yet in BCCIS
-                            #print str(e)
                             state = NIETHER
                             return render_template("views/MigrateChem.html",
                                 state = state,

@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <ul class="nav navbar-nav">
     {% for menuItem in config[authLevel] %}
-      {% if menuItem['link'] == request.path %}
+    {% if menuItem['link'] == request.path %}
         <li class="active">
           <a href="{{menuItem['link']}}">{{menuItem['title']}}</a>
         </li>
@@ -13,7 +13,7 @@
     {% endfor %}
   </ul>
   <ul class="nav navbar-nav navbar-right">
-    <li class="active">
+    <li>
       <a href="http://login.berea.edu/idp/profile/Logout">Log Out</a>
     </li>
   </ul>

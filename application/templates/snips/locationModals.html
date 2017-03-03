@@ -12,7 +12,6 @@
                 {# Text will be filled by editLocationModals.js #}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
                 <a id="deleteButton"><button class="btn btn-danger">Delete</button></a>
                 {# The href attribute will be filled by editLocationModals.js #}
             </div>
@@ -47,10 +46,11 @@
                             </div>
                         {% endif %}
                     {% endfor %}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-success">Submit</button></a>
+                  </div>
+                <div class="clearfix"></div>
+                <div class="modal-footer" text-align: center>
+                  <button type="submit" class="btn btn-success">Submit</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                 </div>
                 </form>
         </div>

@@ -46,6 +46,10 @@ class Chemicals (Model):
   toxicPict       = BooleanField(default = False) # Acute Toxicity
   peroxideFormer  = BooleanField(default = False)
   pressureFormer  = BooleanField(default = False)
+  reqStabalizer   = BooleanField(default = False) # If chemical timesensitive because it requires stablizer
+  toxicFormation  = BooleanField(default = False) # If the chemical forms a toxic gas/liquid over time
+  carcinogen      = BooleanField(default = False) # If carcinogenic
+  pListAcute      = BooleanField(default = False) # If defined as Acutely Toxic in 40CFR 266.31
 
   class Meta:
     database = getDB("inventory", "dynamic")
@@ -57,18 +61,29 @@ def createChemical(data):
     if modelData['sdsLink'] == None:
       modelData['sdsLink'] = 'https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=%s' %(modelData['name'])
     elif modelData['sdsLink'][0:8] != 'https://' and  modelData['sdsLink'][0:7] != 'http://':
-	modelData['sdsLink'] = 'https://' + modelData['sdsLink'] 
+	modelData['sdsLink'] = 'https://' + modelData['sdsLink']
     newChem = Chemicals.create(**modelData) #Create instance of Chemical with mapped info in modelData
     return(True, "Chemical Created Successfully!", "list-group-item list-group-item-success", newChem)
   except Exception as e:
     print e
     return(False, "Chemical Could Not Be Created.", "list-group-item list-group-item-danger", None)
 
+def deleteChemical(chemId):
+    """Deletes a Chemical from the database"""
+    try:
+        chem = Chemicals.get(Chemicals.chemId == chemId)
+        chem.deleteDate = datetime.date.today()
+        chem.remove = True
+        chem.save()
+        return(True, "Successfully Deleted " + chem.name + " From the System", "list-group-item list-group-item-success", chem)
+    except Exception as e:
+        return(False, "Failed to Delete " + chem.name + " From the System", "list-group-item list-group-item-danger", None)
+
 def getChemicalOldPK(oldpk):
     try:
         return Chemicals.select().where(Chemicals.oldPK == oldpk).get()
     except Exception as e:
-        return e
+        return False
 
 def getChemical(chemId):
   try:

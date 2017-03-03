@@ -11,6 +11,30 @@ input[type="checkbox"][id^="cb"] {
   display: none;
 }
 
+.navbar-default{
+  background-color: whitesmoke;
+}
+
+.navbar-right>li>a{ /*Formats the logout button*/
+  color:black !important;
+  background-color:#ef2828;
+  border-color:#9fa1a3;
+  border-width:1px;
+}
+
+.navbar-nav>.active>a{
+  background-color:lightgrey !important;
+  border-color:#9fa1a3;
+  border-width:1px;
+}
+
+.nav-tabs>li>a{
+  background-color:whitesmoke;
+  border-color:#d1d1e0;
+  border-width:1px;
+}
+
+
 .hazardLabel {
   border: 1px solid #fff;
   padding: 10px;
