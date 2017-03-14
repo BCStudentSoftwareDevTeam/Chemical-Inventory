@@ -1,0 +1,21 @@
+buildings:
+  - name: "Science"
+    numFloors: 5
+    address: "101 Chestnut St. Berea KY"
+    rooms:
+      - name: "Floor 1 Test"
+        floorId: 1
+        storages:
+          - name: "Flammable Cabinet"
+            booleans:
+              - "flammable"
+              - "oxidizer"
+  - name: 'Frost'
+    numFloors: 3
+    address: "101 Chestnut St. Berea KY"
+    rooms:
+      - name: "Fuck This Shit"
+        floorId: 4
+        storages:
+          - name: "Fuck This Shit"
+    

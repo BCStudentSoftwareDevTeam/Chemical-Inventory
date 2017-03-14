@@ -38,6 +38,10 @@ userConfig = Configuration.from_file(userConfig_path).configure()
 locationConfig_path = getAbsolutePath('config/locationConfig.yaml')
 locationConfig = Configuration.from_file(locationConfig_path).configure()
 
+# Populates database with all locations added to locations.yaml
+addLocationConfig_path = getAbsolutePath('config/locations.yaml')
+addLocationConfig = Configuration.from_file(addLocationConfig_path).configure()
+
 # This adds the application's base directory to the
 # configuration object, so that the rest of the application
 # can reference it.
