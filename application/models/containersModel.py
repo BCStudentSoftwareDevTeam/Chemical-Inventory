@@ -118,7 +118,7 @@ def getContainers(storage):
     Containers.get(Containers.storageId == storage,
                    Containers.disposalDate == None)
   except Exception as e:
-    return e
+    return False 
 
 def disposeContainer(bId):
     try:
