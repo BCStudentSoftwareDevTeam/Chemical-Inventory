@@ -10,10 +10,10 @@
                 <a role="button" data-toggle="collapse" onclick="highlightTab('{{location}}{{attribute}}Tab')" data-parent="#buildingAccordion" href="#{{building.bId}}" aria-expanded="true" aria-controls="{{building.bId}}">
                     {{building.name}}
                 </a>
-                <a class="glyphLink" data-toggle="modal" data-target="#removeModal" data-location="Building" data-attribute="{{building.bId}}" data-name="{{building.name}}" aria-hidden="true">
+                <a class="glyphLink pull-right" data-toggle="modal" data-target="#removeModal" data-location="Building" data-attribute="{{building.bId}}" data-name="{{building.name}}" aria-hidden="true" style="padding:0px; padding-left:10px;">
                     <span class="glyphicon glyphicon-trash"></span>
                 </a>
-                <a class="glyphLink" data-toggle="modal" data-target="#editBuildingModal" data-location="Building" data-attribute="{{building.bId}}" data-name="{{building.name}}" aria-hidden="true" data-action="edit">
+                <a class="glyphLink" data-toggle="modal" data-target="#editBuildingModal" data-location="Building" data-attribute="{{building.bId}}" data-name="{{building.name}}" aria-hidden="true" data-action="edit" style="padding-left:10px;">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </a>
             </h4>
@@ -33,10 +33,7 @@
                                         <a role="button" data-toggle="collapse" onclick="highlightTab('{{location}}{{attribute}}Tab')" data-parent="#floorAccordion{{building.bId}}" href="#floor{{floor.fId}}" aria-expanded="true" aria-controls="floor{{floor.fId}}">
                                             Floor: {{floor.name}}
                                         </a>
-                                        <a class="glyphLink" data-toggle="modal" data-target="#removeModal" data-location="Floor" data-attribute="{{floor.fId}}" data-name="{{floor.name}}">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
-                                        <a class="glyphLink" data-toggle="modal" data-target="#editFloorModal" data-location="Floor" data-attribute="{{floor.fId}}" data-name="{{floor.name}}" data-action="edit">
+                                        <a class="glyphLink" data-toggle="modal" data-target="#editFloorModal" data-location="Floor" data-attribute="{{floor.fId}}" data-name="{{floor.name}}" data-action="edit" style="padding-left:10px;">
                                             <span class="glyphicon glyphicon-pencil"></span>
                                         </a>
                                     </h4>
@@ -56,10 +53,10 @@
                                                                 <a role="button" data-toggle="collapse" onclick="highlightTab('{{location}}{{attribute}}Tab')" data-parent="#roomAccordian{{floor.fId}}" href="#room{{room.rId}}" aria-expanded="true" aria-controls="room{{room.rId}}">
                                                                     Room: {{room.name}}
                                                                 </a>
-                                                                <a class="glyphLink" data-toggle="modal" data-target="#removeModal" data-location="Room" data-attribute="{{room.rId}}" data-name="{{room.name}}">
+                                                                <a class="glyphLink pull-right" data-toggle="modal" data-target="#removeModal" data-location="Room" data-attribute="{{room.rId}}" data-name="{{room.name}}" style="padding:0px; padding-left:10px;">
                                                                     <span class="glyphicon glyphicon-trash"></span>
                                                                 </a>
-                                                                <a class="glyphLink" data-toggle="modal" data-target="#editRoomModal" data-location="Floor" data-attribute="{{floor.fId}}" data-name="{{floor.name}}" data-action="edit">
+                                                                <a class="glyphLink" data-toggle="modal" data-target="#editRoomModal" data-location="Floor" data-attribute="{{floor.fId}}" data-name="{{floor.name}}" data-action="edit" style="padding-left:10px">
                                                                     <span class="glyphicon glyphicon-pencil"></span>
                                                                 </a>
                                                             </h4>
@@ -77,10 +74,10 @@
                                                                                 <div class="panel-heading panel-change panel-closed" id="{{location}}{{attribute}}Tab" role="tab">
                                                                                     <h4 class="panel-title">
                                                                                         {{storage.name}}
-                                                                                        <a title="Remove Storage Location" class="glyphLink" data-toggle="modal" data-target="#removeModal" data-location="Storage" data-attribute="{{storage.sId}}" data-name="{{storage.name}}">
+                                                                                        <a title="Remove Storage Location" class="glyphLink pull-right" data-toggle="modal" data-target="#removeModal" data-location="Storage" data-attribute="{{storage.sId}}" data-name="{{storage.name}}" style="padding:0px; padding-left:10px;">
                                                                                             <span class="glyphicon glyphicon-trash"></span>
                                                                                         </a>
-                                                                                        <a title="Edit Storage Location" class="glyphLink" data-toggle="modal" data-target="#editStorageModal" data-location="Storage" data-attribute="{{storage.sId}}" data-name="{{storage.name}}" data-action="edit">
+                                                                                        <a title="Edit Storage Location" class="glyphLink" data-toggle="modal" data-target="#editStorageModal" data-location="Storage" data-attribute="{{storage.sId}}" data-name="{{storage.name}}" data-action="edit"  style="padding-left:10px">
                                                                                             <span class="glyphicon glyphicon-pencil"></span>
                                                                                         </a>
                                                                                     </h4>
@@ -108,11 +105,6 @@
                         {% endfor %}
                     </div>
                 </div>
-                {# First Nested Accordion Ends (Floors) #}
-                <button title="Add a floor to the {{building.name}} Building" type="button" class="btn btn-success btn-xs addLink" data-toggle="modal" data-target="#editFloorModal" data-action="add" data-parent="{{parent}}">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    Add Floor
-                </button>
             </div>
         </div>
         {% endfor %}

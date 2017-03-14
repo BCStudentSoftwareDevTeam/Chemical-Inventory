@@ -39,17 +39,18 @@ def adminHome():
         storages = {}
         if request.method == "POST":
             data = request.form #If a form is posted to the page
-            print data
             if data['location'] == "Building": #If the form is editing a building
                 if data['action'] == 'edit':
-                    editBuilding(data)
+                    status, flashMessage, flashFormat, editBuild = editBuilding(data)
                 elif data['action'] == 'add':
-                    createBuilding(data)
+                    status, flashMessage, flashFormat, newBuild = createBuilding(data)
+                    if status:
+                        for value in range(int(data['numFloors'])):
+                            createFloor({'buildId': newBuild.bId, 'name':"Level " + str(value), 'level':value })
+                    flash(flashMessage, flashFormat)
             elif data['location'] == "Floor": #If the form is editing a floor
-                if data['action'] == 'edit':
-                    editFloor(data)
-                elif data['action'] == 'add':
-                    createFloor(data)
+                status, flashMessage, flashFormat, editedFloor = editFloor(data)
+                flash(flashMessage, flashFormat)
             elif data['location'] == "Room": #If the form is editing a room
                 if data['action'] == 'edit':
                     editRoom(data)
@@ -64,6 +65,7 @@ def adminHome():
                 elif data['action'] == 'add':
                     modelData, extraData = sortPost(data, Storages)
                     Storages.create(**modelData)
+
         for building in buildings: #Set floor dictionary with key of current building, and value of all floors that reference that building
             floors[building.bId] = getFloors(building.bId)
             for floor in floors[building.bId]: #Set room dictionary with key of current floor, and value of all rooms that reference that floor
