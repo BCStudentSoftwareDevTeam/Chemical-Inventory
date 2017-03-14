@@ -1,4 +1,5 @@
 <script src="/static/js/local/fillEditForm.js"></script>
+<script src="/static/js/local/printBarcode.js"></script>
 <div class="col-sm-8 col-sm-offset-2">
   <h1>{{chemInfo.name}} Information</h1>
   <a href="{{chemInfo.sdsLink}}" target="blank"><h5>Safety Data Sheet</h5></a>
@@ -53,7 +54,7 @@
     <div class="tab-content">
       {# Table of all containers that is seen when the 'Containers' tab is selected #}
         <div id="containers" class="tab-pane fade in active">
-          <table class="table">
+          <table class="table" id="containers">
             <thead>
               <tr>
                 {%  for field in contConfig['containerInformation']  %}
@@ -66,9 +67,9 @@
             {%  for container in containers  %}
               {% if (authLevel == 'admin' or authLevel == 'systemAdmin') %}
                 {% if container.checkedOut != True %}
-                  <tr class="success" style="cursor: pointer; vertical-align:middle" onclick="window.location.href = '../../ContainerInfo/{{chemInfo.chemId}}/{{container.barcodeId}}/'";>
+                  <tr class="success" style="cursor: pointer">
                 {% else %}
-                  <tr class="danger" style="cursor: pointer; vertical-align:center" onclick="window.location.href = '../../ContainerInfo/{{chemInfo.chemId}}/{{container.barcodeId}}/'";>
+                  <tr class="danger" style="cursor: pointer">
                 {% endif %}
               {% else %}
                 {% if container.checkedOut != True %}
@@ -89,7 +90,21 @@
                           <td>{{container[attribute].roomId.floorId.buildId.name}} Building, Room {{container[attribute].roomId.name}}, {{container[attribute].name}}</td>
                         {% endif %}
                       {% elif attribute == "barcodeId" %}
-                        <td><svg id="barcode{{container.barcodeId}}"></svg></td> {# Creating barcode using JsBarcode library found here: http://lindell.me/JsBarcode #}
+                        <td>
+                          <a href="../../ContainerInfo/{{chemInfo.chemId}}/{{container.barcodeId}}/">
+                            <div class="barcode" id="barcodeDiv{{container.barcodeId}}">
+                              <div class="printInfo" style="font-size: small;">
+                                {{chemInfo.name}}
+                              </div>
+                              <svg name="barcodeSVG" id="barcode{{container.barcodeId}}"></svg>
+                              <div class="printInfo" style="font-size: x-small;">
+                                {% with date = container.receiveDate %}
+                                  Received on: {{date | formatDateTime}}
+                                {% endwith %}
+                              </div>
+                            </div>
+                          </a>
+                        </td> {# Creating barcode using JsBarcode library found here: http://lindell.me/JsBarcode #}
                           <script type="text/javascript">
                             JsBarcode("#barcode{{container.barcodeId}}", "{{container.barcodeId}}", {
                               height:30,
@@ -108,6 +123,7 @@
                       {%  endif  %}
                     {%  endif  %}
                 {%  endfor  %}
+                <td style="vertical-align: middle;"><span class="glyphicon glyphicon-print" id="{{container.barcodeId}}"></span></td>
               </tr>
               {%  endfor  %}
             </table>

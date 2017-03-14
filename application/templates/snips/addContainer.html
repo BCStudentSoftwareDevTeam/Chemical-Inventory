@@ -14,10 +14,18 @@
               <label for="{{group.id}}" class="col-sm-6">{{group.name}}</label>
               <div class="col-sm-6">
                 <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" value="{{barcode}}" {{group.special}}/>
-                <svg id="barcode" value = "{{barcode}}"></svg>
+                <div class="barcode" id="barcodeDiv{{barcode}}">
+                  <div class="printInfo" style="font-size: small;">
+                    {{chemInfo.name}}
+                  </div>
+                  <svg name="barcodeSVG" id="barcode{{barcode}}" value="{{barcode}}"></svg>
+                  <div class="printInfo" style="font-size: x-small;">
+                    Received on: {{date}}
+                  </div>
+                </div>
                 {# Creates barcode based on last barcode, and date. returns barcode as string. #}
                 <script>
-                JsBarcode('#barcode', '{{barcode}}', {
+                JsBarcode('#barcode{{barcode}}', '{{barcode}}', {
                               height:30,
                               fontSize: 15
                              });
@@ -90,7 +98,7 @@
       {% endif %}
       {% endfor %}
       <input type="hidden" name="user" value="testUser">
-      <input type="submit" class="btn btn-primary" id="submitCont" value="Submit" onclick="return checkVals({{contConfig['options']}});">
+      <input type="submit" class="btn btn-primary" id="submitCont" value="Submit" onclick="return checkVals({{contConfig['options']}}) && printBarcode('{{barcode}}');">
   </form>
 </div>
 <script src="/static/js/local/measurements.js-master/metrics.js"></script>

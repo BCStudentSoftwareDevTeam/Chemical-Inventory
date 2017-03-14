@@ -13,7 +13,7 @@ class Containers (Model):
   barcodeId          = CharField(null = False, unique = True)
   currentQuantityUnit= TextField() # units of chemical
   currentQuantity    = FloatField()# amount of chemical currently in container
-  receiveDate        = DateTimeField(default = datetime.datetime.now)
+  receiveDate        = DateTimeField(default = datetime.date.today)
   disposalDate       = DateTimeField(null = True)
   conType            = CharField(default = "")
   manufacturer       = CharField(null = True)
@@ -49,6 +49,7 @@ def addContainer(data, user):
         """
     try:
         modelData, extraData = sortPost(data, Containers)
+        print modelData
         cont = Containers.create(**modelData)
         application.models.historiesModel.updateHistory(cont, "Created", data['storageId'], user)
         return (True, "Container Created Successfully!", "list-group-item list-group-item-success", cont)
