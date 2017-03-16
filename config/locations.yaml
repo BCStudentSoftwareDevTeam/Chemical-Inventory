@@ -36,8 +36,8 @@ buildings:
     numFloors: 3
     address: "101 Chestnut St. Berea KY"
     rooms:
-      - name: "Basement"
-        floorId: 4
+      - name: "04"
+        floorId: 6
         storages:
           - name: "04"
 
