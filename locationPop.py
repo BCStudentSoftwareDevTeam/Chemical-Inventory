@@ -32,6 +32,7 @@ def init_db():
     ####
     #Import MAINN table in CISPro into inventory.sqlite
     ####
+    """
     main_table = Main.select()
     for chem in  main_table:
         #Translate the form: int in CISPro -> string BCCIS
@@ -100,7 +101,7 @@ def init_db():
             oxidizerPict   = oxidizer).save()
         #print chem.NameRaw + " was added to the database"
     print "Chemicals were added to the database"
-
+    """
     ####
     #Makes one building that the one floor is put in
     ####
@@ -114,12 +115,18 @@ def init_db():
         for i in range(building['numFloors']):
             floorsModel.Floors(
                 buildId = currentBuildingId.bId,
-                name = i).save()
+                name = i,
+                level = i).save()
         for room in building['rooms']:
             Room = roomsModel.Rooms()
             Room.name = room['name']
             Room.floorId = room['floorId']
             Room.save()
+            for storage in room['storages']:
+                Storage = storagesModel.Storages()
+                Storage.roomId = Room.rId
+                Storage.name = storage['name']
+                Storage.save()
 
     ####
     #Makes one floor that the one room is put in

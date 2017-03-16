@@ -3,7 +3,7 @@
     <input type="hidden" name="formName" value="addChem">
     {%  for group in chemConfig['addChemInputs']  %}
       <div class="form-group row" id="{{group['id']}}Parent">
-        <label for="{{group['id']}}" class="col-xs-6">{{group['name']}}</label>
+        <label for="{{group['id']}}" class="col-xs-6">{{group['name']}}:</label>
         <div class="col-xs-4">
         {# Checking name oninput to determine whether percentage is required or not. #}
         {% if group['id'] == 'name' %}

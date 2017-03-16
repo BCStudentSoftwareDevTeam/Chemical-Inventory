@@ -38,13 +38,14 @@ def init_db():
         state = state_map[chem.State]
 
         #Translate the structure: int CISPro -> string BCCIS
+        """
         if chem.Organic == 1:
             struct = "Organic"
         elif chem.Inorganic == 1:
             struct = "Inorganic"
         else:
             struct = "Unknown"
-
+        """
         #Translate Hazards for icon fields: int CISPro -> bool BCCIS
         if chem.Hazardous == 1 or chem.Carcinogenic == 1:
             hhazard = True
@@ -83,7 +84,7 @@ def init_db():
             primaryHazard  = primaryHazard[random.randrange(0, 9)],#chem.Id3 #This randomly selects pHaz
             formula        = chem.StructuralFormula,
             state          = state,
-            structure      = struct,
+            #structure      = struct,
             sdsLink        = "https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=" + str(chem.NameRaw),
             description    = chem.PhysicalDescription,
             healthHazard   = chem.Nfpa_Health,
@@ -132,7 +133,8 @@ def init_db():
     locates_table = Locates.select()
     for location in locates_table:
         storagesModel.Storages(
-                roomId    = 1,
+                oldPK      = location.Location,
+                roomId     = 1,
                 name       = location.NameSorted).save()
         #print location.NameSorted + " was added to STORAGES"
     print "Storages were added to the database"
@@ -143,7 +145,7 @@ def init_db():
     cont_table = Batch.select()
     for cont in cont_table:
         relChemId = Chemicals.select(Chemicals.chemId).where(Chemicals.oldPK == cont.NameRaw_id).get()
-        relStorId = 1 
+        relStorId = Storages.select(Storages.sId).where(Storages.oldPK == cont.Id_id).get() 
         containersModel.Containers(
                 chemId              = relChemId.chemId,
                 storageId           = relStorId.sId,

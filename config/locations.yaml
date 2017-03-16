@@ -3,19 +3,41 @@ buildings:
     numFloors: 5
     address: "101 Chestnut St. Berea KY"
     rooms:
-      - name: "Floor 1 Test"
+      - name: "13A"
         floorId: 1
         storages:
-          - name: "Flammable Cabinet"
-            booleans:
-              - "flammable"
-              - "oxidizer"
+          - name: "13A"
+      - name: "13C"
+        floorId: 1
+        storages:
+          - name: "13C"
+      - name: "104"
+        floorId: 2
+        storages:
+          - name: "104"
+      - name: "201"
+        floorId: 3
+        storages:
+          - name: "201"
+      - name: "310"
+        floorId: 4
+        storages:
+          - name: "310"
+      - name: "404"
+        floorId: 5
+        storages:
+          - name: "404"
+      - name: "405"
+        floorId: 5
+        storages:
+          - name: "405"
+
   - name: 'Frost'
     numFloors: 3
     address: "101 Chestnut St. Berea KY"
     rooms:
-      - name: "Fuck This Shit"
+      - name: "Basement"
         floorId: 4
         storages:
-          - name: "Fuck This Shit"
-    
+          - name: "04"
+
