@@ -17,6 +17,7 @@ from flask import render_template, \
                           request, \
                           jsonify, \
                           redirect, \
+                          url_for, \
                           flash
 
 @app.route('/migrateChem/', methods = ['GET', 'POST'])
@@ -45,9 +46,7 @@ def migrateChem():
                 ###
                 status, flashMessage, flashFormat, newChem = addContainer(data, user.username)
                 flash(flashMessage, flashFormat)
-                return render_template("views/MigrateChem.html",
-                        config = config,
-			authLevel = userLevel)
+                return redirect(url_for("migrateChem"))
 
            elif request.form['formName'] == 'addChem':
                 data = request.form
@@ -118,11 +117,4 @@ def renderCorrectTemplate(barcode):
                                 chemConfig = chemConfig,
                                 authLevel = userLevel)
 
-                return render_template("views/MigrateChem.html",
-                    state = state,
-                    container = containerObj,
-                    chemical = chemObj,
-                    inputBar = inputBar,
-                    config = config,
-                    contConfig = contConfig,
-                    authLevel = userLevel)
+                return redirect(url_for("migrateChem"))

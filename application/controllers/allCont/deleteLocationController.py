@@ -10,8 +10,7 @@ from application.logic.getAuthUser import AuthorizedUser
 from application.logic.sortPost import *
 
 from flask import \
-    render_template, \
-     redirect, \
+    redirect, \
     request, \
     flash, \
     url_for, \
@@ -68,6 +67,6 @@ def maDelete(location, lId):
                     deleteStorage(lId)
                 else:
                     flash("This storage location could not be deleted, as there are 1 or more containers still assigned to it.", "list-group-item list-group-item-danger")
-        return redirect("/Home/") #need some js to handle this and edit in order to reload the page on the location tab
+        return redirect(url_for("adminHome")) #need some js to handle this and edit in order to reload the page on the location tab
     else:
         abort(403)

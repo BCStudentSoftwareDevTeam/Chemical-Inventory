@@ -8,6 +8,7 @@ from application.models.chemicalsModel import *
 from application.models.storagesModel import *
 from application.models.historiesModel import *
 from application.models.usersModel import *
+from application.config import *
 import random
 import datetime
 
@@ -31,6 +32,7 @@ def init_db():
     ####
     #Import MAINN table in CISPro into inventory.sqlite
     ####
+    """
     main_table = Main.select()
     for chem in  main_table:
         #Translate the form: int in CISPro -> string BCCIS
@@ -38,14 +40,13 @@ def init_db():
         state = state_map[chem.State]
 
         #Translate the structure: int CISPro -> string BCCIS
-        """
         if chem.Organic == 1:
             struct = "Organic"
         elif chem.Inorganic == 1:
             struct = "Inorganic"
         else:
             struct = "Unknown"
-        """
+
         #Translate Hazards for icon fields: int CISPro -> bool BCCIS
         if chem.Hazardous == 1 or chem.Carcinogenic == 1:
             hhazard = True
@@ -84,7 +85,7 @@ def init_db():
             primaryHazard  = primaryHazard[random.randrange(0, 9)],#chem.Id3 #This randomly selects pHaz
             formula        = chem.StructuralFormula,
             state          = state,
-            #structure      = struct,
+            structure      = struct,
             sdsLink        = "https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=" + str(chem.NameRaw),
             description    = chem.PhysicalDescription,
             healthHazard   = chem.Nfpa_Health,
@@ -100,76 +101,76 @@ def init_db():
             oxidizerPict   = oxidizer).save()
         #print chem.NameRaw + " was added to the database"
     print "Chemicals were added to the database"
-
+    """
     ####
     #Makes one building that the one floor is put in
     ####
-    buildingsModel.Buildings(
-        name               = "Science Building",
-        numFloors          = 1,
-        address            = "101 Chestnut St. Berea, KY").save()
-    print "Buildings were added to the database"
+    for building in addLocationConfig.buildings:
+        print building.keys()
+        currentBuildingId = buildingsModel.Buildings()
+        currentBuildingId.name = building['name']
+        currentBuildingId.numFloors = building['numFloors']
+        currentBuildingId.address = building['address']
+        currentBuildingId.save()
+        for i in range(building['numFloors']):
+            floorsModel.Floors(
+                buildId = currentBuildingId.bId,
+                name = i,
+                level = i).save()
+        for room in building['rooms']:
+            Room = roomsModel.Rooms()
+            Room.name = room['name']
+            Room.floorId = room['floorId']
+            Room.save()
+            for storage in room['storages']:
+                Storage = storagesModel.Storages()
+                Storage.roomId = Room.rId
+                Storage.name = storage['name']
+                Storage.save()
 
     ####
     #Makes one floor that the one room is put in
     ####
-    floorsModel.Floors(
-        buildId         = 1,
-        name            = "First Floor",
-        level           = 0).save()
-    print "Floors were added to the database"
 
     ####
     #Makes a single room that all storages are put in
     ####
-    roomsModel.Rooms(
-            name    = "Super Room",
-            floorId = 1).save()
-    print "Rooms were added to the database"
 
     ####
     #Import LOCATES Table from CISPro into inventory.sqlite
     ###
-    locates_table = Locates.select()
-    for location in locates_table:
-        storagesModel.Storages(
-                oldPK      = location.Location,
-                roomId     = 1,
-                name       = location.NameSorted).save()
-        #print location.NameSorted + " was added to STORAGES"
-    print "Storages were added to the database"
 
     ####
     #Import BATCHES Table from CISPro into inventory.sqlite
     ####
-    cont_table = Batch.select()
-    for cont in cont_table:
-        relChemId = Chemicals.select(Chemicals.chemId).where(Chemicals.oldPK == cont.NameRaw_id).get()
-        relStorId = Storages.select(Storages.sId).where(Storages.oldPK == cont.Id_id).get() 
-        containersModel.Containers(
-                chemId              = relChemId.chemId,
-                storageId           = relStorId.sId,
-                barcodeId           = cont.UniqueContainerID,
-                currentQuantityUnit = "gram (g)",
-                currentQuantity     = 4.0,
-                capacity            = 5.0,
-                receiveDate         = datetime.date.today(),
-                migrated            = 1).save()
-        #print cont.UniqueContainerID + " was added to Containers"i
-    print "Containers were added to the database"
+    # cont_table = Batch.select()
+    # for cont in cont_table:
+    #     relChemId = Chemicals.select(Chemicals.chemId).where(Chemicals.oldPK == cont.NameRaw_id).get()
+    #     relStorId = Storages.select(Storages.sId).where(Storages.oldPK == cont.Id_id).get()
+    #     containersModel.Containers(
+    #             chemId              = relChemId.chemId,
+    #             storageId           = relStorId.sId,
+    #             barcodeId           = cont.UniqueContainerID,
+    #             currentQuantityUnit = "gram (g)",
+    #             currentQuantity     = 4.0,
+    #             capacity            = 5.0,
+    #             receiveDate         = datetime.date.today(),
+    #             migrated            = 1).save()
+    #     #print cont.UniqueContainerID + " was added to Containers"i
+    # print "Containers were added to the database"
     ####
     #Init container histories
     ####
-    newCons = Containers.select()
-    for newcon in newCons:
-        currentQuant = str(newcon.currentQuantity) + str(newcon.currentQuantityUnit)
-        historiesModel.Histories(
-            movedTo       = newcon.storageId,
-            containerId   = newcon.conId,
-            action        = "Created",
-            pastQuantity  = currentQuant
-            ).save()
-    print "Initial Container Histories Created"
+    # newCons = Containers.select()
+    # for newcon in newCons:
+    #     currentQuant = str(newcon.currentQuantity) + str(newcon.currentQuantityUnit)
+    #     historiesModel.Histories(
+    #         movedTo       = newcon.storageId,
+    #         containerId   = newcon.conId,
+    #         action        = "Created",
+    #         pastQuantity  = currentQuant
+    #         ).save()
+    # print "Initial Container Histories Created"
     ####
     # Make all testing users
     ####
