@@ -68,11 +68,12 @@ def changeLocation(cont, status, data, user):
   Returns:
       Nothing
   """ #should return something for unit testing later
+  print data
   if status: # True if checking out
     try:
       cont.storageId = data['storageId']
       cont.checkedOut = status
-      cont.checkOutReason = data['forClass']
+      cont.checkOutReason = data['class']
       cont.forProf = data['forProf']
       cont.checkedOutBy = user
       cont.save()

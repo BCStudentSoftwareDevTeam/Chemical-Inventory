@@ -7,13 +7,16 @@ class Batch(Model):
    NameRaw            = ForeignKeyField(Main)
    UniqueContainerID1 = TextField()
    Id                 = ForeignKeyField(Locates)
+   """
    IsSupplyItem       = TextField()
    Quantity           = TextField()
    Size_Description   = TextField()
    NewLocationID      = TextField()
    ChangeDate         = TextField()
    NewLocation        = TextField()
+   """
    UniqueContainerID  = TextField()
+   """
    Rollbac_           = TextField()
    InitialDate        = TextField()
    InitialTimeSeconds = TextField()
@@ -49,7 +52,7 @@ class Batch(Model):
    ContDescript       = TextField()
    open_date          = TextField()
    DateLastScanned    = TextField()
-
+   """
    class Meta:
        database = getDB("cispro", "static")
 
@@ -60,6 +63,7 @@ def getCisProContainer(barcode):
                 .join(Locates, on=(Batch.Id_id == Locates.Location))\
                 .where((Batch.UniqueContainerID == barcode)|(Batch.UniqueContainerID == str(barcode).upper())).get()
     except Exception as e:
+        print e
         return False
 
 

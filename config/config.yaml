@@ -18,7 +18,8 @@ databases:
       filename: data/inventory.sqlite
   static:
     cispro:
-      filename: data/sample.sqlite
+      filename: data/full_db.sqlite
+      #filename: data/sample.sqlite
 
 roles:
   admin:
