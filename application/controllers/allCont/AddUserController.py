@@ -9,7 +9,9 @@ from flask import \
     render_template, \
     request, \
     url_for, \
-    flash
+    flash, \
+    redirect, \
+    url_for
 
 # PURPOSE: View all the user and add new users
 @app.route('/AddUser/', methods = ['GET', 'POST'])
@@ -25,5 +27,6 @@ def AddUser():
     if request.method == "POST":
       flashMessage, flashFormat = createUser(request.form, user.username, True) # createUser function located in usersModel.py
       flash(flashMessage, flashFormat)
+      return redirect(url_for("AddUser"))
   date = time.strftime("%d/%m/%Y")
   return render_template("views/AddUserView.html", config = config, authLevel = userLevel, date = date)

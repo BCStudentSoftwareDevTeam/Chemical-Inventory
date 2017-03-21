@@ -53,12 +53,12 @@ def createUser(data, createdBy, approval, authLevel = "systemUser"):
     if modelData['end_date'] <= datetime.date.today():
         return("Error: User could not be added. End Date must be later than today.", 'list-group-item list-group-item-danger')
     try:
-        Users.create(**modelData)
-        return(True, "Success: User added successfully.", 'list-group-item list-group-item-success')
+        user = Users.create(**modelData)
+        return("Success: "+user.first_name+ " " +user.last_name+ " added successfully.", 'list-group-item list-group-item-success')
     except Exception as e:
         if e.message == "UNIQUE constraint failed: users.username": #If User Already In system
-            return(False, "Error: "+modelData['username']+" Already In System", "list-group-item list-group-item-danger")
-        return(False, "Error: User could not be added.", 'list-group-item list-group-item-danger')
+            return("Error: "+modelData['username']+" Already In System", "list-group-item list-group-item-danger")
+        return("Error: User could not be added.", 'list-group-item list-group-item-danger')
 
 def approveUsers(user):
     try:
@@ -72,7 +72,7 @@ def denyUsers(user):
     try:
         query = Users.delete().where(Users.username == user)
         query.execute()
-        return("Success: User Access Denied.", 'list-group-item list-group-item-success')
+        return("Success: " +user+"'s Access Denied.", 'list-group-item list-group-item-success')
     except Exception as e:
         return("Error: User Could Not Be Removed.", 'list-group-item list-group-item-danger')
 
