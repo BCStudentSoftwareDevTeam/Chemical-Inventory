@@ -49,8 +49,8 @@ def deleteRoom(room):
   try:
     room = Rooms.get(Rooms.rId == room)
     room.delete_instance(recursive=True)
-    return(True, room.name + " was Successfully Removed From System", "list-group-item list-group-item-success", room)
+    return(True, room.name + " was Successfully Removed From System", "list-group-item list-group-item-success")
   except Exception as e:
-    return(False, "Room could not be Removed to System", "list-group-item list-group-item-danger", None)
+    return(False, "Room could not be Removed to System", "list-group-item list-group-item-danger")
 
 
