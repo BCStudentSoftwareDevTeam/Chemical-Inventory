@@ -32,9 +32,19 @@ def getStorages(room = None):
     except Exception as e:
       return e
 
-def deleteStorage(storage):
+def addStorage():
+    #Needs to be filled in with query and return status message
+    return 0
+
+def editStorage():
+    #Needes to be filled in with Query and return status message
+    return 0
+
+def deleteStorage(storage_id):
   try:
-    storage = Storages.get(Storages.sId == storage)
+    storage = Storages.get(Storages.sId == storage_id)
     storage.delete_instance(recursive=True)
+    return(True, str(storage.name) + " Storage was Successfully Removed", "list-group-item list-group-item-success")
   except Exception as e:
-    return e
+    return(False, str(storage.name) + " Storage was Successfully Removed", "list-group-item list-group-item-danger")
+
