@@ -160,11 +160,9 @@ def init_db():
         username = "webbi",
         first_name = "Ivy",
         last_name = "Webb",
-        auth_level = "systemUser",
-        emailadd = "settersz@berea.edu",
-        reportto = "Kye Hoover",
-        created_by = "ballz",
-        end_date = "10/31/2025").save()
+        auth_level = "admin",
+        emailadd = "webbi@berea.edu",
+        reportto = "Kye Hoover").save()
 
 print "Test Users were added to the database"
 
