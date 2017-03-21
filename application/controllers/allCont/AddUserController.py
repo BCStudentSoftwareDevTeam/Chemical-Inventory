@@ -25,7 +25,7 @@ def AddUser():
   print user.username, userLevel
   if userLevel == "admin":
     if request.method == "POST":
-      flashMessage, flashFormat = createUser(request.form, user.username, True) # createUser function located in usersModel.py
+      status, flashMessage, flashFormat = createUser(request.form, user.username, True) # createUser function located in usersModel.py
       flash(flashMessage, flashFormat)
       return redirect(url_for("AddUser"))
   date = time.strftime("%d/%m/%Y")

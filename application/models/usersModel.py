@@ -54,11 +54,11 @@ def createUser(data, createdBy, approval, authLevel = "systemUser"):
         return("Error: User could not be added. End Date must be later than today.", 'list-group-item list-group-item-danger')
     try:
         user = Users.create(**modelData)
-        return("Success: "+user.first_name+ " " +user.last_name+ " added successfully.", 'list-group-item list-group-item-success')
+        return(True, "Success: "+user.first_name+ " " +user.last_name+ " added successfully.", 'list-group-item list-group-item-success')
     except Exception as e:
         if e.message == "UNIQUE constraint failed: users.username": #If User Already In system
-            return("Error: "+modelData['username']+" Already In System", "list-group-item list-group-item-danger")
-        return("Error: User could not be added.", 'list-group-item list-group-item-danger')
+            return(False, "Error: "+modelData['username']+" Already In System", "list-group-item list-group-item-danger")
+        return(False, "Error: User could not be added.", 'list-group-item list-group-item-danger')
 
 def approveUsers(user):
     try:
