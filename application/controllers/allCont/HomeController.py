@@ -65,6 +65,7 @@ def adminHome():
                 elif data['action'] == 'add':
                     modelData, extraData = sortPost(data, Storages)
                     Storages.create(**modelData)
+            return redirect(url_for("adminHome"))
 
         for building in buildings: #Set floor dictionary with key of current building, and value of all floors that reference that building
             floors[building.bId] = getFloors(building.bId)
@@ -72,6 +73,7 @@ def adminHome():
                 rooms[floor.fId] = Rooms.select().where(Rooms.floorId == floor.fId).order_by(+Rooms.name)
                 for room in rooms[floor.fId]: #Set storage dictionary with key of current room, and value of all storages that reference that room
                     storages[room.rId] = Storages.select().where(Storages.roomId == room.rId)
+
         return render_template("views/HomeView.html",
                                config = config,
                                locationConfig = locationConfig,
