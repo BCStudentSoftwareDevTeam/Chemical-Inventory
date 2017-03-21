@@ -65,7 +65,7 @@ def init_db():
         emailadd = "test.berea.edu?",
         reportto = "test.berea.edu?",
         approve = True).save()
-
+ 
     usersModel.Users(
         username = "hooverk",
         first_name = "Kye",
@@ -162,7 +162,8 @@ def init_db():
         last_name = "Webb",
         auth_level = "admin",
         emailadd = "webbi@berea.edu",
-        reportto = "Kye Hoover").save()
+        reportto = "Kye Hoover",
+        approve = True).save()
 
 print "Test Users were added to the database"
 
