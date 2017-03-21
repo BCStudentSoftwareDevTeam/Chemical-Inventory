@@ -21,15 +21,18 @@ def RequestUserAccess():
   if userLevel == -1 or user == -1:
     abort(403)
   print user.username, userLevel
-  
+
   if request.method == "POST":
-    flashMessage, flashFormat = createUser(request.form, user.username, False)
-    flash(flashMessage, flashFormat)
+    status, flashMessage, flashFormat = createUser(request.form, user.username, False)
+    if status:
+        flash("Success: Access for "+ user.first_name + " " + user.last_name + " was Requested", flashFormat)
+    else:
+        flash(flashMessage, flashFormat)
   return render_template("views/RequestUserAccessView.html",
                           config = config,
                           userConfig = userConfig,
                           authLevel = userLevel)
-    
-  
- 
- 
+
+
+
+

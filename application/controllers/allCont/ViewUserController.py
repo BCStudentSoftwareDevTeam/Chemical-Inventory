@@ -7,9 +7,10 @@ from application.logic.getAuthUser import AuthorizedUser
 from flask import \
     render_template, \
     request, \
-    url_for
+    url_for, \
+    flash
 
-# PURPOSE: View all the user and add new users 
+# PURPOSE: View all the user and add new users
 @app.route('/ViewUser/', methods = ['GET', 'POST'])
 def ViewUser():
   # User authorization
@@ -24,10 +25,9 @@ def ViewUser():
     data = request.form
     if 'auth_level' in data:
       #Updating selected user to a new selected auth_level
-      updateQuery = Users.update(auth_level = data['auth_level']).where(Users.username == data['username'])
-      updateQuery.execute()
+      flashMessage, flashFormat = updateUserAuth(data['username'], data['auth_level'])
     else:
-      removeQuery = Users.delete().where(Users.username == data['username'])
-      removeQuery.execute()
+      flashMessage, flashFormat = denyUsers(data['username'])
+    flash(flashMessage, flashFormat)
   return render_template("views/ViewUserView.html", config = config, authLevel = userLevel, usersList = usersList)
 

@@ -10,10 +10,6 @@ from absolutepath import getAbsolutePath
 config_path = getAbsolutePath('config/config.yaml')
 config = Configuration.from_file(config_path).configure()
 
-# Load the controllers (if needed)
-# controllers = Configuration.from_file('controllers.yaml').configure()
-# config.controllers = controllers
-
 # Added for splitting up Add New Chemical form config from config
 chemConfig_path = getAbsolutePath('config/chemicalConfig.yaml')
 chemConfig = Configuration.from_file(chemConfig_path).configure()
