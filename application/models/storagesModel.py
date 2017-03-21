@@ -32,6 +32,14 @@ def getStorages(room = None):
     except Exception as e:
       return e
 
+def addStorage():
+    #Needs to be filled in with query and return status message
+    return 0
+
+def editStorage():
+    #Needes to be filled in with Query and return status message
+    return 0
+
 def deleteStorage(storage_id):
   try:
     storage = Storages.get(Storages.sId == storage_id)

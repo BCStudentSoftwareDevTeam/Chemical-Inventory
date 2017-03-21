@@ -60,6 +60,7 @@ def adminHome():
                     flash(flashMessage, flashFormat)
             elif data['location'] == "Storage": #If the form is editing a storage
                 if data['action'] == 'edit':
+                    print data
                     storage = Storages.get(Storages.sId == data['id']) #Get storage location to be edited and change all information to what was in form
                     for i in data:
                         setattr(storage, i, data[i])
