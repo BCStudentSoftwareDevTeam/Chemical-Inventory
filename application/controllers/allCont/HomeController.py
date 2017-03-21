@@ -53,9 +53,11 @@ def adminHome():
                 flash(flashMessage, flashFormat)
             elif data['location'] == "Room": #If the form is editing a room
                 if data['action'] == 'edit':
-                    editRoom(data)
+                    status, flashMessage, flashFormat, editedRoom = editRoom(data)
+                    flash(flashMessage, flashFormat)
                 elif data['action'] == 'add':
-                    createRoom(data)
+                    status, flashMessage, flashFormat, editedRoom = createRoom(data)
+                    flash(flashMessage, flashFormat)
             elif data['location'] == "Storage": #If the form is editing a storage
                 if data['action'] == 'edit':
                     storage = Storages.get(Storages.sId == data['id']) #Get storage location to be edited and change all information to what was in form

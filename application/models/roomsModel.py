@@ -12,14 +12,18 @@ class Rooms (Model):
     database = getDB("inventory", "dynamic")
 
 def editRoom(data):
-  room = Rooms.get(Rooms.rId == data['id']) #Get room to be edited and change all information to what was in form
-  room.name = data['name']
-  room.save()
+  try:
+    room = Rooms.get(Rooms.rId == data['id']) #Get room to be edited and change all information to what was in form
+    room.name = data['name']
+    room.save()
+    return(True, room.name + " was Successfully Modified", "list-group-item list-group-item-success", room)
+  except Exception as e:
+    return(False, "Room could not be Modified", "list-group-item list-group-item-danger", None)
 
 def createRoom(data):
   try:
     modelData, extraData = sortPost(data, Rooms)
-    Rooms.create(**modelData)
+    room = Rooms.create(**modelData)
     lastRoomId = Rooms.select().order_by(-Rooms.rId).get().rId
     application.models.storagesModel.Storages.create(roomId = lastRoomId, # This isn't letting me import Storages or storagesModel. I think it is because that file in turn imports this one.
                     name = modelData['name'],
@@ -31,8 +35,9 @@ def createRoom(data):
                     base = True,
                     peroxide = True,
                     pressure = True)
+    return(True, room.name + " was Successfully Added to System", "list-group-item list-group-item-success", room)
   except Exception as e:
-    return e
+    return(False, "Room could not be Added to System", "list-group-item list-group-item-danger", None)
 
 def getRooms(floor):
   try:
@@ -44,5 +49,8 @@ def deleteRoom(room):
   try:
     room = Rooms.get(Rooms.rId == room)
     room.delete_instance(recursive=True)
+    return(True, room.name + " was Successfully Removed From System", "list-group-item list-group-item-success", room)
   except Exception as e:
-    return e
+    return(False, "Room could not be Removed to System", "list-group-item list-group-item-danger", None)
+
+
