@@ -53,11 +53,14 @@ def adminHome():
                 flash(flashMessage, flashFormat)
             elif data['location'] == "Room": #If the form is editing a room
                 if data['action'] == 'edit':
-                    editRoom(data)
+                    status, flashMessage, flashFormat, editedRoom = editRoom(data)
+                    flash(flashMessage, flashFormat)
                 elif data['action'] == 'add':
-                    createRoom(data)
+                    status, flashMessage, flashFormat, editedRoom = createRoom(data)
+                    flash(flashMessage, flashFormat)
             elif data['location'] == "Storage": #If the form is editing a storage
                 if data['action'] == 'edit':
+                    print data
                     storage = Storages.get(Storages.sId == data['id']) #Get storage location to be edited and change all information to what was in form
                     for i in data:
                         setattr(storage, i, data[i])
@@ -65,6 +68,7 @@ def adminHome():
                 elif data['action'] == 'add':
                     modelData, extraData = sortPost(data, Storages)
                     Storages.create(**modelData)
+            return redirect(url_for("adminHome"))
 
         for building in buildings: #Set floor dictionary with key of current building, and value of all floors that reference that building
             floors[building.bId] = getFloors(building.bId)
@@ -72,6 +76,7 @@ def adminHome():
                 rooms[floor.fId] = Rooms.select().where(Rooms.floorId == floor.fId).order_by(+Rooms.name)
                 for room in rooms[floor.fId]: #Set storage dictionary with key of current room, and value of all storages that reference that room
                     storages[room.rId] = Storages.select().where(Storages.roomId == room.rId)
+
         return render_template("views/HomeView.html",
                                config = config,
                                locationConfig = locationConfig,
