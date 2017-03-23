@@ -1,5 +1,6 @@
 from application.models.util import *
 from application.logic.sortPost import *
+from application.config import *
 
 class Chemicals (Model):
   chemId          = PrimaryKeyField()
@@ -94,5 +95,17 @@ def getChemical(chemId):
 def getChemicals():
   try:
     return Chemicals.select()
+  except Exception as e:
+    return e
+
+def getChemicalHazards(chemId):
+  pictList = []
+  try:
+    chem = Chemicals.get(Chemicals.chemId == chemId)
+    if chem:
+      for hazardPict in chemConfig['pictograms']:
+        if getattr(chem, hazardPict['id']):
+          pictList.append((hazardPict['pict'], hazardPict['alt']))
+      return pictList
   except Exception as e:
     return e

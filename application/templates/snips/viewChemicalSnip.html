@@ -162,8 +162,8 @@
 
         <div id="hazards" class="tab-pane fade">
           {# Show all hazards or chemical (nfpa, hmis, and pictograms) #}
-          Primary Hazard: {{chemInfo.primaryHazard}}
-          <div class="col-sm-7">
+          <div class="col-sm-6">NFPA 704 Placeholder</div>
+          <div class="col-sm-6">
             <div class="panel panel-default text-center">
               <div class="panel-heading">
                 <h3 class="panel-title">Hazardous Materials Identification System (HMIS)</h3>
@@ -185,6 +185,12 @@
                 </table>
               </div>
             </div>
+          </div>
+          <div class="col-sm-6 col-sm-offset-3 text-center">
+            <h4>Hazard Communication Standard Pictograms</h4>
+            {% for hazardPict in hazardList %}
+              <img src="{{hazardPict[0]}}" alt="{{hazardPict[1]}}">
+            {% endfor %}
           </div>
         </div>
 

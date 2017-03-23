@@ -28,9 +28,9 @@ def ViewChemical(chemId):
   if userLevel == -1 or user == -1:
     abort(403)
   print user.username, userLevel
-
+  hazardList = getChemicalHazards(chemId)
   try:
-    chemInfo = Chemicals.get(Chemicals.chemId == chemId) #Get chemical by correct chemId
+    chemInfo = getChemical(chemId) #Get chemical by correct chemId
   except:
     return redirect('ChemTable')
   if chemInfo.remove == True: #If the chemical attribute, 'remove', was set to True, go back to the chemical table.
@@ -74,6 +74,7 @@ def ViewChemical(chemId):
                            chemConfig = chemConfig,
                            storageList = storageList,
                            buildingList = buildingList,
+                           hazardList = hazardList,
                            barcode = barcode,
                            authLevel = userLevel,
                            migrated = 0,
@@ -93,6 +94,7 @@ def ViewChemical(chemId):
                            containers = containers,
                            contConfig = contConfig,
                            chemConfig = chemConfig,
+                           hazardList = hazardList,
                            quote = quote,
                            authLevel = userLevel,
                            migrated = 0,
