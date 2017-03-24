@@ -63,7 +63,6 @@ def createChemical(data):
     elif modelData['sdsLink'][0:8] != 'https://' and  modelData['sdsLink'][0:7] != 'http://':
 	    modelData['sdsLink'] = 'https://' + modelData['sdsLink']
     modelData['name'] = modelData['name'].upper()
-    print modelData
     newChem = Chemicals.create(**modelData) #Create instance of Chemical with mapped info in modelData
     return(True, "Chemical Created Successfully!", "list-group-item list-group-item-success", newChem)
   except Exception as e:
