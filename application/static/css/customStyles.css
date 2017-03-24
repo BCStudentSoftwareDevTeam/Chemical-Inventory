@@ -113,3 +113,36 @@ label img {
 .printInfo{
     display: none;
 }
+
+.diamond{
+  width: 300px;
+  height: 300px;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  margin: 100px;
+}
+
+#NFPA1{
+  top:0;
+  left:0;
+  background:#ff6666;
+}
+
+#NFPA2{
+  top:0;
+  left:50%;
+  background:#6691ff;
+}
+
+#NFPA3{
+  top:50%;
+  left:0;
+  background:#fcff66;
+}
+
+#NFPA4{
+  top:50%;
+  left:0;
+  background:#ffffff;
+}
