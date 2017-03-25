@@ -42,7 +42,7 @@
             <div class="form-group row" id="{{group.id}}Parent">
               <label for="{{group.id}}" class="col-sm-6">{{group.name}}</label>
               <div class="col-sm-6">
-              <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" placeholder="{{group.placeholder}}" min='1' max='10000' step="any" {{group.special}}/>
+              <input class="form-control" type="{{group.type}}" name="{{group.id}}" id="{{group.id}}" placeholder="{{group.placeholder}}" min='0.01' max='10000' step="0.01" {{group.special}}/>
               {% if group.id == 'capacity' %}
                 <span class="label label-danger hidden messages" id="{{group.id}}Message">Value must be equal to or greater than value of Current Quantity</span>
               {% endif %}

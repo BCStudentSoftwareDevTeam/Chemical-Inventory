@@ -6,6 +6,14 @@
                 <label class="label-control" for="username">Username:</label>
                 <input class="form-control" type="text" id="username" name="username" required autofocus>
             </div>
+            <div class="form-group">
+                <label class="label-control" for="username">First Name:</label>
+                <input class="form-control" type="text" id="first_name" name="first_name" required autofocus>
+            </div>
+             <div class="form-group">
+                <label class="label-control" for="username">Last Name:</label>
+                <input class="form-control" type="text" id="last_name" name="last_name" required autofocus>
+            </div>
             {% if authLevel == "admin" %}
                 <div class="form-group">
                     <label class="label-control" for="auth_level">Authorization Level:</label>

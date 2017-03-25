@@ -37,34 +37,26 @@ def maDelete(location, lId):
                             if getContainers(storage) != False:# Try to get any containers related to this storage, they do not need to be saved as their mere existence prohibits this building from being deleted.
                                 state = 1
                 if state != 1:
-                    deleteBuilding(lId)
+                    status, flashMessage, flashStatus = deleteBuilding(lId)
+                    flash(flashMessage, flashStatus)
                 else:
                     flash("This building could not be deleted, as there are 1 or more containers still assigned to it.",  "list-group-item list-group-item-danger")
-            elif location == "Floor":
-                rooms = Rooms.select().where(Rooms.floorId == lId)
-                for room in rooms:
-                    storages = getStorages(room)
-                    for storage in storages:
-                         if getContainers(storage) != False:# Try to get any containers related to this storage, they do not need to be saved as their mere existence prohibits this building from being deleted.
-                            state = 1,
-                if state != 1:
-                    deleteFloor(lId)
-                else:
-                    flash("This floor could not be deleted, as there are 1 or more containers still assigned to it.",  "list-group-item list-group-item-danger")
             elif location == "Room":
                 storages = getStorages(lId)
                 for storage in storages:
                      if getContainers(storage) != False:# Try to get any containers related to this storage, they do not need to be saved as their mere existence prohibits this building from being deleted.
                         state = 1
                 if state != 1:
-                    deleteRoom(lId)
+                    status, flashMessage, flashStatus = deleteRoom(lId)
+                    flash(flashMessage, flashStatus)
                 else:
                     flash("This room could not be deleted, as there are 1 or more containers still assigned to it.", "list-group-item list-group-item-danger")
             elif location == "Storage":
                 if getContainers(lId) != False:# Try to get any containers related to this storage, they do not need to be saved as their mere existence prohibits this building from being deleted.
                     state = 1
                 if state != 1:
-                    deleteStorage(lId)
+                    status, flashMessage, flashStatus = deleteStorage(lId)
+                    flash(flashMessage, flashStatus)
                 else:
                     flash("This storage location could not be deleted, as there are 1 or more containers still assigned to it.", "list-group-item list-group-item-danger")
         return redirect(url_for("adminHome")) #need some js to handle this and edit in order to reload the page on the location tab
