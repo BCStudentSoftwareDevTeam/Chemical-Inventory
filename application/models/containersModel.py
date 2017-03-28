@@ -3,6 +3,7 @@ from application.models.chemicalsModel import Chemicals
 from application.models.storagesModel import Storages
 from application.models.roomsModel import *
 import datetime
+import logging
 
 class Containers (Model):
   conId              = PrimaryKeyField()
@@ -51,9 +52,10 @@ def addContainer(data, user):
         modelData, extraData = sortPost(data, Containers)
         cont = Containers.create(**modelData)
         application.models.historiesModel.updateHistory(cont, "Created", data['storageId'], user)
+        app.logger.info("Container: %s" %(cont))
         return (True, "Container Created Successfully!", "list-group-item list-group-item-success", cont)
     except Exception as e:
-        print e
+        app.logger.error("ERROR: %s" %(e))
         return (False, "Container Could Not Be Created!", "list-group-item list-group-item-danger", None)
     return Containers.get(Containers.barcodeId == barcode)
 

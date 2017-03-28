@@ -1,6 +1,7 @@
 from application.models.util import *
 from application.logic.sortPost import *
 from application.config import *
+import logging
 
 class Chemicals (Model):
   chemId          = PrimaryKeyField()
@@ -65,9 +66,10 @@ def createChemical(data):
 	    modelData['sdsLink'] = 'https://' + modelData['sdsLink']
     modelData['name'] = modelData['name'].upper()
     newChem = Chemicals.create(**modelData) #Create instance of Chemical with mapped info in modelData
+    app.logger.info("Chemical: %s" %(newChem))
     return(True, "Chemical Created Successfully!", "list-group-item list-group-item-success", newChem)
   except Exception as e:
-    print e
+    app.logger.error("ERROR: %s" %(e))
     return(False, "Chemical Could Not Be Created.", "list-group-item list-group-item-danger", None)
 
 def deleteChemical(chemId):
