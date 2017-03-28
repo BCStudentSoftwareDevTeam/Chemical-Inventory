@@ -49,7 +49,6 @@ def addContainer(data, user):
         """
     try:
         modelData, extraData = sortPost(data, Containers)
-        print modelData
         cont = Containers.create(**modelData)
         application.models.historiesModel.updateHistory(cont, "Created", data['storageId'], user)
         return (True, "Container Created Successfully!", "list-group-item list-group-item-success", cont)
