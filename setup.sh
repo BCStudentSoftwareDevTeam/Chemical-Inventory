@@ -14,6 +14,7 @@ PYYAML_VERSION="${PYYAML_VERSION:-3.11}"
 CONFIGURE_VERSION="${CONFIGURE_VERSION:-0.5}"
 PYTEST_VERSION="${PYTEST_VERSION:-3.0.5}"
 XLSXWRITER_VERSION="${XLSXWRITER_VERSION:-1.2.0}"
+UNIDECODE_VERSION="${UNIDECODE_VERSION:-0.4.20}"
 # Check for virtualenv
 command -v virtualenv >/dev/null 2>&1 || { 
   echo >&2 "I require 'virtualenv' but it's not installed.  Aborting."; 
@@ -74,4 +75,7 @@ pip install -U "pytest==$PYTEST_VERSION"
 # http://docs.pytest.org/en/latest/
 
 pip install -U "xlsxwriter==$XLSXWRITER_VERSION"
-# https://github.com/jmcnamara/XlsxWriter
+# https://xlsxwriter.readthedocs.io/
+
+pip install -U "unidecode==$UNIDECODE_VERSION"
+# https://pypi.python.org/pypi/Unidecode
