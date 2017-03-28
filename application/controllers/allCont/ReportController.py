@@ -1,6 +1,8 @@
 from application import app
 from application.config import *
 from application.logic.getAuthUser import AuthorizedUser
+from application.logic.excelMaker import exportExcel
+
 
 from flask import render_template, \
                   request, \
@@ -21,5 +23,5 @@ def report():
                                    config = config)
         else:
             data = request.form
-            print data['test']
+            exportExcel(data['test'])
             return redirect(url_for("report"))

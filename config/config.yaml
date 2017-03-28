@@ -120,6 +120,9 @@ flask:
   # it. Hence, we will randomly generate a key.
   secretKey: RANDOM
 
+export:
+  path: "application/Report.xlsx"
+
 DEBUG:
   user: "ballz" #admin
   # user: "hooverk" #systemAdmin

@@ -1,11 +1,20 @@
-import xlsxwriter, datetime
+from openpyxl import Workbook
+import datetime
 from application import app
+from application.config import *
 from application.models.chemicalsModel import *
 from application.models.containersModel import *
 from application.models.roomsModel import *
 from application.models.storagesModel import *
 from application.models.buildingsModel import *
 from application.models.historiesModel import *
+
+def exportExcel(title):
+    book = Workbook()
+    sheet = book.active
+    sheet.title = title
+    sheet.append(['Row1', 'Row2', 'Row3'])
+    book.save(filename = config["export"]["path"])
 
 def locationReport():
     """
