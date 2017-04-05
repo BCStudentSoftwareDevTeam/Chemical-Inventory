@@ -29,6 +29,7 @@ def ViewChemical(chemId):
     abort(403)
   print user.username, userLevel
   hazardList = getChemicalHazards(chemId)
+
   try:
     chemInfo = getChemical(chemId) #Get chemical by correct chemId
   except:
@@ -57,6 +58,7 @@ def ViewChemical(chemId):
 
     except Exception as e:
         barcode = genBarcode("00000000")
+    
     #lastCont needs to be assigned after any potential updates to the last barcode, and before render_template
     containers = (((Containers
                     .select())

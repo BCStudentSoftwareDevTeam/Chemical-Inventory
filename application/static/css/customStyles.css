@@ -115,34 +115,52 @@ label img {
 }
 
 .diamond{
-  width: 300px;
-  height: 300px;
+  width: 14vw;
+  height: 14vw;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
-  margin: 100px;
+  margin: 20%;
 }
 
-#NFPA1{
+.diamond tr td{
+  border: 1px solid black;
+}
+
+.textRotate{
+  -webkit-transform: rotate(315deg);
+  -ms-transform: rotate(315deg);
+  transform: rotate(315deg);
+}
+
+#flammableCell{
   top:0;
   left:0;
   background:#ff6666;
+  width: 50%;
+  height: 50%;
 }
 
-#NFPA2{
+#reactiveCell{
   top:0;
   left:50%;
   background:#6691ff;
+  width: 50%;
+  height: 50%;
 }
 
-#NFPA3{
+#healthHazardCell{
   top:50%;
   left:0;
   background:#fcff66;
+  width: 50%;
+  height: 50%;
 }
 
-#NFPA4{
+#otherCell{
   top:50%;
   left:0;
   background:#ffffff;
+  width: 50%;
+  height: 50%;
 }
