@@ -124,8 +124,8 @@ $(document).on('shown.bs.modal', '#editStorageModal', function(event) {
             data: {sId : attribute},
             type: 'GET',
             success: function(data){
-                modal.find('input[id="name"]').val(data['name']);
-                modal.find('input[id="id"]').val(attribute);
+              modal.find('input[id="name"]').val(data['name']);
+              modal.find('input[id="id"]').val(attribute);
                 for(var key in data){
                     if (data.hasOwnProperty(key)) {
                         if (key == "roomId" || key == "sId") {

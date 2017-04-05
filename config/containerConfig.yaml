@@ -56,7 +56,7 @@ containerInformation:
       id: "manufacturer"
       type: "text"
       placeholder: "Manufacturer"
-      special: "required"
+      special: ""
     - name: "Barcode"
       id: "barcodeId"
       type: "hidden"

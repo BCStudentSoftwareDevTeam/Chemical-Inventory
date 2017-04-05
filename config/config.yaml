@@ -120,8 +120,6 @@ flask:
   # it. Hence, we will randomly generate a key.
   secretKey: RANDOM
 
-controllers: !include:controllers.yaml
-
 DEBUG:
   user: "ballz" #admin
   # user: "hooverk" #systemAdmin

@@ -22,11 +22,11 @@ def editFloor(data):
 
 def createFloor(data):
   try:
-    print data
     modelData, extraData = sortPost(data, Floors)
-    Floors.create(**modelData)
+    floor = Floors.create(**modelData)
+    return(True, floor.name + " was Successfully Created", "list-group-item list-group-item-success", floor)
   except Exception as e:
-    return e
+    return(False, "Floor Could Not Be Added to System", "list-group-item list-group-item-danger", None)
 
 def getFloors(building):
   try:
@@ -36,7 +36,8 @@ def getFloors(building):
 
 def deleteFloor(building):
   try:
-    Floors.get(Floors.fId == building)
+    floor = Floors.get(Floors.fId == building)
     floor.delete_instance(recursive=True)
+    return(True, floor.name + " was Successfully Deleted", "list-group-item list-group-item-success", floor)
   except Exception as e:
-    return e
+    return(False, floor.name + " Could Not Be Deleted to System", "list-group-item list-group-item-danger", None)

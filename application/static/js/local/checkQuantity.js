@@ -37,7 +37,7 @@ function checkVals(groups) {
         }
         var convertedCapacity = window.conversionObject.functions.converter(capacityMeasure, capacityUnit, convertTo, capacity) //convert capacity to correct measurement
         var convertedQuanity = window.conversionObject.functions.converter(quantityMeasure, quantityUnit, convertTo, quantity) //convert quantity to correct measurment
-        if (convertedCapacity >= convertedQuanity){
+      if (convertedCapacity >= convertedQuanity){
             return true; //No errors, the form can be submitted as is
         } else {
             removePreviousErrors();
