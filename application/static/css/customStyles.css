@@ -144,7 +144,7 @@ label img {
 #reactiveCell{
   top:0;
   left:50%;
-  background:#6691ff;
+  background:#fcff66;
   width: 50%;
   height: 50%;
 }
@@ -152,7 +152,7 @@ label img {
 #healthHazardCell{
   top:50%;
   left:0;
-  background:#fcff66;
+  background:#6691ff;
   width: 50%;
   height: 50%;
 }
