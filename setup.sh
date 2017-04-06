@@ -14,6 +14,8 @@ PYYAML_VERSION="${PYYAML_VERSION:-3.11}"
 CONFIGURE_VERSION="${CONFIGURE_VERSION:-0.5}"
 PYTEST_VERSION="${PYTEST_VERSION:-3.0.5}"
 OPENPYXL_VERSION="${OPENPYXL_VERSION:-2.4.5}"
+UNIDECODE_VERSION="${UNIDECODE_VERSION:-0.4.20}"
+
 # Check for virtualenv
 command -v virtualenv >/dev/null 2>&1 || { 
   echo >&2 "I require 'virtualenv' but it's not installed.  Aborting."; 
@@ -75,3 +77,7 @@ pip install -U "pytest==$PYTEST_VERSION"
 
 pip install -U "openpyxl==$OPENPYXL_VERSION"
 # https://github.com/jmcnamara/XlsxWriter
+
+pip install -U "unidecode==$UNIDECODE_VERSION"
+# https://pypi.python.org/pypi/Unidecode
+
