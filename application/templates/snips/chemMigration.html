@@ -97,7 +97,11 @@
                 <select id="flammable" name="flammable" class="form-control">
                   <option value="" selected disabled>Select One</option>
                 {% for selection in chemConfig['selections'] %}
-                  <option value="{{selection}}">{{selection}}</option>
+                  {% if container.NameRaw.Nfpa_Flamable == selection %}
+                    <option value="{{selection}}" selected="selected">{{selection}}</option>
+                  {% else %}
+                    <option value="{{selection}}">{{selection}}</option>
+                  {% endif %}
                 {% endfor %}
               </div>
             </td>
@@ -106,7 +110,11 @@
                 <select id="reactive" name="reactive" class="form-control">
                   <option value="" selected disabled>Select One</option>
                 {% for selection in chemConfig['selections'] %}
-                  <option value="{{selection}}">{{selection}}</option>
+                  {% if container.NameRaw.Nfpa_Reactive == selection %}
+                    <option value="{{selection}}" selected="selected">{{selection}}</option>
+                  {% else %}
+                    <option value="{{selection}}">{{selection}}</option>
+                  {% endif %}
                 {% endfor %}
               </div>
             </td>
@@ -117,7 +125,11 @@
                 <select id="healthHazard" name="healthHazard" class="form-control">
                   <option value="" selected disabled>Select One</option>
                 {% for selection in chemConfig['selections'] %}
-                  <option value="{{selection}}">{{selection}}</option>
+                   {% if container.NameRaw.Nfpa_Health == selection %}
+                    <option value="{{selection}}" selected="selected">{{selection}}</option>
+                  {% else %}
+                    <option value="{{selection}}">{{selection}}</option>
+                  {% endif %}
                 {% endfor %}
               </div>
             </td>
