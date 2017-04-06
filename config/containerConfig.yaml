@@ -28,6 +28,7 @@ containerInformation:
           units:
             - "Bag"
             - "Bottle"
+            - "Bucket"
             - "Can"
             - "Drum"
             - "Jar"
