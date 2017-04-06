@@ -85,7 +85,7 @@ def init_db():
             formula        = chem.StructuralFormula,
             state          = state,
             #structure      = struct,
-            sdsLink        = "https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=" + str(chem.NameRaw),
+            #sdsLink        = "https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm=" + str(chem.NameRaw),
             description    = chem.PhysicalDescription,
             healthHazard   = chem.Nfpa_Health,
             flammable      = chem.Nfpa_Flamable,

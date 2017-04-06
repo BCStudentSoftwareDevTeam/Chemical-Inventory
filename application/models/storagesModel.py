@@ -3,7 +3,7 @@ from application.models.roomsModel import Rooms
 
 class Storages(Model):
   sId           = PrimaryKeyField()
-  roomId        = ForeignKeyField(Rooms) # When creating a container, select room first, then populate dropdown with all storages with matching roomId.
+  roomId        = ForeignKeyField(Rooms, related_name="stor") # When creating a container, select room first, then populate dropdown with all storages with matching roomId.
   oldPK         = IntegerField(null = True)
   name          = TextField() # Name of the specific storage unit ex: "Flammable Cabinet"
   # Booleans of true are what the storage is allowed to hold

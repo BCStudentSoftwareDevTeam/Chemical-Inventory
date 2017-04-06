@@ -1,7 +1,7 @@
 from application import app
 from application.config import *
 from application.logic.getAuthUser import AuthorizedUser
-from application.logic.excelMaker import exportExcel
+from application.logic.excelMaker import *
 
 
 from flask import render_template, \
@@ -23,5 +23,5 @@ def report():
                                    config = config)
         else:
             data = request.form
-            exportExcel(data['test'])
+            genLocationReport(data['test'])
             return redirect(url_for("report"))

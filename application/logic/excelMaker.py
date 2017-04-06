@@ -2,12 +2,8 @@ from openpyxl import Workbook
 import datetime
 from application import app
 from application.config import *
-from application.models.chemicalsModel import *
-from application.models.containersModel import *
-from application.models.roomsModel import *
-from application.models.storagesModel import *
-from application.models.buildingsModel import *
-from application.models.historiesModel import *
+from application.queries.locationReportQueries import *
+from application.queries.hazardReportQueries import *
 
 def exportExcel(title):
     book = Workbook()
@@ -16,19 +12,30 @@ def exportExcel(title):
     sheet.append(['Row1', 'Row2', 'Row3'])
     book.save(filename = config["export"]["path"])
 
-def locationReport():
+def genLocationReport(loc_id):
     """
     Returns a file of all chemicals and containers in a location
     """
+    print loc_id
+    #for cont in getChemInStor(loc_id):
+    #    print cont.chemId.name
+    #for cont in getChemInRoom(loc_id):
+    #    print cont.barcodeId
+    #for cont in getChemInFloor(loc_id):
+    #    print cont.barcodeId
+    #for cont in getChemInBuild(loc_id):
+    #    print cont.barcodeId
+    for cont in getIBFlamLiquids():
+        print cont.barcodeId
     return 0
 
-def hazardReport(building):
+def genHazardReport(building):
     """
     Returns the quantity of each hazard by floor in building
     """
     return 0
 
-def specialHazardList():
+def genSpecialHazardList():
     """
     Returns all special hazards (Peroxide, Pressure, Toxin/Time, Req_Stabalizer)
     """
