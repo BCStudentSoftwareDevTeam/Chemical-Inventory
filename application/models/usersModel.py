@@ -5,6 +5,8 @@ import pytest
 class Users (Model):
     userId       = PrimaryKeyField()
     username     = TextField(null = False, unique = True)
+    first_name   = TextField(null = False)
+    last_name    = TextField(null = False)
     auth_level   = TextField(null = False)
     emailadd     = TextField(null = True)
     approve      = BooleanField(default = False)
@@ -51,10 +53,12 @@ def createUser(data, createdBy, approval, authLevel = "systemUser"):
     if modelData['end_date'] <= datetime.date.today():
         return("Error: User could not be added. End Date must be later than today.", 'list-group-item list-group-item-danger')
     try:
-        Users.create(**modelData)
-        return("Success: User added successfully.", 'list-group-item list-group-item-success')
-    except:
-        return("Error: User could not be added.", 'list-group-item list-group-item-danger')
+        user = Users.create(**modelData)
+        return(True, "Success: "+user.first_name+ " " +user.last_name+ " added successfully.", 'list-group-item list-group-item-success')
+    except Exception as e:
+        if e.message == "UNIQUE constraint failed: users.username": #If User Already In system
+            return(False, "Error: "+modelData['username']+" Already In System", "list-group-item list-group-item-danger")
+        return(False, "Error: User could not be added.", 'list-group-item list-group-item-danger')
 
 def approveUsers(user):
     try:
@@ -66,8 +70,19 @@ def approveUsers(user):
 
 def denyUsers(user):
     try:
-        query = Users.delete().where(Users.userId == user)
+        query = Users.delete().where(Users.username == user)
         query.execute()
-        return("Success: User has been denied.", 'list-group-item list-group-item-success')
+        return("Success: " +user+"'s Access Denied.", 'list-group-item list-group-item-success')
+    except Exception as e:
+        return("Error: User Could Not Be Removed.", 'list-group-item list-group-item-danger')
+
+def updateUserAuth(user, auth):
+    try:
+        query = Users.update(auth_level = auth).where(Users.username == user)
+        query.execute()
+        return("Success: Users Authorization Has Been Updated.", 'list-group-item list-group-item-success')
     except:
-        return("Error: User could not be removed.", 'list-group-item list-group-item-danger')
+        return("Error: User Authorization Could Not Be Update.", 'list-group-item list-group-item-danger')
+
+
+

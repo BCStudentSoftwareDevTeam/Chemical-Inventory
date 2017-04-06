@@ -29,22 +29,24 @@ def editBuilding(data):
     building.name = data['name'] #Change all information to what was in the form
     building.address = data['address']
     building.save()
-    return(True, building.name + " was Successfully Modified", "list-group-item list-group-item-success", building)
+    return(True, building.name + "Building was Successfully Modified", "list-group-item list-group-item-success", building)
   except Exception as e:
-    return(False, building.name + " Could Not be Modified", "list-group-item list-group-item-danger", building)
+    return(False, building.name + "Building Could Not be Modified", "list-group-item list-group-item-danger", building)
 
 def createBuilding(data):
   try:
     modelData, extraData = sortPost(data, Buildings)
     build = Buildings.create(**modelData)
-    return(True, build.name + " was Successfully Added to System", "list-group-item list-group-item-success", build)
+    return(True, build.name + " Building was Successfully Added to System", "list-group-item list-group-item-success", build)
   except Exception as e:
-    return (False, build.name + " Could Not Be Added to System", "list-group-item list-group-item-danger", none)
+    return (False, build.name + " Building Could Not Be Added to System", "list-group-item list-group-item-danger", none)
 
 def deleteBuilding(bId):
   try:
     building = getBuilding(bId)
-    print bId
     building.delete_instance(recursive=True) # With recursive set to True, this will go through and delete the building and everything that is associated with it. ie: Floors, Rooms, and Storages
+    return(True, building.name + " Building was Deleted From the System", "list-group-item list-group-item-success")
   except Exception as e:
-    return e
+    return (False, build.name + " Building Could Not Be Deleted From the System", "list-group-item list-group-item-danger")
+
+

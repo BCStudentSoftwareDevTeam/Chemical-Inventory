@@ -147,8 +147,9 @@
             </div>
             <form method="POST">
                 <div class="modal-body text-center" id="editMessage">
-                    <input type="hidden" value="" name="action">
-                    <input type="hidden" value="" name="roomId"/>
+                    <input type="hidden" name="action" value="">
+                    <input type="hidden" name="id" class="id" value="">
+                    <input type="hidden" name="roomId" value=""/>
                     <input type="hidden" name="location" value="Storage">
                     <input type="{{locationConfig['Storage']['edit'].type}}" value="{#attribute#}" name="name">
                     <div class="clearfix"></div>

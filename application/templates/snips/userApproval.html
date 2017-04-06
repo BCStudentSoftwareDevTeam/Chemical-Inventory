@@ -16,7 +16,7 @@
                     {% for user in pendingUsers %}
                         <tr>
                             <td><input type="checkbox" class="selectUser" name="users" id="{{user.userId}}" value="{{user.userId}}"></td>
-                            <td>{{user.username}}</td>
+                            <td>{{user.first_name}} {{user.last_name}}</td>
                             <td>{{user.created_by}}</td>
                             <td>{{user.reportto}}</td>
                             <td>{{user.end_date}}</td>

@@ -37,5 +37,6 @@ def getEditData():
     chemId = request.args.get('chemId')
     chemical = Chemicals.select().where(Chemicals.chemId ==  chemId).dicts().get() # Gets the database entry as a dictionary. This is needed to pass it as a JSON object
     for key in chemical:
-      chemical[key] = str(chemical[key]) #Set all values to a string. This is needed for jsonify
+      if chemical[key] is not None:
+        chemical[key] = str(chemical[key]) #Set all values to a string. This is needed for jsonify
     return jsonify(chemical)

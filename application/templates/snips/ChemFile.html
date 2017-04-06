@@ -14,8 +14,7 @@
             </thead>
             {% for chemical in chemicals %}
                 {% if chemical.remove == False %}
-                    {% set chemName = quote(chemical.name) %} {# Handles escape chars #}
-                    <tr onclick="window.location.href = '../ViewChemical/{{chemical.chemId}}/';"> {# The whole row is a link to the correct chemical page #}
+                   <tr onclick="window.location.href = '../ViewChemical/{{chemical.chemId}}/';"> {# The whole row is a link to the correct chemical page #}
                         <td>{{chemical.name}}</td>
                         <td>{{chemical.casNum}}</td>
                         {% if config.hazards[chemical.primaryHazard] is defined %}
