@@ -14,6 +14,7 @@ function fillEditForm(chemId, config){
                         document.getElementById(curElement.id).value = data[curElement.id]; //Setting values of text and number fields to values from database
                     }
                     else if (curElement.type == "dropdown"){
+                        // debugger
                         var dropdownList = document.getElementById(curElement.id);
                         dropdownList.value = data[curElement.id] //Setting selected values of dropdowns to values from database
                     }

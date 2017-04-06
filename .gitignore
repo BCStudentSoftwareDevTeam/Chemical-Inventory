@@ -9,3 +9,4 @@ data/inventory.sqlite
 *.sqlite-shm
 *.sqlite-wal
 .cache/
+*.log

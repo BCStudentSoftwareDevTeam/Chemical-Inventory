@@ -31,13 +31,14 @@ function getData(barcodeId, formAction){
                         document.getElementById('submit').disabled = true;
                         return false;
                     };
+                }else{
+                    document.getElementById('currentQuantityUnit').value = data['unit'];
                 };
                 document.getElementById("chemId").value = data['chemName'];
                 document.getElementById("primaryHazard").value = data['hazard']
                 document.getElementById('prevStorageId').value = data['storage'];
                 document.getElementById('prevQuantity').value = data['quantity'] + " " + data['unit'];
                 document.getElementById('submit').disabled = false;
-                document.getElementById('currentQuantityUnit').value = data['unit'];
                 changeForm(false); //Enable fields
             } else {
                 changeForm(true); //Disable and clear fields when there are no containers with matching barcode

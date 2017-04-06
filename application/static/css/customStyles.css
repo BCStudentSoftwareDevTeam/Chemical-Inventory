@@ -113,3 +113,54 @@ label img {
 .printInfo{
     display: none;
 }
+
+.diamond{
+  width: 14vw;
+  height: 14vw;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  margin: 20%;
+}
+
+.diamond tr td{
+  border: 1px solid black;
+}
+
+.textRotate{
+  -webkit-transform: rotate(315deg);
+  -ms-transform: rotate(315deg);
+  transform: rotate(315deg);
+}
+
+#flammableCell{
+  top:0;
+  left:0;
+  background:#ff6666;
+  width: 50%;
+  height: 50%;
+}
+
+#reactiveCell{
+  top:0;
+  left:50%;
+  background:#6691ff;
+  width: 50%;
+  height: 50%;
+}
+
+#healthHazardCell{
+  top:50%;
+  left:0;
+  background:#fcff66;
+  width: 50%;
+  height: 50%;
+}
+
+#otherCell{
+  top:50%;
+  left:0;
+  background:#ffffff;
+  width: 50%;
+  height: 50%;
+}
