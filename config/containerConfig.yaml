@@ -26,9 +26,12 @@ containerInformation:
       options:
         - measure: ""
           units:
+            - "Bag"
             - "Bottle"
+            - "Bucket"
             - "Can"
             - "Drum"
+            - "Jar"
             - "Jug"
     - name: "Current Quantity"
       id: "currentQuantity"
