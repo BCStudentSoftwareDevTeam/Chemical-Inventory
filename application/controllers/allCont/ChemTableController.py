@@ -24,7 +24,7 @@ def ChemTable():
   
   chemicals = getChemicals() #Get all chemicals from the database
   contDict = contCount(chemicals)
-
+  
   return render_template("views/ChemTableView.html",
                           config = config,
                           chemicals = chemicals,

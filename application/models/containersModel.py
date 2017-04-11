@@ -102,14 +102,13 @@ def contCount(chemicals):
   contDict = {} #Set up a dictionary for all containers
   for chemical in chemicals: #For each chemical
     try:
-      contDict[chemical.name] = ((((Chemicals
+      contDict[chemical.name] = ((((Containers
                                 .select())
-                                .join(Containers))
+                                .join(Chemicals))
                                 .where(
                                   (Containers.disposalDate == None) &
                                   (Containers.chemId == chemical.chemId) &
-                                  (Chemicals.remove == False))
-                                .count()))
+                                  (Chemicals.remove == False))))
     except:
       contDict[chemical.name] = "n/a"
   return contDict

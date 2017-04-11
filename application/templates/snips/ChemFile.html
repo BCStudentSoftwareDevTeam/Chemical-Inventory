@@ -8,8 +8,9 @@
                   <tr>
                     <th>Name</th>
                     <th>CAS Number</th>
-                    <th>Color Code</th>
-                    <th>In Stock</th>
+                    <th class="nosort">Color Code</th>
+                    <th class="nosort">In Stock</th>
+                    <th class="Barcodes">Barcodes</th>
                   </tr>
             </thead>
             {% for chemical in chemicals %}
@@ -22,13 +23,29 @@
                         {% else %}
                             <td>Not Available</td>
                         {% endif %}
-                        <td>{{contDict[chemical.name]}}</td>
+                        <td>{{contDict[chemical.name] | length}}</td>
+                        <td>
+                            {% for container in contDict[chemical.name] %}
+                                {{container.barcodeId}}
+                            {% endfor %}
+                        </td>
                     </tr>
                 {%endif%}
             {%endfor%}
             <script>
             $(document).ready(function(){
-            $('#chemtable').DataTable();
+                $('#chemtable').DataTable({
+                    "columnDefs": [
+                        {
+                            "targets": 'Barcodes',
+                            "visible": false
+                        },
+                        {
+                            "targets": 'nosort',
+                            "searchable": false
+                        }
+                    ]
+                });
             });
 
             </script>
