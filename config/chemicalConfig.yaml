@@ -172,6 +172,7 @@ addChemDropdowns:
     - name: "Primary Hazard"
       id: "primaryHazard"
       type: "dropdown"
+      special: "required"
       selections:
         - "Flammable"
           # color: "Red"
@@ -194,12 +195,14 @@ addChemDropdowns:
     - name: "Structure"
       id: "structure"
       type: "dropdown"
+      special: "required"
       selections:
         - "Organic"
         - "Inorganic"
     - name: "State"
       id: "state"
       type: "dropdown"
+      special: "required"
       selections:
         - "Solid"
         - "Liquid"
