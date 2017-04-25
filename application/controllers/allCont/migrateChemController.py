@@ -92,6 +92,8 @@ def renderCorrectTemplate(barcode):
                         if chemObj:
                             storageList = getStorages()
                             buildingList = getBuildings()
+                            chemObj.remove = False #Make sure that the chemical will show in the UI
+                            chemObj.save()
                             state = ONLYCHEM
                             return render_template("views/MigrateChem.html",
                                 state = state,
