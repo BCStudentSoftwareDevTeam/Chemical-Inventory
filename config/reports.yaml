@@ -1,0 +1,39 @@
+ReportTypes:
+  Inputs:
+    Building: "bId"
+    Floor: "fId"
+    Room: "rId"
+    Storage: "sId"
+    Hazard: "hId"
+  LocationBased:
+      name: "Location"
+      id: "loc"
+      LocationQuantity:
+        options:
+          - Building
+          - Floor
+          - Room
+          - Storage
+          - Hazard
+        row_title:
+          - Building
+          - Floor
+          - Room
+          - Storage
+          - Barcode
+          - Chemical Name
+          - Current Quantity
+          - Current Unit
+        queries:
+            Building: objects[row].storageId.roomId.floorId.buildId.name
+            Floor: objects[row].storageId.roomId.floorId.name
+            Room: objects[row].storageId.roomId.name
+            Storage: objects[row].storageId.name
+            Chemical_Name: objects[row].chemId.name
+            Primary_Hazard: objects[row].chemId.primaryHazard
+            Barcode: objects[row].barcodeId
+            Current_Quantity: objects[row].currentQuantity
+            Current_Unit: objects[row].currentQuantityUnit
+            Container_Capacity: objects[row].capacity
+            Container_Capacity_Unit: objects[row].capacityUnit
+            Manufacturer: objects[row].manufacturer

@@ -7,6 +7,27 @@ from application.models.buildingsModel import Buildings
 from application.models.buildingsModel import *
 from application.models.historiesModel import *
 
+def getChemInLoc(loc_data):
+    ##Returns all containers, chem in Storages and rooms and floors in build
+    conditionals = {"Building":"Buildings.bId == loc_data['Building']", "Floor":"Floors.fId == loc_data['Floor']", "Room":"Rooms.rId == loc_data['Room']", "Storage":"Storages.sId == loc_data['Storage']"}
+    if loc_data["Building"] != "*":
+        wheres = eval(conditionals["Building"])
+        for value in loc_data:
+            if value == "Building":
+                pass
+            elif loc_data[value] != "*":
+                wheres &= eval(conditionals[value])
+    else:
+        wheres = Buildings.name == Buildings.name
+    conts = (Containers.select() \
+                .join(Storages, on = (Containers.storageId == Storages.sId)) \
+                .join(Rooms, on = (Rooms.rId == Storages.roomId)) \
+                .join(Floors, on = (Floors.fId == Rooms.floorId)) \
+                .join(Buildings, on = (Buildings.bId == Floors.buildId)) \
+                .where(wheres)\
+                .switch(Containers))
+    return conts
+
 def getChemInStor(s_id):
     ##Done cont.storageId.roomId.floorId.buildId.name
     conts = (Containers.select() \

@@ -10,19 +10,24 @@ def exportExcel(title, row_headers, indexes, objects):
     sheet = book.active
     sheet.title = title
     sheet.append(row_headers)
-    for row in range(len(objects)):
-        for col in range(len(row_headers)):
-            ##Writes out each cell with the correct value, objects found in yaml
-            sheet.cell(column=col+1, row=row+2, value = eval(indexes[row_headers[col].replace(" ", "_")]))
     book.save(filename = config["export"]["path"])
 
-def genLocationReport(locData):
+def genLocationReport(loc_id):
     """
     Returns a file of all chemicals and containers in a location
     """
-    for cont in getChemInLoc(locData):
-        print cont.chemId.name
-    return getChemInLoc(locData)
+    print loc_id
+    #for cont in getChemInStor(loc_id):
+    #    print cont.chemId.name
+    #for cont in getChemInRoom(loc_id):
+    #    print cont.barcodeId
+    #for cont in getChemInFloor(loc_id):
+    #    print cont.barcodeId
+    #for cont in getChemInBuild(loc_id):
+    #    print cont.barcodeId
+    for cont in getIBFlamLiquids():
+        print cont.barcodeId
+    return 0
 
 def genHazardReport(building):
     """

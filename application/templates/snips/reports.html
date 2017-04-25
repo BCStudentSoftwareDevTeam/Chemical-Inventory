@@ -1,7 +1,25 @@
+<script src="/static/js/local/reportFill.js"></script>
 <div class="form container text-center">
-  <form name="report" method="post" class="form-group">
-    <p>Reports</p>
-    <input id="test" name="test" type="text" class="form-control" value="">
+  <form name="report" method="post" class="form-group" onsubmit="enableFields()">
+    {# Report Type Selection #}
+    <div class="reportTypes form-group row">
+      {% for report in reportConfig.ReportTypes.Inputs %}
+         {% if report == "Building" %}
+          <label class="co-xs-6">{{ report }}</label>
+          <select id="{{report}}" name="{{report}}" class="form-control"  onchange="getLocation('{{report}}')">
+          <option selected disable value="*">All {{report}}s</option>
+            {% for build in allBuild%}
+               <option value={{build.bId}}>{{  build.name }}</option>
+            {% endfor %}
+          </select>
+        {% else %}
+          <label class="co-xs-6">{{ report }}</label>
+          <select id="{{report}}" name="{{report}}" class="form-control"  onchange="getLocation('{{report}}')" required disabled>
+          <option selected value="*">All {{report}}s</option>
+          </select>
+        {% endif %}
+    {% endfor %}
+   </div>
     <input class="btn btn-primary btn-lg" id="requestReport" type="submit" value="Submit">
   </form>
 </div>
