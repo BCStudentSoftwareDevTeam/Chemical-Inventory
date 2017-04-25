@@ -1,3 +1,16 @@
+selections: &zeroThruFour
+   - "0"
+   - "1"
+   - "2"
+   - "3"
+   - "4"
+
+otherHazards: &otherHazards
+   - "None"
+   - "OX (Oxidizer)"
+   - "Water Reactive"
+   - "SA (Simple Asphyxiant Gas)"
+   
 # Add New Chemical form
 pictograms:
   # Pictograms found @ https://www.osha.gov/dsg/hazcom/pictograms/
@@ -44,12 +57,7 @@ HMIS:
      type: "dropdown"
      color: "blue"
      text: "#FFF"
-     selections: &zeroThruFour
-       - "0"
-       - "1"
-       - "2"
-       - "3"
-       - "4"
+     selections: *zeroThruFour
    - name: "Flammability"
      id: "hmisFlammable"
      type: "dropdown"
@@ -81,10 +89,6 @@ HMIS:
 
 NFPAdiamond:
   # Used to build the selection form for the NFPA "Fire Diamond"
-    - section: "Health"
-      id: "healthHazard"
-      type: "dropdown"
-      selections: *zeroThruFour
     - section: "Flammability"
       id: "flammable"
       type: "dropdown"
@@ -93,14 +97,14 @@ NFPAdiamond:
       id: "reactive"
       type: "dropdown"
       selections: *zeroThruFour
+    - section: "Health"
+      id: "healthHazard"
+      type: "dropdown"
+      selections: *zeroThruFour
     - section: "Special"
       id: "other"
       type: "dropdown"
-      selections:
-       - "None"
-       - "OX (Oxidizer)"
-       - "Water Reactive"
-       - "SA (Simple Asphyxiant Gas)"
+      selections: *otherHazards
 
 addChemInputs:
     - name: "Name"
@@ -168,6 +172,7 @@ addChemDropdowns:
     - name: "Primary Hazard"
       id: "primaryHazard"
       type: "dropdown"
+      special: "required"
       selections:
         - "Flammable"
           # color: "Red"
@@ -190,12 +195,14 @@ addChemDropdowns:
     - name: "Structure"
       id: "structure"
       type: "dropdown"
+      special: "required"
       selections:
         - "Organic"
         - "Inorganic"
     - name: "State"
       id: "state"
       type: "dropdown"
+      special: "required"
       selections:
         - "Solid"
         - "Liquid"

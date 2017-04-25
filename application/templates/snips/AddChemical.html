@@ -1,13 +1,17 @@
 <div class="form container text-center">
+  <strong><p style="color:#e32; display:inline">*</p> indicates required field</strong>
   <form name="addChem" method="post" class="form-group">
     <input type="hidden" name="formName" value="addChem">
     {%  for group in chemConfig['addChemInputs']  %}
       <div class="form-group row" id="{{group['id']}}Parent">
-        <label for="{{group['id']}}" class="col-xs-6">{{group['name']}}:</label>
+        {% if group.special == 'required' %}
+          <label for="{{group['id']}}" class="col-xs-6">{{group['name']}}: <p style="color:#e32; display:inline">*</p></label>
+        {% else %}
+          <label for="{{group['id']}}" class="col-xs-6">{{group['name']}}:</label>
+        {% endif %}
         <div class="col-xs-4">
         {# Checking name oninput to determine whether percentage is required or not. #}
         {% if group['id'] == 'name' %}
-          {# If name is equal to one already in the database, percentage should be required #}
           <input id="{{group['id']}}" name="{{group['id']}}" type="{{group['type']}}" oninput="checkName()" placeholder="{{group['placeholder']}}" {{group['special']}} class="form-control" required>
         {# If it is the sdsLink, add a link to msdsonline #}
         {% elif group['id'] == "sdsLink" %}
@@ -23,7 +27,11 @@
 
     {%  for group in chemConfig['addChemDropdowns']  %}
     <div class="form-group row">
-      <label for="{{  group['name'] }}" class="col-xs-6">{{group['name']}}:</label>
+      {% if group.special == 'required' %}  
+        <label for="{{  group['name'] }}" class="col-xs-6">{{group['name']}}: <p style="color:#e32; display:inline">*</p></label>
+      {% else %}
+        <label for="{{  group['name'] }}" class="col-xs-6">{{group['name']}}:</label>
+      {% endif %}
       <div class="col-xs-4">
         <select id="{{  group['id']  }}" name="{{  group['id']  }}" class="form-control" required>
           <option selected disabled value="">Select One</option>
@@ -39,15 +47,48 @@
     <div class="form-group row">
       <label for="nfpaDiamond" class="col-xs-6">NFPA 704:</label>
       <div class="col-xs-4">
-        {%for division in chemConfig['NFPAdiamond']%}
-          <label for="{{division['section']}}">{{division['section']}}</label>
-          <select id="{{division['id']}}" name="{{division['id']}}" class="form-control">
-            <option value="" selected>Select One</option>
-          {%for selection in division['selections']%}
-            <option value="{{selection}}">{{selection}}</option>
-          {%endfor%}
-          </select>
-        {%endfor%}
+        <table class="diamond" style="">
+          <tr>
+            <td id="flammableCell">
+              <div class="textRotate">
+                <select id="flammable" name="flammable" class="form-control">
+                  <option value="" selected disabled>Select One</option>
+                {% for selection in chemConfig['selections'] %}
+                  <option value="{{selection}}">{{selection}}</option>
+                {% endfor %}
+              </div>
+            </td>
+            <td id="reactiveCell">
+              <div class="textRotate">
+                <select id="reactive" name="reactive" class="form-control">
+                  <option value="" selected disabled>Select One</option>
+                {% for selection in chemConfig['selections'] %}
+                  <option value="{{selection}}">{{selection}}</option>
+                {% endfor %}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td id="healthHazardCell">
+              <div class="textRotate">
+                <select id="healthHazard" name="healthHazard" class="form-control">
+                  <option value="" selected disabled>Select One</option>
+                {% for selection in chemConfig['selections'] %}
+                  <option value="{{selection}}">{{selection}}</option>
+                {% endfor %}
+              </div>
+            </td>
+            <td id="otherCell">
+              <div class="textRotate">
+                <select id="other" name="other" class="form-control">
+                  <option value="" selected disabled>Select One</option>
+                {% for selection in chemConfig['otherHazards'] %}
+                  <option value="{{selection}}">{{selection}}</option>
+                {% endfor %}
+              </div>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
 

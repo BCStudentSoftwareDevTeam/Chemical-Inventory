@@ -16,31 +16,31 @@ options: &units
       - "milliliter (mL)"
 
 inputs:
-  - name: "Chemical Name"
+  - name: "Chemical Name:"
     id: "chemId" # This may need to change
     type: "text"
     autoPop: "true"
-  - name: "Primary Hazard"
+  - name: "Primary Hazard:"
     id: "primaryHazard"
     type: "text"
     autoPop: "true"
-  - name: "Previous Location"
+  - name: "Previous Location:"
     id: "prevStorageId" #This should change to whatever will get the full location information
     type: "text"
     autoPop: "true"
-  - name: "Previous Quantity"
+  - name: "Previous Quantity:"
     id: "prevQuantity" # This should change to whatever will get the full quantity info
     type: "text"
     autoPop: "true"
-  - name: "Current Location" #This may be unclear... maybe 'New Location'
+  - name: "Current Location:" #This may be unclear... maybe 'New Location'
     id: "storageId" # This may need to change
     type: "select"
     special: "required"
-  - name: "Current Quantity"
+  - name: "Current Quantity:"
     id: "currentQuantity" # This may also need to change
     type: "number"
     special: "required"
-  - name: "Current Unit"
+  - name: "Current Unit:"
     id: "currentQuantityUnit"
     type: "select"
     options: *units

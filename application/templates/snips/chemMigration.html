@@ -90,25 +90,60 @@
     <div class="form-group row">
       <label for="nfpaDiamond" class="col-xs-6">NFPA 704:</label>
       <div class="col-xs-4">
-        {%for division in chemConfig['NFPAdiamond']%}
-        <label for="{{division['section']}}">{{division['section']}}</label>
-        <select id="{{division['id']}}" name="{{division['id']}}" class="form-control">
-            <option value="" selected>Select One</option>
-            {%for selection in division['selections']%}
-              {% if division['id'] == 'healthHazard' and container.NameRaw.Nfpa_Health == selection%}
-              <option value="{{selection}}" selected="selected">{{selection}}</option>
-              {% elif division['id'] == 'flammable' and container.NameRaw.Nfpa_Flamable == selection%}
-                 <option value="{{selection}}" selected="selected">{{selection}}</option>
-              {% elif division['id'] == 'reactive' and container.NameRaw.Nfpa_Reactive == selection%}
-                 <option value="{{selection}}" selected="selected">{{selection}}</option>
-              {% elif division['id'] == 'other' and container.NameRaw.Nfpa_Specific == selection%}
-                <option value="{{selection}}" selected="selected">{{selection}}</option>
-              {% else %}
-                <option value="{{selection}}">{{selection}}</option>
-              {% endif %}
-          {%endfor%}
-          </select>
-        {%endfor%}
+        <table class="diamond" style="">
+          <tr>
+            <td id="flammableCell">
+              <div class="textRotate">
+                <select id="flammable" name="flammable" class="form-control">
+                  <option value="" selected disabled>Select One</option>
+                {% for selection in chemConfig['selections'] %}
+                  {% if container.NameRaw.Nfpa_Flamable == selection %}
+                    <option value="{{selection}}" selected="selected">{{selection}}</option>
+                  {% else %}
+                    <option value="{{selection}}">{{selection}}</option>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </td>
+            <td id="reactiveCell">
+              <div class="textRotate">
+                <select id="reactive" name="reactive" class="form-control">
+                  <option value="" selected disabled>Select One</option>
+                {% for selection in chemConfig['selections'] %}
+                  {% if container.NameRaw.Nfpa_Reactive == selection %}
+                    <option value="{{selection}}" selected="selected">{{selection}}</option>
+                  {% else %}
+                    <option value="{{selection}}">{{selection}}</option>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td id="healthHazardCell">
+              <div class="textRotate">
+                <select id="healthHazard" name="healthHazard" class="form-control">
+                  <option value="" selected disabled>Select One</option>
+                {% for selection in chemConfig['selections'] %}
+                   {% if container.NameRaw.Nfpa_Health == selection %}
+                    <option value="{{selection}}" selected="selected">{{selection}}</option>
+                  {% else %}
+                    <option value="{{selection}}">{{selection}}</option>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </td>
+            <td id="otherCell">
+              <div class="textRotate">
+                <select id="other" name="other" class="form-control">
+                  <option value="" selected disabled>Select One</option>
+                {% for selection in chemConfig['otherHazards'] %}
+                  <option value="{{selection}}">{{selection}}</option>
+                {% endfor %}
+              </div>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
 
