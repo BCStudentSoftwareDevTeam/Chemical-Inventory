@@ -34,8 +34,8 @@ def report():
             data = request.form
             print data
             locData = genLocationReport(data)
-            #print addReportsConfig["locationQuantity"]["row_title"]
-            #exportExcel("Test", reportConfig["locationQuantity"]["row_title"], reportConfig["locationQuantity"]["queries"], )
+            print reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["row_title"]
+            exportExcel("Test", reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["row_title"], reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["queries"], locData)
             return redirect(url_for("report"))
 
 @app.route('/locationData/', methods = ['GET'])
