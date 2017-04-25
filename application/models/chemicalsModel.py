@@ -8,10 +8,10 @@ class Chemicals (Model):
   ## General Information
   name            = CharField(null = True, unique = True)
   casNum          = CharField(null = True)
-  primaryHazard   = CharField(null = True)
+  primaryHazard   = CharField(null = False)
   formula         = CharField(null = True)
-  state           = CharField(null = True)
-  structure       = CharField(null = True) # Organic or Inorganic
+  state           = CharField(null = False)
+  structure       = CharField(null = False) # Organic or Inorganic
   flashPoint      = DecimalField(null = True)
   boilPoint       = DecimalField(null = True)
   molecularWeight = DecimalField(null = True)
@@ -64,8 +64,16 @@ def createChemical(data):
     elif modelData['sdsLink'][0:8] != 'https://' and  modelData['sdsLink'][0:7] != 'http://':
 	    modelData['sdsLink'] = 'https://' + modelData['sdsLink']
     modelData['name'] = modelData['name'].upper()
-    newChem = Chemicals.create(**modelData) #Create instance of Chemical with mapped info in modelData
-    return(True, "Chemical Created Successfully!", "list-group-item list-group-item-success", newChem)
+    try:
+      newChem = (Chemicals.get(name = modelData['name']), True) #True because it could get the chemical
+    except:
+      newChem = (Chemicals.create(**modelData), False) #Create instance of Chemical with mapped info in modelData False, because it couldn't get the chemical
+    if newChem[1]:
+      print modelData
+      Chemicals.update(**modelData).where(Chemicals.name == newChem[0].name).execute()
+      newChem[0].remove = False
+      newChem[0].save()
+    return(True, "Chemical Created Successfully!", "list-group-item list-group-item-success", newChem[0])
   except Exception as e:
     print e
     return(False, "Chemical Could Not Be Created.", "list-group-item list-group-item-danger", None)
