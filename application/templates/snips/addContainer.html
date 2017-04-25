@@ -31,7 +31,7 @@
                              });
                 </script>
                 {# Hidden manual entry barcode field #}
-                <input type="text" class="form-control" id="null{{group.id}}" name="hidden{{group.id}}" style="visibility:hidden" oninput="spaceCheck(this); JsBarcode('#barcode', this.value, {height:30, fontSize: 15});">
+                <input type="text" class="form-control" id="null{{group.id}}" name="hidden{{group.id}}" style="visibility:hidden" oninput="spaceCheck(this); JsBarcode('#barcode{{barcode}}', this.value, {height:30, fontSize: 15});">
                 <span class="label label-danger hidden messages" id="{{group.id}}Message">Barcode must not include any spaces or special characters</span>
                 {# Manual VS Autopopulated barcode select #}
                 <label for="manualSel">Manually enter a barcode</label>
