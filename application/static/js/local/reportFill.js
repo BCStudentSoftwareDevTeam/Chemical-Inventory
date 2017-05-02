@@ -1,11 +1,7 @@
 function getLocation(loc_type){
   var locId = document.getElementById(loc_type).value;
-  if(locId == "*"){
-    reset_fields(loc_type)
-  }
-  else{
-    getData(locId, loc_type)
-  }
+  reset_fields(loc_type) //Clears all data of children fields
+  getData(locId, loc_type)
 }
 
 function reset_fields(loc_type){

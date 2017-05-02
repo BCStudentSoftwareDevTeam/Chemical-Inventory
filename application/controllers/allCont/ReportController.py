@@ -25,6 +25,7 @@ def report():
     if userLevel == 'admin':
         if request.method == "GET":
             allBuild = getBuildings()
+            print reportConfig.ReportTypes.Hazard
             return render_template("views/ReportView.html",
                                    authLevel = userLevel,
                                    config = config,

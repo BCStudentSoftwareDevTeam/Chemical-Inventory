@@ -18,7 +18,12 @@
           <option selected value="*">All {{report}}s</option>
           </select>
         {% endif %}
-    {% endfor %}
+      {% endfor %}
+      <div class="row">
+      <h3>Hazards</h3>
+      {% for hazard in reportConfig.ReportTypes.Hazard %}
+      <input type="checkbox" id="{{reportConfig.ReportTypes.Hazard[hazard]['id']}}"><label>{{reportConfig.ReportTypes.Hazard[hazard]['name']}}</label> 
+      {% endfor %}
    </div>
     <input class="btn btn-primary btn-lg" id="requestReport" type="submit" value="Submit">
   </form>
