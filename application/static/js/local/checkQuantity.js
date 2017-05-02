@@ -12,7 +12,7 @@ function checkVals(groups) {
         document.getElementById("barcodeIdMessage").classList.remove('hidden');
         return false;
     }
-    
+
     var quantityUnit = document.getElementById('currentQuantityUnit');
     quantityUnit = quantityUnit[quantityUnit.selectedIndex].text;
     var capacityUnit = document.getElementById('capacityUnit');
