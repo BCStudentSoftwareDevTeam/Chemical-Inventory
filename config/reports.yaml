@@ -51,6 +51,7 @@ ReportTypes:
           - Chemical Name
           - Current Quantity
           - Current Unit
+          - Primary Hazard
         queries:
             Building: objects[row].storageId.roomId.floorId.buildId.name
             Floor: objects[row].storageId.roomId.floorId.name

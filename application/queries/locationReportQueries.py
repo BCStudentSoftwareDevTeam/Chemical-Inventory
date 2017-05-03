@@ -9,17 +9,27 @@ from application.models.historiesModel import *
 
 def getChemInLoc(loc_data):
     ##Returns all containers, chem in Storages and rooms and floors in build
-    conditionals = {"Building":"Buildings.bId == loc_data['Building']", "Floor":"Floors.fId == loc_data['Floor']", "Room":"Rooms.rId == loc_data['Room']", "Storage":"Storages.sId == loc_data['Storage']"}
+    loc_cons = {"Building":"Buildings.bId == loc_data['Building']", "Floor":"Floors.fId == loc_data['Floor']", "Room":"Rooms.rId == loc_data['Room']", "Storage":"Storages.sId == loc_data['Storage']"}
+    haz_cons = {"reactive":"Chemicals.primaryHazard == 'Reactive'", "hh":"Chemicals.primaryHazard == 'Health Hazard'", "base":"Chemicals.primaryHazard == 'Base'", "oxi":"Chemicals.primaryHazard == 'Oxidizer'", "flam":"Chemicals.primaryHazard == 'Flammable'", "inorg_acid":"Chemicals.primaryHazard == 'Inorganic Acid'", "flam_solid":"Chemicals.primaryHazard == 'Flammable Solid'", "org_acid":"Chemicals.primaryHazard == 'Organic Acid'", "gen_haz":"Chemicals.primaryHazard == 'General Hazard'"}
+    ##The ifs are to instanciate the where, not sure how else to do it
     if loc_data["Building"] != "*":
-        wheres = eval(conditionals["Building"])
-        for value in loc_data:
-            if value == "Building":
-                pass
-            elif loc_data[value] != "*":
-                wheres &= eval(conditionals[value])
+        wheres = eval(loc_cons["Building"])
     else:
         wheres = Buildings.name == Buildings.name
+    haz_where = eval("Chemicals.primaryHazard == 'Nothing'") #Does nothing but instanciate object
+    for value in loc_data:
+        if (loc_data[value] != "*") and (value in loc_cons):
+            wheres &= eval(loc_cons[value])
+        elif value in haz_cons:
+            haz_where |= eval(haz_cons[value])
+        else:
+            #No conditional provided
+            pass
+    if len(loc_data) > 4:
+        wheres &= haz_where
+
     conts = (Containers.select() \
+                .join(Chemicals, on = (Containers.chemId == Chemicals.chemId)) \
                 .join(Storages, on = (Containers.storageId == Storages.sId)) \
                 .join(Rooms, on = (Rooms.rId == Storages.roomId)) \
                 .join(Floors, on = (Floors.fId == Rooms.floorId)) \

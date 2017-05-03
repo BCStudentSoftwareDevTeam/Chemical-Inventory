@@ -25,7 +25,6 @@ def report():
     if userLevel == 'admin':
         if request.method == "GET":
             allBuild = getBuildings()
-            print reportConfig.ReportTypes.Hazard
             return render_template("views/ReportView.html",
                                    authLevel = userLevel,
                                    config = config,
@@ -35,7 +34,7 @@ def report():
             data = request.form
             print data
             locData = genLocationReport(data)
-            print reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["row_title"]
+            #print reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["row_title"]
             exportExcel("Test", reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["row_title"], reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["queries"], locData)
             return redirect(url_for("report"))
 
@@ -43,7 +42,7 @@ def report():
 def locationData():
     locId = request.args.get('locId')
     locType = request.args.get('locType')
-    print locType
+    #print locType
     if locType == "Building":
         locObject = getFloors(locId)
         objectType = "Floor"
