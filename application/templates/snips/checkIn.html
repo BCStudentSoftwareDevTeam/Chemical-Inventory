@@ -64,7 +64,7 @@
                       {% if group.special == 'required' %}
                         <div class="form-group">
                             <label class="label-control {{group['special']}}" for="{{group.id}}">{{group.name}} <p style="color:#e32; display:inline">*</p></label>
-                                <input class="form-control d" type="{{group.type}}" id="{{group.id}}" name="{{group.id}}" {{group.special}} disabled>
+                                <input class="form-control d" type="{{group.type}}" id="{{group.id}}" name="{{group.id}}" {{group.special}} min="0.01" max="10000" step="0.01" disabled>
                         </div>
                       {% else %}
                         <div class="form-group">

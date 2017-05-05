@@ -144,7 +144,6 @@ addChemInputs:
       type: "text"
       placeholder: "Description of Chemical"
 
-
 timeSensitive:
     - name: "Pressure Former"
       id: "pressureFormer"
@@ -166,7 +165,6 @@ addChemChecks:
     - name: "P-List Acute Toxicity"
       id: "pListAcute"
       type: "checkbox"
-
 
 addChemDropdowns:
     - name: "Primary Hazard"
