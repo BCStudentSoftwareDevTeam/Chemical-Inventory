@@ -1,4 +1,4 @@
-from openpyxl import Workbook
+f"Chemicals.primaryHazard == 'General Hazard'irom openpyxl import Workbook
 import datetime
 from application import app
 from application.config import *
@@ -23,8 +23,6 @@ def genLocationReport(locData):
     """
     Returns a file of all chemicals and containers in a location
     """
-    for cont in getChemInLoc(locData):
-        print cont.chemId.name
     return getChemInLoc(locData)
 
 def genHazardReport(building):
