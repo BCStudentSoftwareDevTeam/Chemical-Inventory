@@ -38,8 +38,7 @@ def report():
                                    inputs = inputs,
                                    allBuild = allBuild)
         else:
-            data = request.form
-            print data
+            data = request.form 
             locData = genLocationReport(data)
             #print reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["row_title"]
             reportName = exportExcel("Report", reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["row_title"], reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["queries"], locData)
