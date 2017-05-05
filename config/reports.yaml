@@ -1,9 +1,9 @@
 ReportTypes:
   Inputs:
-    Building: "bId"
-    Floor: "fId"
-    Room: "rId"
-    Storage: "sId"
+    Building: 0
+    Floor: 1
+    Room: 2
+    Storage: 3
   Hazard:
     flammable:
        name: "Flammable"
@@ -32,16 +32,34 @@ ReportTypes:
     gen_haz:
        name: "General Hazard"
        id: "gen_haz"
+  Ts_Hazard:
+    pressure:
+      name: "Pressure Former"
+      id: "pres"
+    peroxide:
+      name: "Peroxide Former"
+      id: "per"
+    stabalizer:
+      name: "Requires Stabalizer"
+      id: "req_stab"
+    tox_form:
+       name: "Forms Toxins Over Time"
+       id: "tox_form"
   LocationBased:
       name: "Location"
       id: "loc"
       LocationQuantity:
         options:
           - Building
+            1
           - Floor
+            2
           - Room
+            3
           - Storage
+            4
           - Hazard
+            5
         row_title:
           - Building
           - Floor

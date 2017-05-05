@@ -1,3 +1,4 @@
+import os
 from application import app
 from application.config import *
 from application.models import *
@@ -14,29 +15,41 @@ from flask import render_template, \
                   flash, \
                   redirect, \
                   url_for, \
-                  jsonify
+                  jsonify, \
+                  current_app, \
+                  send_from_directory
 
 @app.route('/Report/', methods = ['GET', 'POST'])
 def report():
     auth = AuthorizedUser()
     user = auth.getUser()
     userLevel = auth.userLevel()
-
     if userLevel == 'admin':
         if request.method == "GET":
             allBuild = getBuildings()
+            inputs = [None] * len(reportConfig.ReportTypes.Inputs)
+            for key in reportConfig.ReportTypes.Inputs:
+                index = reportConfig.ReportTypes.Inputs[key]
+                inputs[index] = key
             return render_template("views/ReportView.html",
                                    authLevel = userLevel,
                                    config = config,
                                    reportConfig = reportConfig,
+                                   inputs = inputs,
                                    allBuild = allBuild)
         else:
             data = request.form
             print data
             locData = genLocationReport(data)
             #print reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["row_title"]
-            exportExcel("Test", reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["row_title"], reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["queries"], locData)
-            return redirect(url_for("report"))
+            reportName = exportExcel("Report", reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["row_title"], reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["queries"], locData)
+            return redirect("/download/" + reportName)
+
+@app.route('/download/<path:filename>', methods=["GET"])
+def download(filename):
+    ##Download file path
+    reports = os.path.join(current_app.root_path, 'reports')
+    return send_from_directory(directory=reports, filename=filename)
 
 @app.route('/locationData/', methods = ['GET'])
 def locationData():
