@@ -27,7 +27,7 @@
 
     {%  for group in chemConfig['addChemDropdowns']  %}
     <div class="form-group row">
-      {% if group.special == 'required' %}  
+      {% if group.special == 'required' %}
         <label for="{{  group['name'] }}" class="col-xs-6">{{group['name']}}: <p style="color:#e32; display:inline">*</p></label>
       {% else %}
         <label for="{{  group['name'] }}" class="col-xs-6">{{group['name']}}:</label>

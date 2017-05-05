@@ -3,9 +3,7 @@ function CheckInModal(name,barcode,lastroom,newQuantity,newroom){
    var check = checkValues(list);
    if (check == true) {
      printdata(name,barcode,lastroom,newQuantity,newroom);
-     
    }
-  
 }
 
 function checkValues(list){
@@ -32,6 +30,3 @@ function printdata(name,barcode,lastroom,newQuantity,newroom){
       $('.chemdata').append("<li>NewRoom:" +newroomy+"</li>")
       $("#myModal").modal('show');
 }
-
-
- 

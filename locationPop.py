@@ -8,7 +8,6 @@ from application.models.chemicalsModel import *
 from application.models.storagesModel import *
 from application.models.historiesModel import *
 from application.models.usersModel import *
-from application.config import *
 import random
 import datetime
 

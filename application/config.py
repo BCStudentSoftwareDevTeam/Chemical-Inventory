@@ -38,6 +38,10 @@ locationConfig = Configuration.from_file(locationConfig_path).configure()
 addLocationConfig_path = getAbsolutePath('config/locations.yaml')
 addLocationConfig = Configuration.from_file(addLocationConfig_path).configure()
 
+# Populates database with all locations added to reports.yaml
+reportConfig_path = getAbsolutePath('config/reports.yaml')
+reportConfig = Configuration.from_file(reportConfig_path).configure()
+
 # This adds the application's base directory to the
 # configuration object, so that the rest of the application
 # can reference it.

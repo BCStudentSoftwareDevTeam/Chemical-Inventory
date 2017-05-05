@@ -89,7 +89,8 @@ admin:
     link: "/CheckIn/"
   - title: "Check Out"
     link: "/CheckOut/"
-
+  - title: "Reports"
+    link: "/Report/"
 superUser:
   - title: "View All Chemicals"
     link: "/ChemTable/"
@@ -119,6 +120,9 @@ flask:
   # Only needed for admin module, and we don't seem to rely on
   # it. Hence, we will randomly generate a key.
   secretKey: RANDOM
+
+export:
+  path: "application/reports/"
 
 DEBUG:
   user: "ballz" #admin
