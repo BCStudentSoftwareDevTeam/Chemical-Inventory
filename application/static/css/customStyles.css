@@ -164,3 +164,8 @@ label img {
   width: 50%;
   height: 50%;
 }
+
+.dataTables_filter .input-sm{
+  width: 300px;
+  margin-left: 5px;
+}
