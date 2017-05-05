@@ -40,8 +40,8 @@ def report():
         else:
             data = request.form 
             locData = genLocationReport(data)
-            #print reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["row_title"]
-            reportName = exportExcel("Report", reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["row_title"], reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["queries"], locData)
+            path = os.path.join(current_app.root_path, 'reports')
+            reportName = exportExcel("Report", reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["row_title"], reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["queries"], locData, path)
             return redirect("/download/" + reportName)
 
 @app.route('/download/<path:filename>', methods=["GET"])
