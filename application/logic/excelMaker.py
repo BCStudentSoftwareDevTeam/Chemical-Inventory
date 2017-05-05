@@ -1,4 +1,4 @@
-f"Chemicals.primaryHazard == 'General Hazard'irom openpyxl import Workbook
+from openpyxl import Workbook
 import datetime
 from application import app
 from application.config import *
