@@ -10,3 +10,4 @@ data/inventory.sqlite
 *.sqlite-wal
 .cache/
 *.log
+/application/report
