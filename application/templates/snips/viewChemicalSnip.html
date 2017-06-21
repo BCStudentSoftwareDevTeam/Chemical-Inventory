@@ -92,26 +92,9 @@
                       {% elif attribute == "barcodeId" %}
                         <td>
                           <a href="../../ContainerInfo/{{chemInfo.chemId}}/{{container.barcodeId}}/">
-                            <div class="barcode" id="barcodeDiv{{container.barcodeId}}">
-                              <div class="printInfo" style="font-size: small;">
-                                {{chemInfo.name}}
-                              </div>
-                              <svg name="barcodeSVG" id="barcode{{container.barcodeId}}"></svg>
-                              <div class="printInfo" style="font-size: x-small;">
-                                {% with date = container.receiveDate %}
-                                  Received on: {{date | formatDateTime}}
-                                {% endwith %}
-                              </div>
-                            </div>
+                            {% include "snips/viewBarcodeSnip.html" %}
                           </a>
-                        </td> {# Creating barcode using JsBarcode library found here: http://lindell.me/JsBarcode #}
-                          <script type="text/javascript">
-                            JsBarcode("#barcode{{container.barcodeId}}", "{{container.barcodeId}}", {
-                              height:30,
-                              fontSize: 15,
-                              background: '' //set value to none to match background color of table row
-                            });
-                          </script>
+                        </td> 
                       {% elif attribute == 'checkedOut' %}
                         {% if container[attribute] == True %}
                           <td style="text-align:center; vertical-align: middle;"><span class="glyphicon glyphicon-ban-circle"></span></td>

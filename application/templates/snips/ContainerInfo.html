@@ -1,19 +1,12 @@
 <h1 align="center">
+  {% set chemInfo = chemical %}
   <a href="../../../ViewChemical/{{chemical.chemId}}/" >{{chemical.name}}</a>
 
-  <div class="barcode" id="barcodeDiv{{container.barcodeId}}">
-    <svg id="barcode{{container.barcodeId}}"></svg>
-  </div>
-  <button class="btn btn-primary" onclick="printBarcode('barcodeDiv{{container.barcodeId}}');">Print Barcode</button>
+  {% include "snips/viewBarcodeSnip.html" %}
+  <button class="btn btn-primary" onclick="printBarcode('{{container.barcodeId}}');">Print Barcode</button>
 </h1>
 
-<script type="text/javascript">
-  JsBarcode("#barcode{{container.barcodeId}}", "{{container.barcodeId}}", {
-    height:30,
-    fontSize: 15,
-    background: '' //set value to none to match background color of table row
-  });
-</script>
+
 
 <div class="col-md-8 col-md-offset-2">
     <ul class="nav nav-tabs">
