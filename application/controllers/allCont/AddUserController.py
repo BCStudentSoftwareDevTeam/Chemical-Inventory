@@ -28,5 +28,5 @@ def AddUser():
       status, flashMessage, flashFormat = createUser(request.form, user.username, True) # createUser function located in usersModel.py
       flash(flashMessage, flashFormat)
       return redirect(url_for("AddUser"))
-  date = time.strftime("%d/%m/%Y")
+  date = time.strftime("%m/%d/%Y")
   return render_template("views/AddUserView.html", config = config, authLevel = userLevel, date = date)

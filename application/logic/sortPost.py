@@ -45,4 +45,4 @@ def sortPost( data, model):
   return ( model_data, extra_data )
 
 def convert_to_datetime(dateString):
-  return datetime.datetime.strptime(dateString, '%Y-%m-%d').date()
+  return datetime.datetime.strptime(dateString, "%m/%d/%Y").date()
