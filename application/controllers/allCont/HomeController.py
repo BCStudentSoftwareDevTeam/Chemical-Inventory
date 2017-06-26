@@ -46,7 +46,7 @@ def adminHome():
                     status, flashMessage, flashFormat, newBuild = createBuilding(data)
                     if status:
                         for value in range(int(data['numFloors'])):
-                            createFloor({'buildId': newBuild.bId, 'name':"Level " + str(value), 'level':value })
+                            createFloor({'buildId': str(newBuild.bId), 'name':"Level " + str(value), 'level': str(value) })
                     flash(flashMessage, flashFormat)
             elif data['location'] == "Floor": #If the form is editing a floor
                 status, flashMessage, flashFormat, editedFloor = editFloor(data)
