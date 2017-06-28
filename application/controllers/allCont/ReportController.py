@@ -24,7 +24,7 @@ def report():
     auth = AuthorizedUser()
     user = auth.getUser()
     userLevel = auth.userLevel()
-    if userLevel == 'admin':
+    if userLevel == 'admin' or userLevel == 'superUser' or userLevel == 'systemAdmin':
         if request.method == "GET":
             allBuild = getBuildings()
             inputs = [None] * len(reportConfig.ReportTypes.Inputs)

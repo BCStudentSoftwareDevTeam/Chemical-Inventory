@@ -96,6 +96,8 @@ superUser:
     link: "/ChemTable/"
   - title: "Request Access For a Student"
     link: "/RequestUserAccess/"
+  - title: "Reports"
+    link: "/Report/"
 
 systemUser:
   - title: "Home"
@@ -114,6 +116,8 @@ systemAdmin:
     link: "/CheckIn/"
   - title: "Check Out Container"
     link: "/CheckOut/"
+  - title: "Reports"
+    link: "/Report/"
 
 flask:
   # Secret key for signing cookies
