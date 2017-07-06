@@ -8,6 +8,7 @@ from application.models.storagesModel import *
 from application.logic.getAuthUser import AuthorizedUser
 from application.logic.excelMaker import *
 from playhouse.shortcuts import model_to_dict, dict_to_model
+#from absolutepath import getAbsolutePath
 
 
 from flask import render_template, \
@@ -41,6 +42,11 @@ def report():
             data = request.form 
             locData = genLocationReport(data)
             path = os.path.join(current_app.root_path, 'reports')
+            #make the directory if it doesn't exist
+            try:
+                os.makedirs(path)
+            except:
+                pass
             reportName = exportExcel("Report", reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["row_title"], reportConfig["ReportTypes"]["LocationBased"]["LocationQuantity"]["queries"], locData, path)
             return redirect("/download/" + reportName)
 
