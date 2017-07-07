@@ -23,7 +23,7 @@ function cookieSaveAndRedirect(href) {
     //parameter is path in this case to a particular container
 
     var searchVal = document.getElementsByTagName("input")[0].value;
-    document.cookie = "savedSearch="+searchVal;
+    setCookie("savedSearch",searchVal,600);
     window.location.href = href;
 }
 
@@ -31,14 +31,12 @@ function addClearButton(){
     var x = document.getElementById('chemtable_filter');
     var button = document.createElement('button');
     button.className = 'btn btn-default CLEAR';
-    button.onclick = destroyCookie();
-    button.innerHTML = "Clear";
+    button.onclick = function() {destroyCookie("savedSearch")};
+    button.innerHTML = "Clear Search";
     x.append(button)
 }
 
-function destroyCookie(){
-    return false
-}
+
 
 function getCookie(cname) {
     //function obtained from https://www.w3schools.com/js/js_cookies.asp
@@ -55,7 +53,6 @@ function getCookie(cname) {
 		}
 		if (c.indexOf(name) == 0) {
 		    cookie = c.substring(name.length, c.length);
-		    console.log(cookie);
             var el = document.getElementsByTagName("input")[0];
             el.value = cookie;
 		    reload_table(cookie)
@@ -67,6 +64,8 @@ function getCookie(cname) {
 }
 
 function find_cookie ( cookie_name ){
+  //Used by getCookie function to find the cookie needed
+
   var results = document.cookie.match ( '(^|;) ?' + cookie_name + '=([^;]*)(;|$)' );
   if ( results )
     return ( unescape ( results[2] ) );
@@ -74,8 +73,26 @@ function find_cookie ( cookie_name ){
     return false;
 }
 
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+
+
 function reload_table(cookie){
     table
          .search(cookie)
          .draw();
+
+}
+
+function destroyCookie(cookieKey){
+   
+   document.cookie = cookieKey+"=; expires=Fri, 5 July 2017 12:00:00 UTC; path=/";
+   reload_table("");
+
 }
