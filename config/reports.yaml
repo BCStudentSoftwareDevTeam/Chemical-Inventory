@@ -45,6 +45,11 @@ ReportTypes:
     tox_form:
        name: "Forms Toxins Over Time"
        id: "tox_form"
+  Pl_Acute:
+    p_listed:
+       name: "P Listed"
+       id: "p_list"
+
   LocationBased:
       name: "Location"
       id: "loc"
