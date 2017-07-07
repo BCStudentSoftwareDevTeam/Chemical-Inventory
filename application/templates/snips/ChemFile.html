@@ -1,4 +1,5 @@
-<script src="/static/js/local/saveSearch.js"> window.onload = setCookie('savedSearch')</script>
+<script src="/static/js/local/saveSearch.js"></script>
+<link href="{{ url_for('static', filename = 'css/chemTable.css') }}" rel="stylesheet">
 <div class="container">
   <div class ="container-fluid">
       <h1>View All Chemicals</h1>
@@ -35,7 +36,7 @@
             {%endfor%}
             <script>
             $(document).ready(createTable());
-
+                        
             </script>
         </table>
     </div>

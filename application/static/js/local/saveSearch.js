@@ -13,9 +13,8 @@ function createTable(){
 		}
 	                  ]
    });
-  var inputSearch = document.getElementsByTagName("input")[0];
-  inputSearch.setAttribute('id','myId')
   getCookie('savedSearch')
+  addClearButton()
 }
 
 function cookieSaveAndRedirect(href) {
@@ -28,6 +27,18 @@ function cookieSaveAndRedirect(href) {
     window.location.href = href;
 }
 
+function addClearButton(){
+    var x = document.getElementById('chemtable_filter');
+    var button = document.createElement('button');
+    button.className = 'btn btn-default CLEAR';
+    button.onclick = destroyCookie();
+    button.innerHTML = "Clear";
+    x.append(button)
+}
+
+function destroyCookie(){
+    return false
+}
 
 function getCookie(cname) {
     //function obtained from https://www.w3schools.com/js/js_cookies.asp
