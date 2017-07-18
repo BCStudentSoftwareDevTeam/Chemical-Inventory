@@ -1,6 +1,9 @@
 /*Pictogram Checkboxes*/
 ul {
   list-style-type: none;
+  padding-top: 12px;
+  color: white!important
+  
 }
 
 li {
@@ -11,19 +14,38 @@ input[type="checkbox"][id^="cb"] {
   display: none;
 }
 
-.navbar-default{
-  background-color: whitesmoke;
+.navbar-inverse{
+  color: white !important;
+  background-color:#1B7994;
 }
 
 .navbar-right>li>a{ /*Formats the logout button*/
-  color:black !important;
-  background-color:#ef2828;
+  color:white !important;
+  background-color:#EE8A25;
   border-color:#9fa1a3;
   border-width:1px;
+
 }
 
+.navbar-nav>li>a{ 
+  color: white !important;
+  
+  
+}
+
+.navbar-nav{
+  margin-left:  250;
+  margin-right: 0;
+}
+.navbar-brand{
+	height: 90px;
+	padding-top: 0;
+	padding-bottom: 0;
+} 
+
+
 .navbar-nav>.active>a{
-  background-color:lightgrey !important;
+  background-color:transparent !important;
   border-color:#9fa1a3;
   border-width:1px;
 }
@@ -163,4 +185,5 @@ label img {
   background:#ffffff;
   width: 50%;
   height: 50%;
-}
+  
+ 
