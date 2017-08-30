@@ -21,14 +21,17 @@ def CheckOut():
     user = auth.getUser()
     userLevel = auth.userLevel()
     print user.username, userLevel
+    print 'Right Code'
     
     if userLevel == "admin" or userLevel == "systemAdmin":
         storageList = getStorages()
         buildingList = getBuildings()
         if request.method == "POST":
             data = request.form
+            print data
             cont = getContainer(data['barcodeId'])
             updateHistory(cont, "Checked Out", data['storageId'], user.username)
+            print cont.barcodeId
             changeLocation(cont, True, data, user.username)
         return render_template("views/CheckOutView.html",
                                config = config,

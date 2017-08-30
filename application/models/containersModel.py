@@ -70,9 +70,14 @@ def changeLocation(cont, status, data, user):
   print data
   if status: # True if checking out
     try:
+      print status
+      print data['storageId']
+      print data['forClass']
+      print data['forProf']
+      print user
       cont.storageId = data['storageId']
       cont.checkedOut = status
-      cont.checkOutReason = data['class']
+      cont.checkOutReason = data['forClass']
       cont.forProf = data['forProf']
       cont.checkedOutBy = user
       cont.save()
