@@ -31,6 +31,7 @@ def CheckIn():
             cont = getContainer(data['barcodeId'])
             updateHistory(cont, "Checked In", data['storageId'], user.username) # updateHistory located in historiesModel.py
             changeLocation(cont, False, data, user.username) # changeLocation located in containersModel.py
+            flash('Container Checked In','list-group-item list-group-item-success')
             # Move Try and Except to containersModel.py changeLocation()
             """try:
                 data = request.form
