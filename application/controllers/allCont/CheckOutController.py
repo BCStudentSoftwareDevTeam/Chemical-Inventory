@@ -12,6 +12,7 @@ from flask import \
     request, \
     jsonify, \
     url_for, \
+    flash, \
     abort
     
 # PURPOSE: Check out a container
@@ -30,6 +31,7 @@ def CheckOut():
             cont = getContainer(data['barcodeId'])
             updateHistory(cont, "Checked Out", data['storageId'], user.username)
             changeLocation(cont, True, data, user.username)
+            flash('Container Checked Out','list-group-item list-group-item-success')
         return render_template("views/CheckOutView.html",
                                config = config,
                                contConfig = contConfig,
