@@ -64,7 +64,11 @@ def isCas(cas):
         return False
  
 def main():
-    database = "/home/ubuntu/workspace/new_workspace/ChemicalInventory/chemical-inventory-new/data/inventory.sqlite"
+    #Dev
+    #database = "/home/ubuntu/workspace/new_workspace/ChemicalInventory/chemical-inventory-new/data/inventory.sqlite"
+    
+    #production
+    database = "/var/www/html/chemical-inventory-new/data/inventory.sqlite"
     conn = create_connection(database)
     with conn:
         cId = 1
