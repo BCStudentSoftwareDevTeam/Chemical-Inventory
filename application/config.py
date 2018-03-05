@@ -42,6 +42,11 @@ addLocationConfig = Configuration.from_file(addLocationConfig_path).configure()
 reportConfig_path = getAbsolutePath('config/reports.yaml')
 reportConfig = Configuration.from_file(reportConfig_path).configure()
 
+# added for Add Wase Page
+wasteConfig_path = getAbsolutePath('config/wasteConfig.yaml')
+wasteConfig = Configuration.from_file(wasteConfig_path).configure()
+
+
 # This adds the application's base directory to the
 # configuration object, so that the rest of the application
 # can reference it.

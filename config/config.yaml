@@ -91,6 +91,7 @@ admin:
     link: "/CheckOut/"
   - title: "Reports"
     link: "/Report/"
+    
 superUser:
   - title: "View All Chemicals"
     link: "/ChemTable/"
@@ -112,9 +113,9 @@ systemAdmin:
     link: "/migrateChem/"
   - title: "Add Chemical"
     link: "/AddChemical/"
-  - title: "Check In Container"
+  - title: "Check In"
     link: "/CheckIn/"
-  - title: "Check Out Container"
+  - title: "Check Out"
     link: "/CheckOut/"
   - title: "Reports"
     link: "/Report/"
@@ -129,8 +130,8 @@ export:
   path: "application/reports/"
 
 DEBUG:
-  user: "ballz" #admin
-  # user: "hooverk" #systemAdmin
-  # user: "thakurr" #superUser
-  # user: "williamsk" #systemUser
+   user: "ballz" #admin
+  # user: "robinsonkal" #systemAdmin
+  # user: "saderholmm" #superUser
+  # user: "reasoners" #systemUser
   # user: "sheggen" #unnapproved systemUser

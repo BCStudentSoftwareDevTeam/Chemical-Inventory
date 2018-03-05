@@ -24,9 +24,16 @@
             <li><a href="{{menuItem['link']}}">{{menuItem['title']}}</a></li>
           {% endif %}
         {% endfor %}
+        
+        {% if authLevel == "admin" or authLevel == "systemAdmin" %}
+        <li>
+          <a class="btn btn-primary" href="/AddWaste">Waste Management</a>  
+        </li>
+        {% endif %}
         <li>
           <a class="btn btn-warning" href="https://login.berea.edu/idp/profile/Logout">Log Out</a>
         </li>
+      
       </ul>
     </div>
   </div>
