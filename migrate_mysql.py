@@ -9,9 +9,9 @@ from application.models.rolesModel import *
 from application.models.roomsModel import *
 from application.models.usersModel import *
 from application.models.storagesModel import *
-
-
-
+from application.models.wasteContainersModel import *
+from application.models.wasteChemicalsModel import *
+from application.models.wasteContentsModel import *
 
 def create_tables(db, tables):
     for table in tables:
@@ -22,7 +22,7 @@ def clone_entries(db, tables):
         print("-------------%s----------" % (str(table)))
         entries = table.select()
         entries = list(entries)
-	old_db = table._meta.database 
+	old_db = table._meta.database
         table._meta.database = db
         for entry in entries:
             try:
@@ -33,7 +33,7 @@ def clone_entries(db, tables):
         table._meta.database = old_db
 
 def migrate(user, password, db, host):
-    tables = [Buildings, Chemicals, Floors,Rooms,Users,Storages,Containers, Histories,]
+    tables = [Buildings, Chemicals, Floors,Rooms,Users,Storages,Containers, Histories, Wastecontainers, Wastechemicals, Wastecontents]
     mysql = MySQLDatabase(db, host=host,password=password,user=user)
     create_tables(mysql, tables)
     clone_entries(mysql, tables)
@@ -52,11 +52,4 @@ if __name__ == "__main__":
 
     migrate(args.user, args.password, args.db, args.host)
 
-<<<<<<< HEAD
-=======
-#python migrate_mysql.py --user cas --password CasIsThePassword123! --host localhost --db cas >>log.txt
-
-
->>>>>>> f2cc59f2b8441e7a14805ad6974f31fb9b1e70fc
-
-
+    #python migrate_mysql.py --user cas --password CasIsThePassword123! --host localhost --db cas >>log.txt
