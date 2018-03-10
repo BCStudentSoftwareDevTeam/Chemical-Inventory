@@ -52,5 +52,11 @@ if __name__ == "__main__":
 
     migrate(args.user, args.password, args.db, args.host)
 
+<<<<<<< HEAD
+=======
+#python migrate_mysql.py --user cas --password CasIsThePassword123! --host localhost --db cas >>log.txt
+
+
+>>>>>>> f2cc59f2b8441e7a14805ad6974f31fb9b1e70fc
 
 
