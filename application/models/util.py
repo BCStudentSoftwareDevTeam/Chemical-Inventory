@@ -3,10 +3,12 @@ from application.absolutepath import getAbsolutePath
 from peewee import *
 
 def getDB (dbName, dbType):
+#choose which database to use
   dbtype = "sqlite"
 
   if dbtype == "mysql":
-      #theDB = MySQLDatabase('chemical')
+
+      #This changes based on what dtabase you set up in MYSQL
       theDB = MySQLDatabase('chemical', user='root', password='root',
                              host='localhost', port=3306)
 
