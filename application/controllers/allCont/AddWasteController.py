@@ -1,5 +1,5 @@
 from application import app
-from application.models.chemicalsModel import *
+from application.models.wasteContainersModel import *
 from application.models.util import *
 from application.config import *
 from application.logic.getAuthUser import AuthorizedUser
@@ -29,12 +29,12 @@ def AddWaste():
                                chemConfig = chemConfig,
                                wasteConfig = wasteConfig)
 
-    status, flashMessage, flashFormat, newChem = createChemical(request.form) # Function located in chemicalsModel.py
+    status, flashMessage, flashFormat, wCont = createWaste(request.form) # Function located in chemicalsModel.py
     flash(flashMessage, flashFormat)
-    if status: # Chemical created successfully
-      return redirect(url_for('ViewChemical', chemId = newChem.chemId)) #Redirect to the new chemical page
-    else:
-      return render_template("views/AddWasteView.html",
+    #if status: # Chemical created successfully
+    #  return redirect(url_for('ViewChemical', chemId = newChem.chemId)) #Redirect to the new chemical page
+    #else:
+    return render_template("views/AddWasteView.html",
                              authLevel = userLevel,
                              config = config,
                              chemConfig = chemConfig,
@@ -42,5 +42,3 @@ def AddWaste():
 
   else:
     abort(403)
-
-
