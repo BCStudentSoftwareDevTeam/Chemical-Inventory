@@ -20,7 +20,7 @@ from flask import \
 
 # PURPOSE: Shows specific chemical and all containers of said chemical.
 @app.route('/ViewChemical/<chemId>/', methods = ['GET', 'POST'])
-def ViewChemical(chemId):
+def ViewChemical():
   # User authorization
   auth = AuthorizedUser()
   user = auth.getUser()
@@ -58,7 +58,7 @@ def ViewChemical(chemId):
 
     except Exception as e:
         barcode = genBarcode("00000000")
-    
+
     #lastCont needs to be assigned after any potential updates to the last barcode, and before render_template
     containers = (((Containers
                     .select())
@@ -107,4 +107,3 @@ def maDeleteChemical(chemId):
     status, flashMessage, flashFormat, object = deleteChemical(chemId)
     flash(flashMessage, flashFormat)
     return redirect('/ChemTable')
-
