@@ -14,7 +14,7 @@ from flask import \
     abort
 
 # PURPOSE: Add New Chemical to the database
-@app.route('/AddWaste/', methods = ['GET', 'POST'])
+@app.route('/AddWasteContainer/', methods = ['GET', 'POST'])
 def AddWaste():
   auth = AuthorizedUser()
   user = auth.getUser()
@@ -23,7 +23,7 @@ def AddWaste():
 
   if userLevel == "admin" or userLevel == "systemAdmin":
     if request.method == "GET":
-        return render_template("views/AddWasteView.html",
+        return render_template("views/AddWasteContainerView.html",
                                authLevel = userLevel,
                                config = config,
                                chemConfig = chemConfig,

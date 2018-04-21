@@ -25,10 +25,9 @@ def AddWasteItem(wID):
 
   if userLevel == "admin" or userLevel == "systemAdmin":
     if request.method == "GET":
-        return render_template("views/AddWasteView.html",
+        return render_template("views/AddWasteContentsView.html",
                                authLevel = userLevel,
                                config = config,
-                               chemConfig = chemConfig,
                                wasteConfig = wasteConfig)
 
     status, flashMessage, flashFormat, wCont = createWaste(request.form) # Function located in chemicalsModel.py
@@ -36,10 +35,9 @@ def AddWasteItem(wID):
     #if status: # Chemical created successfully
     #  return redirect(url_for('ViewChemical', chemId = newChem.chemId)) #Redirect to the new chemical page
     #else:
-    return render_template("views/AddWasteView.html",
+    return render_template("views/AddWasteContentsView.html",
                              authLevel = userLevel,
                              config = config,
-                             chemConfig = chemConfig,
                              wasteConfig = wasteConfig)
 
   else:
