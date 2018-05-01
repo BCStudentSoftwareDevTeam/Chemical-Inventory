@@ -3,6 +3,7 @@ from application.logic.sortPost import *
 
 
 class Wastechemicals (Model):
+    #model data to create table values and definition to create rows in the table of waste chemicals
     wCHEMID = PrimaryKeyField()
     wName   = CharField(null = False)
     wCasNo  = CharField(null = True)

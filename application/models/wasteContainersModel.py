@@ -3,6 +3,7 @@ from application.logic.sortPost import *
 import  datetime
 
 class Wastecontainers (Model):
+    #model data to create table values and definition to create rows in the table of waste containers
     wID              = PrimaryKeyField()
     wQuant           = FloatField(null = False)
     wQuantUnit       = CharField(default = "")

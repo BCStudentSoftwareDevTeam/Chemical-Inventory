@@ -18,6 +18,8 @@ from flask import \
 # PURPOSE: Add New Chemical to the database
 @app.route('/AddWasteContents/<wID>/', methods = ['GET', 'POST'])
 def AddWasteItem(wID):
+        #function is what is run to render the right page, if GET, it shows the add waste contents view which allows a place to click to add chemicals
+        #if Post, it redirects to waste chemicals page with a specific url conatining the waste container number.
 
   auth = AuthorizedUser()
   user = auth.getUser()
@@ -32,7 +34,7 @@ def AddWasteItem(wID):
                                config = config,
                                wasteConfig = wasteConfig)
 
-    
+
     return redirect(url_for('AddWasteChemical', wID = wID))
 
   else:

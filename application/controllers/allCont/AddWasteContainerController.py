@@ -16,6 +16,8 @@ from flask import \
 # PURPOSE: Add New Chemical to the database
 @app.route('/AddWasteContainer/', methods = ['GET', 'POST'])
 def AddWaste():
+    #function is what is run to render the right page, if GET, it shows the create container view which allows form entry for container
+    #if Post, it creates a row entry to the database for waste containers with a relevant message for success.
   auth = AuthorizedUser()
   user = auth.getUser()
   userLevel = auth.userLevel()
@@ -29,7 +31,7 @@ def AddWaste():
                                chemConfig = chemConfig,
                                wasteConfig = wasteConfig)
 
-    status, flashMessage, flashFormat, wCont = createWaste(request.form) # Function located in chemicalsModel.py
+    status, flashMessage, flashFormat, wCont = createWaste(request.form) # Function located in wasteContainersModel.py
     flash(flashMessage, flashFormat)
     print wCont.wID
     #if status: # Chemical created successfully

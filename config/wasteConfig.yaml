@@ -1,3 +1,8 @@
+#Used with controller to pass in information when rendering the html.
+#The form data can then be saved and used to
+#create the proper rows for their respective waste components.
+
+
 options: &units
   - measure: "Weight"
     units:
