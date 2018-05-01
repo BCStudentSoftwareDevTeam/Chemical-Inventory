@@ -20,7 +20,7 @@ from flask import \
 
 # PURPOSE: Shows specific chemical and all containers of said chemical.
 @app.route('/ViewChemical/<chemId>/', methods = ['GET', 'POST'])
-def ViewChemical():
+def ViewChemical(chemId):
   # User authorization
   auth = AuthorizedUser()
   user = auth.getUser()

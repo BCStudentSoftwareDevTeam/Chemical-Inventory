@@ -1,6 +1,7 @@
 from application import app
 from application.models.wasteContainersModel import *
 from application.models.wasteContentsModel import *
+from application.models.wasteChemicalsModel import *
 from application.models.util import *
 from application.config import *
 from application.logic.getAuthUser import AuthorizedUser
@@ -16,9 +17,8 @@ from flask import \
     abort
 
 # PURPOSE: Add New Chemical to the database
-@app.route('/AddWasteContents/<wID>/', methods = ['GET', 'POST'])
-def AddWasteItem(wID):
-
+@app.route('/AddWasteContents/<wID>/AddWasteChemical', methods = ['GET', 'POST'])
+def AddWasteChemical(wID):
   auth = AuthorizedUser()
   user = auth.getUser()
   userLevel = auth.userLevel()
@@ -26,14 +26,22 @@ def AddWasteItem(wID):
 
   if userLevel == "admin" or userLevel == "systemAdmin":
     if request.method == "GET":
-        return render_template("views/AddWasteContentsView.html",
-                               wID = wID,
+        return render_template("views/AddWasteChemicalView.html",
                                authLevel = userLevel,
                                config = config,
                                wasteConfig = wasteConfig)
 
+    status, flashMessage, flashFormat, wChem = createWasteChemical(request.form) # Function located in chemicalsModel.py
+    flash(flashMessage, flashFormat)
+    print(wID)
+    contentData= {'wCHEMID':unicode(str(wChem.wCHEMID), "utf-8"),'wID':unicode(str(wID), "utf-8")}
     
-    return redirect(url_for('AddWasteChemical', wID = wID))
+
+    status, flashMessage, flashFormat, wCont = createWasteItem(contentData) # Function located in chemicalsModel.py
+    flash(flashMessage, flashFormat)
+
+
+    return redirect(url_for('AddWasteItem', wID = wID))
 
   else:
     abort(403)

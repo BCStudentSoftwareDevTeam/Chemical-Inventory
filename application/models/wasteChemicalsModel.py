@@ -17,3 +17,14 @@ class Wastechemicals (Model):
 
     class Meta:
         database = getDB("inventory", "dynamic")
+
+def createWasteChemical(data):
+  """Creates chemical based on input from user."""
+  try:
+    modelData, extraData = sortPost(data, Wastechemicals) #Only get relevant data for the current Model
+    wCont = Wastechemicals.create(**modelData)
+
+    return(True, "Waste Chemical Created Successfully!", "list-group-item list-group-item-success", wCont)
+  except Exception as e:
+    print e
+    return(False, "Waste Chemical Could Not Be Created.", "list-group-item list-group-item-danger", None)

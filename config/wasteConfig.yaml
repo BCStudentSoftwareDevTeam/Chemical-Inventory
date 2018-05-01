@@ -64,6 +64,7 @@ addWasteChemical:
       id: "wName"
       type: "text"
       placeholder: "Name of Chemical"
+      special: "required"
     - name: "CAS #"
       id: "wCasNo"
       type: "text"
@@ -105,4 +106,3 @@ addWasteContents:
     - name: "rmWaste"
       id: "renmove Waste"
       type: "integer"
-    
