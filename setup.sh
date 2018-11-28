@@ -4,11 +4,11 @@
 # exporting these variables into the shell environment before
 # sourcing this script. If these variables exist before this
 # script is sourced, then the pre-existing values will be used.
-FLASK_VERSION="${FLASK_VERSION:-0.11.1}"
+FLASK_VERSION="${FLASK_VERSION:-0.12.1}"
 WTFORMS_VERSION="${WTFORMS_VERSION:-2.1}"
 FLASK_SESSION_VERSION="${FLASK_SESSION_VERSION:-0.2.3}"
 FLASK_ADMIN_VERSION="${FLASK_ADMIN_VERSION:-1.4.0}"
-PEEWEE_VERSION="${PEEWEE_VERSION:-2.8.1}"
+PEEWEE_VERSION="${PEEWEE_VERSION:-2.9.2}"
 WTF_PEEWEE_VERSION="${WTF_PEEWEE_VERSION:-0.2.6}"
 PYYAML_VERSION="${PYYAML_VERSION:-3.11}"
 CONFIGURE_VERSION="${CONFIGURE_VERSION:-0.5}"
@@ -51,33 +51,33 @@ pip install --upgrade pip
 # Install specific versions of libraries to avoid
 # different behaviors of applications over time.
 
-pip install -U "flask==$FLASK_VERSION"
+pip install "flask==$FLASK_VERSION" #0.12.1
 # http://flask.pocoo.org/
 
-pip install -U "wtforms==$WTFORMS_VERSION"
+pip install "wtforms==$WTFORMS_VERSION" #2.1
 # https://wtforms.readthedocs.io/en/latest/
 
-pip install -U "flask-session==$FLASK_SESSION_VERSION"
+pip install "flask-session==$FLASK_SESSION_VERSION" #0.2.3
 # http://pythonhosted.org/Flask-Session/
 
-pip install -U "flask-admin==$FLASK_ADMIN_VERSION"
+pip install "flask-admin==$FLASK_ADMIN_VERSION" #1.4.0
 # https://flask-admin.readthedocs.io/en/latest/
 
-pip install -U "peewee==$PEEWEE_VERSION"
+pip install "peewee==$PEEWEE_VERSION" # 2.9.2
 # http://docs.peewee-orm.com/en/latest/
 
-pip install -U "wtf-peewee==$WTF_PEEWEE_VERSION"
+pip install "wtf-peewee==$WTF_PEEWEE_VERSION" #0.2.6
 # https://github.com/coleifer/wtf-peewee
 
-pip install -U "configure==$CONFIGURE_VERSION"
+pip install "configure==$CONFIGURE_VERSION" #0.5
 # http://configure.readthedocs.io/en/latest/#
 
-pip install -U "pytest==$PYTEST_VERSION"
+pip install "pytest==$PYTEST_VERSION" #3.0.5
 # http://docs.pytest.org/en/latest/
 
-pip install -U "openpyxl==$OPENPYXL_VERSION"
+pip install "openpyxl==$OPENPYXL_VERSION" #2.4.5
 # https://github.com/jmcnamara/XlsxWriter
 
-pip install -U "unidecode==$UNIDECODE_VERSION"
+pip install "unidecode==$UNIDECODE_VERSION" #0.4.20
 # https://pypi.python.org/pypi/Unidecode
 
