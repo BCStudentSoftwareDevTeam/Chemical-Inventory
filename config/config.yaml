@@ -129,7 +129,8 @@ export:
   path: "application/reports/"
 
 DEBUG:
-  user: "ballz" #admin
+  user: "manalaih_ssdt"
+  # user: "ballz" #admin
   # user: "hooverk" #systemAdmin
   # user: "thakurr" #superUser
   # user: "williamsk" #systemUser

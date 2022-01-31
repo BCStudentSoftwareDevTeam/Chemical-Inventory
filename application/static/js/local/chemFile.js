@@ -17,6 +17,11 @@ function createTable(){
   addClearButton()
 }
 
+// TODO: Add filter for Hazard and Room
+// - Add Hazard and Room columns to the table
+// - Add a custom filter for both of these columns
+// - Look at https://www.datatables.net/extensions/searchpanes/examples/customFiltering/customOptionConditions
+
 function cookieSaveAndRedirect(href) {
 
     //function to save the cookie held in the search bar as 'savedSearch' and then redirect to webpage
@@ -59,8 +64,8 @@ function getCookie(cname) {
 		    return true;
 		}
  	    }
-    }  
-    return "";	
+    }
+    return "";
 }
 
 function find_cookie ( cookie_name ){
@@ -91,7 +96,7 @@ function reload_table(cookie){
 }
 
 function destroyCookie(cookieKey){
-   
+
    document.cookie = cookieKey+"=; expires=Fri, 5 July 2017 12:00:00 UTC; path=/";
    reload_table("");
 
