@@ -33,7 +33,7 @@ roles:
 
 sys:
   debug: True
-  host: "0.0.0.0"
+  host: "0.0.0.0" #TODO: change this to the user's IP.
   port: 8080
 
 # Color Codes
@@ -129,8 +129,8 @@ export:
   path: "application/reports/"
 
 DEBUG:
-  user: "ballz" #admin
+  #user: "ballz" #admin
   # user: "hooverk" #systemAdmin
   # user: "thakurr" #superUser
   # user: "williamsk" #systemUser
-  # user: "sheggen" #unnapproved systemUser
+  user: "heggens" #unnapproved systemUser #TODO: This should be the default user

@@ -17,14 +17,14 @@ OPENPYXL_VERSION="${OPENPYXL_VERSION:-2.4.5}"
 UNIDECODE_VERSION="${UNIDECODE_VERSION:-0.4.20}"
 
 # Check for virtualenv
-command -v virtualenv >/dev/null 2>&1 || { 
-  echo >&2 "I require 'virtualenv' but it's not installed.  Aborting."; 
+command -v virtualenv >/dev/null 2>&1 || {
+  echo >&2 "I require 'virtualenv' but it's not installed.  Aborting.";
   exit 1;
  }
 
  # Check for pip
-command -v pip >/dev/null 2>&1 || { 
- echo >&2 "I require 'pip' but it's not installed.  Aborting."; 
+command -v pip >/dev/null 2>&1 || {
+ echo >&2 "I require 'pip' but it's not installed.  Aborting.";
  exit 1;
 }
 
@@ -36,8 +36,10 @@ if [ -d venv ]; then
   rm -rf venv
 fi
 
+#TODO: Check the python version here (must be 2.7)
+
 # Create and activate a clean virtual environment.
-virtualenv venv
+virtualenv --python=/usr/bin/python2.7 venv #TODO: keep this
 . venv/bin/activate
 
 # Create a data directory
@@ -81,3 +83,5 @@ pip install "openpyxl==$OPENPYXL_VERSION" #2.4.5
 pip install "unidecode==$UNIDECODE_VERSION" #0.4.20
 # https://pypi.python.org/pypi/Unidecode
 
+#TODO: add commands for: python -m pip uninstall werkzeug
+#TODO: add command for: python -m pip install werkzeug==0.16.0
