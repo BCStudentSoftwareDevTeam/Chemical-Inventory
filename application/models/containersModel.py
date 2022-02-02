@@ -2,7 +2,12 @@ from application.models.util import *
 from application.models.chemicalsModel import Chemicals
 from application.models.storagesModel import Storages
 from application.models.roomsModel import *
+from application.models.roomsModel import Rooms
+from application.models.storagesModel import Storages
+from application.models.floorsModel import Floors
+from application.models.buildingsModel import Buildings
 import datetime
+
 
 class Containers (Model):
   conId              = PrimaryKeyField()
@@ -118,7 +123,7 @@ def getContainers(storage):
     Containers.get(Containers.storageId == storage,
                    Containers.disposalDate == None)
   except Exception as e:
-    return False 
+    return False
 
 def disposeContainer(bId):
     try:
@@ -129,3 +134,11 @@ def disposeContainer(bId):
     except Exception as e:
         return (False, "Container "+ bId +" was could not be removed!", "list-group-item list-group-item-danger")
 
+def getAllDataAboutContainers():
+    conts = (Containers.select() \
+                .join(Chemicals, on = (Containers.chemId == Chemicals.chemId)) \
+                .join(Storages, on = (Containers.storageId == Storages.sId)) \
+                .join(Rooms, on = (Rooms.rId == Storages.roomId)) \
+                .join(Floors, on = (Floors.fId == Rooms.floorId)) \
+                .join(Buildings, on = (Buildings.bId == Floors.buildId)))
+    return conts

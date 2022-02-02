@@ -21,13 +21,13 @@ def ChemTable():
   if userLevel == -1 or user == -1:
     abort(403)
   print user.username, userLevel
-  
-  chemicals = getChemicals() #Get all chemicals from the database
-  contDict = contCount(chemicals)
-  
+
+  contDict = contCount(getChemicals())
+  containers = getAllDataAboutContainers()
+
   return render_template("views/ChemTableView.html",
                           config = config,
-                          chemicals = chemicals,
+                          containers = containers,
                           contDict = contDict,
                           quote = quote,
                           authLevel = userLevel)

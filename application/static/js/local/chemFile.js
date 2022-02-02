@@ -1,26 +1,22 @@
 var table;
 var cookie;
+
 function createTable(){
     table = $('#chemtable').DataTable({
 	    "columnDefs": [
-		{
-		    "targets": 'Barcodes',
-		    "visible": false
-		},
-		{
-		    "targets": 'nosort',
-		    "searchable": false
-		}
-	                  ]
+  		{
+  		    "targets": 'Barcodes',
+  		    "visible": false
+  		},
+  		{
+  		    "targets": 'nosort',
+  		    "searchable": false
+  		}
+    ]
    });
   getCookie('savedSearch')
   addClearButton()
 }
-
-// TODO: Add filter for Hazard and Room
-// - Add Hazard and Room columns to the table
-// - Add a custom filter for both of these columns
-// - Look at https://www.datatables.net/extensions/searchpanes/examples/customFiltering/customOptionConditions
 
 function cookieSaveAndRedirect(href) {
 
