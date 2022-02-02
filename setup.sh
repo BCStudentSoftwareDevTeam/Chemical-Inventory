@@ -36,7 +36,14 @@ if [ -d venv ]; then
   rm -rf venv
 fi
 
-#TODO: Check the python version here (must be 2.7)
+# Check for correct python version
+VERSION=`python2 --version | awk '{print $2}'`
+if [ "${VERSION:0:1}" -ne "2" ] || [ "${VERSION:2:1}" -ne "7" ]; then
+	     echo "You must use Python 2.7. You are using $VERSION"
+	     return 1
+else
+	echo -e "You are using Python $VERSION"
+fi
 
 # Create and activate a clean virtual environment.
 virtualenv --python=/usr/bin/python2.7 venv #TODO: keep this
