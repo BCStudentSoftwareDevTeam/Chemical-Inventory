@@ -38,15 +38,15 @@ fi
 
 # Check for correct python version
 VERSION=`python2 --version | awk '{print $2}'`
-if [ "${VERSION:0:1}" -ne "2" ] || [ "${VERSION:2:1}" -ne "7" ]; then
-	     echo "You must use Python 2.7. You are using $VERSION"
+if [ "${VERSION:0:1}" -ne "2" ] || [ "${VERSION:2:1}" -ne "7" ] ; then
+	     echo " You must use Python 2.7. You are using $VERSION "
 	     return 1
 else
-	echo -e "You are using Python $VERSION"
+	echo -e " You are using Python $VERSION "
 fi
 
 # Create and activate a clean virtual environment.
-virtualenv --python=/usr/bin/python2.7 venv #TODO: keep this
+virtualenv --python=/usr/bin/python2.7 venv
 . venv/bin/activate
 
 # Create a data directory
@@ -90,5 +90,12 @@ pip install "openpyxl==$OPENPYXL_VERSION" #2.4.5
 pip install "unidecode==$UNIDECODE_VERSION" #0.4.20
 # https://pypi.python.org/pypi/Unidecode
 
-#TODO: add commands for: python -m pip uninstall werkzeug
-#TODO: add command for: python -m pip install werkzeug==0.16.0
+#TODO: A better approach to dealing with this would be to figure out what causes the
+# werkzeug version to be 1.x.x
+# I believe it is python version because I get this while uninstalling
+
+# /home/manalaih_ssdt/chemical-inventory/venv/lib/python2.7/site-packages/Werkzeug-1.0.1.dist-info/*
+# /home/manalaih_ssdt/chemical-inventory/venv/lib/python2.7/site-packages/werkzeug/*
+
+pip uninstall "werkzeug"
+pip install "werkzeug==0.16.0"
