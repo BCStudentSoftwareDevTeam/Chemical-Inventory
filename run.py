@@ -3,15 +3,14 @@ from application import app
 # Import all of our configuration
 from application.config import *
 import socket
+import os
 
 # Builds the server configuration
-
-if socket.gethostname():
-  hostname = socket.gethostname()
+if os.getenv('USER'):
+  hostname = os.getenv('USER')
   IP = socket.gethostbyname(hostname)
 else:
-  IP    = '0.0.0.0'
-
+  IP = '0.0.0.0'
 
 # Run the web application.
 app.run(debug = config.sys.debug, host = IP, port = config.sys.port)
