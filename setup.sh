@@ -39,7 +39,6 @@ fi
 
 # Check for correct python version
 VERSION=`python2 -V | awk '{print $2}'`
-echo "$VERSION"
 if [ "${VERSION:0:1}" -ne "2" ] || [ "${VERSION:2:1}" -ne "7" ]; then
 	     echo "You must use Python 2.7. You are using $VERSION"
 	     return 1
