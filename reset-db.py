@@ -4,6 +4,7 @@
 from application.models import classes
 from application.config import *
 from application.models import *
+from application.models.usersModel import Users
 import datetime
 
 def init_db ():
@@ -23,6 +24,19 @@ def init_db ():
   # Create tables for each model.
   for c in classes:
     c.create_table(True)
+
+  # Create a Users entry in the database for Scott Heggen as the admin
+  # The database written to is inventory.sqlite
+  (Users.create(username="heggens",
+    first_name="Scott",
+    last_name="Heggen",
+    auth_level="admin",
+    emailadd="heggens@berea.edu",
+    approve=True,
+    created_date=2022-01-31,
+    end_date=2025-01-30,
+    reportto="Idk",
+    created_by="heggens"))
 
 if __name__ == "__main__":
   init_db()
