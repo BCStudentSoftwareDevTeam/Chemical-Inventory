@@ -1,17 +1,18 @@
 var table;
 var cookie;
+
 function createTable(){
     table = $('#chemtable').DataTable({
 	    "columnDefs": [
-		{
-		    "targets": 'Barcodes',
-		    "visible": false
-		},
-		{
-		    "targets": 'nosort',
-		    "searchable": false
-		}
-	                  ]
+  		{
+  		    "targets": 'Barcodes',
+  		    "visible": false
+  		},
+  		{
+  		    "targets": 'nosort',
+  		    "searchable": false
+  		}
+    ]
    });
   getCookie('savedSearch')
   addClearButton()
@@ -59,8 +60,8 @@ function getCookie(cname) {
 		    return true;
 		}
  	    }
-    }  
-    return "";	
+    }
+    return "";
 }
 
 function find_cookie ( cookie_name ){
@@ -91,7 +92,7 @@ function reload_table(cookie){
 }
 
 function destroyCookie(cookieKey){
-   
+
    document.cookie = cookieKey+"=; expires=Fri, 5 July 2017 12:00:00 UTC; path=/";
    reload_table("");
 
