@@ -4,8 +4,8 @@
 # exporting these variables into the shell environment before
 # sourcing this script. If these variables exist before this
 # script is sourced, then the pre-existing values will be used.
-WERKZEUG_VERSION="${WERKZEUG_VERSION:-0.16.0}"
 FLASK_VERSION="${FLASK_VERSION:-0.12.1}"
+WERKZEUG_VERSION="${WERKZEUG_VERSION:-0.16.0}"
 WTFORMS_VERSION="${WTFORMS_VERSION:-2.1}"
 FLASK_SESSION_VERSION="${FLASK_SESSION_VERSION:-0.2.3}"
 FLASK_ADMIN_VERSION="${FLASK_ADMIN_VERSION:-1.4.0}"
@@ -47,7 +47,7 @@ else
 fi
 
 # Create and activate a clean virtual environment.
-virtualenv --python=/usr/bin/python2.7 venv
+virtualenv --python=python2.7 venv
 . venv/bin/activate
 
 # Create a data directory
@@ -91,3 +91,8 @@ pip install "openpyxl==$OPENPYXL_VERSION" #2.4.5
 
 pip install "unidecode==$UNIDECODE_VERSION" #0.4.20
 # https://pypi.python.org/pypi/Unidecode
+
+export FLASK_APP=run.py
+export FLASK_ENV=development
+export FLASK_RUN_PORT=8080
+export FLASK_RUN_HOST=0.0.0.0   # To allow external routing to the application for development
