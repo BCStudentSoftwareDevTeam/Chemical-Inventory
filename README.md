@@ -9,7 +9,7 @@ To build this application you must...
 4. Add your current machine user id to admin in config/roles.yaml 
 5. Start webserver to serve application
 	python run.py
-6. Open 0.0.0.0:8080 in your browser
+6. Open 0.0.0.0:8080 in your browser if you are working locally, your IP:8080 if remotely
 
 # Relevant Documentation
 
