@@ -33,7 +33,6 @@ roles:
 
 sys:
   debug: True
-  host: "0.0.0.0"
   port: 8080
 
 # Color Codes
@@ -129,9 +128,9 @@ export:
   path: "application/reports/"
 
 DEBUG:
+  user: "heggens" # default user - admin
   # user: "manalaih_ssdt"
   # user: "ballz" #admin
   # user: "hooverk" #systemAdmin
   # user: "thakurr" #superUser
   # user: "williamsk" #systemUser
-  user: "heggens" #unnapproved systemUser

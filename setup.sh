@@ -5,6 +5,7 @@
 # sourcing this script. If these variables exist before this
 # script is sourced, then the pre-existing values will be used.
 FLASK_VERSION="${FLASK_VERSION:-0.12.1}"
+WERKZEUG_VERSION="${WERKZEUG_VERSION:-0.16.0}"
 WTFORMS_VERSION="${WTFORMS_VERSION:-2.1}"
 FLASK_SESSION_VERSION="${FLASK_SESSION_VERSION:-0.2.3}"
 FLASK_ADMIN_VERSION="${FLASK_ADMIN_VERSION:-1.4.0}"
@@ -17,14 +18,14 @@ OPENPYXL_VERSION="${OPENPYXL_VERSION:-2.4.5}"
 UNIDECODE_VERSION="${UNIDECODE_VERSION:-0.4.20}"
 
 # Check for virtualenv
-command -v virtualenv >/dev/null 2>&1 || { 
-  echo >&2 "I require 'virtualenv' but it's not installed.  Aborting."; 
+command -v virtualenv >/dev/null 2>&1 || {
+  echo >&2 "I require 'virtualenv' but it's not installed.  Aborting.";
   exit 1;
  }
 
  # Check for pip
-command -v pip >/dev/null 2>&1 || { 
- echo >&2 "I require 'pip' but it's not installed.  Aborting."; 
+command -v pip >/dev/null 2>&1 || {
+ echo >&2 "I require 'pip' but it's not installed.  Aborting.";
  exit 1;
 }
 
@@ -36,8 +37,17 @@ if [ -d venv ]; then
   rm -rf venv
 fi
 
+# Check for correct python version
+VERSION=`python2 -V | awk '{print $2}'`
+if [ "${VERSION:0:1}" -ne "2" ] || [ "${VERSION:2:1}" -ne "7" ]; then
+	     echo "You must use Python 2.7. You are using $VERSION"
+	     return 1
+else
+	echo -e "You are using Python $VERSION"
+fi
+
 # Create and activate a clean virtual environment.
-virtualenv venv
+virtualenv --python=python2.7 venv
 . venv/bin/activate
 
 # Create a data directory
@@ -50,6 +60,7 @@ pip install --upgrade pip
 
 # Install specific versions of libraries to avoid
 # different behaviors of applications over time.
+pip install "werkzeug==$WERKZEUG_VERSION"
 
 pip install "flask==$FLASK_VERSION" #0.12.1
 # http://flask.pocoo.org/
@@ -81,3 +92,7 @@ pip install "openpyxl==$OPENPYXL_VERSION" #2.4.5
 pip install "unidecode==$UNIDECODE_VERSION" #0.4.20
 # https://pypi.python.org/pypi/Unidecode
 
+export FLASK_APP=run.py
+export FLASK_ENV=development
+export FLASK_RUN_PORT=8080
+export FLASK_RUN_HOST=0.0.0.0   # To allow external routing to the application for development

@@ -1,14 +1,15 @@
 # About This Application
 
 To build this application you must...
-1. Run the setup file with the command
+1. Have python 2.7 and `virtualenv` installed
+2. Run the setup file with the command
 	source setup.sh
-2. Populate the database with generic values
+3. Populate the database with generic values
 	python reset-db.py
-3. Add your current machine user id to admin in config/role.yaml 
-4. Start Appache server to serve application
+4. Add your current machine user id to admin in config/roles.yaml 
+5. Start webserver to serve application
 	python run.py
-5. Open 0.0.0.0:8000 in your browser
+6. Open 0.0.0.0:8080 in your browser if you are working locally, your IP:8080 if remotely
 
 # Relevant Documentation
 
