@@ -129,6 +129,7 @@ export:
 
 DEBUG:
   user: "heggens" # default user - admin
+  # user: "manalaih_ssdt"
   # user: "ballz" #admin
   # user: "hooverk" #systemAdmin
   # user: "thakurr" #superUser

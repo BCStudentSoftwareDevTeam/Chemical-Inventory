@@ -20,7 +20,7 @@ def getChemInLoc(loc_data):
     for value in loc_data:
         if (loc_data[value] != "*") and (value in loc_cons):
             wheres &= eval(loc_cons[value])
-        elif value in haz_cons: 
+        elif value in haz_cons:
             haz_where |= eval(haz_cons[value])
         else:
             #No conditional provided
@@ -82,4 +82,3 @@ def getIAFlamLiquids():
                     .where((Chemicals.flashPoint < 73) & (Chemicals.boilPoint < 100))) \
                     .switch(Containers)
     return allIAFlam
-
