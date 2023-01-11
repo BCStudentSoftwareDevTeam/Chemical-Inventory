@@ -58,7 +58,7 @@ def addContainer(data, user):
         application.models.historiesModel.updateHistory(cont, "Created", data['storageId'], user)
         return (True, "Container Created Successfully!", "list-group-item list-group-item-success", cont)
     except Exception as e:
-        print e
+        print (e)
         return (False, "Container Could Not Be Created!", "list-group-item list-group-item-danger", None)
     return Containers.get(Containers.barcodeId == barcode)
 
@@ -72,7 +72,7 @@ def changeLocation(cont, status, data, user):
   Returns:
       Nothing
   """ #should return something for unit testing later
-  print data
+  print (data)
   if status: # True if checking out
     try:
       cont.storageId = data['storageId']

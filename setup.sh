@@ -4,18 +4,18 @@
 # exporting these variables into the shell environment before
 # sourcing this script. If these variables exist before this
 # script is sourced, then the pre-existing values will be used.
-FLASK_VERSION="${FLASK_VERSION:-0.12.1}"
+FLASK_VERSION="${FLASK_VERSION:-2.0.1}"
 WERKZEUG_VERSION="${WERKZEUG_VERSION:-0.16.0}"
 WTFORMS_VERSION="${WTFORMS_VERSION:-2.1}"
-FLASK_SESSION_VERSION="${FLASK_SESSION_VERSION:-0.2.3}"
-FLASK_ADMIN_VERSION="${FLASK_ADMIN_VERSION:-1.4.0}"
-PEEWEE_VERSION="${PEEWEE_VERSION:-2.9.2}"
+FLASK_SESSION_VERSION="${FLASK_SESSION_VERSION:-2 1.3.1}"
+FLASK_ADMIN_VERSION="${FLASK_ADMIN_VERSION:-1.6.0}"
+PEEWEE_VERSION="${PEEWEE_VERSION:-3.14.4}"
 WTF_PEEWEE_VERSION="${WTF_PEEWEE_VERSION:-0.2.6}"
 PYYAML_VERSION="${PYYAML_VERSION:-3.11}"
-CONFIGURE_VERSION="${CONFIGURE_VERSION:-0.5}"
-PYTEST_VERSION="${PYTEST_VERSION:-3.0.5}"
-OPENPYXL_VERSION="${OPENPYXL_VERSION:-2.4.5}"
-UNIDECODE_VERSION="${UNIDECODE_VERSION:-0.4.20}"
+CONFIGURE_VERSION="${CONFIGURE_VERSION:-0.4.8}"
+PYTEST_VERSION="${PYTEST_VERSION:-7.2.0}"
+OPENPYXL_VERSION="${OPENPYXL_VERSION:-3.0.10}"
+UNIDECODE_VERSION="${UNIDECODE_VERSION:-1.3.6}"
 
 # Check for virtualenv
 command -v virtualenv >/dev/null 2>&1 || {
@@ -38,16 +38,16 @@ if [ -d venv ]; then
 fi
 
 # Check for correct python version
-VERSION=`python2 -V | awk '{print $2}'`
-if [ "${VERSION:0:1}" -ne "2" ] || [ "${VERSION:2:1}" -ne "7" ]; then
-	     echo "You must use Python 2.7. You are using $VERSION"
-	     return 1
-else
-	echo -e "You are using Python $VERSION"
-fi
+# VERSION=`python2 -V | awk '{print $2}'`
+# if [ "${VERSION:0:1}" -ne "2" ] || [ "${VERSION:2:1}" -ne "7" ]; then
+# 	     echo "You must use Python 2.7. You are using $VERSION"
+# 	     return 1
+# else
+# 	echo -e "You are using Python $VERSION"
+# fi
 
 # Create and activate a clean virtual environment.
-virtualenv --python=python2.7 venv
+virtualenv --python=python3.9 venv
 . venv/bin/activate
 
 # Create a data directory
@@ -58,26 +58,28 @@ mkdir -p data
 # This should not affect application behavior.
 pip install --upgrade pip
 
+python -m pip install -r requirements.txt
+
 # Install specific versions of libraries to avoid
 # different behaviors of applications over time.
-pip install "werkzeug==$WERKZEUG_VERSION"
+# pip install "werkzeug==$WERKZEUG_VERSION"
 
-pip install "flask==$FLASK_VERSION" #0.12.1
+# pip install "flask==$FLASK_VERSION" #0.12.1
 # http://flask.pocoo.org/
 
-pip install "wtforms==$WTFORMS_VERSION" #2.1
+# pip install "wtforms==$WTFORMS_VERSION" #2.1
 # https://wtforms.readthedocs.io/en/latest/
 
 pip install "flask-session==$FLASK_SESSION_VERSION" #0.2.3
 # http://pythonhosted.org/Flask-Session/
 
-pip install "flask-admin==$FLASK_ADMIN_VERSION" #1.4.0
+# pip install "flask-admin==$FLASK_ADMIN_VERSION" #1.4.0
 # https://flask-admin.readthedocs.io/en/latest/
 
-pip install "peewee==$PEEWEE_VERSION" # 2.9.2
+# pip install "peewee==$PEEWEE_VERSION" # 2.9.2
 # http://docs.peewee-orm.com/en/latest/
 
-pip install "wtf-peewee==$WTF_PEEWEE_VERSION" #0.2.6
+# pip install "wtf-peewee==$WTF_PEEWEE_VERSION" #0.2.6
 # https://github.com/coleifer/wtf-peewee
 
 pip install "configure==$CONFIGURE_VERSION" #0.5
@@ -91,6 +93,7 @@ pip install "openpyxl==$OPENPYXL_VERSION" #2.4.5
 
 pip install "unidecode==$UNIDECODE_VERSION" #0.4.20
 # https://pypi.python.org/pypi/Unidecode
+
 
 export FLASK_APP=run.py
 export FLASK_ENV=development

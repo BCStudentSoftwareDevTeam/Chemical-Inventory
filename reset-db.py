@@ -33,8 +33,8 @@ def init_db ():
     auth_level="admin",
     emailadd="heggens@berea.edu",
     approve=True,
-    created_date=2022-01-31,
-    end_date=2025-01-30,
+    created_date=2022-1-31,
+    end_date=2025-1-30,
     reportto="Idk",
     created_by="heggens"))
 

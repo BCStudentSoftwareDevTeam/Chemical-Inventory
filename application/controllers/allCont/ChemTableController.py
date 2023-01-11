@@ -20,7 +20,7 @@ def ChemTable():
   userLevel = auth.userLevel()
   if userLevel == -1 or user == -1:
     abort(403)
-  print user.username, userLevel
+  print (user.username, userLevel)
 
   contDict = contCount(getChemicals())
   containers = getAllDataAboutContainers()
