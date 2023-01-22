@@ -81,7 +81,7 @@ def renderCorrectTemplate(barcode):
                 #Try and Retrieve Container and Chemical Informatoin from CISPro
                 if state != MIGRATED:
                     containerObj = getCisProContainer(inputBar)
-                    print containerObj
+                    print (containerObj)
                     if containerObj == False:
                         flash("Container " + inputBar + " Is Not In CISPro Database", "list-group-item list-group-item-danger")
                         state = UNKNOWN

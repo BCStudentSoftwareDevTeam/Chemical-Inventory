@@ -35,7 +35,7 @@ def UserApproval():
           flash(flashMessage, flashFormat)
       elif 'denyButton' in data:
         #TODO: delete users that were denied
-        print data['denyButton']
+        print (data['denyButton'])
         for user in usersList:
           try:
             query = Users.delete().where(Users.userId == user)

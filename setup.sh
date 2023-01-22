@@ -4,18 +4,18 @@
 # exporting these variables into the shell environment before
 # sourcing this script. If these variables exist before this
 # script is sourced, then the pre-existing values will be used.
-FLASK_VERSION="${FLASK_VERSION:-2.0.1}"
-WERKZEUG_VERSION="${WERKZEUG_VERSION:-0.16.0}"
-WTFORMS_VERSION="${WTFORMS_VERSION:-2.1}"
-FLASK_SESSION_VERSION="${FLASK_SESSION_VERSION:-2 1.3.1}"
-FLASK_ADMIN_VERSION="${FLASK_ADMIN_VERSION:-1.6.0}"
-PEEWEE_VERSION="${PEEWEE_VERSION:-3.14.4}"
-WTF_PEEWEE_VERSION="${WTF_PEEWEE_VERSION:-0.2.6}"
-PYYAML_VERSION="${PYYAML_VERSION:-3.11}"
-CONFIGURE_VERSION="${CONFIGURE_VERSION:-0.4.8}"
-PYTEST_VERSION="${PYTEST_VERSION:-7.2.0}"
-OPENPYXL_VERSION="${OPENPYXL_VERSION:-3.0.10}"
-UNIDECODE_VERSION="${UNIDECODE_VERSION:-1.3.6}"
+# FLASK_VERSION="${FLASK_VERSION:-2.0.1}"
+# WERKZEUG_VERSION="${WERKZEUG_VERSION:-0.16.0}"
+# WTFORMS_VERSION="${WTFORMS_VERSION:-2.1}"
+# FLASK_SESSION_VERSION="${FLASK_SESSION_VERSION:-1.3.1}"
+# FLASK_ADMIN_VERSION="${FLASK_ADMIN_VERSION:-1.6.0}"
+# PEEWEE_VERSION="${PEEWEE_VERSION:-3.14.4}"
+# WTF_PEEWEE_VERSION="${WTF_PEEWEE_VERSION:-0.2.6}"
+# PYYAML_VERSION="${PYYAML_VERSION:-3.11}"
+# # CONFIGURE_VERSION="${CONFIGURE_VERSION:-0.4.8}"
+# PYTEST_VERSION="${PYTEST_VERSION:-7.2.0}"
+# OPENPYXL_VERSION="${OPENPYXL_VERSION:-3.0.10}"
+# UNIDECODE_VERSION="${UNIDECODE_VERSION:-1.3.6}"
 
 # Check for virtualenv
 command -v virtualenv >/dev/null 2>&1 || {
@@ -70,7 +70,7 @@ python -m pip install -r requirements.txt
 # pip install "wtforms==$WTFORMS_VERSION" #2.1
 # https://wtforms.readthedocs.io/en/latest/
 
-pip install "flask-session==$FLASK_SESSION_VERSION" #0.2.3
+# pip install "flask-session2==$FLASK_SESSION_VERSION" #0.2.3
 # http://pythonhosted.org/Flask-Session/
 
 # pip install "flask-admin==$FLASK_ADMIN_VERSION" #1.4.0
@@ -82,16 +82,15 @@ pip install "flask-session==$FLASK_SESSION_VERSION" #0.2.3
 # pip install "wtf-peewee==$WTF_PEEWEE_VERSION" #0.2.6
 # https://github.com/coleifer/wtf-peewee
 
-pip install "configure==$CONFIGURE_VERSION" #0.5
+# pip install "configure==$CONFIGURE_VERSION" #0.5
 # http://configure.readthedocs.io/en/latest/#
 
-pip install "pytest==$PYTEST_VERSION" #3.0.5
-# http://docs.pytest.org/en/latest/
+/# http://docs.pytest.org/en/latest/
 
-pip install "openpyxl==$OPENPYXL_VERSION" #2.4.5
+# pip install "openpyxl==$OPENPYXL_VERSION" #2.4.5
 # https://github.com/jmcnamara/XlsxWriter
 
-pip install "unidecode==$UNIDECODE_VERSION" #0.4.20
+# pip install "unidecode==$UNIDECODE_VERSION" #0.4.20
 # https://pypi.python.org/pypi/Unidecode
 
 

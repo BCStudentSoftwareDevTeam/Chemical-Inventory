@@ -49,5 +49,5 @@ def checkName():
     if chemical is not None:
       return jsonify({'required':True}) #Build the json dict for a success
   except:
-    print "This should log something..."
+    print( "This should log something...")
     return jsonify({'required':False})
