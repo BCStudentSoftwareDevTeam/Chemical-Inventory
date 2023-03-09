@@ -28,9 +28,9 @@ def report():
     if userLevel == 'admin' or userLevel == 'superUser' or userLevel == 'systemAdmin':
         if request.method == "GET":
             allBuild = getBuildings()
-            inputs = [None] * len(reportConfig.ReportTypes.Inputs)
-            for key in reportConfig.ReportTypes.Inputs:
-                index = reportConfig.ReportTypes.Inputs[key]
+            inputs = [None] * len(reportConfig["ReportTypes"]["Inputs"])
+            for key in reportConfig["ReportTypes"]["Inputs"]:
+                index = reportConfig["ReportTypes"]["Inputs"][key]
                 inputs[index] = key
             return render_template("views/ReportView.html",
                                    authLevel = userLevel,
