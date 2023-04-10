@@ -1,22 +1,3 @@
-# This sets default values for the versions of the Python
-# libraries we are installing. If we wish to override this
-# (say, during VM or container setup), we do so by
-# exporting these variables into the shell environment before
-# sourcing this script. If these variables exist before this
-# script is sourced, then the pre-existing values will be used.
-# FLASK_VERSION="${FLASK_VERSION:-2.0.1}"
-# WERKZEUG_VERSION="${WERKZEUG_VERSION:-0.16.0}"
-# WTFORMS_VERSION="${WTFORMS_VERSION:-2.1}"
-# FLASK_SESSION_VERSION="${FLASK_SESSION_VERSION:-1.3.1}"
-# FLASK_ADMIN_VERSION="${FLASK_ADMIN_VERSION:-1.6.0}"
-# PEEWEE_VERSION="${PEEWEE_VERSION:-3.14.4}"
-# WTF_PEEWEE_VERSION="${WTF_PEEWEE_VERSION:-0.2.6}"
-# PYYAML_VERSION="${PYYAML_VERSION:-3.11}"
-# # CONFIGURE_VERSION="${CONFIGURE_VERSION:-0.4.8}"
-# PYTEST_VERSION="${PYTEST_VERSION:-7.2.0}"
-# OPENPYXL_VERSION="${OPENPYXL_VERSION:-3.0.10}"
-# UNIDECODE_VERSION="${UNIDECODE_VERSION:-1.3.6}"
-
 # Check for virtualenv
 command -v virtualenv >/dev/null 2>&1 || {
   echo >&2 "I require 'virtualenv' but it's not installed.  Aborting.";
@@ -38,13 +19,15 @@ if [ -d venv ]; then
 fi
 
 # Check for correct python version
-# VERSION=`python2 -V | awk '{print $2}'`
-# if [ "${VERSION:0:1}" -ne "2" ] || [ "${VERSION:2:1}" -ne "7" ]; then
-# 	     echo "You must use Python 2.7. You are using $VERSION"
-# 	     return 1
-# else
-# 	echo -e "You are using Python $VERSION"
-# fi
+VERSION=`python3 -V | awk '{print $2}'`
+MAJOR_VERSION=`echo $VERSION | cut -d'.' -f1`  #make sure a python version above 3.7 is used 
+MINOR_VERSION=`echo $VERSION | cut -d'.' -f2`
+if [ $MAJOR_VERSION -eq 3 ] && [ $MINOR_VERSION -ge 7 ]; then
+    echo -e "You are using Python $VERSION"
+else
+    echo "You must use Python 3.7 or later. You are using $VERSION"
+    return 1
+fi
 
 # Create and activate a clean virtual environment.
 virtualenv --python=python3.9 venv
@@ -56,42 +39,9 @@ mkdir -p data
 
 # Upgrade pip before continuing; avoids warnings.
 # This should not affect application behavior.
-pip install --upgrade pip
+pip3 install --upgrade pip
 
 python -m pip install -r requirements.txt
-
-# Install specific versions of libraries to avoid
-# different behaviors of applications over time.
-# pip install "werkzeug==$WERKZEUG_VERSION"
-
-# pip install "flask==$FLASK_VERSION" #0.12.1
-# http://flask.pocoo.org/
-
-# pip install "wtforms==$WTFORMS_VERSION" #2.1
-# https://wtforms.readthedocs.io/en/latest/
-
-# pip install "flask-session2==$FLASK_SESSION_VERSION" #0.2.3
-# http://pythonhosted.org/Flask-Session/
-
-# pip install "flask-admin==$FLASK_ADMIN_VERSION" #1.4.0
-# https://flask-admin.readthedocs.io/en/latest/
-
-# pip install "peewee==$PEEWEE_VERSION" # 2.9.2
-# http://docs.peewee-orm.com/en/latest/
-
-# pip install "wtf-peewee==$WTF_PEEWEE_VERSION" #0.2.6
-# https://github.com/coleifer/wtf-peewee
-
-# pip install "configure==$CONFIGURE_VERSION" #0.5
-# http://configure.readthedocs.io/en/latest/#
-
-/# http://docs.pytest.org/en/latest/
-
-# pip install "openpyxl==$OPENPYXL_VERSION" #2.4.5
-# https://github.com/jmcnamara/XlsxWriter
-
-# pip install "unidecode==$UNIDECODE_VERSION" #0.4.20
-# https://pypi.python.org/pypi/Unidecode
 
 
 export FLASK_APP=run.py
