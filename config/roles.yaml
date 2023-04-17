@@ -1,7 +1,7 @@
 # Only certain people can be admins in this app
 admin:
   - ubuntu #For Testing
-  - ala_qasem
+  - hooverk
   - insengrim
   - ramsayb2
   - heggens
