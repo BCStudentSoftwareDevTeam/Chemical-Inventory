@@ -25,7 +25,7 @@ def migrateChem():
     auth = AuthorizedUser()
     user = auth.getUser()
     userLevel = auth.userLevel()
-    print user.username, userLevel
+    print (user.username, userLevel)
 
     #locdict = Batch.select().dicts().get() This was used for datamodel testing
     if userLevel == 'admin' or userLevel == "systemAdmin":
@@ -81,7 +81,7 @@ def renderCorrectTemplate(barcode):
                 #Try and Retrieve Container and Chemical Informatoin from CISPro
                 if state != MIGRATED:
                     containerObj = getCisProContainer(inputBar)
-                    print containerObj
+                    print (containerObj)
                     if containerObj == False:
                         flash("Container " + inputBar + " Is Not In CISPro Database", "list-group-item list-group-item-danger")
                         state = UNKNOWN

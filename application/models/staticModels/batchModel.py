@@ -63,7 +63,7 @@ def getCisProContainer(barcode):
                 .join(Locates, on=(Batch.Id_id == Locates.Location))\
                 .where((Batch.UniqueContainerID == barcode)|(Batch.UniqueContainerID == str(barcode).upper())).get()
     except Exception as e:
-        print e
+        print (e)
         return False
 
 

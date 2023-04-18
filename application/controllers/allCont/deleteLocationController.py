@@ -23,7 +23,7 @@ def maDelete(location, lId):
     userLevel = auth.userLevel()
     if userLevel == -1 or user == -1:
         abort(403)
-    print user.username, userLevel
+    print (user.username, userLevel)
     if userLevel == "admin":
         state = 0
         if request.method == "GET": #Calls delete queries based on what type of location is being deleted.

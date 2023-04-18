@@ -15,4 +15,4 @@ if os.getenv('USER'):
     pass
 
 # Run the web application.
-app.run(debug = config.sys.debug, host = IP, port = config.sys.port)
+app.run(debug = config["sys"]["debug"], host = IP, port = config["sys"]["port"])

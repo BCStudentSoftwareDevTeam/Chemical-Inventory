@@ -20,7 +20,7 @@ def UserApproval():
   userLevel = auth.userLevel()
   if userLevel == -1 or user == -1:
     abort(403)
-  print user.username, userLevel
+  print (user.username, userLevel)
 
   if userLevel == "admin":
     if request.method == "POST":
@@ -35,7 +35,7 @@ def UserApproval():
           flash(flashMessage, flashFormat)
       elif 'denyButton' in data:
         #TODO: delete users that were denied
-        print data['denyButton']
+        print (data['denyButton'])
         for user in usersList:
           try:
             query = Users.delete().where(Users.userId == user)

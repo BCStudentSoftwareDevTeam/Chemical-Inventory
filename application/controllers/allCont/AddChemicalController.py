@@ -19,7 +19,7 @@ def AddChemical():
   auth = AuthorizedUser()
   user = auth.getUser()
   userLevel = auth.userLevel()
-  print user.username, userLevel
+  print (user.username, userLevel)
 
   if userLevel == "admin" or userLevel == "systemAdmin":
     if request.method == "GET":
@@ -49,5 +49,5 @@ def checkName():
     if chemical is not None:
       return jsonify({'required':True}) #Build the json dict for a success
   except:
-    print "This should log something..."
+    print( "This should log something...")
     return jsonify({'required':False})

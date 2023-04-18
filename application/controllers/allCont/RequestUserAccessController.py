@@ -20,7 +20,7 @@ def RequestUserAccess():
   userLevel = auth.userLevel()
   if userLevel == -1 or user == -1:
     abort(403)
-  print user.username, userLevel
+  print (user.username, userLevel)
 
   if request.method == "POST":
     status, flashMessage, flashFormat = createUser(request.form, user.username, False)

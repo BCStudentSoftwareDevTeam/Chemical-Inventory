@@ -1,6 +1,7 @@
 from datetime import date
 
 def genBarcode(lstBcode):
+
     """Takes a barcode and creates and returns the next one
         Input: Str in the form '16100024'
         Output: Str in the form '16100025"""
@@ -9,15 +10,15 @@ def genBarcode(lstBcode):
 
     if len(month) < 2:
 	#if month is less then 10 add a 0 to the front to make it match in len
-	month = '0' + month
+        month = '0' + month
 
     if lstBcode[0:2] == year: #If the last barcode was made in current year
         #The year is correct
-	if lstBcode[2:4] == month: #If the last barcode was made in current month
-	    #The month is also correct so we increment the count
-            newbar = year + month + increment(lstBcode[4:8])
+        if lstBcode[2:4] == month: #If the last barcode was made in current month
+            #The month is also correct so we increment the count
+                newbar = year + month + increment(lstBcode[4:8])
         else:
-	    newbar = year + month + "0000"
+         newbar = year + month + "0000"
     else:
         newbar = year + month +"0000"
     return newbar

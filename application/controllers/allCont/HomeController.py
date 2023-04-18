@@ -30,7 +30,7 @@ def adminHome():
     userLevel = auth.userLevel()
     if user == -1:
         render_template("views/UnathorizedView.html")
-    print user.username, userLevel
+    print (user.username, userLevel)
 
     if userLevel == "admin" or userLevel == "systemAdmin":
         buildings = getBuildings()
@@ -60,7 +60,7 @@ def adminHome():
                     flash(flashMessage, flashFormat)
             elif data['location'] == "Storage": #If the form is editing a storage
                 if data['action'] == 'edit':
-                    print data
+                    print (data)
                     storage = Storages.get(Storages.sId == data['id']) #Get storage location to be edited and change all information to what was in form
                     for i in data:
                         setattr(storage, i, data[i])

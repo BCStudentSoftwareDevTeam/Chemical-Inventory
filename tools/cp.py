@@ -19,11 +19,11 @@ parser.add_argument('-v', '--verbose',
 args = parser.parse_args()
 
 def error (msg):
-  print "OOPS: {0}\n".format(msg)
+  print ("OOPS: {0}\n".format(msg))
   exit()
 
 def announce (msg):
-  print msg
+  print (msg)
 
 def hasKey (d, k):
   return isinstance(d, dict) and (k in d)
@@ -63,7 +63,7 @@ def checkValidMethods (h):
   result = True
   for m in h["methods"]:
     if not m in ["GET", "POST", "PUT", "DELETE"]:
-      print "==> {0} is not a valid method.".format(m)
+      print ("==> {0} is not a valid method.".format(m))
       result = False
   return result
 
@@ -72,7 +72,7 @@ def checkValidRoles (h):
   definedRoles = Configuration.from_file('config/roles.yaml').configure()
   for r in h["roles"]:
     if not r in definedRoles:
-      print "==> {0} is not a valid role.".format(r)
+      print ("==> {0} is not a valid role.".format(r))
       result = False
   return result
 
@@ -117,9 +117,9 @@ def checkSyntax (cc):
 
   # We now know there is a valid list of controllers in every directory
   for d in directories:
-    print "------------------"
-    print "Checking directory '{0}'".format(d["name"])
-    print "------------------"
+    print ("------------------")
+    print ("Checking directory '{0}'".format(d["name"]))
+    print ("------------------")
 
     controllers = d["controllers"]
 
@@ -182,39 +182,39 @@ def checkSyntax (cc):
   routes = []
   funs   = []
 
-  print
-  print "Looking for repeats of routes and function names."
-  print "-------------------------------------------------"
+  
+  print ("Looking for repeats of routes and function names.")
+  print ("-------------------------------------------------")
   for d in directories:
-    print "Directory {0}".format(d["name"])
+    print ("Directory {0}".format(d["name"]))
     controllers = d["controllers"]
     for c in controllers:
-      print "=> Controller: {0}".format(c["name"])
+      print ("=> Controller: {0}".format(c["name"]))
       handlers = c["handlers"]
       for h in handlers:
-        print "==> Route {0}".format(h["route"])
-        print "==> Func  {0}".format(h["function"])
+        print ("==> Route {0}".format(h["route"]))
+        print ("==> Func  {0}".format(h["function"]))
         print
         routes.append(h["route"])
         funs.append(h["function"])
 
-  print ""
+  print ("")
   # Now, do a cute set uniqueness check.
   # http://stackoverflow.com/questions/5278122/checking-if-all-elements-in-a-list-are-unique
   repeats = findRepeats(routes)
   if len(repeats) > 0:
-    print "There are repeated routes in your controllers."
-    print routes
-    print repeats
+    print ("There are repeated routes in your controllers.")
+    print (routes)
+    print (repeats)
     for r in repeats:
-      print "route: {0}".format(r)
+      print ("route: {0}".format(r))
     error("Routes cannot repeat.")
 
   repeats = findRepeats(funs)
   if len(repeats) > 0:
-    print "There are repeated function names in your controllers."
+    print ("There are repeated function names in your controllers.")
     for f in repeats:
-      print "function: {0}".format(f)
+      print ("function: {0}".format(f))
     error ("Function names cannot repeat.")
 
   # If we get here, we pass syntax.
@@ -222,7 +222,7 @@ def checkSyntax (cc):
 
 def createDirectory (dir):
   if not os.path.exists(dir):
-    print "Creating directory '{0}'".format(dir)
+    print ("Creating directory '{0}'".format(dir))
     os.makedirs(dir)
 
 def touchFile (f):
@@ -230,7 +230,7 @@ def touchFile (f):
 
 def copyDefault (src, dest):
   if not os.path.exists(dest):
-    print "Copying default file:\n\t'{0}'.".format(src)
+    print ("Copying default file:\n\t'{0}'.".format(src))
     shutil.copy(src, dest)
 
 
@@ -245,7 +245,7 @@ def handlerExists (f, h):
   result = False
   for line in f:
     if re.search(h["route"], line):
-      print "=> Route '{0}' already exists. Skipping.".format(h["route"])
+      print ("=> Route '{0}' already exists. Skipping.".format(h["route"]))
       result = True
   return result
 
@@ -260,7 +260,7 @@ def getParams(routeString):
 def createHandlerInController (controllerFile, d, c, h):
   # If the handler isn't already there
   if not handlerExists(controllerFile, h):
-    print "Adding route '{0}' to {1}.".format(h["route"], c["name"])
+    print ("Adding route '{0}' to {1}.".format(h["route"], c["name"]))
     cf = open(controllerFile, 'a')
     cf.write("\n")
 
@@ -333,11 +333,10 @@ if __name__ == "__main__":
   syntaxOK = checkSyntax (cc)
 
   if syntaxOK:
-    print "Syntax checks."
+    print ("Syntax checks.")
 
   if syntaxOK and args.generate:
-    print
-    print "Generating files."
-    print "-----------------"
+    print( "Generating files.")
+    print ("-----------------")
     generateFiles (cc)
 

@@ -27,12 +27,12 @@ def init_db():
     for c in classes:
         c.create_table(True)
 
-    print 'Database Initialized'
+    print ('Database Initialized')
     ####
     #Makes one building that the one floor is put in
     ####
     for building in addLocationConfig.buildings:
-        print building.keys()
+        print (building.keys())
         currentBuildingId = buildingsModel.Buildings()
         currentBuildingId.name = building['name']
         currentBuildingId.numFloors = building['numFloors']
