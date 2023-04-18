@@ -1,23 +1,3 @@
-# Check for virtualenv
-command -v virtualenv >/dev/null 2>&1 || {
-  echo >&2 "I require 'virtualenv' but it's not installed.  Aborting.";
-  exit 1;
- }
-
- # Check for pip
-command -v pip >/dev/null 2>&1 || {
- echo >&2 "I require 'pip' but it's not installed.  Aborting.";
- exit 1;
-}
-
-
-# If there is a virtual environment, destroy it.
-if [ -d venv ]; then
-  echo "Deactivating and removing old virtualenv"
-  deactivate 2>&1 /dev/null
-  rm -rf venv
-fi
-
 # Check for correct python version
 VERSION=`python3 -V | awk '{print $2}'`
 MAJOR_VERSION=`echo $VERSION | cut -d'.' -f1`  #make sure a python version above 3.7 is used 
@@ -29,8 +9,10 @@ else
     return 1
 fi
 
-# Create and activate a clean virtual environment.
-virtualenv --python=python3.9 venv
+if [ ! -d venv ]
+then
+  python3 -m venv venv
+fi
 . venv/bin/activate
 
 # Create a data directory
