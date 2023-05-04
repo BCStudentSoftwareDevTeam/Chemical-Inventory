@@ -1,16 +1,15 @@
-from application.config import *
+from application.config import config 
 from application.absolutepath import getAbsolutePath
-from peewee import *
+from peewee import SqliteDatabase
 
 def getDB (dbName, dbType):
-  dbPath = config.databases[dbType][dbName].filename
-  dbPath = getAbsolutePath(dbPath)
+  dbPath = getAbsolutePath(config['databases'][dbType][dbName]['filename'])
   # print "DB Name: {0}\nDB Path: {1}".format(dbName, dbPath)
   theDB = SqliteDatabase (dbPath,
                           pragmas = ( ('busy_timeout',  100),
                                       ('journal_mode', 'WAL')
                                   ),
                           threadlocals = True)
-  config.databases[dbType][dbName].theDB = theDB
+  config['databases'][dbType][dbName]['theDB'] = theDB
   return theDB
 

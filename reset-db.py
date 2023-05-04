@@ -8,8 +8,8 @@ import datetime
 
 def init_db ():
   # First, we create the databases.
-  for database in config.databases.dynamic:
-    filename = config.databases.dynamic[database].filename
+  for database in config['databases']['dynamic']:
+    filename = config['databases']['dynamic'][database]['filename']
 
     """Initializes the database."""
     # Remove the DB
@@ -23,6 +23,17 @@ def init_db ():
   # Create tables for each model.
   for c in classes:
     c.create_table(True)
+
+  (Users.create(username="heggens",
+                first_name="Scott",
+                last_name="Heggen",
+                auth_level="admin",
+                emailadd="heggens@berea.edu",
+                approve=True,
+                created_date="2022-1-31",
+                end_date="2025-1-30",
+                reportto="Idk",
+                created_by="heggens"))
 
 if __name__ == "__main__":
   init_db()
