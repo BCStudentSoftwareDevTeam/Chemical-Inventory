@@ -50,7 +50,7 @@ def getSearchTerm(conn, chemId):
         return cas
 
 def isCas(cas):
-    if type(cas) == unicode:
+    if type(cas) == str:
         cas = cas.strip()
         if len(cas) == 0:
             return False
@@ -79,7 +79,7 @@ def main():
                     cId=cId+1
                 else:
                     sdsLink = "https://msdsmanagement.msdsonline.com/af807f3c-b6be-4bd0-873b-f464c8378daa/ebinder/?SearchTerm="+term
-                    print ("updated chemId "+str(cId)+" sdslink with "+sdsLink)
+                    print(("updated chemId "+str(cId)+" sdslink with "+sdsLink))
                     update_chemicals(conn, (sdsLink,cId))
                     cId=cId+1
             except IndexError:

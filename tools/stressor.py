@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from application.models import Mess
 from application.config import *
-from httplib import *
+from http.client import *
 from urllib import *
 from uuid import *
 
@@ -25,5 +25,5 @@ for stringSize in [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 4096, 65536]:
     conn.request("POST", "insert", params, headers)
     response = conn.getresponse()
     if response.status != 200:
-      print "Error on insert {0}: {1} {2}".format(i, response.status, response.reason)
-  print "Done with {0} inserts on string size {1}".format(numInserts, stringSize)
+      print("Error on insert {0}: {1} {2}".format(i, response.status, response.reason))
+  print("Done with {0} inserts on string size {1}".format(numInserts, stringSize))
