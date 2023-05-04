@@ -71,3 +71,4 @@ for modelFileName, classObj in zip (models, classes):
   setattr(o, modelName, classObj)
 models = o
 
+from peewee import *

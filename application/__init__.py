@@ -1,10 +1,8 @@
 # This must come first in this particular file.
-from flask import Flask
+from flask import Flask, session
 from flask import session, redirect, url_for, request, abort
-from flask_session import Session
 
 app = Flask(__name__)
-sess = Session()
 
 # Import all of the controllers for your application
 from application.controllers import *
@@ -19,10 +17,6 @@ if config['flask']['secretKey'] in ["UUID", "RANDOM"]:
   app.secret_key = uuid.uuid4()
 else:
   app.secret_key = "secretsecretsecret"
-
-app.config['SESSION_TYPE'] = 'filesystem'
-app.config['SESSION_FILE_DIR'] = getAbsolutePath('flask_session')
-sess.init_app(app)
 
 # Set up the administrative interface
 import flask_admin as admin

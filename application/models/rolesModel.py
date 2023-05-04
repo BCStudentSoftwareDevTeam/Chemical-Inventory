@@ -8,3 +8,5 @@ class Roles (Model):
   class Meta:
     database = getDB("roles", "dynamic")
 
+from peewee import *
+from peewee import *

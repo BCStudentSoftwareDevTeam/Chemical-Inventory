@@ -24,6 +24,8 @@ with open('config/locations.yaml', 'r') as f:
     addLocationConfig = yaml.safe_load(f)
 with open('config/reports.yaml', 'r') as f:
     reportConfig = yaml.safe_load(f)
+with open('config/roles.yaml', 'r') as f:
+    roleConfig = yaml.safe_load(f)
 
 # Add the application's base directory to the config object
 config['sys']['base_dir'] = os.path.abspath(os.path.dirname(__file__))

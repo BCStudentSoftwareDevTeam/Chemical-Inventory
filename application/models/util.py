@@ -13,3 +13,4 @@ def getDB (dbName, dbType):
   config['databases'][dbType][dbName]['theDB'] = theDB
   return theDB
 
+from peewee import *

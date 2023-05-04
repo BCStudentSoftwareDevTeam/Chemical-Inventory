@@ -1,3 +1,5 @@
+from peewee import *
+
 from application.models.util import *
 from application.logic.sortPost import *
 from application.config import *
@@ -118,3 +120,4 @@ def getChemicalHazards(chemId):
       return pictList
   except Exception as e:
     return e
+from peewee import *
