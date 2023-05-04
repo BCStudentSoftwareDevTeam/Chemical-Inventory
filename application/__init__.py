@@ -61,7 +61,7 @@ config['flask']['username'] = getUsernameFromEnv()
 # but because we don't know which will be used...
 @app.before_request
 def _db_connect():
-  for db in config['databases']['dynamic'].keys():
+  for db in list(config['databases']['dynamic'].keys()):
     theDB = config['databases']['dynamic'][db]['theDB']
     theDB.connect()
 
@@ -69,7 +69,7 @@ def _db_connect():
 # processing the request.
 @app.teardown_appcontext
 def _db_close(exc):
-  for db in config['databases']['dynamic'].keys():
+  for db in list(config['databases']['dynamic'].keys()):
     theDB = config['databases']['dynamic'][db]['theDB']
     if not theDB.is_closed():
         theDB.close()

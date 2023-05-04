@@ -69,13 +69,13 @@ def createChemical(data):
     except:
       newChem = (Chemicals.create(**modelData), False) #Create instance of Chemical with mapped info in modelData False, because it couldn't get the chemical
     if newChem[1]:
-      print modelData
+      print(modelData)
       Chemicals.update(**modelData).where(Chemicals.name == newChem[0].name).execute()
       newChem[0].remove = False
       newChem[0].save()
     return(True, "Chemical Created Successfully!", "list-group-item list-group-item-success", newChem[0])
   except Exception as e:
-    print e
+    print(e)
     return(False, "Chemical Could Not Be Created.", "list-group-item list-group-item-danger", None)
 
 def deleteChemical(chemId):

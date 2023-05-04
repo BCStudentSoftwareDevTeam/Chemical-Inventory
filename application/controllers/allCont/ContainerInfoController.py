@@ -27,7 +27,7 @@ def maContainerInfo(chemId, barcodeId):
   auth = AuthorizedUser()
   user = auth.getUser()
   userLevel = auth.userLevel()
-  print user.username, userLevel
+  print(user.username, userLevel)
 
   if userLevel == "admin" or userLevel == "systemAdmin":
     chemical = getChemical(chemId)

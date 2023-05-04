@@ -19,7 +19,7 @@ def ViewUser():
   userLevel = auth.userLevel()
   if userLevel == -1 or user == -1:
     abort(403)
-  print user.username, userLevel
+  print(user.username, userLevel)
   usersList = Users.select().where(Users.approve == True)
   if request.method == "POST":
     data = request.form

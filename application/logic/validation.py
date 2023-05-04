@@ -53,19 +53,19 @@ def userHasRole (username, role):
     if re.match('database', ug):
       # Get the name of the database
       db = re.split(" ", ug)[1]
-      print "DB is '{0}'".format(db)
+      print("DB is '{0}'".format(db))
       # Get the actual model from the name of the model.
       m = getModelFromName(db)
-      print "Model: {0}".format(m)
+      print("Model: {0}".format(m))
 
       # Do a "get", and require that their username and role are both
       # set. For example, look for {jadudm, admin}, not just the username.
       result = m.select().where(m.username == username, m.role == role).count()
       if result > 0:
-        print "User '{0}' validated via database {1}".format(username, db)
+        print("User '{0}' validated via database {1}".format(username, db))
         return True
       else:
-        print "User '{0}' not found in database {1}".format(username, db)
+        print("User '{0}' not found in database {1}".format(username, db))
         return False
 
     # Check if they are in the Active Directory
@@ -82,7 +82,7 @@ def userHasRole (username, role):
 def checkValidUser (fun):
   @wraps(fun)
   def wrapper (*args, **kwargs):
-    print "Is Valid User"
+    print("Is Valid User")
     return fun(*args, **kwargs)
   return wrapper
 
@@ -92,10 +92,10 @@ def require_role (requiredRole):
     def decorated_fun (*args, **kwargs):
       # print "Is Valid Role: %s" % expected_args[0]
       if userHasRole (getUsernameFromEnv(), requiredRole):
-        print "User has role."
+        print("User has role.")
         return fun(*args, **kwargs)
       else:
-        print "User does not have role."
+        print("User does not have role.")
         return redirect(url_for(config.application.default), code = 302)
         # return config.application.noRoleHandler
     return decorated_fun
