@@ -1,6 +1,5 @@
-# This must come first in this particular file.
-from flask import Flask, session
-from flask import session, redirect, url_for, request, abort
+import uuid
+from flask import Flask, session, redirect, url_for, request, abort
 
 app = Flask(__name__)
 
@@ -12,11 +11,10 @@ from application.absolutepath import getAbsolutePath
 # We need to track session information for using the
 # admin console. This is not fully understood yet.
 # The admin console does not work without it, though.
-import uuid
 if config['flask']['secretKey'] in ["UUID", "RANDOM"]:
-  app.secret_key = uuid.uuid4()
+  app.secret_key = str(uuid.uuid4())
 else:
-  app.secret_key = "secretsecretsecret"
+  app.secret_key = config['flask']['secretKey']
 
 # Set up the administrative interface
 import flask_admin as admin
@@ -45,7 +43,6 @@ for c in classes:
 
 # Store the username (which will have been set by the webserver) into the config.
 # FIXME: This is temporary. Fix with proper code for running under Apache/Shibboleth
-import os
 from application.logic.validation import getUsernameFromEnv
 config['flask']['username'] = getUsernameFromEnv()
 
@@ -81,3 +78,23 @@ def authUser(env):
       return config["DEBUG"]["user"].split('@')[0].split('/')[-1].lower()
     else:
       return None
+
+@app.before_request
+def queryCount():
+    if session:
+        session['querycount'] = 0
+
+from peewee import BaseQuery
+if 'show_queries' in config and config['show_queries']:
+    old_execute = BaseQuery.execute
+    def new_execute(*args, **kwargs):
+        if session:
+            if 'querycount' not in session:
+                session['querycount'] = 0
+
+            session['querycount'] += 1
+            print("**Running query {}**".format(session['querycount']))
+            print(args[0])
+
+        return old_execute(*args, **kwargs)
+    BaseQuery.execute = new_execute

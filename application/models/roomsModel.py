@@ -1,3 +1,5 @@
+from peewee import *
+
 import application
 from application.models.util import *
 from application.models.floorsModel import Floors
@@ -52,7 +54,3 @@ def deleteRoom(room):
     return(True, room.name + " was Successfully Removed From System", "list-group-item list-group-item-success")
   except Exception as e:
     return(False, "Room could not be Removed to System", "list-group-item list-group-item-danger")
-
-
-from peewee import *
-from peewee import *

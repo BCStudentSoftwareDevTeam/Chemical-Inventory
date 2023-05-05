@@ -1,6 +1,8 @@
+from peewee import *
+import pytest
+
 from application.models.util import *
 from application.logic.sortPost import *
-import pytest
 
 class Users (Model):
     userId       = PrimaryKeyField()
@@ -83,8 +85,3 @@ def updateUserAuth(user, auth):
         return("Success: Users Authorization Has Been Updated.", 'list-group-item list-group-item-success')
     except:
         return("Error: User Authorization Could Not Be Update.", 'list-group-item list-group-item-danger')
-
-
-
-from peewee import *
-from peewee import *

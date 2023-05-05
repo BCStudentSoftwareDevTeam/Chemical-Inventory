@@ -1,3 +1,5 @@
+from peewee import *
+
 from application.models.util import *
 from application.models.roomsModel import Rooms
 
@@ -47,6 +49,3 @@ def deleteStorage(storage_id):
     return(True, str(storage.name) + " Storage was Successfully Removed", "list-group-item list-group-item-success")
   except Exception as e:
     return(False, str(storage.name) + " Storage was Successfully Removed", "list-group-item list-group-item-danger")
-
-from peewee import *
-from peewee import *

@@ -1,3 +1,5 @@
+from peewee import *
+
 from application.models.util import *
 from application.models.buildingsModel import Buildings
 from application.logic.sortPost import *
@@ -41,5 +43,3 @@ def deleteFloor(building):
     return(True, floor.name + " was Successfully Deleted", "list-group-item list-group-item-success", floor)
   except Exception as e:
     return(False, floor.name + " Could Not Be Deleted to System", "list-group-item list-group-item-danger", None)
-from peewee import *
-from peewee import *

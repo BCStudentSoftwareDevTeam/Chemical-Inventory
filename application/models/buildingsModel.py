@@ -1,3 +1,5 @@
+from peewee import *
+
 from application.models.util import *
 from application.logic.sortPost import *
 
@@ -48,7 +50,3 @@ def deleteBuilding(bId):
     return(True, building.name + " Building was Deleted From the System", "list-group-item list-group-item-success")
   except Exception as e:
     return (False, build.name + " Building Could Not Be Deleted From the System", "list-group-item list-group-item-danger")
-
-
-from peewee import *
-from peewee import *

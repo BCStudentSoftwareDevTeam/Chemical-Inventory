@@ -4,6 +4,7 @@
 from application.models import classes
 from application.config import *
 from application.models import *
+from application.models.usersModel import Users
 import datetime
 
 def init_db ():

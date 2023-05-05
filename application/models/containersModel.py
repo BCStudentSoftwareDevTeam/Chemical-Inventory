@@ -1,3 +1,5 @@
+from peewee import *
+
 from application.models.util import *
 from application.models.chemicalsModel import Chemicals
 from application.models.storagesModel import Storages
@@ -107,13 +109,13 @@ def contCount(chemicals):
   contDict = {} #Set up a dictionary for all containers
   for chemical in chemicals: #For each chemical
     try:
-      contDict[chemical.name] = ((((Containers
+      contDict[chemical.name] = (((Containers
                                 .select())
                                 .join(Chemicals))
                                 .where(
                                   (Containers.disposalDate == None) &
                                   (Containers.chemId == chemical.chemId) &
-                                  (Chemicals.remove == False))))
+                                  (Chemicals.remove == False)))
     except:
       contDict[chemical.name] = "n/a"
   return contDict
@@ -135,12 +137,10 @@ def disposeContainer(bId):
         return (False, "Container "+ bId +" was could not be removed!", "list-group-item list-group-item-danger")
 
 def getAllDataAboutContainers():
-    conts = (Containers.select() \
-                .join(Chemicals, on = (Containers.chemId == Chemicals.chemId)) \
-                .join(Storages, on = (Containers.storageId == Storages.sId)) \
-                .join(Rooms, on = (Rooms.rId == Storages.roomId)) \
-                .join(Floors, on = (Floors.fId == Rooms.floorId)) \
-                .join(Buildings, on = (Buildings.bId == Floors.buildId)))
+    conts = (Containers.select(Containers,Chemicals,Storages,Rooms,Floors,Buildings)
+                .join(Chemicals).switch(Containers)
+                .join(Storages)
+                .join(Rooms)
+                .join(Floors)
+                .join(Buildings))
     return conts
-from peewee import *
-from peewee import *

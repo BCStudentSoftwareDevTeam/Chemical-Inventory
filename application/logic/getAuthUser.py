@@ -6,7 +6,11 @@ from flask import abort
 
 class AuthorizedUser:
     def __init__(self):
-        self.username = authUser(request.environ)
+        if "username" not in session:
+            session['username'] = authUser(request.environ)
+        
+        self.username = session['username']
+
 
     def getUsername(self):
         """returns the username"""

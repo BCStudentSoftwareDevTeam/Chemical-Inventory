@@ -1,3 +1,4 @@
+import time
 from application import app
 from application.models.chemicalsModel import *
 from application.models.containersModel import *
@@ -20,7 +21,6 @@ def ChemTable():
   userLevel = auth.userLevel()
   if userLevel == -1 or user == -1:
     abort(403)
-  print(user.username, userLevel)
 
   contDict = contCount(getChemicals())
   containers = getAllDataAboutContainers()
@@ -29,7 +29,6 @@ def ChemTable():
                           config = config,
                           containers = containers,
                           contDict = contDict,
-                          quote = quote,
                           authLevel = userLevel)
 
 @app.route("/getEditData/", methods = ['GET']) #AJAX call to get data for edit chemical form

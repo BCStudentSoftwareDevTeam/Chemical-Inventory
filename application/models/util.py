@@ -7,9 +7,7 @@ def getDB (dbName, dbType):
   # print "DB Name: {0}\nDB Path: {1}".format(dbName, dbPath)
   theDB = SqliteDatabase (dbPath,
                           pragmas = ( ('busy_timeout',  100),
-                                      ('journal_mode', 'WAL')
-                                  ),
-                          threadlocals = True)
+                                      ('journal_mode', 'WAL')),)
   config['databases'][dbType][dbName]['theDB'] = theDB
   return theDB
 

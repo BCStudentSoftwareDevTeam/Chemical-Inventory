@@ -1,3 +1,5 @@
+from peewee import *
+
 from application.models.util import *
 from application.models.storagesModel import Storages
 from application.models.containersModel import Containers 
@@ -52,5 +54,3 @@ def getContainerHistory(containerId):
     return Histories.select().where(Histories.containerId == containerId)
   except Exception as e:
     return e
-from peewee import *
-from peewee import *

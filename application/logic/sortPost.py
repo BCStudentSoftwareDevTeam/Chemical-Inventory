@@ -1,5 +1,6 @@
 import datetime
 from unidecode import unidecode
+from peewee import DateTimeField, BooleanField
 
 def sortPost( data, model):
   # print "sortPost"
@@ -7,7 +8,7 @@ def sortPost( data, model):
   """
     Takes a dictionary and a model to replace empty strings with None.
     It also splits post data into two variable model_data and extra_data.
-    Model data only has feilds present in the model, extra has all extra data.
+    Model data only has fields present in the model, extra has all extra data.
     Requires that the name field in the html is the same as the model's field.
 
     Inputs:
@@ -30,12 +31,11 @@ def sortPost( data, model):
         extra_data[key] = data[key]
 
     elif hasattr( model, key ):
-      instance = getattr(model, key)
-      field_type = getattr(instance, "db_field")
-      if field_type == "datetime":
+      column = getattr(model, key)
+      if isinstance(column, DateTimeField):
         fixed_date = convert_to_datetime(data[key])
         model_data[key] = fixed_date
-      elif field_type == bool:
+      elif isinstance(column, BooleanField):
         model_data[key] = bool(data[key])
       else:
         model_data[key] = unidecode(data[key])

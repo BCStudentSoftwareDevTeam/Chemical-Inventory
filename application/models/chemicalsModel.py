@@ -120,4 +120,3 @@ def getChemicalHazards(chemId):
       return pictList
   except Exception as e:
     return e
-from peewee import *
