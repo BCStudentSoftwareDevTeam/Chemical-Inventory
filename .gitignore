@@ -1,13 +1,13 @@
 .DS_Store
 flask_session
-.tmp
+*.tmp
 venv
 *.pyc
 data/roles.sqlite
 data/inventory.sqlite
-.~c9*
 *.sqlite-shm
 *.sqlite-wal
-.cache/
+*.cache/
 *.log
-/application/report
+*.swp
+application/report

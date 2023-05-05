@@ -1,3 +1,6 @@
+from collections import defaultdict
+import datetime
+
 from peewee import *
 
 from application.models.util import *
@@ -8,7 +11,6 @@ from application.models.roomsModel import Rooms
 from application.models.storagesModel import Storages
 from application.models.floorsModel import Floors
 from application.models.buildingsModel import Buildings
-import datetime
 
 
 class Containers (Model):
@@ -98,34 +100,28 @@ def changeLocation(cont, status, data, user):
     except Exception as e:
       return e
 
-def contCount(chemicals):
-  """Gets a count of how many containers are currently checked in and not disposed of for each chemical
+def getChemicalContainers():
+    """
+        Returns a dictionary with keys of every chemical name referencing a list of available containers for checkout
+    """
+    query = (Chemicals.select(Chemicals,Containers)
+                      .join(Containers, JOIN.LEFT_OUTER, on=(Containers.chemId_id==Chemicals.chemId), attr='container')
+                      .where(Containers.disposalDate == None, Chemicals.remove == False)
+                      .order_by(Chemicals.name))
 
-  Args:
-      chemicals (list): a list of all chemicals in the database
-  Returns:
-      dict: a dictionary with keys of every chemical name, and values of how many containers are available for checkout
-  """
-  contDict = {} #Set up a dictionary for all containers
-  for chemical in chemicals: #For each chemical
-    try:
-      contDict[chemical.name] = (((Containers
-                                .select())
-                                .join(Chemicals))
-                                .where(
-                                  (Containers.disposalDate == None) &
-                                  (Containers.chemId == chemical.chemId) &
-                                  (Chemicals.remove == False)))
-    except:
-      contDict[chemical.name] = "n/a"
-  return contDict
+    chemDict = defaultdict(list)
+    for chem in query:
+        chemDict[chem.name] = chemDict[chem.name] + ([chem.container] if hasattr(chem,'container') else [])
 
+    return chemDict
+    
 def getContainers(storage):
   try:
     Containers.get(Containers.storageId == storage,
                    Containers.disposalDate == None)
   except Exception as e:
     return False
+
 
 def disposeContainer(bId):
     try:
@@ -143,4 +139,4 @@ def getAllDataAboutContainers():
                 .join(Rooms)
                 .join(Floors)
                 .join(Buildings))
-    return conts
+    return list(conts)

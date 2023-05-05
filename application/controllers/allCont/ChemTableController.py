@@ -1,7 +1,6 @@
 import time
 from application import app
-from application.models.chemicalsModel import *
-from application.models.containersModel import *
+from application.models.containersModel import getChemicalContainers, getAllDataAboutContainers
 from application.config import *
 from application.logic.getAuthUser import AuthorizedUser
 from urllib import *
@@ -22,7 +21,8 @@ def ChemTable():
   if userLevel == -1 or user == -1:
     abort(403)
 
-  contDict = contCount(getChemicals())
+  #contDict = contCount(getChemicals())
+  contDict = getChemicalContainers()
   containers = getAllDataAboutContainers()
 
   return render_template("views/ChemTableView.html",
