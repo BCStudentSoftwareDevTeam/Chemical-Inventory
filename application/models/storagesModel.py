@@ -1,9 +1,10 @@
 from peewee import *
 
+from application.models import BaseModel
 from application.models.util import *
 from application.models.roomsModel import Rooms
 
-class Storages(Model):
+class Storages(BaseModel):
   sId           = PrimaryKeyField()
   roomId        = ForeignKeyField(Rooms, related_name="stor") # When creating a container, select room first, then populate dropdown with all storages with matching roomId.
   oldPK         = IntegerField(null = True)
@@ -17,10 +18,7 @@ class Storages(Model):
   base          = BooleanField(default = False)
   peroxide      = BooleanField(default = False)
   pressure      = BooleanField(default = False)
-  # refridgerated = BooleanField(default = False) # Do we need to check if a storage is refridgerated?
-
-  class Meta:
-    database = getDB("inventory", "dynamic")
+  # refrigerated = BooleanField(default = False) # Do we need to check if a storage is refrigerated?
 
 def getStorages(room = None):
   if room == None:
@@ -49,3 +47,7 @@ def deleteStorage(storage_id):
     return(True, str(storage.name) + " Storage was Successfully Removed", "list-group-item list-group-item-success")
   except Exception as e:
     return(False, str(storage.name) + " Storage was Successfully Removed", "list-group-item list-group-item-danger")
+
+from application import admin
+from flask_admin.contrib.peewee import ModelView
+admin.add_view(ModelView(Storages))

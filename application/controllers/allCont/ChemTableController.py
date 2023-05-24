@@ -1,6 +1,7 @@
 import time
 from application import app
 from application.models.containersModel import getChemicalContainers, getAllDataAboutContainers
+from application.models.chemicalsModel import Chemicals
 from application.config import *
 from application.logic.getAuthUser import AuthorizedUser
 from urllib import *

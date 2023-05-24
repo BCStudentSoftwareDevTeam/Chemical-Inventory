@@ -68,6 +68,9 @@ def main():
     #database = "/home/ubuntu/workspace/new_workspace/ChemicalInventory/chemical-inventory-new/data/inventory.sqlite"
     
     #production
+    print("This file needs to be updated to work with mysql, not sqlite")
+    return
+
     database = "/var/www/html/chemical-inventory-new/data/inventory.sqlite"
     conn = create_connection(database)
     with conn:

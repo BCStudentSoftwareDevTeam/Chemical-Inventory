@@ -27,7 +27,6 @@ def ViewChemical(chemId):
   userLevel = auth.userLevel()
   if userLevel == -1 or user == -1:
     abort(403)
-  print(user.username, userLevel)
   hazardList = getChemicalHazards(chemId)
 
   try:
@@ -50,13 +49,15 @@ def ViewChemical(chemId):
           status, flashMessage, flashFormat, newChem = addContainer(data, user.username)
           flash(flashMessage, flashFormat)
     try:
-        lastCont = Containers.select().where(Containers.migrated >> 0)\
-            .order_by(-Containers.barcodeId).get().barcodeId # Gets the last entered container that was not migrated. Used for creating the next barcode
-        barcode = genBarcode(lastCont)
+        # Get the last entered container that was not migrated and creates the next barcode
+        lastCont = Containers.select().where(Containers.migrated == 0)\
+            .order_by(Containers.barcodeId.desc()).get()
+        barcode = genBarcode(lastCont.barcodeId)
         while getContainer(barcode) != False:
             barcode = genBarcode(barcode)
 
     except Exception as e:
+        print("Exception!", e)
         barcode = genBarcode("00000000")
     
     #lastCont needs to be assigned after any potential updates to the last barcode, and before render_template

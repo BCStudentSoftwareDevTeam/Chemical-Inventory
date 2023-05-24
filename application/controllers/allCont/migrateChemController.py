@@ -1,7 +1,4 @@
 from application import app
-from application.models.staticModels.batchModel import *
-from application.models.staticModels.mainModel import *
-from application.models.staticModels.locatesModel import *
 from application.models.chemicalsModel import *
 from application.models.containersModel import *
 from application.models.roomsModel import *
@@ -27,7 +24,6 @@ def migrateChem():
     userLevel = auth.userLevel()
     print(user.username, userLevel)
 
-    #locdict = Batch.select().dicts().get() This was used for datamodel testing
     if userLevel == 'admin' or userLevel == "systemAdmin":
         if request.method == "GET":
             return render_template("views/MigrateChem.html",

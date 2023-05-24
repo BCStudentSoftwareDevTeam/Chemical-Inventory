@@ -1,0 +1,24 @@
+.output sqlitedump.sql
+.mode insert buildings
+select * from buildings;
+
+.mode insert chemicals
+select * from chemicals;
+
+.mode insert floors
+select * from floors;
+
+.mode insert rooms
+select * from rooms;
+
+.mode insert storages
+select * from storages;
+
+.mode insert users
+select * from users;
+
+.mode insert containers
+select * from containers;
+
+.mode insert histories
+select * from histories;

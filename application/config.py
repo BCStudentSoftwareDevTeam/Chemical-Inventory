@@ -29,4 +29,3 @@ with open('config/roles.yaml', 'r') as f:
 
 # Add the application's base directory to the config object
 config['sys']['base_dir'] = os.path.abspath(os.path.dirname(__file__))
-

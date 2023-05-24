@@ -3,6 +3,7 @@ import datetime
 
 from peewee import *
 
+from application.models import BaseModel
 from application.models.util import *
 from application.models.chemicalsModel import Chemicals
 from application.models.storagesModel import Storages
@@ -13,7 +14,7 @@ from application.models.floorsModel import Floors
 from application.models.buildingsModel import Buildings
 
 
-class Containers (Model):
+class Containers (BaseModel):
   conId              = PrimaryKeyField()
   ##Foreign Keys
   chemId             = ForeignKeyField(Chemicals, related_name = 'chemical')
@@ -22,7 +23,7 @@ class Containers (Model):
   barcodeId          = CharField(null = False, unique = True)
   currentQuantityUnit= TextField() # units of chemical
   currentQuantity    = FloatField()# amount of chemical currently in container
-  receiveDate        = DateTimeField(default = datetime.date.today)
+  receiveDate        = DateTimeField(default = datetime.datetime.now)
   disposalDate       = DateTimeField(null = True)
   conType            = CharField(default = "")
   manufacturer       = CharField(null = True)
@@ -37,8 +38,6 @@ class Containers (Model):
   removalDate        = DateTimeField(null = True) # This will be for when waste is disposed
   peroxideCheckDate  = DateTimeField(null = True)
 
-  class Meta:
-    database = getDB("inventory", "dynamic")
 
 def getContainer(barcode):
   """Returns a Containers object with the given barcode"""
@@ -140,3 +139,9 @@ def getAllDataAboutContainers():
                 .join(Floors)
                 .join(Buildings))
     return list(conts)
+
+
+from application import admin
+from flask_admin.contrib.peewee import ModelView
+admin.add_view(ModelView(Containers))
+

@@ -2,7 +2,6 @@
 # this library.
 # http://configure.readthedocs.io/en/latest/#
 from application.config import config, roleConfig
-from application.models import getModelFromName
 from application.absolutepath import getAbsolutePath
 from functools import wraps
 from flask import request, redirect, url_for
@@ -41,28 +40,10 @@ def userHasRole (username, role):
     # return True, because we want them to have access.
     if ug == config.flask.username:
       return True
+
     if re.match('group', ug):
       superRole = re.split(" ", ug)[1]
       return userHasRole (username, superRole)
-
-    # We may find it is a database lookup.
-    if re.match('database', ug):
-      # Get the name of the database
-      db = re.split(" ", ug)[1]
-      print("DB is '{0}'".format(db))
-      # Get the actual model from the name of the model.
-      m = getModelFromName(db)
-      print("Model: {0}".format(m))
-
-      # Do a "get", and require that their username and role are both
-      # set. For example, look for {jadudm, admin}, not just the username.
-      result = m.select().where(m.username == username, m.role == role).count()
-      if result > 0:
-        print("User '{0}' validated via database {1}".format(username, db))
-        return True
-      else:
-        print("User '{0}' not found in database {1}".format(username, db))
-        return False
 
     # Check if they are in the Active Directory
     if re.match('AD', ug):

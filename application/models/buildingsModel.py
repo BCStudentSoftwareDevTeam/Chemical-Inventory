@@ -1,17 +1,16 @@
 from peewee import *
 
+from application.models import BaseModel
+
 from application.models.util import *
-from application.logic.sortPost import *
+from application.logic.sortPost import sortPost
 
 
-class Buildings (Model):
+class Buildings (BaseModel):
   bId        = PrimaryKeyField()
   name       = TextField() #Sans "Building"
   numFloors  = FloatField()
   address    = TextField()
-
-  class Meta:
-    database = getDB("inventory", "dynamic")
 
 def getBuilding(lId):
   try:
@@ -50,3 +49,7 @@ def deleteBuilding(bId):
     return(True, building.name + " Building was Deleted From the System", "list-group-item list-group-item-success")
   except Exception as e:
     return (False, build.name + " Building Could Not Be Deleted From the System", "list-group-item list-group-item-danger")
+
+from application import admin
+from flask_admin.contrib.peewee import ModelView
+admin.add_view(ModelView(Buildings))

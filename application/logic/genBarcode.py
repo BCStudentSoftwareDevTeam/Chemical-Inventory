@@ -1,6 +1,7 @@
 from datetime import date
 
 def genBarcode(lstBcode):
+    print(lstBcode)
     """Takes a barcode and creates and returns the next one
         Input: Str in the form '16100024'
         Output: Str in the form '16100025"""

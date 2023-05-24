@@ -1,27 +1,25 @@
 from peewee import *
 import pytest
 
+from application.models import BaseModel
 from application.models.util import *
 from application.logic.sortPost import *
 
-class Users (Model):
+class Users (BaseModel):
     userId       = PrimaryKeyField()
-    username     = TextField(null = False, unique = True)
-    first_name   = TextField(null = False)
-    last_name    = TextField(null = False)
-    auth_level   = TextField(null = False)
-    emailadd     = TextField(null = True)
+    username     = CharField(unique = True)
+    first_name   = CharField()
+    last_name    = CharField()
+    auth_level   = CharField()
+    emailadd     = CharField(null = True)
     approve      = BooleanField(default = False)
     created_date = DateTimeField(null = True)
     end_date     = DateTimeField(null = True)
-    reportto     = TextField(null = False)
-    created_by   = TextField(null = True)
+    reportto     = CharField(null = False)
+    created_by   = CharField(null = True)
 
-    class Meta:
-        database = getDB("inventory", "dynamic")
-
-def getUsers(username = None):
-    if username != None:
+def getUsers(username=None):
+    if username:
         return Users.get(Users.username == username)
     else:
         return Users.select()
@@ -85,3 +83,7 @@ def updateUserAuth(user, auth):
         return("Success: Users Authorization Has Been Updated.", 'list-group-item list-group-item-success')
     except:
         return("Error: User Authorization Could Not Be Update.", 'list-group-item list-group-item-danger')
+
+from application import admin
+from flask_admin.contrib.peewee import ModelView
+admin.add_view(ModelView(Users))

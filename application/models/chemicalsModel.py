@@ -1,10 +1,11 @@
 from peewee import *
 
+from application.models import BaseModel
 from application.models.util import *
 from application.logic.sortPost import *
 from application.config import *
 
-class Chemicals (Model):
+class Chemicals (BaseModel):
   chemId          = PrimaryKeyField()
   oldPK           = IntegerField(null = True)
   ## General Information
@@ -18,7 +19,7 @@ class Chemicals (Model):
   boilPoint       = DecimalField(null = True)
   molecularWeight = DecimalField(null = True)
   storageTemp     = DecimalField(null = True)
-  sdsLink         = CharField(null = True)
+  sdsLink         = TextField(null = True)
   description     = CharField(default = "")
   remove          = BooleanField(default = False)
   deleteDate      = DateTimeField(null = True)
@@ -54,8 +55,6 @@ class Chemicals (Model):
   carcinogen      = BooleanField(default = False) # If carcinogenic
   pListAcute      = BooleanField(default = False) # If defined as Acutely Toxic in 40CFR 266.31
 
-  class Meta:
-    database = getDB("inventory", "dynamic")
 
 def createChemical(data):
   """Creates chemical based on input from user."""
@@ -120,3 +119,7 @@ def getChemicalHazards(chemId):
       return pictList
   except Exception as e:
     return e
+
+from application import admin
+from flask_admin.contrib.peewee import ModelView
+admin.add_view(ModelView(Chemicals))

@@ -1,11 +1,12 @@
 from peewee import *
 
+from application.models import BaseModel
 from application.models.util import *
 from application.models.storagesModel import Storages
 from application.models.containersModel import Containers 
 import datetime
 
-class Histories (Model):
+class Histories (BaseModel):
   hId          = PrimaryKeyField()
   ##Foreign Keys
   movedFrom     = ForeignKeyField(Storages, related_name="movedFrom", null = True)
@@ -18,8 +19,6 @@ class Histories (Model):
   pastQuantity  = CharField()# This holds both the quantity and unit as a string. Since it won't be changed, the two fields could be combined
   modDate       = DateTimeField(default = datetime.datetime.now) #If a history instance is made, and the call doesn't specify the date, the default will take care of it
 
-  class Meta:
-    database = getDB("inventory", "dynamic")
 
 def updateHistory(container, action, location, modifiedBy):
   """Creates a new history instance everytime a container is moved
@@ -54,3 +53,7 @@ def getContainerHistory(containerId):
     return Histories.select().where(Histories.containerId == containerId)
   except Exception as e:
     return e
+
+from application import admin
+from flask_admin.contrib.peewee import ModelView
+admin.add_view(ModelView(Histories))

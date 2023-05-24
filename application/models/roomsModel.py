@@ -1,17 +1,15 @@
 from peewee import *
 
 import application
+from application.models import BaseModel
 from application.models.util import *
 from application.models.floorsModel import Floors
 from application.logic.sortPost import *
 
-class Rooms (Model):
+class Rooms (BaseModel):
   rId        = PrimaryKeyField()
   floorId    = ForeignKeyField(Floors, related_name = "floor")
   name       = TextField() #Room number. It is a text field to account for rooms like '13c'
-
-  class Meta:
-    database = getDB("inventory", "dynamic")
 
 def editRoom(data):
   try:
@@ -54,3 +52,7 @@ def deleteRoom(room):
     return(True, room.name + " was Successfully Removed From System", "list-group-item list-group-item-success")
   except Exception as e:
     return(False, "Room could not be Removed to System", "list-group-item list-group-item-danger")
+
+from application import admin
+from flask_admin.contrib.peewee import ModelView
+admin.add_view(ModelView(Rooms))
