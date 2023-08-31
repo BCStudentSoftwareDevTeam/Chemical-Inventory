@@ -3,12 +3,16 @@
 To build this application you must...
 1. Run the setup file with the command
 	source setup.sh
-2. Populate the database with generic values
-	python reset-db.py
+
+2. Populate the database with test values or a production backup
+	database/reset-database.sh [test|from-backup]
+
 3. Add your current machine user id to admin in config/role.yaml 
+
 4. Start Appache server to serve application
-	python run.py
-5. Open 0.0.0.0:8000 in your browser
+	flask run
+
+5. Open 127.0.0.1:8080 in your browser (or whatever IP flask gives you)
 
 # Relevant Documentation
 
@@ -25,9 +29,5 @@ To work on this application, you'll probably want:
 * The PeeWee Documentation
 
   http://docs.peewee-orm.com/en/latest/index.html
-
-* The Configure Documentation
-
-  http://configure.readthedocs.io/en/latest/#
 
 That's most of what comes to mind...
