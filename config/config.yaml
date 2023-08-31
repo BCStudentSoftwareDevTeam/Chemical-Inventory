@@ -53,6 +53,14 @@ hazards:
     hazardColor: "Blue"
     textColor: "#FFFFFF"
     hexColor: "#0000FF"
+  "Organic Health Hazard":
+    hazardColor: "Blue"
+    textColor: "#FFFFFF"
+    hexColor: "#0000FF"
+  "Inorganic Health Hazard":
+    hazardColor: "Blue"
+    textColor: "#FFFFFF"
+    hexColor: "#0000FF"
   "Inorganic Acid":
     hazardColor: "Rose"
     textColor: "#333333"
