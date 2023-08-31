@@ -14,6 +14,12 @@ ReportTypes:
     health:
        name: "Health Hazard"
        id: "hh"
+    org_hazard:
+       name: "Organic Health Hazard"
+       id: "org_haz"
+    inorg_hazard:
+       name: "Inorganic Health Hazard"
+       id: "inorg_haz"
     org_acid:
        name: "Organic Acid"
        id: "org_acid"
